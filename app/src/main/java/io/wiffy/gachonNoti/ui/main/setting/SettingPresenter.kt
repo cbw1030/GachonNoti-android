@@ -1,6 +1,6 @@
-package io.wiffy.gachonNoti.main.setting
+package io.wiffy.gachonNoti.ui.main.setting
 
-import io.wiffy.gachonNoti.main.MainContract
+import io.wiffy.gachonNoti.ui.main.MainContract
 
 class SettingPresenter(private val mView:MainContract.FragmentSetting):MainContract.PresenterSetting {
 }

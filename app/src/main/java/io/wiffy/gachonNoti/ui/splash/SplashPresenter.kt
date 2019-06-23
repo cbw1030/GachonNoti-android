@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.splash
+package io.wiffy.gachonNoti.ui.splash
 
 import android.os.Handler
 import android.os.Looper

@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.main
+package io.wiffy.gachonNoti.ui.main
 
 import androidx.fragment.app.Fragment
 
