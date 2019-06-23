@@ -3,5 +3,6 @@
     <string name="Language">언어 설정</string>
     <string name="Notification">공지</string>
     <string name="Setting">설정</string>
-
+    <string name="OK">확인</string>
+    <string name="CANCEL">취소</string>
 </resources>

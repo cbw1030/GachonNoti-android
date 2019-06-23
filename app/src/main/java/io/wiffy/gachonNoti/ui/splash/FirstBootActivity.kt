@@ -14,8 +14,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FirstBootActivity : AppCompatActivity() {
-    val list = ArrayList<RelativeLayout>()
-    val list2 = ArrayList<Locale>()
+    private val list = ArrayList<RelativeLayout>()
+    private val list2 = ArrayList<Locale>()
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
@@ -27,8 +27,8 @@ class FirstBootActivity : AppCompatActivity() {
         list.add(lang_JA2)
         list2.add(Locale.ENGLISH)
         list2.add(Locale.KOREAN)
-        list2.add(Locale.SIMPLIFIED_CHINESE)
-        list2.add(Locale.TRADITIONAL_CHINESE)
+        list2.add(Locale.CHINESE)
+        list2.add(Locale.TAIWAN)
         list2.add(Locale.JAPANESE)
 
         for (X in 0 until list.size) {

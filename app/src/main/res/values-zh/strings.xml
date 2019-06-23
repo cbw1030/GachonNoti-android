@@ -3,4 +3,6 @@
     <string name="Language">语言设置</string>
     <string name="Notification">公告</string>
     <string name="Setting">设置</string>
+    <string name="OK">确认</string>
+    <string name="CANCEL">取消</string>
 </resources>

@@ -3,4 +3,6 @@
     <string name="Language">言語設定</string>
     <string name="Notification">お知らせ</string>
     <string name="Setting">設定</string>
+    <string name="OK">はい</string>
+    <string name="CANCEL">いいえ</string>
 </resources>

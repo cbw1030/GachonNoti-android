@@ -3,8 +3,43 @@
                 android:background="@color/mainBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textColor="#000000"
-              android:text="setting"/>
+    <TableLayout
+            android:stretchColumns="*"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TableRow>
+            <RelativeLayout>
+                <TextView
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="bottom"
+                        android:text="@string/Setting"
+                        android:textColor="@color/title2"
+                        android:textStyle="bold"
+                        android:layout_marginStart="15dp"
+                />
+            </RelativeLayout>
+        </TableRow>
+        <TableRow>
+            <RelativeLayout
+                    android:id="@+id/lang"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_button"
+            >
+                <TextView
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="@string/Language"
+                        android:textColor="@color/mainDeepBlue"
+                        android:textStyle="bold"
+                        android:layout_marginStart="15dp"
+                />
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>

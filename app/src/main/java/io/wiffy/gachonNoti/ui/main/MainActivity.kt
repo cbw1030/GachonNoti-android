@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -53,5 +54,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 Util.global
             )
         )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(resultCode)
+        {
+            Util.languageResultOn->Util.restartApp(applicationContext)
+
+            Util.languageResultOff->{}
+            else->{
+                finish()
+            }
+        }
     }
 }

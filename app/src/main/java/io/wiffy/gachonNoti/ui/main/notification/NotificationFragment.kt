@@ -10,12 +10,11 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainContract
 
 class NotificationFragment: Fragment(),MainContract.FragmentNotification {
-    var myView:View?=null
+    lateinit var myView:View
     lateinit var mPresenter: NotificationPresenter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        myView = inflater.inflate(R.layout.fragment_notification,container,false)
         mPresenter = NotificationPresenter(this)
-        Log.d("asdf","notification")
         return myView
     }
 }
