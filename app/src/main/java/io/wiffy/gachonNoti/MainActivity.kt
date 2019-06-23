@@ -1,4 +1,4 @@
-package io.wiffy.GachonNoti
+package io.wiffy.gachonNoti
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

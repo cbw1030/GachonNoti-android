@@ -1,4 +1,4 @@
-package io.wiffy.GachonNoti
+package io.wiffy.gachonNoti
 
 import org.junit.Test
 
