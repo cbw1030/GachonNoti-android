@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "857141121281",
+    "firebase_url": "https://gachonnoti.firebaseio.com",
+    "project_id": "gachonnoti",
+    "storage_bucket": "gachonnoti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857141121281:android:e1ee014c24ca728a",
+        "android_client_info": {
+          "package_name": "io.wiffy.gachonNoti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857141121281-tfk99g2olbnn1kdr5mp40sbn5s17jj84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs0SU7TisTj1-yaA1cCsEKYQhRK6YNYQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857141121281-tfk99g2olbnn1kdr5mp40sbn5s17jj84.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "857141121281-e2at7t1ojuq7tvssqvhdn7ibjrf1fqjo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.wiffy.GachonNoti"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
