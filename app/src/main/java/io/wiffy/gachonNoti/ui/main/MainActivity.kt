@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun changeUI(mList: ArrayList<Fragment>) {
         adapter = PagerAdapter(supportFragmentManager, mList)
-        navigation.addTab(navigation.newTab().setText("공지"))
-        navigation.addTab(navigation.newTab().setText("설정"))
+        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
+        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
 
         pager.adapter = adapter
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))

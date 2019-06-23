@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.splash
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -25,6 +26,22 @@ class SplashActivity : AppCompatActivity(),SplashContract.View {
 
     override fun changeUI() {
         mPresenter.move()
+    }
+
+    override fun firstBoot() {
+        startActivityForResult(Intent(this@SplashActivity,FirstBootActivity::class.java),1)
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(resultCode)
+        {
+            Activity.RESULT_OK->{
+                moveToMain()
+            }
+            else->finish()
+        }
     }
 
     override fun moveToMain() {

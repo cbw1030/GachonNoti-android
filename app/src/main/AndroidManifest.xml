@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name="io.wiffy.gachonNoti.ui.main.MainActivity"/>
+        <activity android:name=".ui.splash.FirstBootActivity"
+                  android:theme="@style/dialog"/>
     </application>
 
 </manifest>

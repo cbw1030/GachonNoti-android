@@ -32,6 +32,8 @@ class Util {
             return ContextWrapper(context?.createConfigurationContext(configuration!!))
         }
 
+        const val papagoId = "_PhNYUBa_SGQ1Qm7NeSP"
+        const val papagoSecret = "YgUYJ4N1co"
         const val appConstantPreferences = "GACHONNOTIFICATIONE"
     }
 }

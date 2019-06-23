@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Gachon University NoticE</string>
     <string name="Language">Language setting</string>
+    <string name="Notification">Notice</string>
+    <string name="Setting">Setting</string>
 
 </resources>

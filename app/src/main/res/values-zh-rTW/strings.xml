@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">嘉泉大學通知</string>
     <string name="Language">"語言設置"</string>
+    <string name="Notification">公告</string>
+    <string name="Setting">設置</string>
 </resources>
