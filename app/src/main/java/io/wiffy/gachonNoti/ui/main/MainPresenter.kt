@@ -1,14 +1,19 @@
 package io.wiffy.gachonNoti.ui.main
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 
-class MainPresenter(private val mView:MainContract.View):MainContract.Presenter {
+class MainPresenter(private val mView: MainContract.View) : MainContract.Presenter {
     private val mList = ArrayList<Fragment>()
 
     override fun initPresent() {
-        mList.add(NotificationFragment())
+        val notificationFragment = NotificationFragment()
+        val bundle = Bundle()
+        bundle.putStringArrayList("myList", mView.getList())
+        notificationFragment.arguments = bundle
+        mList.add(notificationFragment)
         mList.add(SettingFragment())
 
         mView.changeUI(mList)

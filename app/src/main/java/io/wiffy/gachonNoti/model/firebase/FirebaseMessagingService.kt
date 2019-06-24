@@ -32,7 +32,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
 
     private fun sendNotification(p0: RemoteMessage) {
-        val title = getString(R.string.app_name)
+        val title = p0.notification?.title?:getString(R.string.app_name)
         val message = p0.notification?.body?:""
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {

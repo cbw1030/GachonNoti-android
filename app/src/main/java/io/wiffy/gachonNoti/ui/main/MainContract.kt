@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 
 interface MainContract {
     interface View{
+        fun init()
         fun changeUI(mList:ArrayList<Fragment>)
+        fun builderUp()
+        fun builderDismiss()
+        fun getList():ArrayList<String>
     }
     interface Presenter{
         fun initPresent()

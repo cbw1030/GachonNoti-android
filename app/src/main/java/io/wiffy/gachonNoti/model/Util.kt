@@ -19,6 +19,9 @@ class Util {
         var firstBoot = true
 
         @JvmStatic
+        var index = 0
+
+        @JvmStatic
         fun wrap(context: Context?, language: String?): ContextWrapper? {
             val configuration = context?.resources?.configuration
             val newLocale = Locale(language)
@@ -42,6 +45,8 @@ class Util {
             )
             exitProcess(0)
         }
+        const val mobileURL1 = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum="
+        const val mobileURL2 = "&pageSize=10&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val languageResultOn = 1357283
         const val languageResultOff = 1357284
         const val papagoId = "_PhNYUBa_SGQ1Qm7NeSP"
