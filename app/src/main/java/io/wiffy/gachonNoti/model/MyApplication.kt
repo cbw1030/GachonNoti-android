@@ -17,7 +17,7 @@ class MyApplication:Application() {
         )?:Locale.ENGLISH.toLanguageTag()
 
         Util.firstBoot=Util.sharedPreferences.getBoolean(
-            "firstBoot",true
+            "firstBooting",true
         )
 
     }

@@ -5,13 +5,23 @@
     <application
             android:allowBackup="false"
             android:name=".model.MyApplication"
-            android:fullBackupContent = "false"
+            android:fullBackupContent="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
 
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/defaults"/>
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="@string/channel" />
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_color"
+                android:resource="@color/mainBlue"/>
+
         <activity android:name="io.wiffy.gachonNoti.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,6 +34,16 @@
                   android:theme="@style/dialog"/>
         <activity android:name=".ui.main.setting.LanguageActivity"
                   android:theme="@style/dialog"/>
+
+        <service
+                android:name=".model.firebase.FirebaseMessagingService"
+                android:exported="false"
+                android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

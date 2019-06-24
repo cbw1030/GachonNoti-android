@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "857141121281-o8nqbn4itkcsj39ica4l4nnd453kb7et.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.wiffy.gachonNoti",
+            "certificate_hash": "16054f300807dfff4854a3030daaa6e3e01168c4"
+          }
+        },
+        {
           "client_id": "857141121281-tfk99g2olbnn1kdr5mp40sbn5s17jj84.apps.googleusercontent.com",
           "client_type": 3
         }

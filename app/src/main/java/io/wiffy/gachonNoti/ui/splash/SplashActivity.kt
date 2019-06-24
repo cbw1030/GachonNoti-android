@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -38,12 +39,18 @@ class SplashActivity : AppCompatActivity(),SplashContract.View {
         when(resultCode)
         {
             Activity.RESULT_OK->{
+                Util.sharedPreferences.edit().putBoolean(Util.boot,false).apply()
+                subscribe()
                 moveToMain()
             }
             else->finish()
         }
     }
 
+    private fun subscribe()
+    {
+        FirebaseMessaging.getInstance().subscribeToTopic("noti")
+    }
     override fun moveToMain() {
         startActivity(Intent(this, MainActivity::class.java))
         overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)

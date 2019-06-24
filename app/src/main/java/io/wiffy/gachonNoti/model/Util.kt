@@ -46,6 +46,7 @@ class Util {
         const val languageResultOff = 1357284
         const val papagoId = "_PhNYUBa_SGQ1Qm7NeSP"
         const val papagoSecret = "YgUYJ4N1co"
-        const val appConstantPreferences = "GACHONNOTIFICATIONE"
+        const val appConstantPreferences = "GACHONNOTICE"
+        const val boot = "firstBooting"
     }
 }
