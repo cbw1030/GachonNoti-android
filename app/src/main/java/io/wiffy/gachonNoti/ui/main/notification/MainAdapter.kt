@@ -27,9 +27,6 @@ class MainAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val config = context.resources.configuration
-        config.locale = Locale(Util.global)
-        val res = Resources(context.assets, context.resources.displayMetrics, config)
 
         items.get(position).let { item ->
             with(holder) {
@@ -39,15 +36,15 @@ class MainAdapter(
                         ContextCompat.getColorStateList(
                             context, when {
                                 item.value.contains("[글로벌]") -> {
-                                    contexts.text = "[${res.getString(R.string.global)}]"
+                                    contexts.text = "[글로벌]"
                                     R.color.red
                                 }
                                 item.value.contains("[메디컬]") -> {
-                                    contexts.text = "[${res.getString(R.string.medical)}]"
+                                    contexts.text = "[메디컬]"
                                     R.color.green
                                 }
                                 else -> {
-                                    contexts.text ="[${res.getString(R.string.common)}]"
+                                    contexts.text ="[공통]"
                                     R.color.mainBlue
                                 }
                             }

@@ -5,7 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
+import android.view.KeyEvent
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
@@ -13,18 +22,31 @@ import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import io.wiffy.gachonNoti.ui.main.notification.ParseList
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var mPresenter: MainPresenter
     lateinit var adapter: PagerAdapter
     lateinit var parseList: ParseList
     lateinit var builder: Dialog
+    var protector: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_main)
+        invisible()
         supportActionBar?.hide()
+
+    }
+
+    override fun onStart() {
+        visible()
+        super.onStart()
+    }
+
+    override fun onResume() {
+   visible()
         mPresenter = MainPresenter(this)
         parseList = ParseList()
         builder = Dialog(this)
@@ -33,6 +55,19 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         builder.setCanceledOnTouchOutside(false)
         builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
         MainAsyncTask(parseList, this).execute()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Util.index = 0
+        Util.looper = false
+     invisible()
+        super.onPause()
+    }
+
+    override fun onStop() {
+   invisible()
+        super.onStop()
     }
 
     override fun init() {
@@ -43,7 +78,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         builder.show()
     }
 
-    override fun getList():ParseList = parseList
+    override fun makeToast(str: String) {
+        Handler(Looper.getMainLooper()).post {
+            Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun getList(): ParseList = parseList
 
     override fun builderDismiss() {
         builder.dismiss()
@@ -71,25 +112,45 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(
-            Util.wrap(
-                newBase,
-                Util.global
-            )
-        )
+    override fun onUserLeaveHint() {
+        invisible()
+        super.onUserLeaveHint()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            Util.languageResultOn -> Util.restartApp(applicationContext)
+    private fun visible() {
+        main_main.visibility = View.VISIBLE
+        main_splash.visibility = View.GONE
+        main_splash.invalidate()
+        main_main.invalidate()
+    }
 
-            Util.languageResultOff -> {
+    override fun onAttachedToWindow() {
+        visible()
+        super.onAttachedToWindow()
+    }
+
+    override fun onDetachedFromWindow() {
+        invisible()
+        super.onDetachedFromWindow()
+    }
+
+    private fun invisible() {
+        main_main.visibility = View.GONE
+        main_splash.visibility = View.VISIBLE
+        main_splash.invalidate()
+        main_main.invalidate()
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        if(event?.action==KeyEvent.ACTION_DOWN)
+            when(event.keyCode)
+            {
+                KeyEvent.KEYCODE_MENU->{
+                    pager.currentItem =1
+                    navigation[1].isSelected=true
+                    return true
+                }
             }
-            else -> {
-                finish()
-            }
-        }
+        return true
     }
 }

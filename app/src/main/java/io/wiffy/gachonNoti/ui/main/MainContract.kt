@@ -12,6 +12,7 @@ interface MainContract {
         fun builderUp()
         fun builderDismiss()
         fun getList():ParseList
+        fun makeToast(str:String)
     }
     interface Presenter{
         fun initPresent()
@@ -25,8 +26,7 @@ interface MainContract {
     }
 
     interface FragmentSetting{
-        fun addListener(listener1:android.view.View.OnClickListener)
-        fun languageSetting()
+
     }
     interface PresenterSetting
     {

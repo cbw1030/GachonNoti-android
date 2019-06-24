@@ -4,7 +4,7 @@ interface SplashContract {
     interface View{
         fun changeUI()
         fun moveToMain()
-        fun firstBoot()
+        fun subscribe()
     }
     interface Presenter{
         fun initPresent()

@@ -13,13 +13,16 @@ class Util {
     companion object {
         @JvmStatic
         lateinit var sharedPreferences: SharedPreferences
-        @JvmStatic
-        lateinit var global: String
+        //        @JvmStatic
+//        lateinit var global: String
         @JvmStatic
         var firstBoot = true
 
         @JvmStatic
         var index = 0
+
+        @JvmStatic
+        var looper = true
 
         @JvmStatic
         fun wrap(context: Context?, language: String?): ContextWrapper? {
@@ -36,6 +39,7 @@ class Util {
             }
             return ContextWrapper(context?.createConfigurationContext(configuration!!))
         }
+
         @JvmStatic
         fun restartApp(context: Context) {
             context.startActivity(
@@ -45,12 +49,11 @@ class Util {
             )
             exitProcess(0)
         }
+
         const val mobileURL1 = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum="
-        const val mobileURL2 = "&pageSize=50&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
+        const val mobileURL2 = "&pageSize=30&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val languageResultOn = 1357283
         const val languageResultOff = 1357284
-        const val papagoId = "_PhNYUBa_SGQ1Qm7NeSP"
-        const val papagoSecret = "YgUYJ4N1co"
         const val appConstantPreferences = "GACHONNOTICE"
         const val boot = "firstBooting"
     }

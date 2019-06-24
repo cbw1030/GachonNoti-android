@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainContract
-import kotlinx.android.synthetic.main.fragment_setting.*
-import kotlinx.android.synthetic.main.fragment_setting.view.*
+
 
 
 class SettingFragment:Fragment(),MainContract.FragmentSetting {
@@ -23,12 +22,5 @@ class SettingFragment:Fragment(),MainContract.FragmentSetting {
         return myView
     }
 
-    override fun addListener(listener1: View.OnClickListener) {
-        myView.lang.setOnClickListener(listener1)
-    }
 
-    override fun languageSetting() {
-        activity?.startActivityForResult(Intent(context,LanguageActivity::class.java),1)
-        activity?.overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
-    }
 }

@@ -8,7 +8,7 @@ import io.wiffy.gachonNoti.model.Util
 class SplashPresenter(private val mView: SplashContract.View) : SplashContract.Presenter {
 
     override fun initPresent() = when (Util.firstBoot) {
-        true -> mView.firstBoot()
+        true -> mView.subscribe()
         false -> mView.changeUI()
     }
 

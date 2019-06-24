@@ -4,13 +4,21 @@ import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import io.wiffy.gachonNoti.ui.main.notification.ParseList
+import org.json.JSONObject
 import org.jsoup.Jsoup
+import java.io.BufferedReader
+import java.io.DataOutputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLEncoder
+import java.util.*
 
-class MainAsyncTask(val list: ParseList, private val mView: MainContract.View) : AsyncTask<Void, Void, Int>() {
+class MainAsyncTask(private val list: ParseList, private val mView: MainContract.View) : AsyncTask<Void, Void, Int>() {
 
 
     override fun onPreExecute() {
@@ -44,9 +52,12 @@ class MainAsyncTask(val list: ParseList, private val mView: MainContract.View) :
         Handler(Looper.getMainLooper()).post {
 
             mView.builderDismiss()
+
+            if(Util.looper)
             if (Util.index == 0) {
                 mView.init()
             } else {
+
             }
             Util.index += 1
         }

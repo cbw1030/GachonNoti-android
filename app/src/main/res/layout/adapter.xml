@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:id="@+id/parents"
->
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/parents"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/table_in"
+        android:layout_margin="0dp">
     <RelativeLayout
-            android:layout_centerInParent="true"
-            android:layout_width="match_parent" android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/titleIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="start"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:text="가천최고라는 사실 밝혀져..."
-        />
-        <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:gravity="start"
-                android:id="@+id/contexts"
-                android:layout_below="@id/titleIn"
-                android:text="[공통]"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:gravity="start"
-                android:id="@+id/date"
-              android:layout_toEndOf="@+id/contexts"
-                android:layout_below="@id/titleIn"
-                android:text="2019-06-13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:layout_width="match_parent" android:layout_height="match_parent">
+        <RelativeLayout
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/titleIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:text="가천대학교, 최고라는 사실 밝혀져..."
+            />
+            <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:id="@+id/contexts"
+                    android:layout_below="@id/titleIn"
+                    android:text="@string/common"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:id="@+id/date"
+                    android:layout_toEndOf="@+id/contexts"
+                    android:layout_below="@id/titleIn"
+                    android:text="2019-06-13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</androidx.cardview.widget.CardView>
