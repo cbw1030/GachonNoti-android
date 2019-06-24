@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.notification.Parse
+import io.wiffy.gachonNoti.ui.main.notification.ParseList
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var mPresenter: MainPresenter
     lateinit var adapter: PagerAdapter
-    lateinit var parseList: ArrayList<String>
+    lateinit var parseList: ParseList
     lateinit var builder: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +26,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         mPresenter = MainPresenter(this)
-        parseList = ArrayList()
+        parseList = ParseList()
         builder = Dialog(this)
         builder.setContentView(R.layout.builder)
         builder.setCancelable(false)
         builder.setCanceledOnTouchOutside(false)
         builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        MainAsyncTask(parseList, this)
+        MainAsyncTask(parseList, this).execute()
     }
 
     override fun init() {
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         builder.show()
     }
 
-    override fun getList(): ArrayList<String> = parseList
+    override fun getList():ParseList = parseList
 
     override fun builderDismiss() {
         builder.dismiss()

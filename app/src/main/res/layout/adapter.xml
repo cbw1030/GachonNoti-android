@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="50dp">
-<TextView
-        android:id="@+id/titleIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:gravity="start"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:text="asdfasd"
-/>
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/parents"
+>
+    <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/titleIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:text="가천최고라는 사실 밝혀져..."
+        />
+        <TextView
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:id="@+id/contexts"
+                android:layout_below="@id/titleIn"
+                android:text="[공통]"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:id="@+id/date"
+              android:layout_toEndOf="@+id/contexts"
+                android:layout_below="@id/titleIn"
+                android:text="2019-06-13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>

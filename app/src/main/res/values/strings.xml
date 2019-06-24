@@ -6,4 +6,8 @@
     <string name="Setting">설정</string>
     <string name="OK">확인</string>
     <string name="CANCEL">취소</string>
+
+    <string name="common">공통</string>
+    <string name="medical">메디컬</string>
+    <string name="global">글로벌</string>
 </resources>

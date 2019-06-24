@@ -5,5 +5,8 @@
     <string name="Setting">Setting</string>
     <string name="OK">OK</string>
     <string name="CANCEL">Cancel</string>
+    <string name="common">common</string>
+    <string name="global">global</string>
+    <string name="medical">medical</string>
 
 </resources>

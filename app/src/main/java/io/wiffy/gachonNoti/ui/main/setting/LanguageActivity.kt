@@ -115,7 +115,7 @@ class LanguageActivity : AppCompatActivity() {
                             Locale.ENGLISH.toLanguageTag()
                         }
                     }
-                Util.sharedPreferences.edit().putString("global", languages).apply()
+                Util.sharedPreferences.edit().putString("global", languages).commit()
                 Util.restartApp(applicationContext)
             }
         }

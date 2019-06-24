@@ -33,7 +33,7 @@ class FirstBootActivity : AppCompatActivity() {
 
         for (X in 0 until list.size) {
             list[X].setOnClickListener {
-                Util.sharedPreferences.edit().putString("global", list2[X].toLanguageTag()).apply()
+                Util.sharedPreferences.edit().putString("global", list2[X].toLanguageTag()).commit()
                 Util.global = list2[X].toLanguageTag()
                 setResult(Activity.RESULT_OK)
                 finish()

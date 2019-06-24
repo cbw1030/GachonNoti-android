@@ -39,7 +39,7 @@ class SplashActivity : AppCompatActivity(),SplashContract.View {
         when(resultCode)
         {
             Activity.RESULT_OK->{
-                Util.sharedPreferences.edit().putBoolean(Util.boot,false).apply()
+                Util.sharedPreferences.edit().putBoolean(Util.boot,false).commit()
                 subscribe()
                 moveToMain()
             }

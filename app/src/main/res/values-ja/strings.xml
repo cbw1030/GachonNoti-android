@@ -5,4 +5,7 @@
     <string name="Setting">設定</string>
     <string name="OK">はい</string>
     <string name="CANCEL">いいえ</string>
+    <string name="global">グローバル</string>
+    <string name="medical">医療</string>
+    <string name="common">共通</string>
 </resources>

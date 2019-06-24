@@ -5,4 +5,7 @@
     <string name="Setting">设置</string>
     <string name="OK">确认</string>
     <string name="CANCEL">取消</string>
+    <string name="common">共同</string>
+    <string name="global">全球</string>
+    <string name="medical">医</string>
 </resources>
