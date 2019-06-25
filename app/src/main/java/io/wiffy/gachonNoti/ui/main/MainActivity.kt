@@ -134,15 +134,4 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         main_main.invalidate()
     }
 
-    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
-        if (event?.action == KeyEvent.ACTION_DOWN)
-            when (event.keyCode) {
-                KeyEvent.KEYCODE_MENU -> {
-                    pager.currentItem = 1
-                    navigation[1].isSelected = true
-                    return true
-                }
-            }
-        return true
-    }
 }

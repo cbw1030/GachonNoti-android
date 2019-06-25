@@ -1,8 +1,7 @@
 package io.wiffy.gachonNoti.ui.main
 
-import android.view.View
+
 import androidx.fragment.app.Fragment
-import io.wiffy.gachonNoti.ui.main.notification.Parse
 import io.wiffy.gachonNoti.ui.main.notification.ParseList
 
 interface MainContract {
