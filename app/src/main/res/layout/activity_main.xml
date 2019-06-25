@@ -39,25 +39,31 @@
                 layout="@layout/appbar"
                 android:id="@+id/toolbar_main"/>
 
-        <androidx.viewpager.widget.ViewPager
-                android:layout_below="@+id/toolbar_main"
-                android:layout_above="@+id/navigation"
-                android:id="@+id/pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
         <com.google.android.material.tabs.TabLayout
+                android:layout_below="@+id/toolbar_main"
                 android:id="@+id/navigation"
                 app:tabMode="fixed"
-                app:tabIndicatorGravity="top"
-                app:tabIndicatorColor="@color/mainDeepBlue"
-                android:layout_alignParentBottom="true"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorColor="@color/WHITE"
                 android:layout_width="match_parent"
-                app:tabSelectedTextColor="@color/mainDeepBlue"
-                app:tabRippleColor="@color/mainBlue"
+                app:tabSelectedTextColor="@color/WHITE"
+                app:tabTextColor="@color/gray"
+                app:tabIndicatorHeight="3dp"
+                android:background="@color/main2Blue"
+                app:tabRippleColor="@color/WHITE"
                 android:layout_height="50dp">
 
         </com.google.android.material.tabs.TabLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+                android:layout_below="@+id/navigation"
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"/>
+
+
+
     </RelativeLayout>
 </FrameLayout>

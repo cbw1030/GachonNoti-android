@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import io.wiffy.gachonNoti.ui.main.notification.ParseList
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,7 +28,6 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var mPresenter: MainPresenter
     lateinit var adapter: PagerAdapter
-    lateinit var parseList: ParseList
     lateinit var builder: Dialog
     var protector: Dialog? = null
 
@@ -37,7 +37,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         invisible()
         supportActionBar?.hide()
-
+        mPresenter = MainPresenter(this)
+        builder = Dialog(this)
+        builder.setContentView(R.layout.builder)
+        builder.setCancelable(false)
+        builder.setCanceledOnTouchOutside(false)
+        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        mPresenter.initPresent()
     }
 
     override fun onStart() {
@@ -46,32 +52,21 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun onResume() {
-   visible()
-        mPresenter = MainPresenter(this)
-        parseList = ParseList()
-        builder = Dialog(this)
-        builder.setContentView(R.layout.builder)
-        builder.setCancelable(false)
-        builder.setCanceledOnTouchOutside(false)
-        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        MainAsyncTask(parseList, this).execute()
+        visible()
         super.onResume()
     }
+
 
     override fun onPause() {
         Util.index = 0
         Util.looper = false
-     invisible()
+        invisible()
         super.onPause()
     }
 
     override fun onStop() {
-   invisible()
+        invisible()
         super.onStop()
-    }
-
-    override fun init() {
-        mPresenter.initPresent()
     }
 
     override fun builderUp() {
@@ -83,8 +78,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
         }
     }
-
-    override fun getList(): ParseList = parseList
 
     override fun builderDismiss() {
         builder.dismiss()
@@ -142,12 +135,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
-        if(event?.action==KeyEvent.ACTION_DOWN)
-            when(event.keyCode)
-            {
-                KeyEvent.KEYCODE_MENU->{
-                    pager.currentItem =1
-                    navigation[1].isSelected=true
+        if (event?.action == KeyEvent.ACTION_DOWN)
+            when (event.keyCode) {
+                KeyEvent.KEYCODE_MENU -> {
+                    pager.currentItem = 1
+                    navigation[1].isSelected = true
                     return true
                 }
             }

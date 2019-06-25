@@ -6,7 +6,9 @@ import android.content.res.Resources
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +33,15 @@ class MainAdapter(
         items.get(position).let { item ->
             with(holder) {
                 Handler(Looper.getMainLooper()).post {
+                    itemView.setBackgroundResource(
+                        when{
+                            item.isNoti ->{
+                                R.color.notiBackground
+                            }else ->{
+                                R.color.WHITE
+                            }
+                        }
+                    )
                     title.text = item.text
                     contexts.setTextColor(
                         ContextCompat.getColorStateList(
@@ -44,16 +55,39 @@ class MainAdapter(
                                     R.color.green
                                 }
                                 else -> {
-                                    contexts.text ="[공통]"
+                                    contexts.text = "[공통]"
                                     R.color.mainBlue
                                 }
                             }
                         )
                     )
+                    new.visibility =
+                        when {
+                            item.isNew -> {
+                                View.VISIBLE
+                            }
+                            else -> {
+                                View.GONE
+                            }
+                        }
+                    save.visibility =
+                        when {
+                            item.isSave -> {
+                                View.VISIBLE
+                            }
+                            else -> {
+                                View.GONE
+                            }
+                        }
                     date.text = item.data
                 }
             }
         }
+    }
+
+    fun update(list: ParseList) {
+        items = list
+        notificationUpdate()
     }
 
 
@@ -70,6 +104,8 @@ class MainAdapter(
         val title: TextView = itemView.titleIn
         val contexts: TextView = itemView.contexts
         val date: TextView = itemView.date
+        val new: ImageView = itemView.neww
+        val save: ImageView = itemView.save
     }
 
 }

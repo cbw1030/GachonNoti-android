@@ -7,11 +7,9 @@ import io.wiffy.gachonNoti.ui.main.notification.ParseList
 
 interface MainContract {
     interface View{
-        fun init()
         fun changeUI(mList:ArrayList<Fragment>)
         fun builderUp()
         fun builderDismiss()
-        fun getList():ParseList
         fun makeToast(str:String)
     }
     interface Presenter{
@@ -19,10 +17,18 @@ interface MainContract {
     }
 
     interface FragmentNotification{
-        fun changeUI()
+        fun changeUI(list:ParseList)
+        fun updateUI(list:ParseList)
+        fun showLoad()
+        fun dismissLoad()
     }
     interface PresenterNotification{
         fun initPresent()
+        fun load()
+        fun update(data: ParseList)
+        fun show()
+        fun dismiss()
+        fun request()
     }
 
     interface FragmentSetting{

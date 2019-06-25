@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main
+package io.wiffy.gachonNoti.ui.main.notification
 
 import android.os.AsyncTask
 import android.os.Handler
@@ -6,6 +6,7 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.MainContract
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import io.wiffy.gachonNoti.ui.main.notification.ParseList
 import org.json.JSONObject
@@ -18,12 +19,11 @@ import java.net.URL
 import java.net.URLEncoder
 import java.util.*
 
-class MainAsyncTask(private val list: ParseList, private val mView: MainContract.View) : AsyncTask<Void, Void, Int>() {
-
+class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: MainContract.PresenterNotification) : AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
-            mView.builderUp()
+            mPresenter.show()
         }
     }
 
@@ -31,7 +31,7 @@ class MainAsyncTask(private val list: ParseList, private val mView: MainContract
         val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}"
         val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
         for (n in conn) {
-            if (!n.html().contains("alt=\"공지\"")) {
+            if (n.html().contains("alt=\"공지\"")) {
                 val x = n.select("a").text()
                 val v = x.split("]")[0]
 
@@ -39,7 +39,22 @@ class MainAsyncTask(private val list: ParseList, private val mView: MainContract
                     Parse(
                         "$v]",
                         x.substring(v.length + 2),
-                        n.select("span.data").text()
+                        n.select("span.data").text(),
+                        true,
+                        when{
+                            n.html().contains("icon_new.gif")->{
+                                true
+                            }else ->{
+                                false
+                            }
+                        },
+                        when{
+                            n.html().contains("icon_file.gif")->{
+                                true
+                            }else ->{
+                                false
+                            }
+                        }
                     )
                 )
             }
@@ -50,16 +65,7 @@ class MainAsyncTask(private val list: ParseList, private val mView: MainContract
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-
-            mView.builderDismiss()
-
-            if(Util.looper)
-            if (Util.index == 0) {
-                mView.init()
-            } else {
-
-            }
-            Util.index += 1
+            mPresenter.request()
         }
     }
 }

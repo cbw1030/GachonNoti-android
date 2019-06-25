@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/mainBlue</item>
-        <item name="colorPrimaryDark">@color/mainDeepBlue</item>
+        <item name="colorPrimary">@color/main2Blue</item>
+        <item name="colorPrimaryDark">@color/main2DeepBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="dialog" parent="Theme.AppCompat.Dialog">
