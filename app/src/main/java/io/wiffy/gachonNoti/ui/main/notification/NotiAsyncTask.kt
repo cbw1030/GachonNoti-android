@@ -14,12 +14,14 @@ import org.jsoup.Jsoup
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.InputStreamReader
+import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
 
-class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainContract.PresenterNotification) : AsyncTask<Void, Void, Int>() {
+class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainContract.PresenterNotification) :
+    AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -41,17 +43,19 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainCon
                         x.substring(v.length + 2),
                         n.select("span.data").text(),
                         false,
-                        when{
-                            n.html().contains("icon_new.gif")->{
+                        when {
+                            n.html().contains("icon_new.gif") -> {
                                 true
-                            }else ->{
+                            }
+                            else -> {
                                 false
                             }
                         },
-                        when{
-                            n.html().contains("icon_file.gif")->{
+                        when {
+                            n.html().contains("icon_file.gif") -> {
                                 true
-                            }else ->{
+                            }
+                            else -> {
                                 false
                             }
                         }
@@ -59,6 +63,12 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainCon
                 )
             }
         }
+        val help = URL("http://wiffy.io/gachon/thanks.txt").readText().split(",")
+        val newString= StringBuilder()
+        for (k in help) {
+            newString.append("$k\n")
+        }
+        Util.helper = newString.toString()
         return 0
     }
 

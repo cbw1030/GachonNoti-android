@@ -15,6 +15,9 @@ class MyApplication:Application() {
         Util.firstBoot=Util.sharedPreferences.getBoolean(
             "firstBooting",true
         )
+        Util.notifiSet=Util.sharedPreferences.getBoolean(
+            "notiOn",true
+        )
 
 
     }

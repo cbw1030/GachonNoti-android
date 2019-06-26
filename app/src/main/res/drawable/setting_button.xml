@@ -7,7 +7,7 @@
             <gradient
                     android:angle="90"
                     android:startColor="@color/table_in"
-                    android:endColor="@color/title2"
+                    android:endColor="@color/table_in"
             />
         </shape>
     </item>

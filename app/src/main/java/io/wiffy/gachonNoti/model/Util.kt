@@ -25,6 +25,15 @@ class Util {
         var looper = true
 
         @JvmStatic
+        var notifiSet = true
+
+        @JvmStatic
+        var state = 0
+
+        @JvmStatic
+        var helper = "인터넷 연결을 확인해주세요."
+
+        @JvmStatic
         fun wrap(context: Context?, language: String?): ContextWrapper? {
             val configuration = context?.resources?.configuration
             val newLocale = Locale(language)
@@ -54,5 +63,8 @@ class Util {
         const val mobileURL2 = "&pageSize=30&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val appConstantPreferences = "GACHONNOTICE"
 
+        const val STATE_NOTIFICATION = 0
+        const val STATE_SETTING = 1
+        const val STATE_WEBVIEW = 2
     }
 }

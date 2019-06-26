@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
 
-        mPresenter = SplashPresenter(this)
+        mPresenter = SplashPresenter(this,applicationContext)
         mPresenter.initPresent()
     }
 

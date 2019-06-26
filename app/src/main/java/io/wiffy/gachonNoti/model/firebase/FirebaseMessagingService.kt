@@ -36,24 +36,11 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         val message = p0.notification?.body?:""
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
-                val channel = getString(R.string.channel)
-                val channelName = getString(R.string.app_name)
-                val notiChannel =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                val channelMessage = NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT)
-                channelMessage.description = ""
-                channelMessage.enableLights(true)
-                channelMessage.enableVibration(true)
-                channelMessage.setShowBadge(false)
-
-                channelMessage.vibrationPattern = addList()
-                notiChannel.createNotificationChannel(channelMessage)
-
-                val notificationBuilder = NotificationCompat.Builder(this, channel)
+                val notificationBuilder = NotificationCompat.Builder(this, getString(R.string.channel))
                     .setSmallIcon(R.drawable.defaults)
                     .setContentTitle(title)
                     .setContentText(message)
-                    .setChannelId(channel)
+                    .setChannelId(getString(R.string.channel))
                     .setAutoCancel(true)
                     .setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_VIBRATE)
                 val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -1,9 +1,11 @@
 package io.wiffy.gachonNoti.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,11 +14,14 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.get
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
@@ -35,6 +40,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_main)
+        Util.state = Util.STATE_NOTIFICATION
         invisible()
         supportActionBar?.hide()
         mPresenter = MainPresenter(this)
@@ -49,6 +55,40 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onStart() {
         visible()
         super.onStart()
+    }
+
+    @SuppressLint("ApplySharedPref")
+    private fun notiCheck() {
+        if (NotificationManagerCompat.from(applicationContext)
+                .areNotificationsEnabled() == false and Util.notifiSet
+        ) {
+
+            val builders = AlertDialog.Builder(this,R.style.light_dialog)
+            builders.setTitle("알림 설정 확인")
+            builders.setMessage("가천 알림이의 알림을 허용하시겠습니까?")
+            builders.setPositiveButton("OK") { _, _ ->
+                val tent = Intent()
+                tent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tent.putExtra("android.provider.extra.APP_PACKAGE", packageName)
+
+                } else {
+                    tent.putExtra("app_package", packageName)
+                    tent.putExtra("app_uid", applicationInfo.uid)
+                }
+                startActivity(tent)
+                finish()
+            }
+            builders.setNegativeButton("Cancel") { _, _ ->
+                Util.notifiSet=false
+                Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
+                finish()
+            }
+            builders.setCancelable(false)
+            builders.show()
+        }
     }
 
     override fun onResume() {
@@ -81,6 +121,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun builderDismiss() {
         builder.dismiss()
+        notiCheck()
     }
 
     override fun changeUI(mList: ArrayList<Fragment>) {
@@ -99,10 +140,26 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                pager.currentItem = tab?.position!!
+                Util.state = tab?.position?:0
+                pager.currentItem = tab?.position?:0
             }
         })
 
+    }
+
+    override fun onBackPressed() {
+        when (Util.state) {
+            Util.STATE_NOTIFICATION -> {
+                finish()
+            }
+            Util.STATE_SETTING -> {
+                pager.currentItem = Util.STATE_NOTIFICATION
+                Util.state =Util.STATE_NOTIFICATION
+            }
+            Util.STATE_WEBVIEW -> {
+
+            }
+        }
     }
 
     override fun onUserLeaveHint() {
