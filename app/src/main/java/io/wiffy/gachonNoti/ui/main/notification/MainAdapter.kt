@@ -2,7 +2,9 @@ package io.wiffy.gachonNoti.ui.main.notification
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -10,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
@@ -43,20 +47,20 @@ class MainAdapter(
                         }
                     )
                     title.text = item.text
-                    contexts.setTextColor(
+                    card.setCardBackgroundColor(
                         ContextCompat.getColorStateList(
                             context, when {
                                 item.value.contains("[글로벌]") -> {
-                                    contexts.text = "[글로벌]"
+                                    contexts.text = "글로벌"
                                     R.color.red
                                 }
                                 item.value.contains("[메디컬]") -> {
-                                    contexts.text = "[메디컬]"
+                                    contexts.text = "메디컬"
                                     R.color.green
                                 }
                                 else -> {
-                                    contexts.text = "[공통]"
-                                    R.color.mainBlue
+                                    contexts.text = "공통"
+                                    R.color.main2DeepBlue
                                 }
                             }
                         )
@@ -80,6 +84,10 @@ class MainAdapter(
                             }
                         }
                     date.text = item.data
+
+                    itemView.setOnClickListener {
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.link)))
+                    }
                 }
             }
         }
@@ -102,10 +110,11 @@ class MainAdapter(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter, parent, false)
     ) {
         val title: TextView = itemView.titleIn
-        val contexts: TextView = itemView.contexts
+        val contexts: TextView = itemView.contextsIn
         val date: TextView = itemView.date
         val new: ImageView = itemView.neww
         val save: ImageView = itemView.save
+        val card:CardView = itemView.contexts
     }
 
 }

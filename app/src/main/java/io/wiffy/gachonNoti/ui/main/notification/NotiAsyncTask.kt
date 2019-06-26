@@ -58,7 +58,8 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainCon
                             else -> {
                                 false
                             }
-                        }
+                        },
+                        "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                     )
                 )
             }

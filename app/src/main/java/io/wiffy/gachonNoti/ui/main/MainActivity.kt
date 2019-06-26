@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var mPresenter: MainPresenter
     lateinit var adapter: PagerAdapter
     lateinit var builder: Dialog
-    var protector: Dialog? = null
+    var backKeyPressedTime: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -150,7 +150,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onBackPressed() {
         when (Util.state) {
             Util.STATE_NOTIFICATION -> {
-                finish()
+                if (System.currentTimeMillis() > backKeyPressedTime + 2000L) {
+                    backKeyPressedTime = System.currentTimeMillis()
+                    Toast.makeText(applicationContext, "종료하시려면 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
+                } else {
+                    finish()
+                }
             }
             Util.STATE_SETTING -> {
                 pager.currentItem = Util.STATE_NOTIFICATION

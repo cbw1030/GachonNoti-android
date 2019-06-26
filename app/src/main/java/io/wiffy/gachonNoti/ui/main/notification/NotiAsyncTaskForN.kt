@@ -34,7 +34,6 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
             if (n.html().contains("alt=\"공지\"")) {
                 val x = n.select("a").text()
                 val v = x.split("]")[0]
-
                 list.add(
                     Parse(
                         "$v]",
@@ -54,7 +53,8 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
                             }else ->{
                                 false
                             }
-                        }
+                        },
+                        "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                     )
                 )
             }
