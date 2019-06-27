@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     override fun onPause() {
-        Util.index = 0
         Util.looper = false
         invisible()
         super.onPause()
