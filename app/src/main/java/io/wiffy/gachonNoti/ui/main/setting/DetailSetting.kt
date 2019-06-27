@@ -19,7 +19,6 @@ class DetailSetting : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailsetting)
 
-
         OK.setBackgroundColor(
             resources.getColor(
                 when (Util.theme) {

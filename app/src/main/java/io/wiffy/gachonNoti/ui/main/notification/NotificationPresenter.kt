@@ -19,6 +19,10 @@ class NotificationPresenter(private val mView:MainContract.FragmentNotification)
         }
     }
 
+    override fun uno() {
+        mView.changer(list)
+    }
+
     override fun update(data: ParseList){
         isloading = false
         list = data

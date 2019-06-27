@@ -37,6 +37,9 @@ class Util {
         var theme = "default"
 
         @JvmStatic
+        var made = true
+
+        @JvmStatic
         fun wrap(context: Context?, language: String?): ContextWrapper? {
             val configuration = context?.resources?.configuration
             val newLocale = Locale(language)
@@ -68,7 +71,8 @@ class Util {
         const val RESULT_SETTING_CHANGED = 123
 
         const val STATE_NOTIFICATION = 0
-        const val STATE_SETTING = 1
-        const val STATE_WEBVIEW = 2
+        const val STATE_SEARCHER=1
+        const val STATE_SETTING = 2
+        const val STATE_WEBVIEW = 3
     }
 }

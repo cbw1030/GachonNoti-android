@@ -30,6 +30,7 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainCon
     }
 
     override fun doInBackground(vararg params: Void?): Int {
+        Log.d("asdf","찾았다에러")
         val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}"
         val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
         for (n in conn) {

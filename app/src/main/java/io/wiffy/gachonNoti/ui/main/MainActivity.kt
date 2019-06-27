@@ -149,9 +149,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun changeUI(mList: ArrayList<Fragment>) {
         themeChange()
-
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
+        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
         pager.adapter = adapter
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
@@ -165,8 +165,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Util.state = tab?.position ?: 0
-                pager.currentItem = tab?.position ?: 0
+                Util.state = tab?.position ?: Util.STATE_NOTIFICATION
+                pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
             }
         })
 
@@ -181,6 +181,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 } else {
                     finish()
                 }
+            }
+            Util.STATE_SEARCHER->{
+                pager.currentItem = Util.STATE_NOTIFICATION
+                Util.state = Util.STATE_NOTIFICATION
             }
             Util.STATE_SETTING -> {
                 pager.currentItem = Util.STATE_NOTIFICATION

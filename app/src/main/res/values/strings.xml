@@ -17,6 +17,7 @@
     <string name="details">자세한 설정</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
+    <string name="searcher">빈 강의실 찾기</string>
     <string name="open">https://github.com/jhy/jsoup\n
         https://github.com/81813780/AVLoadingIndicatorView\n
         https://github.com/hdodenhof/CircleImageView

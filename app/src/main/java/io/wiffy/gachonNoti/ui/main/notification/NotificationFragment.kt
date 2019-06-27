@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.notification
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainContract
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -16,17 +18,21 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 class NotificationFragment : Fragment(), MainContract.FragmentNotification {
 
     lateinit var myView: View
-    lateinit var mPresenter: NotificationPresenter
+    var mPresenter: NotificationPresenter? = null
     lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification, container, false)
-        mPresenter = NotificationPresenter(this)
-        mPresenter.initPresent()
+        if(mPresenter==null) {
+            mPresenter = NotificationPresenter(this)
+            mPresenter?.initPresent()
+        }else{
+            mPresenter?.uno()
+        }
         return myView
     }
 
-    override fun changeUI(list:ParseList) {
+    override fun changeUI(list: ParseList) {
         adapter = MainAdapter(list, activity?.applicationContext!!)
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
@@ -35,7 +41,21 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    mPresenter.load()
+                    mPresenter?.load()
+                }
+            }
+        })
+    }
+
+    override fun changer(list: ParseList) {
+        myView.recylcer.adapter = adapter
+        myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
+        myView.recylcer.addItemDecoration(VerticalSpaceItemDecoration(2))
+        myView.recylcer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)) {
+                    mPresenter?.load()
                 }
             }
         })
@@ -45,11 +65,11 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
         adapter.update(list)
     }
 
-    override fun showLoad(){
+    override fun showLoad() {
         (activity as MainActivity).builderUp()
     }
 
-    override fun dismissLoad(){
+    override fun dismissLoad() {
         (activity as MainActivity).builderDismiss()
     }
 

@@ -17,7 +17,17 @@ interface MainContract {
         fun changeThemes()
     }
 
+    interface FragmentSearcher {
+        fun changeUI()
+    }
+
+    interface PresenterSearcher {
+        fun initPresent()
+
+    }
+
     interface FragmentNotification {
+        fun changer(list:ParseList)
         fun changeUI(list: ParseList)
         fun updateUI(list: ParseList)
         fun showLoad()
@@ -25,6 +35,7 @@ interface MainContract {
     }
 
     interface PresenterNotification {
+        fun uno()
         fun initPresent()
         fun load()
         fun update(data: ParseList)
