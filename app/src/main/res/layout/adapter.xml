@@ -33,20 +33,27 @@
             <androidx.cardview.widget.CardView
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
-                    app:cardCornerRadius="3dp"
+                    app:cardCornerRadius="2dp"
                     android:gravity="start"
                     android:id="@+id/contexts"
                     android:layout_below="@id/titleIn"
+                    app:cardElevation="0dp"
                     app:cardBackgroundColor="@color/main2DeepBlue"
                     android:layout_width="45dp"
-                    android:layout_height="wrap_content">
-                <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/date">
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                     <TextView
                             android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
                             android:textColor="@color/WHITE"
                             android:gravity="center"
                             android:id="@+id/contextsIn"
                             android:text="@string/common"
+                            android:textSize="11sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                 </RelativeLayout>
@@ -54,7 +61,8 @@
             <TextView
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
-                    android:gravity="start"
+                    android:gravity="center"
+                    android:foregroundGravity="center"
                     android:id="@+id/date"
                     android:layout_toEndOf="@+id/contexts"
                     android:layout_below="@id/titleIn"
