@@ -5,7 +5,7 @@
     <string name="Notification">공지 사항</string>
     <string name="Setting">설정</string>
     <string name="OK">확인</string>
-    <string name="NotificationFunction">알림설정</string>
+    <string name="NotificationFunction">알림 설정</string>
     <string name="CANCEL">취소</string>
     <string name="func">기능</string>
     <string name="money">후원</string>
@@ -14,7 +14,7 @@
     <string name="medical">메디컬</string>
     <string name="global">글로벌</string>
     <string name="info">정보</string>
-    <string name="details">자세한 설정</string>
+    <string name="details">테마 설정</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
     <string name="searcher">빈 강의실 찾기</string>

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.MainContract
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 
@@ -65,8 +66,19 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
             }
         }
         myView.detailSetting.setOnClickListener {
-            Util.novisible = true
-            startActivityForResult(Intent(context, DetailSetting::class.java), 1)
+            val builder = DetailDialog(context!!)
+            builder.show()
+            builder.setListener(
+                View.OnClickListener {
+                    builder.okListen()
+                    (activity as MainActivity).themeChange()
+                    (activity as MainActivity).mPresenter.changeThemes()
+                    builder.dismiss()
+                },
+                View.OnClickListener {
+                    builder.dismiss()
+                })
+
         }
         myView.money.setOnClickListener {
             Util.novisible = true
@@ -117,11 +129,11 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
         )
         val color = when (Util.theme) {
             "red" -> intArrayOf(resources.getColor(R.color.red), resources.getColor(R.color.gray2))
-            "green" ->intArrayOf(resources.getColor(R.color.green), resources.getColor(R.color.gray2))
+            "green" -> intArrayOf(resources.getColor(R.color.green), resources.getColor(R.color.gray2))
             else -> intArrayOf(resources.getColor(R.color.main2Blue), resources.getColor(R.color.gray2))
         }
         val lightColor = when (Util.theme) {
-            "red" ->intArrayOf(resources.getColor(R.color.lightRed), resources.getColor(R.color.lightGray))
+            "red" -> intArrayOf(resources.getColor(R.color.lightRed), resources.getColor(R.color.lightGray))
             "green" -> intArrayOf(resources.getColor(R.color.lightGreen), resources.getColor(R.color.lightGray))
             else -> intArrayOf(resources.getColor(R.color.main2LightBlue), resources.getColor(R.color.lightGray))
         }

@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         notiCheck()
     }
 
-    private fun themeChange() {
+    fun themeChange() {
         toolbar_main.setBackgroundResource(
             when (Util.theme) {
                 "red" -> {
