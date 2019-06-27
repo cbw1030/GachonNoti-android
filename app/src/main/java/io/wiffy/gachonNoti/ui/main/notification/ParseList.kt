@@ -14,4 +14,9 @@ class ParseList:Serializable {
     fun get(index:Int):Parse = list[index]
 
     fun size():Int = list.size
+
+    fun clear()
+    {
+        list.clear()
+    }
 }

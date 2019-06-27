@@ -27,6 +27,7 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
             mPresenter = NotificationPresenter(this)
             mPresenter?.initPresent()
         }else{
+            changeTheme()
             mPresenter?.uno()
         }
         return myView
@@ -45,8 +46,22 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
                 }
             }
         })
+       changeTheme()
+        myView.swipe.setOnRefreshListener {
+            Util.index=0
+            mPresenter?.resetList()
+            mPresenter?.initPresent()
+            myView.swipe.isRefreshing=false
+        }
     }
-
+fun changeTheme()
+{
+    myView.swipe.setColorSchemeColors(when(Util.theme){
+        "red"->resources.getColor(R.color.red)
+        "green"->resources.getColor(R.color.green)
+        else->resources.getColor(R.color.main2Blue)
+    })
+}
     override fun changer(list: ParseList) {
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)

@@ -19,6 +19,10 @@ class NotificationPresenter(private val mView:MainContract.FragmentNotification)
         }
     }
 
+    override fun resetList() {
+        list.clear()
+    }
+
     override fun uno() {
         mView.changer(list)
     }

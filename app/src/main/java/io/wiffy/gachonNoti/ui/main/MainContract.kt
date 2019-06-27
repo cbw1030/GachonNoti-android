@@ -35,6 +35,7 @@ interface MainContract {
     }
 
     interface PresenterNotification {
+        fun resetList()
         fun uno()
         fun initPresent()
         fun load()

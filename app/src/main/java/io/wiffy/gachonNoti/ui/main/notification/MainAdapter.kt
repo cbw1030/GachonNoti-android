@@ -91,6 +91,10 @@ class MainAdapter(
                         myIntent.putExtra("bundle",item)
                         context.startActivity(myIntent)
                     }
+                    itemView.setOnLongClickListener {
+
+                        true
+                    }
                 }
             }
         }
