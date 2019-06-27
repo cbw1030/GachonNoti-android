@@ -36,7 +36,8 @@
         <!--android:theme="@style/dialog"/>-->
         <!--<activity android:name=".ui.main.setting.LanguageActivity"-->
         <!--android:theme="@style/dialog"/>-->
-
+        <activity android:name=".ui.main.setting.DetailSetting"
+                  android:theme="@style/dialog"/>
         <service
                 android:name=".model.firebase.FirebaseMessagingService"
                 android:exported="false"

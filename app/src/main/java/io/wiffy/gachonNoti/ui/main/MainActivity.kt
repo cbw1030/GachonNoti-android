@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         supportActionBar?.hide()
         mPresenter = MainPresenter(this)
-        builder = Dialog(this)
+        builder = Dialog(this@MainActivity)
         builder.setContentView(R.layout.builder)
         builder.setCancelable(false)
         builder.setCanceledOnTouchOutside(false)
@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         visible()
         super.onStart()
     }
+
     override fun onResume() {
         visible()
         super.onResume()
@@ -73,13 +74,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         super.onStop()
     }
+
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
         if (NotificationManagerCompat.from(applicationContext)
                 .areNotificationsEnabled() == false and Util.notifiSet
         ) {
 
-            val builders = AlertDialog.Builder(this,R.style.light_dialog)
+            val builders = AlertDialog.Builder(this, R.style.light_dialog)
             builders.setTitle("알림 설정 확인")
             builders.setMessage("가천 알림이의 알림을 허용하시겠습니까?")
             builders.setPositiveButton("OK") { _, _ ->
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 finish()
             }
             builders.setNegativeButton("Cancel") { _, _ ->
-                Util.notifiSet=false
+                Util.notifiSet = false
                 Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
                 finish()
@@ -106,7 +108,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             builders.show()
         }
     }
-
 
 
     override fun builderUp() {
@@ -124,7 +125,31 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         notiCheck()
     }
 
+    private fun themeChange() {
+        toolbar_main.setBackgroundResource(
+            when (Util.theme) {
+                "red" -> {
+                    window.statusBarColor = resources.getColor(R.color.deepRed)
+                    navigation.setBackgroundColor(resources.getColor(R.color.red))
+                    R.color.red
+                }
+                "green" -> {
+                    window.statusBarColor = resources.getColor(R.color.deepGreen)
+                    navigation.setBackgroundColor(resources.getColor(R.color.green))
+                    R.color.green
+                }
+                else -> {
+                    window.statusBarColor = resources.getColor(R.color.main2DeepBlue)
+                    navigation.setBackgroundColor(resources.getColor(R.color.main2Blue))
+                    R.color.main2Blue
+                }
+            }
+        )
+    }
+
     override fun changeUI(mList: ArrayList<Fragment>) {
+        themeChange()
+
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
@@ -140,8 +165,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Util.state = tab?.position?:0
-                pager.currentItem = tab?.position?:0
+                Util.state = tab?.position ?: 0
+                pager.currentItem = tab?.position ?: 0
             }
         })
 
@@ -159,7 +184,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
             Util.STATE_SETTING -> {
                 pager.currentItem = Util.STATE_NOTIFICATION
-                Util.state =Util.STATE_NOTIFICATION
+                Util.state = Util.STATE_NOTIFICATION
             }
             Util.STATE_WEBVIEW -> {
 
@@ -199,7 +224,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        when (resultCode) {
+            Util.RESULT_SETTING_CHANGED -> {
+                themeChange()
+                mPresenter.changeThemes()
+            }
+            else -> {
+            }
+        }
     }
 
 }

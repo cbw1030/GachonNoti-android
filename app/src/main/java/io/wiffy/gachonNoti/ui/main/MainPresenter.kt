@@ -6,7 +6,6 @@ import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 
 
-
 class MainPresenter(private val mView: MainContract.View) : MainContract.Presenter {
 
     private val mList = ArrayList<Fragment>()
@@ -18,4 +17,7 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
         mView.changeUI(mList)
     }
 
+    override fun changeThemes() {
+        (mList[1] as SettingFragment).themeChanger()
+    }
 }

@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.setting
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -33,6 +34,7 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
 
     override fun changeView() {
         myView.notiSwitch.isChecked = Util.notifiSet
+        themeChanger()
 
         myView.notiSwitch.setOnCheckedChangeListener { switch, isChecked ->
             when (isChecked) {
@@ -63,7 +65,7 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
             }
         }
         myView.detailSetting.setOnClickListener {
-            Toast.makeText(activity,"TEST",Toast.LENGTH_SHORT).show()
+            startActivityForResult(Intent(context, DetailSetting::class.java), 1)
         }
         myView.money.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
@@ -100,6 +102,31 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
         }
 
 
+    }
+
+    fun themeChanger() {
+
+        val arar = arrayOf(
+            intArrayOf(
+                android.R.attr.state_checked
+            ),
+            intArrayOf(-android.R.attr.state_checked)
+        )
+        val color = when (Util.theme) {
+            "red" -> intArrayOf(resources.getColor(R.color.red), resources.getColor(R.color.gray2))
+            "green" ->intArrayOf(resources.getColor(R.color.green), resources.getColor(R.color.gray2))
+            else -> intArrayOf(resources.getColor(R.color.main2Blue), resources.getColor(R.color.gray2))
+        }
+        val lightColor = when (Util.theme) {
+            "red" ->intArrayOf(resources.getColor(R.color.lightRed), resources.getColor(R.color.lightGray))
+            "green" -> intArrayOf(resources.getColor(R.color.lightGreen), resources.getColor(R.color.lightGray))
+            else -> intArrayOf(resources.getColor(R.color.main2LightBlue), resources.getColor(R.color.lightGray))
+        }
+
+        myView.notiSwitch.thumbTintList = ColorStateList(arar, color)
+
+
+        myView.notiSwitch.trackTintList = ColorStateList(arar, lightColor)
     }
 
     @SuppressLint("ApplySharedPref")

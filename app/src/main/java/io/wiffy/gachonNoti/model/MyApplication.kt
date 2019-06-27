@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 
-class MyApplication:Application() {
+class MyApplication : Application() {
 
 
     @SuppressLint("CommitPrefEdits")
@@ -12,13 +12,15 @@ class MyApplication:Application() {
         super.onCreate()
 
         Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE)
-        Util.firstBoot=Util.sharedPreferences.getBoolean(
-            "firstBooting",true
+        Util.firstBoot = Util.sharedPreferences.getBoolean(
+            "firstBooting", true
         )
-        Util.notifiSet=Util.sharedPreferences.getBoolean(
-            "notiOn",true
+        Util.notifiSet = Util.sharedPreferences.getBoolean(
+            "notiOn", true
         )
-
+        Util.theme = Util.sharedPreferences.getString(
+            "theme", "default"
+        ) ?: "default"
 
     }
 }

@@ -6,8 +6,8 @@
             <corners
                     android:radius="5dip"/>
             <gradient
-                    android:startColor="@color/mainDeepBlue"
-                    android:endColor="@color/mainDeepBlue"
+                    android:startColor="@color/main2DeepBlue"
+                    android:endColor="@color/main2DeepBlue"
             />
         </shape>
     </item>
@@ -17,8 +17,8 @@
             <corners
                     android:radius="5dip"/>
             <gradient
-                    android:startColor="@color/mainDeepBlue"
-                    android:endColor="@color/mainDeepBlue"
+                    android:startColor="@color/main2DeepBlue"
+                    android:endColor="@color/main2DeepBlue"
             />
         </shape>
     </item>
@@ -28,8 +28,8 @@
             <corners
                     android:radius="5dip"/>
             <gradient
-                    android:startColor="@color/mainBlue"
-                    android:endColor="@color/mainBlue"
+                    android:startColor="@color/main2Blue"
+                    android:endColor="@color/main2Blue"
             />
         </shape>
     </item>

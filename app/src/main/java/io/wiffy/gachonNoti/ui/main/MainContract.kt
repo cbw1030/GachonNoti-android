@@ -14,6 +14,7 @@ interface MainContract {
 
     interface Presenter {
         fun initPresent()
+        fun changeThemes()
     }
 
     interface FragmentNotification {

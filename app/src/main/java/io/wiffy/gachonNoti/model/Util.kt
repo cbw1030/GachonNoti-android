@@ -34,6 +34,9 @@ class Util {
         var helper = "인터넷 연결을 확인해주세요."
 
         @JvmStatic
+        var theme = "default"
+
+        @JvmStatic
         fun wrap(context: Context?, language: String?): ContextWrapper? {
             val configuration = context?.resources?.configuration
             val newLocale = Locale(language)
@@ -62,6 +65,7 @@ class Util {
         const val mobileURL1 = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum="
         const val mobileURL2 = "&pageSize=30&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val appConstantPreferences = "GACHONNOTICE"
+        const val RESULT_SETTING_CHANGED = 123
 
         const val STATE_NOTIFICATION = 0
         const val STATE_SETTING = 1
