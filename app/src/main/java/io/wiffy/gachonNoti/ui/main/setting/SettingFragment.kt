@@ -62,6 +62,9 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
                 }
             }
         }
+        myView.detailSetting.setOnClickListener {
+            Toast.makeText(activity,"TEST",Toast.LENGTH_SHORT).show()
+        }
         myView.money.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }

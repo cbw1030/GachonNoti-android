@@ -56,7 +56,23 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         visible()
         super.onStart()
     }
+    override fun onResume() {
+        visible()
+        super.onResume()
+    }
 
+
+    override fun onPause() {
+        Util.index = 0
+        Util.looper = false
+        invisible()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        invisible()
+        super.onStop()
+    }
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
         if (NotificationManagerCompat.from(applicationContext)
@@ -91,23 +107,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun onResume() {
-        visible()
-        super.onResume()
-    }
 
-
-    override fun onPause() {
-        Util.index = 0
-        Util.looper = false
-        invisible()
-        super.onPause()
-    }
-
-    override fun onStop() {
-        invisible()
-        super.onStop()
-    }
 
     override fun builderUp() {
         builder.show()
@@ -179,6 +179,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         main_main.invalidate()
     }
 
+    private fun invisible() {
+        main_main.visibility = View.GONE
+        main_splash.visibility = View.VISIBLE
+        main_splash.invalidate()
+        main_main.invalidate()
+    }
+
     override fun onAttachedToWindow() {
         visible()
         super.onAttachedToWindow()
@@ -189,12 +196,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onDetachedFromWindow()
     }
 
-    private fun invisible() {
-        main_main.visibility = View.GONE
-        main_splash.visibility = View.VISIBLE
-        main_splash.invalidate()
-        main_main.invalidate()
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

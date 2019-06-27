@@ -14,7 +14,7 @@
     <string name="medical">메디컬</string>
     <string name="global">글로벌</string>
     <string name="info">정보</string>
-
+<string name="details">자세한 설정</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
     <string name="open">https://github.com/jhy/jsoup\n
