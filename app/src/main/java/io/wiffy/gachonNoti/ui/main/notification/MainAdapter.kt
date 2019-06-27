@@ -1,7 +1,10 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
@@ -12,9 +15,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
@@ -39,10 +44,11 @@ class MainAdapter(
             with(holder) {
                 Handler(Looper.getMainLooper()).post {
                     itemView.setBackgroundResource(
-                        when{
-                            item.isNoti ->{
+                        when {
+                            item.isNoti -> {
                                 R.color.notiBackground
-                            }else ->{
+                            }
+                            else -> {
                                 R.color.WHITE
                             }
                         }
@@ -87,12 +93,14 @@ class MainAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        val myIntent =Intent(context,WebViewActivity::class.java)
-                        myIntent.putExtra("bundle",item)
+                        val myIntent = Intent(context, WebViewActivity::class.java)
+                        myIntent.putExtra("bundle", item)
                         context.startActivity(myIntent)
                     }
                     itemView.setOnLongClickListener {
-
+                        (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
+                            ClipData.newPlainText(item.text, item.link)
+                        Toast.makeText(context, "주소를 복사했습니다.", Toast.LENGTH_SHORT).show()
                         true
                     }
                 }
@@ -121,7 +129,7 @@ class MainAdapter(
         val date: TextView = itemView.date
         val new: ImageView = itemView.neww
         val save: ImageView = itemView.save
-        val card:CardView = itemView.contexts
+        val card: CardView = itemView.contexts
     }
 
 }

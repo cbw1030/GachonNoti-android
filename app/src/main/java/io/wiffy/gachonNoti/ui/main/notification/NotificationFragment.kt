@@ -23,6 +23,12 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification, container, false)
+        myView.swipe.setOnRefreshListener {
+            Util.index=0
+            mPresenter?.resetList()
+            mPresenter?.initPresent()
+            myView.swipe.isRefreshing=false
+        }
         if(mPresenter==null) {
             mPresenter = NotificationPresenter(this)
             mPresenter?.initPresent()
@@ -47,12 +53,7 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
             }
         })
        changeTheme()
-        myView.swipe.setOnRefreshListener {
-            Util.index=0
-            mPresenter?.resetList()
-            mPresenter?.initPresent()
-            myView.swipe.isRefreshing=false
-        }
+
     }
 fun changeTheme()
 {
