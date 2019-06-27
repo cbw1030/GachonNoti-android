@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -29,7 +30,8 @@ import java.util.*
 
 class MainAdapter(
     var items: ParseList,
-    private val context: Context
+    private val context: Context,
+    private val act: Activity
 ) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
@@ -93,9 +95,10 @@ class MainAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        val myIntent = Intent(context, WebViewActivity::class.java)
+                        Util.novisible = true
+                        val myIntent = Intent(act, WebViewActivity::class.java)
                         myIntent.putExtra("bundle", item)
-                        context.startActivity(myIntent)
+                        act.startActivity(myIntent)
                     }
                     itemView.setOnLongClickListener {
                         (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =

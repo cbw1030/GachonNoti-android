@@ -40,6 +40,9 @@ class Util {
         var made = true
 
         @JvmStatic
+        var novisible = false
+
+        @JvmStatic
         fun wrap(context: Context?, language: String?): ContextWrapper? {
             val configuration = context?.resources?.configuration
             val newLocale = Locale(language)

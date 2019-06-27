@@ -65,12 +65,15 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
             }
         }
         myView.detailSetting.setOnClickListener {
+            Util.novisible = true
             startActivityForResult(Intent(context, DetailSetting::class.java), 1)
         }
         myView.money.setOnClickListener {
+            Util.novisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
         myView.maker.setOnClickListener {
+            Util.novisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/wiffy-io")))
         }
         myView.source.setOnClickListener {

@@ -24,15 +24,14 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification, container, false)
         myView.swipe.setOnRefreshListener {
-            Util.index=0
             mPresenter?.resetList()
             mPresenter?.initPresent()
-            myView.swipe.isRefreshing=false
+            myView.swipe.isRefreshing = false
         }
-        if(mPresenter==null) {
+        if (mPresenter == null) {
             mPresenter = NotificationPresenter(this)
             mPresenter?.initPresent()
-        }else{
+        } else {
             changeTheme()
             mPresenter?.uno()
         }
@@ -40,7 +39,7 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
     }
 
     override fun changeUI(list: ParseList) {
-        adapter = MainAdapter(list, activity?.applicationContext!!)
+        adapter = MainAdapter(list, activity?.applicationContext!!,activity as MainActivity)
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
         myView.recylcer.addItemDecoration(VerticalSpaceItemDecoration(2))
@@ -52,17 +51,20 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
                 }
             }
         })
-       changeTheme()
+        changeTheme()
 
     }
-fun changeTheme()
-{
-    myView.swipe.setColorSchemeColors(when(Util.theme){
-        "red"->resources.getColor(R.color.red)
-        "green"->resources.getColor(R.color.green)
-        else->resources.getColor(R.color.main2Blue)
-    })
-}
+
+    fun changeTheme() {
+        myView.swipe.setColorSchemeColors(
+            when (Util.theme) {
+                "red" -> resources.getColor(R.color.red)
+                "green" -> resources.getColor(R.color.green)
+                else -> resources.getColor(R.color.main2Blue)
+            }
+        )
+    }
+
     override fun changer(list: ParseList) {
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)

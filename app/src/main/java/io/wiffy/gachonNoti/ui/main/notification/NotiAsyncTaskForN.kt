@@ -65,6 +65,7 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
+            Util.index = 0
             mPresenter.request()
         }
     }

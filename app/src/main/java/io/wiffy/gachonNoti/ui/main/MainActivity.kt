@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun onResume() {
+        Util.novisible = false
         visible()
         super.onResume()
     }
@@ -208,10 +209,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun invisible() {
-        main_main.visibility = View.GONE
-        main_splash.visibility = View.VISIBLE
-        main_splash.invalidate()
-        main_main.invalidate()
+        if(!Util.novisible){
+            Log.d("asdf","aaa3")
+            main_main.visibility = View.GONE
+            main_splash.visibility = View.VISIBLE
+            main_splash.invalidate()
+            main_main.invalidate()
+        }
     }
 
     override fun onAttachedToWindow() {
