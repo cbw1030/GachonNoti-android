@@ -18,12 +18,13 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
 import java.util.*
 
 class MainAdapter(
     var items: ParseList,
-    val context: Context
+    private val context: Context
 ) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
@@ -86,7 +87,9 @@ class MainAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.link)))
+                        val myIntent =Intent(context,WebViewActivity::class.java)
+                        myIntent.putExtra("bundle",item)
+                        context.startActivity(myIntent)
                     }
                 }
             }

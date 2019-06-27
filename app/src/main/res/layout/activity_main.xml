@@ -5,10 +5,10 @@
              android:layout_height="match_parent">
     <RelativeLayout
             android:id="@+id/main_splash"
-            android:background="@color/table_out"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <RelativeLayout
+                android:background="@color/mainBackground"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -32,6 +32,7 @@
     </RelativeLayout>
     <RelativeLayout
             android:id="@+id/main_main"
+            android:background="@color/table_out"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <include

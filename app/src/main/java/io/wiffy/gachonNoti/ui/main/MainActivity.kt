@@ -196,4 +196,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         main_main.invalidate()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
+
 }
