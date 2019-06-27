@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import kotlinx.android.synthetic.main.activity_webview.*
 
@@ -16,6 +17,9 @@ class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
+
+        window.statusBarColor = resources.getColor(R.color.mainBlue)
+
 
         parse = intent.getSerializableExtra("bundle") as Parse
         webview.settings.javaScriptEnabled = true

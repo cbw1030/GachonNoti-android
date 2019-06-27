@@ -19,6 +19,26 @@ class DetailSetting : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailsetting)
 
+
+        OK.setBackgroundColor(
+            resources.getColor(
+                when (Util.theme) {
+                    "red" -> R.color.red
+                    "green" -> R.color.green
+                    else -> R.color.main2Blue
+                }
+            )
+        )
+        Cancel.setBackgroundColor(
+            resources.getColor(
+                when (Util.theme) {
+                    "red" -> R.color.red
+                    "green" -> R.color.green
+                    else -> R.color.main2Blue
+                }
+            )
+        )
+
         index = when (Util.theme) {
             "red" -> 1
             "green" -> 2
@@ -40,18 +60,35 @@ class DetailSetting : AppCompatActivity() {
                         list[v].borderWidth = 0
                 }
                 index = x
+                OK.setBackgroundColor(
+                    resources.getColor(
+                        when (x) {
+                            1 -> R.color.red
+                            2 -> R.color.green
+                            else -> R.color.main2Blue
+                        }
+                    )
+                )
+                Cancel.setBackgroundColor(
+                    resources.getColor(
+                        when (x) {
+                            1 -> R.color.red
+                            2 -> R.color.green
+                            else -> R.color.main2Blue
+                        }
+                    )
+                )
             }
         }
 
         OK.setOnClickListener {
-            Util.theme = when(index)
-            {
-                1->"red"
-                2->"green"
-                else->"default"
+            Util.theme = when (index) {
+                1 -> "red"
+                2 -> "green"
+                else -> "default"
             }
 
-            Util.sharedPreferences.edit().putString("theme",Util.theme).commit()
+            Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
             setResult(Util.RESULT_SETTING_CHANGED)
             finish()
         }
@@ -65,5 +102,5 @@ class DetailSetting : AppCompatActivity() {
 
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean =true
+    override fun onTouchEvent(event: MotionEvent?): Boolean = true
 }
