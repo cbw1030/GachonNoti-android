@@ -1,33 +1,56 @@
 package io.wiffy.gachonNoti.ui.webView
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.Parse
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : AppCompatActivity(), WebViewContract.View {
-    lateinit var parse: Parse
-    lateinit var string: String
-    lateinit var mPresenter: WebViewPresenter
 
+    lateinit var mPresenter: WebViewPresenter
+    lateinit var builder: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
+        var bundle = (intent.getSerializableExtra("bundle") as Parse)
+        title = "${bundle.value} ${bundle.data}"
         window.statusBarColor = resources.getColor(R.color.mainBlue)
         mPresenter = WebViewPresenter(this)
-        mPresenter.initPresent()
+        mPresenter.initPresent(bundle.link)
+        initBuild()
+        themeChange()
+    }
 
+    fun initBuild() {
+        builder = Dialog(this@WebViewActivity)
+        builder.setContentView(R.layout.builder)
+        builder.setCancelable(false)
+        builder.setCanceledOnTouchOutside(false)
+        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+
+    override fun builderUp() {
+        builder.show()
+    }
+
+    override fun builderDismiss() {
+        builder.dismiss()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    override fun changeUI() {
-        parse = intent.getSerializableExtra("bundle") as Parse
-        webview.settings.javaScriptEnabled = true
-        webview.loadUrl(parse.link)
+    override fun changeUI(javaS: String) {
+        webview.settings?.javaScriptEnabled = true
+        webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
     }
 
     override fun onUserLeaveHint() {
@@ -43,10 +66,13 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     }
 
     private fun invisible() {
-        webview.visibility = View.GONE
-        web_splash.visibility = View.VISIBLE
-        webview.invalidate()
-        web_splash.invalidate()
+        if (!Util.novisible) {
+            webview.visibility = View.GONE
+            web_splash.visibility = View.VISIBLE
+            webview.invalidate()
+            web_splash.invalidate()
+        }
+
     }
 
     override fun onAttachedToWindow() {
@@ -60,6 +86,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     }
 
     override fun onResume() {
+        Util.novisible = false
         visible()
         super.onResume()
     }
@@ -72,11 +99,39 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     override fun onStop() {
         invisible()
+        Util.novisible = false
         super.onStop()
     }
 
     override fun onDetachedFromWindow() {
         invisible()
         super.onDetachedFromWindow()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Util.novisible = true
+        finish()
+    }
+
+    fun themeChange() {
+        supportActionBar!!.setBackgroundDrawable(
+            ColorDrawable(
+                when (Util.theme) {
+                    "red" -> {
+                        window.statusBarColor = resources.getColor(R.color.red)
+                        resources.getColor(R.color.red)
+                    }
+                    "green" -> {
+                        window.statusBarColor = resources.getColor(R.color.green)
+                        resources.getColor(R.color.green)
+                    }
+                    else -> {
+                        window.statusBarColor = resources.getColor(R.color.main2Blue)
+                        resources.getColor(R.color.main2Blue)
+                    }
+                }
+            )
+        )
     }
 }

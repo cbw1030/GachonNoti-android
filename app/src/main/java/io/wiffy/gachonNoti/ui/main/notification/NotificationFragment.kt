@@ -25,7 +25,6 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
         myView = inflater.inflate(R.layout.fragment_notification, container, false)
         myView.swipe.setOnRefreshListener {
             mPresenter?.resetList()
-            mPresenter?.initPresent()
             myView.swipe.isRefreshing = false
         }
         if (mPresenter == null) {
@@ -63,20 +62,6 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
                 else -> resources.getColor(R.color.main2Blue)
             }
         )
-    }
-
-    override fun changer(list: ParseList) {
-        myView.recylcer.adapter = adapter
-        myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
-        myView.recylcer.addItemDecoration(VerticalSpaceItemDecoration(2))
-        myView.recylcer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)) {
-                    mPresenter?.load()
-                }
-            }
-        })
     }
 
     override fun updateUI(list: ParseList) {

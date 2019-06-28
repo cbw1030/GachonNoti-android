@@ -1,16 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/main2Blue</item>
         <item name="colorPrimaryDark">@color/main2DeepBlue</item>
         <item name="colorAccent">@color/main2Blue</item>
     </style>
+
     <style name="dialog" parent="Theme.AppCompat.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="light_dialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:background">@color/WHITE</item>
     </style>

@@ -21,10 +21,11 @@ class NotificationPresenter(private val mView:MainContract.FragmentNotification)
 
     override fun resetList() {
         list.clear()
+        NotiAsyncTaskForN(list, this).execute()
     }
 
     override fun uno() {
-        mView.changer(list)
+        mView.changeUI(list)
     }
 
     override fun update(data: ParseList){

@@ -54,12 +54,6 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainCon
                 )
             }
         }
-        val help = URL("http://wiffy.io/gachon/thanks.txt").readText().split(",")
-        val newString= StringBuilder()
-        for (k in help) {
-            newString.append("$k\n")
-        }
-        Util.helper = newString.toString()
         return 0
     }
 

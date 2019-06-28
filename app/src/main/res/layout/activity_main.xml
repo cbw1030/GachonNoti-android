@@ -37,12 +37,14 @@
             android:layout_height="match_parent">
         <include
                 layout="@layout/appbar"
-                android:id="@+id/toolbar_main"/>
+                android:id="@+id/toolbar_main"
+                android:visibility="gone"/>
 
         <com.google.android.material.tabs.TabLayout
                 android:layout_below="@+id/toolbar_main"
                 android:id="@+id/navigation"
                 app:tabMode="fixed"
+                android:elevation="0dp"
                 app:tabIndicatorGravity="bottom"
                 app:tabIndicatorColor="@color/WHITE"
                 android:layout_width="match_parent"
@@ -62,7 +64,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"/>
-
 
 
     </RelativeLayout>

@@ -27,7 +27,6 @@ interface MainContract {
     }
 
     interface FragmentNotification {
-        fun changer(list:ParseList)
         fun changeUI(list: ParseList)
         fun updateUI(list: ParseList)
         fun showLoad()

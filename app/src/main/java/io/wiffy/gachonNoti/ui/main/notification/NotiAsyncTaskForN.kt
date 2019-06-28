@@ -6,6 +6,7 @@ import android.os.Looper
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainContract
 import org.jsoup.Jsoup
+import java.lang.StringBuilder
 import java.net.URL
 
 
@@ -49,6 +50,12 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
                 )
             }
         }
+        val help = URL("http://wiffy.io/gachon/thanks.txt").readText().split(",")
+        val newString= StringBuilder()
+        for (k in help) {
+            newString.append("$k\n")
+        }
+        Util.helper = newString.toString()
         return 0
     }
 

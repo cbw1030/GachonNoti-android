@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
-        supportActionBar?.hide()
+        //supportActionBar?.hide()
         mPresenter = MainPresenter(this)
         builder = Dialog(this@MainActivity)
         builder.setContentView(R.layout.builder)
@@ -118,24 +119,27 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     fun themeChange() {
-        toolbar_main.setBackgroundResource(
-            when (Util.theme) {
-                "red" -> {
-                    window.statusBarColor = resources.getColor(R.color.deepRed)
-                    navigation.setBackgroundColor(resources.getColor(R.color.red))
-                    R.color.red
+        supportActionBar!!.elevation = 0.toFloat()
+        supportActionBar!!.setBackgroundDrawable(
+            ColorDrawable(
+                when (Util.theme) {
+                    "red" -> {
+                        window.statusBarColor = resources.getColor(R.color.red)
+                        navigation.setBackgroundColor(resources.getColor(R.color.deepRed))
+                        resources.getColor(R.color.red)
+                    }
+                    "green" -> {
+                        window.statusBarColor = resources.getColor(R.color.green)
+                        navigation.setBackgroundColor(resources.getColor(R.color.deepGreen))
+                        resources.getColor(R.color.green)
+                    }
+                    else -> {
+                        window.statusBarColor = resources.getColor(R.color.main2Blue)
+                        navigation.setBackgroundColor(resources.getColor(R.color.main2DeepBlue))
+                        resources.getColor(R.color.main2Blue)
+                    }
                 }
-                "green" -> {
-                    window.statusBarColor = resources.getColor(R.color.deepGreen)
-                    navigation.setBackgroundColor(resources.getColor(R.color.green))
-                    R.color.green
-                }
-                else -> {
-                    window.statusBarColor = resources.getColor(R.color.main2DeepBlue)
-                    navigation.setBackgroundColor(resources.getColor(R.color.main2Blue))
-                    R.color.main2Blue
-                }
-            }
+            )
         )
     }
 
@@ -174,7 +178,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                     finish()
                 }
             }
-            Util.STATE_SEARCHER->{
+            Util.STATE_SEARCHER -> {
                 pager.currentItem = Util.STATE_NOTIFICATION
                 Util.state = Util.STATE_NOTIFICATION
             }
@@ -201,8 +205,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun invisible() {
-        if(!Util.novisible){
-            Log.d("asdf","aaa3")
+        if (!Util.novisible) {
             main_main.visibility = View.GONE
             main_splash.visibility = View.VISIBLE
             main_splash.invalidate()
@@ -218,19 +221,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onDetachedFromWindow() {
         invisible()
         super.onDetachedFromWindow()
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            Util.RESULT_SETTING_CHANGED -> {
-                themeChange()
-                mPresenter.changeThemes()
-            }
-            else -> {
-            }
-        }
     }
 
 }
