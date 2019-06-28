@@ -1,13 +1,7 @@
 package io.wiffy.gachonNoti.model
 
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
+
 import android.content.SharedPreferences
-import android.os.Build
-import android.os.LocaleList
-import java.util.*
-import kotlin.system.exitProcess
 
 class Util {
     companion object {

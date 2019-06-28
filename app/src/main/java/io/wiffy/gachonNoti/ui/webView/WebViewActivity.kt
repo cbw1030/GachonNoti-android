@@ -22,7 +22,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-        var bundle = (intent.getSerializableExtra("bundle") as Parse)
+        val bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
         window.statusBarColor = resources.getColor(R.color.mainBlue)
         mPresenter = WebViewPresenter(this)
@@ -31,7 +31,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         themeChange()
     }
 
-    fun initBuild() {
+    private fun initBuild() {
         builder = Dialog(this@WebViewActivity)
         builder.setContentView(R.layout.builder)
         builder.setCancelable(false)
@@ -114,7 +114,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         finish()
     }
 
-    fun themeChange() {
+    private fun themeChange() {
         supportActionBar!!.setBackgroundDrawable(
             ColorDrawable(
                 when (Util.theme) {

@@ -2,7 +2,6 @@ package io.wiffy.gachonNoti.ui.main.notification
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,7 +53,7 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
 
     }
 
-    fun changeTheme() {
+    private fun changeTheme() {
         myView.swipe.setColorSchemeColors(
             when (Util.theme) {
                 "red" -> resources.getColor(R.color.red)

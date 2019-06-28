@@ -11,12 +11,11 @@ import java.lang.StringBuilder
 import java.net.URL
 
 
-class WebAsyncTask(private val url: String, private val mPresenter: WebViewContract.Presenter,redirect:Boolean) :
+class WebAsyncTask(private val url: String, private val mPresenter: WebViewContract.Presenter, private var redirect:Boolean) :
     AsyncTask<Void, Void, Int>() {
 
     private var javaS = ""
     private var goHref =  ""
-    var redirect = redirect
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -25,7 +24,7 @@ class WebAsyncTask(private val url: String, private val mPresenter: WebViewContr
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        var address = when (redirect) {
+        val address = when (redirect) {
             true ->{
                 url
             }
