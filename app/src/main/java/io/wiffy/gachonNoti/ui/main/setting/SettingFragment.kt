@@ -120,8 +120,7 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
     }
 
     fun themeChanger() {
-
-        val arar = arrayOf(
+        val themeColorArray = arrayOf(
             intArrayOf(
                 android.R.attr.state_checked
             ),
@@ -138,10 +137,8 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
             else -> intArrayOf(resources.getColor(R.color.main2LightBlue), resources.getColor(R.color.lightGray))
         }
 
-        myView.notiSwitch.thumbTintList = ColorStateList(arar, color)
-
-
-        myView.notiSwitch.trackTintList = ColorStateList(arar, lightColor)
+        myView.notiSwitch.thumbTintList = ColorStateList(themeColorArray, color)
+        myView.notiSwitch.trackTintList = ColorStateList(themeColorArray, lightColor)
     }
 
     @SuppressLint("ApplySharedPref")

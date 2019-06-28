@@ -8,26 +8,26 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import kotlinx.android.synthetic.main.activity_webview.*
 
-class WebViewActivity : AppCompatActivity() {
+class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     lateinit var parse: Parse
     lateinit var string: String
+    lateinit var mPresenter: WebViewPresenter
 
-    @SuppressLint("SetJavaScriptEnabled")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-
         window.statusBarColor = resources.getColor(R.color.mainBlue)
-
-
-        parse = intent.getSerializableExtra("bundle") as Parse
-        webview.settings.javaScriptEnabled = true
-        webview.loadUrl(parse.link)
+        mPresenter = WebViewPresenter(this)
+        mPresenter.initPresent()
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun changeUI() {
+        parse = intent.getSerializableExtra("bundle") as Parse
+        webview.settings.javaScriptEnabled = true
+        webview.loadUrl(parse.link)
     }
 
     override fun onUserLeaveHint() {

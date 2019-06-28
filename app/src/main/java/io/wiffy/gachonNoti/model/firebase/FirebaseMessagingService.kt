@@ -59,12 +59,4 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun addList(): LongArray {
-        val myList = LongArray(4)
-        myList[0] = 100
-        myList[1] = 200
-        myList[2] = 100
-        myList[3] = 200
-        return myList
-    }
 }

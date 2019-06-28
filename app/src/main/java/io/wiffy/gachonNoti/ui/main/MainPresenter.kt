@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.ui.main
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment

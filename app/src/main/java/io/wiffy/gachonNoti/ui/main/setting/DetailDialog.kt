@@ -1,14 +1,10 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
@@ -88,6 +84,7 @@ class DetailDialog(context: Context) : Dialog(context) {
         Cancel.setOnClickListener(negativeListener)
     }
 
+    @SuppressLint("ApplySharedPref")
     fun okListen(){
         Util.theme = when (index) {
             1 -> "red"

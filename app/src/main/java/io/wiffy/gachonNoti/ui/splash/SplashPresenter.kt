@@ -6,8 +6,6 @@ import android.content.Context
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 

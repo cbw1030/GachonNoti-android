@@ -2,7 +2,6 @@ package io.wiffy.gachonNoti.ui.main
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -10,25 +9,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.view.get
-import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
-import io.wiffy.gachonNoti.ui.main.notification.Parse
-import io.wiffy.gachonNoti.ui.main.notification.ParseList
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var mPresenter: MainPresenter
