@@ -18,12 +18,22 @@ interface MainContract {
     }
 
     interface FragmentSearcher {
-        fun changeUI()
+        fun initUI()
+        fun getdataDialog(yearsemester:String)
+        fun showBtn(c: Boolean)
+        fun showLoad()
+        fun dismissLoad()
+        fun errorDialog()
+        fun setSpinner(arrayList:ArrayList<String>)
     }
 
     interface PresenterSearcher {
         fun initPresent()
-
+        fun getdata(yearsemester:String)
+        fun isdownloaded(year: String, semester: String)
+        fun showLoad()
+        fun dismissLoad()
+        fun error()
     }
 
     interface FragmentNotification {
