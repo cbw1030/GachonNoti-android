@@ -2,7 +2,8 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 import io.wiffy.gachonNoti.model.Util
 
-class ClassTime {
+class ClassTime(val roomNM:String) {
+
     private val week = Array(5) { ClassTimePerDay() }
 
     fun getAllday(): Array<ClassTimePerDay> = week
@@ -11,6 +12,5 @@ class ClassTime {
     fun getWednesday(): ClassTimePerDay = week[Util.WEDNESDAY]
     fun getThursday(): ClassTimePerDay = week[Util.THURSDAY]
     fun getFriday(): ClassTimePerDay = week[Util.FRIDAY]
-
 
 }

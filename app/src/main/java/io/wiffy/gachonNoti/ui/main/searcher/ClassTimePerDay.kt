@@ -46,6 +46,9 @@ class ClassTimePerDay {
     }
     //GET -
     //SET
+    fun setTable(data:String)
+    {
 
-//SET -
+    }
+    //SET -
 }
