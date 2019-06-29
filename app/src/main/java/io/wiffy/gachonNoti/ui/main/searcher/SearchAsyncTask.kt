@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
+import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
@@ -12,21 +13,17 @@ import java.lang.Exception
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
-import java.nio.ByteBuffer
-import java.nio.charset.Charset
 
 
 class SearchAsyncTask(
     private val data: String,
-    cate: String,
-    yearsemester: String,
+    private val cate: String,
+    private val yearSemester: String,
     private val mPresenter: MainContract.PresenterSearcher
 ) :
     AsyncTask<Void, Void, Int>() {
 
     private var done = ""
-    private var cate = cate
-    private var yearsemester = yearsemester
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -41,8 +38,8 @@ class SearchAsyncTask(
         try {
             //Log.d("asdf",url+url2)
             try {
-                val Url = URL(url + url2)
-                val conn = Url.openConnection() as HttpURLConnection
+                val myUrl = URL(url + url2)
+                val conn = myUrl.openConnection() as HttpURLConnection
                 conn.requestMethod = "GET"
                 conn.instanceFollowRedirects = true
                 HttpURLConnection.setFollowRedirects(true)
@@ -76,10 +73,11 @@ class SearchAsyncTask(
     }
 
 
+    @SuppressLint("ApplySharedPref")
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
             if (done.contains("<haksuNo>")) {
-                Util.sharedPreferences.edit().putString("$yearsemester-$cate", done).commit()
+                Util.sharedPreferences.edit().putString("$yearSemester-$cate", done).commit()
                 mPresenter.dismissLoad()
             } else {
                 mPresenter.error()

@@ -10,13 +10,8 @@ import io.wiffy.gachonNoti.ui.main.MainContract
 import java.util.*
 import android.widget.ArrayAdapter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import kotlinx.android.synthetic.main.fragment_searcher.*
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
-
-
-
 
 
 class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
@@ -32,21 +27,24 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
 
 
     override fun initUI() {
-        var semester = ""
+        val semester:String
+
         val year = Calendar.getInstance().get(Calendar.YEAR).toString()
         myView.year.setText(year)
 
         val month = Calendar.getInstance().get(Calendar.MONTH)
-        if(month <= 6){
-            myView.semester.setText("1학기")
-            semester = "1"
-        }
-        if(month > 6){
-            myView.semester.setText("2학기")
-            semester = "2"
-        }
+        myView.semester.setText(when{
+            month<=6 -> {
+                semester="1"
+                "1학기"
+            }
+            else -> {
+                semester="2"
+                "2학기"
+            }
+        })
 
-        val yearsemester = "$year-$semester"
+        val yearSemester = "$year-$semester"
 
         myView.checkTime.setOnClickListener {
             myView.getdate.visibility =
@@ -61,10 +59,10 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         }
 
         myView.getdata.setOnClickListener {
-            getdataDialog(yearsemester)
+            getDataDialog(yearSemester)
         }
 
-        mPresenter.isdownloaded(year, semester)
+        mPresenter.isDownloaded(year, semester)
     }
 
     override fun showBtn(c: Boolean) {
@@ -77,13 +75,14 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         }
     }
 
-    override fun getdataDialog(yearsemester:String) {
+
+    override fun getDataDialog(yearSemester:String) {
         val builder = AlertDialog.Builder(activity, R.style.light_dialog)
         builder.setTitle("시간표 데이터를 가져옵니다.")
         builder.setMessage("시간이 다소 걸릴 수 있으니 중간에 앱을 종료하지 마세요.")
         builder.setPositiveButton(
             "OK"
-        ) { _, _ -> mPresenter.getdata(yearsemester) }
+        ) { _, _ -> mPresenter.getData(yearSemester) }
         builder.show()
     }
 
@@ -106,7 +105,7 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
     }
 
     override fun setSpinner(arrayList:ArrayList<String>){
-        var arrayAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
-        myView.cate.setAdapter(arrayAdapter)
+        val arrayAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
+        myView.cate.adapter = arrayAdapter
     }
 }

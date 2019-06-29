@@ -19,7 +19,7 @@ interface MainContract {
 
     interface FragmentSearcher {
         fun initUI()
-        fun getdataDialog(yearsemester:String)
+        fun getDataDialog(yearSemester:String)
         fun showBtn(c: Boolean)
         fun showLoad()
         fun dismissLoad()
@@ -29,8 +29,8 @@ interface MainContract {
 
     interface PresenterSearcher {
         fun initPresent()
-        fun getdata(yearsemester:String)
-        fun isdownloaded(year: String, semester: String)
+        fun getData(yearSemester:String)
+        fun isDownloaded(year: String, semester: String)
         fun showLoad()
         fun dismissLoad()
         fun error()
