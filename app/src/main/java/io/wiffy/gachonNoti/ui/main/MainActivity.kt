@@ -21,6 +21,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.activity_main.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.view.WindowManager
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -32,6 +36,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        
+
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
@@ -198,6 +204,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun visible() {
+
         main_main.visibility = View.VISIBLE
         main_splash.visibility = View.GONE
         main_splash.invalidate()
@@ -222,5 +229,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         super.onDetachedFromWindow()
     }
+
 
 }

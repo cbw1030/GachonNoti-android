@@ -82,7 +82,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
             val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>",""))
             val doc: Document = builder.parse(InputSource(sr))
             val nodeList = doc.getElementsByTagName("grid")
-//            Log.d("asdf", doc.xmlEncoding)
+//          Log.d("asdf", doc.xmlEncoding)
             for (i in 0 until nodeList.length) {
                 try{
                     val node = nodeList.item(i)
@@ -97,14 +97,8 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     val roomNM = classInformation.room.split(",")
                     for(x in roomNM) {
                         addArray(x.trim())
-                    }
-//                    if(roomNM.contains(",")){
-//                        addArray(roomNM.split(",")[0])
-//                        addArray(roomNM.split(",")[1])
-//                    }else{
-//                        addArray(roomNM)
-//                    }
-//                    Log.d("asdf", "${i.toString()}$roomNM")
+
+
                 }catch (e:java.lang.Exception){
 //                    Log.d("asdf","wawawa")
                 }
