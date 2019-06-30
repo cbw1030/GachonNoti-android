@@ -3,8 +3,10 @@ package io.wiffy.gachonNoti.model
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import io.wiffy.gachonNoti.R
 import java.lang.Exception
 import java.text.SimpleDateFormat
+import kotlin.random.Random
 
 class Util {
     companion object {
@@ -40,6 +42,25 @@ class Util {
 
         @JvmStatic
         var novisible = false
+
+        @JvmStatic
+        fun getRandomColorId():Int = intArrayOf(
+                R.color.mainBlue,
+                R.color.mainDeepBlue,
+                R.color.red,
+                R.color.lightRed,
+                R.color.green,
+                R.color.lightGreen,
+                R.color.main2Blue,
+                R.color.ran1,
+                R.color.ran2,
+                R.color.ran3,
+                R.color.ran4,
+                R.color.ran5,
+                R.color.ran6,
+                R.color.ran7
+            )[java.util.Random().nextInt(14)]
+
 
         @SuppressLint("SimpleDateFormat")
         @JvmStatic

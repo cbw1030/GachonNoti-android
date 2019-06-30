@@ -28,4 +28,12 @@
     <color name="main2DeepBlue">#2F5AA8</color>
     <color name="notiBackground">#FEF6E3</color>
 
+    <color name="ran1">#E6DF714D</color>
+    <color name="ran2">#E6DFBF4D</color>
+    <color name="ran3">#E6D54DDF</color>
+    <color name="ran4">#E6F54343</color>
+    <color name="ran5">#E64DDFD3</color>
+    <color name="ran6">#E6744DDF</color>
+    <color name="ran7">#E6B95C7C</color>
+
 </resources>
