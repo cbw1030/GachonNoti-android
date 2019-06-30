@@ -46,20 +46,19 @@ class Util {
 
         @JvmStatic
         fun getRandomColorId(): Int = intArrayOf(
-            R.color.mainBlue,
-            R.color.mainDeepBlue,
-            R.color.red,
-            R.color.lightRed,
-            R.color.green,
-            R.color.lightGreen,
-            R.color.main2Blue,
             R.color.ran1,
             R.color.ran2,
             R.color.ran3,
             R.color.ran4,
             R.color.ran5,
             R.color.ran6,
-            R.color.ran7
+            R.color.ran7,
+            R.color.ran8,
+            R.color.ran9,
+            R.color.ran10,
+            R.color.ran11,
+            R.color.ran12,
+            R.color.ran13
         )[Random().nextInt(14)]
 
 

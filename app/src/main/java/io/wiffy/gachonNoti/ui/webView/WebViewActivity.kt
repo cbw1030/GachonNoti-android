@@ -2,9 +2,13 @@ package io.wiffy.gachonNoti.ui.webView
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +22,12 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     lateinit var mPresenter: WebViewPresenter
     lateinit var builder: Dialog
+    lateinit var bundle:Parse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-        val bundle = (intent.getSerializableExtra("bundle") as Parse)
+        bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
         webview_text.text = bundle.text
         window.statusBarColor = resources.getColor(R.color.mainBlue)
@@ -114,6 +119,25 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         Util.novisible = true
         finish()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.mymenu, menu)
+        return true
+    }
+
+    private fun goPage()
+    {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bundle.link)))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        R.id.actionmy -> {
+            goPage()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
 
     private fun themeChange() {
         supportActionBar!!.setBackgroundDrawable(
