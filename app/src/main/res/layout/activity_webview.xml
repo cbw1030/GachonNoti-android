@@ -37,9 +37,9 @@
                 android:gravity="center"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
-                android:text="title"
+                android:maxLines="1"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:id="@+id/webview_text"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"/>
