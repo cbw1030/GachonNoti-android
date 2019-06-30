@@ -206,7 +206,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
             TimeData(
                 1,
                 str1.name,
-                R.color.mainBlue,
+               Util.getRandomColorId(),
                 R.color.white,
                 start,
                 end
