@@ -20,24 +20,34 @@ interface MainContract {
 
     interface FragmentSearcher {
         fun initUI()
-        fun getDataDialog(yearSemester:String)
-        fun showBtn(c: Boolean)
+
         fun showLoad()
         fun dismissLoad()
-        fun errorDialog()
-        fun setSpinner(arrayList:ArrayList<String>)
-        fun setlistDialog(arrayList:ArrayList<String>)
-        fun setTimeTable(arr:ArrayList<TimeTableData>)
+
+
+        fun setTimeTable(arr:ArrayList<TimeTableData>?)
     }
 
     interface PresenterSearcher {
         fun initPresent()
+        fun initPresentDialog(tmp: MainContract.PresenterSearchDialog)
         fun getData(yearSemester:String)
         fun isDownloaded(year: String, semester: String)
         fun showLoad()
         fun dismissLoad()
         fun error()
         fun loadRoom(roomNM:String)
+        fun loadTable(str: String)
+    }
+
+    interface PresenterSearchDialog {
+        fun getDataDialog(yearSemester:String)
+        fun showBtn(c: Boolean)
+        fun errorDialog()
+        fun setSpinner(arrayList:ArrayList<String>)
+        fun setlistDialog(arrayList:ArrayList<String>)
+        fun requestLoad()
+
     }
 
     interface FragmentNotification {

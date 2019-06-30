@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/BLACK"
+                    android:textSize="18sp"
+                    android:text="asdad"/>
+
+            <Button
+                    android:text="시간표 가져오기"
+                    android:layout_below="@+id/year"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/getdata"
+                    android:visibility="visible"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cate"
+                    android:visibility="visible"
+                    android:dropDownWidth="wrap_content"
+                    android:layout_below="@+id/year"
+                    android:layout_toStartOf="@+id/search"
+                    android:spinnerMode="dropdown"/>
+
+            <Button
+                    android:text="검색"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/year"
+                    android:backgroundTint="@color/ran1"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/search"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

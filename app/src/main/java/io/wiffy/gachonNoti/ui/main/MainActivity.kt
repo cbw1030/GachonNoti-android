@@ -110,7 +110,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     override fun builderUp() {
-        builder.show()
+        Handler(Looper.getMainLooper()).post {
+            builder.show()
+        }
     }
 
     override fun makeToast(str: String) {
@@ -120,8 +122,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun builderDismiss() {
-        builder.dismiss()
-        notiCheck()
+        Handler(Looper.getMainLooper()).post {
+            builder.dismiss()
+            notiCheck()
+        }
     }
 
     fun themeChange() {

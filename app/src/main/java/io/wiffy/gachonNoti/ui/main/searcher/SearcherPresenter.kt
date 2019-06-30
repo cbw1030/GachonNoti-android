@@ -29,9 +29,14 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     lateinit var load1: String
     lateinit var load2: String
     lateinit var load3: String
+    lateinit var mView2 : MainContract.PresenterSearchDialog
 
     override fun initPresent() {
         mView.initUI()
+    }
+
+    override fun initPresentDialog(tmp: MainContract.PresenterSearchDialog) {
+        mView2 = tmp
     }
 
     override fun getData(yearSemester: String) {
@@ -50,7 +55,8 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     override fun dismissLoad() {
         loadcnt += 1
         if (loadcnt >= 3) {
-            mView.initUI()
+            mView2.showBtn(false)
+            mView2.requestLoad()
             mView.dismissLoad()
         }
     }
@@ -59,7 +65,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         errorCnt += 1
         if (errorCnt == 1) {
             mView.dismissLoad()
-            mView.errorDialog()
+            mView2.errorDialog()
         }
     }
 
@@ -77,13 +83,15 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
             !load2.contains("<nodata>") &&
             !load3.contains("<nodata>")
         ) {
-            mView.showBtn(false)
+            mView2.showBtn(false)
             findBuilding = ArrayList()
             findBuildingXML(load1)
             findBuildingXML(load2)
             findBuildingXML(load3)
+            findBuilding.sort()
+            mView2.setSpinner(findBuilding)
         } else {
-            mView.showBtn(true)
+            mView2.showBtn(true)
         }
     }
 
@@ -124,8 +132,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         } catch (ex: Exception) {
             Log.d("asdf", "nononon")
         }
-        findBuilding.sort()
-        mView.setSpinner(findBuilding)
+
     }
 
     override fun loadRoom(roomNM: String) {
@@ -134,7 +141,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         findRoomXML(load2, roomNM)
         findRoomXML(load3, roomNM)
         findRoom.sort()
-        mView.setlistDialog(findRoom)
+        mView2.setlistDialog(findRoom)
     }
 
     private fun findRoomXML(data: String, roomNMD: String) {
@@ -179,7 +186,8 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         }
     }
 
-    fun loadTable(str: String) {
+    override fun loadTable(str: String) {
+        mView.showLoad()
         tablearr = ArrayList(6)
         tablearr.add(ArrayList())
         tablearr.add(ArrayList())
@@ -209,6 +217,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         }
 
         mView.setTimeTable(array2)
+        mView.dismissLoad()
     }
 
 
