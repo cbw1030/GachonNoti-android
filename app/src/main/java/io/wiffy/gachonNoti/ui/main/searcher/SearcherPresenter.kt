@@ -15,7 +15,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
 
     private var loadcnt = 0
     private var errorCnt = 0
-    lateinit var arrayList : ArrayList<String>
+    lateinit var arrayList: ArrayList<String>
 
 
     override fun initPresent() {
@@ -54,13 +54,13 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     override fun isDownloaded(year: String, semester: String) {
         val isLoad1 = Util.sharedPreferences.getString(
             "$year-$semester-1", "<nodata>"
-        )?:"<nodata>"
+        ) ?: "<nodata>"
         val isLoad2 = Util.sharedPreferences.getString(
             "$year-$semester-2", "<nodata>"
-        )?:"<nodata>"
+        ) ?: "<nodata>"
         val isLoad3 = Util.sharedPreferences.getString(
             "$year-$semester-3", "<nodata>"
-        )?:"<nodata>"
+        ) ?: "<nodata>"
         if (!isLoad1.contains("<nodata>") &&
             !isLoad2.contains("<nodata>") &&
             !isLoad3.contains("<nodata>")
@@ -75,16 +75,16 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         }
     }
 
-    private fun makeXML(data:String) {
+    private fun makeXML(data: String) {
         try {
             val factory = DocumentBuilderFactory.newInstance()
             val builder = factory.newDocumentBuilder()
-            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>",""))
+            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>", ""))
             val doc: Document = builder.parse(InputSource(sr))
             val nodeList = doc.getElementsByTagName("grid")
 //          Log.d("asdf", doc.xmlEncoding)
             for (i in 0 until nodeList.length) {
-                try{
+                try {
                     val node = nodeList.item(i)
                     val firstElement = node as Element
                     val room = firstElement.getElementsByTagName("room")
@@ -93,23 +93,27 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                         firstElement.getElementsByTagName("time").item(0).childNodes.item(0).nodeValue,
                         room.item(0).childNodes.item(0).nodeValue
                     )
-                    Log.d("asdf",classInformation.name)
+                    Log.d("asdf", classInformation.name)
                     val roomNM = classInformation.room.split(",")
-                    for(x in roomNM) {
+                    for (x in roomNM) {
                         addArray(x.trim())
+                    }
 
-
-                }catch (e:java.lang.Exception){
-//                    Log.d("asdf","wawawa")
+                } catch (e: java.lang.Exception) {
+                    //                    Log.d("asdf","wawawa")
                 }
             }
-        } catch (ex: Exception) { Log.d("asdf", "nononon")}
+        } catch (ex: Exception) {
+            Log.d("asdf", "nononon")
+        }
+
         arrayList.sort()
         mView.setSpinner(arrayList)
     }
 
-    private fun addArray(roomNM:String){
-        if (!arrayList.contains(roomNM)){
+
+    private fun addArray(roomNM: String) {
+        if (!arrayList.contains(roomNM)) {
             arrayList.add(roomNM)
         }
     }
