@@ -120,14 +120,17 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
             ColorDrawable(
                 when (Util.theme) {
                     "red" -> {
+                        webview_layout.setBackgroundColor(resources.getColor(R.color.deepRed))
                         window.statusBarColor = resources.getColor(R.color.red)
                         resources.getColor(R.color.red)
                     }
                     "green" -> {
+                        webview_layout.setBackgroundColor(resources.getColor(R.color.deepGreen))
                         window.statusBarColor = resources.getColor(R.color.green)
                         resources.getColor(R.color.green)
                     }
                     else -> {
+                        webview_layout.setBackgroundColor(resources.getColor(R.color.main2DeepBlue))
                         window.statusBarColor = resources.getColor(R.color.main2Blue)
                         resources.getColor(R.color.main2Blue)
                     }

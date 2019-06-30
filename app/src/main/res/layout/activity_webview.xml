@@ -31,7 +31,6 @@
     </RelativeLayout>
     <RelativeLayout
             android:id="@+id/webview_layout"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
@@ -39,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
                 android:text="title"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:id="@+id/webview_text"
                 android:layout_width="match_parent"
