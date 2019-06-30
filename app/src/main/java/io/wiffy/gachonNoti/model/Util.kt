@@ -46,21 +46,15 @@ class Util {
 
         @JvmStatic
         fun getRandomColorId(): Int = intArrayOf(
-            R.color.mainBlue,
-            R.color.mainDeepBlue,
-            R.color.red,
-            R.color.lightRed,
-            R.color.green,
-            R.color.lightGreen,
-            R.color.main2Blue,
             R.color.ran1,
             R.color.ran2,
             R.color.ran3,
             R.color.ran4,
             R.color.ran5,
             R.color.ran6,
-            R.color.ran7
-        )[Random().nextInt(14)]
+            R.color.ran7,
+            R.color.ran8
+        )[Random().nextInt(8)]
 
 
         @SuppressLint("SimpleDateFormat")

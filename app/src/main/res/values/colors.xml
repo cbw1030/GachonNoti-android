@@ -28,12 +28,13 @@
     <color name="main2DeepBlue">#2F5AA8</color>
     <color name="notiBackground">#FEF6E3</color>
 
-    <color name="ran1">#E6DF714D</color>
-    <color name="ran2">#E6DFBF4D</color>
-    <color name="ran3">#E6D54DDF</color>
-    <color name="ran4">#E6F54343</color>
-    <color name="ran5">#E64DDFD3</color>
-    <color name="ran6">#E6744DDF</color>
-    <color name="ran7">#E6B95C7C</color>
+    <color name="ran1">#EF8676</color>
+    <color name="ran2">#ECC269</color>
+    <color name="ran3">#A7C96F</color>
+    <color name="ran4">#79A5E8</color>
+    <color name="ran5">#7CD0C1</color>
+    <color name="ran6">#FBAA67</color>
+    <color name="ran7">#9E86E1</color>
+    <color name="ran8">#76CA88</color>
 
 </resources>
