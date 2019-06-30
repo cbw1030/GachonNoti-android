@@ -6,7 +6,8 @@ import android.content.SharedPreferences
 import io.wiffy.gachonNoti.R
 import java.lang.Exception
 import java.text.SimpleDateFormat
-import kotlin.random.Random
+import java.util.*
+
 
 class Util {
     companion object {
@@ -59,7 +60,7 @@ class Util {
                 R.color.ran5,
                 R.color.ran6,
                 R.color.ran7
-            )[java.util.Random().nextInt(14)]
+            )[Random().nextInt(14)]
 
 
         @SuppressLint("SimpleDateFormat")
