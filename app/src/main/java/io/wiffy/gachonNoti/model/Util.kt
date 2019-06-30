@@ -53,13 +53,8 @@ class Util {
             R.color.ran5,
             R.color.ran6,
             R.color.ran7,
-            R.color.ran8,
-            R.color.ran9,
-            R.color.ran10,
-            R.color.ran11,
-            R.color.ran12,
-            R.color.ran13
-        )[Random().nextInt(14)]
+            R.color.ran8
+        )[Random().nextInt(8)]
 
 
         @SuppressLint("SimpleDateFormat")
