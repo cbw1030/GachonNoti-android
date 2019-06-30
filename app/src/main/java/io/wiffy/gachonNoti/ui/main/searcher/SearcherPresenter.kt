@@ -13,6 +13,7 @@ import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 import kotlin.collections.ArrayList
+import kotlin.math.absoluteValue
 
 
 class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : MainContract.PresenterSearcher {
@@ -203,6 +204,28 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         }
     }
 
+    private fun numToday(num:Int): String{
+        return when (num) {
+            0 ->{
+                "월"
+            }
+            1 ->{
+                "화"
+            }
+            2 ->{
+                "수"
+            }
+            3 ->{
+                "목"
+            }
+            4 ->{
+                "금"
+            }
+            else ->{
+                "토"
+            }
+        }
+    }
 
     private fun findTable(data:String,roomNMD:String) {
         //Log.d("asdf",roomNMD)
@@ -228,7 +251,6 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     }else{
                         val time = classInformation.time.split(",")
                         var data = Array(5){""}
-
                         for(t in time){
                             if (t.contains("월")){
                                 data[0] = "${data[0]},$t"
@@ -246,29 +268,19 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                                 data[4] = "${data[4]},$t"
                             }
                         }
-
                         for (i in 0 .. 4){
                             if (data[i].contains(",")){
-                                var scom = data[i].trim().split(",")
-
+                                var scom = data[i].replace(" ","").split(",")
                                 insertTime(
                                     classInformation,
                                     roomNMD,
                                     i,
-                                    classToTime(scom[1][1].toString())[0],
-                                    classToTime(scom[scom.size-1][1].toString())[1]
+                                    classToTime(scom[1].replace(numToday(i),""))[0],
+                                    classToTime(scom[scom.size-1].replace(numToday(i),""))[1]
                                 )
-                                Log.d("asdf",data[i])
-                                Log.d("asdf",scom[1][1].toString())
-                                Log.d("asdf",scom[scom.size-1][1].toString())
                             }
                         }
                     }
-
-
-
-
-
 //                  Log.d("asdf", "${i.toString()}$roomNM")
                 }catch (e:java.lang.Exception){
 //                    Log.d("asdf","wawawa")
