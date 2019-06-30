@@ -18,6 +18,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
+import io.wiffy.gachonNoti.model.Util
 import kotlin.collections.ArrayList
 
 
@@ -86,34 +87,13 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         }
 
         mPresenter.isDownloaded(year, semester)
-        setTimeTable()
     }
 
-    fun setTimeTable() {
+    override fun setTimeTable(arr:ArrayList<TimeTableData>) {
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.LONG)
-
-        var array = ArrayList<TimeData<Any?>>()
-        array.add(
-            TimeData(
-                1,
-                "English",
-                R.color.mainBlue,
-                R.color.white,
-                System.currentTimeMillis() + 0,
-                System.currentTimeMillis() + 10000000000
-            )
-        )
-
-        var array2 = ArrayList<TimeTableData>()
-        array2.add(TimeTableData("월", array))
-        array2.add(TimeTableData("화", array))
-        array2.add(TimeTableData("수", array))
-        array2.add(TimeTableData("목", array))
-        array2.add(TimeTableData("금", array))
-
-        myView.timetable.setTimeTable(System.currentTimeMillis() + 0, array2)
+        myView.timetable.setTimeTable(Util.classToTime("1")[0], arr)
     }
 
     override fun showBtn(c: Boolean) {
@@ -171,7 +151,8 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         builder.setTitle("이용가능한 강의실")
         builder.setAdapter(adapter, DialogInterface.OnClickListener { _, which ->
             var strName = adapter.getItem(which)
-            Toast.makeText(activity, strName, Toast.LENGTH_SHORT).show()
+            mPresenter.loadTable(strName)
+            //Toast.makeText(activity, strName, Toast.LENGTH_SHORT).show()
         })
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
         builder.show()

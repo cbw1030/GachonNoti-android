@@ -1,7 +1,11 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.util.Log
+import com.github.eunsiljo.timetablelib.data.TimeData
+import com.github.eunsiljo.timetablelib.data.TimeTableData
+import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.classToTime
 import io.wiffy.gachonNoti.ui.main.MainContract
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
@@ -17,6 +21,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     private var errorCnt = 0
     lateinit var findBuilding : ArrayList<String>
     lateinit var findRoom : ArrayList<String>
+    lateinit var tablearr : ArrayList<ArrayList<TimeData<Any?>>>
     lateinit var load1 : String
     lateinit var load2 : String
     lateinit var load3 : String
@@ -127,7 +132,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     }
 
     private fun findRoomXML(data:String,roomNMD:String) {
-        Log.d("asdf",roomNMD)
+        //Log.d("asdf",roomNMD)
         try {
             val factory = DocumentBuilderFactory.newInstance()
             val builder = factory.newDocumentBuilder()
@@ -151,6 +156,121 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                             findRoom.add(x)
                         }
                     }
+//                  Log.d("asdf", "${i.toString()}$roomNM")
+                }catch (e:java.lang.Exception){
+//                    Log.d("asdf","wawawa")
+                }
+            }
+        } catch (ex: Exception) { Log.d("asdf", "nononon")}
+    }
+
+    fun loadTable(str:String){
+        tablearr = ArrayList(6)
+        tablearr.add(ArrayList())
+        tablearr.add(ArrayList())
+        tablearr.add(ArrayList())
+        tablearr.add(ArrayList())
+        tablearr.add(ArrayList())
+        tablearr.add(ArrayList())
+        findTable(load1,str)
+        findTable(load2,str)
+        findTable(load3,str)
+
+
+        var array2 = ArrayList<TimeTableData>()
+        array2.add(TimeTableData("월", tablearr[0]))
+        array2.add(TimeTableData("화", tablearr[1]))
+        array2.add(TimeTableData("수", tablearr[2]))
+        array2.add(TimeTableData("목", tablearr[3]))
+        array2.add(TimeTableData("금", tablearr[4]))
+
+        mView.setTimeTable(array2)
+    }
+
+
+    private fun insertTime(str1:ClassDataInformation,str2:String,cnt:Int,start:Long,end:Long){
+        if (str1.room.contains(str2)){
+            tablearr[cnt].add(
+                TimeData(
+                    1,
+                    str1.name,
+                    R.color.mainBlue,
+                    R.color.white,
+                    start,
+                    end
+                )
+            )
+        }
+    }
+
+
+    private fun findTable(data:String,roomNMD:String) {
+        //Log.d("asdf",roomNMD)
+        try {
+            val factory = DocumentBuilderFactory.newInstance()
+            val builder = factory.newDocumentBuilder()
+            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>",""))
+            val doc: Document = builder.parse(InputSource(sr))
+            val nodeList = doc.getElementsByTagName("grid")
+            for (i in 0 until nodeList.length) {
+                try{
+                    val node = nodeList.item(i)
+                    val firstElement = node as Element
+                    val room = firstElement.getElementsByTagName("room")
+                    val classInformation = ClassDataInformation(
+                        firstElement.getElementsByTagName("subjectNm").item(0).childNodes.item(0).nodeValue,
+                        firstElement.getElementsByTagName("time").item(0).childNodes.item(0).nodeValue,
+                        room.item(0).childNodes.item(0).nodeValue
+                    )
+
+                    if (classInformation.room.contains(",")){
+
+                    }else{
+                        Log.d("asdf","hi")
+                        val time = classInformation.time.split(",")
+                        var data = Array(5){""}
+
+                        for(t in time){
+                            if (t.contains("월")){
+                                data[0] = "${data[0]},$t"
+                            }
+                            if (t.contains("화")){
+                                data[1] = "${data[1]},$t"
+                            }
+                            if (t.contains("수")){
+                                data[2] = "${data[2]},$t"
+                            }
+                            if (t.contains("목")){
+                                data[3] = "${data[3]},$t"
+                            }
+                            if (t.contains("금")){
+                                data[4] = "${data[4]},$t"
+                            }
+                        }
+
+                        for (i in 0 .. 4){
+
+                            if (data[i].contains(",")){
+
+                                var scom = data[i].trim().split(",")
+                                Log.d("asdf",data[i])
+                                Log.d("asdf",scom[1][1].toString())
+                                Log.d("asdf",scom[scom.size-1][1].toString())
+                                insertTime(
+                                    classInformation,
+                                    roomNMD,
+                                    i,
+                                    classToTime(scom[1][1].toString())[0],
+                                    classToTime(scom[scom.size-1][1].toString())[1]
+                                )
+                            }
+                        }
+                    }
+
+
+
+
+
 //                  Log.d("asdf", "${i.toString()}$roomNM")
                 }catch (e:java.lang.Exception){
 //                    Log.d("asdf","wawawa")

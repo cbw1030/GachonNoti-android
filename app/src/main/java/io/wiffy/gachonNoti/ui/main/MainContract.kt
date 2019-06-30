@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main
 
 
 import androidx.fragment.app.Fragment
+import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.ui.main.notification.ParseList
 
 interface MainContract {
@@ -26,6 +27,7 @@ interface MainContract {
         fun errorDialog()
         fun setSpinner(arrayList:ArrayList<String>)
         fun setlistDialog(arrayList:ArrayList<String>)
+        fun setTimeTable(arr:ArrayList<TimeTableData>)
     }
 
     interface PresenterSearcher {
