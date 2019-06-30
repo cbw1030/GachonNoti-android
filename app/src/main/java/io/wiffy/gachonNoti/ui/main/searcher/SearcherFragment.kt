@@ -144,7 +144,7 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         }
         builder.setTitle("이용가능한 강의실")
         builder.setAdapter(adapter, DialogInterface.OnClickListener { _, which ->
-            var strName = adapter.getItem(which)
+            val strName = adapter.getItem(which)
             mPresenter.loadTable(strName.replace(" ",""))
             //Toast.makeText(activity, strName, Toast.LENGTH_SHORT).show()
         })
