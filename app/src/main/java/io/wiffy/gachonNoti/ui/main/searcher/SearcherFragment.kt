@@ -1,36 +1,23 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
-import android.app.AlertDialog
-import android.content.DialogInterface
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.ui.main.MainContract
-import java.util.*
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
-import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
-import io.wiffy.gachonNoti.model.Util
 import kotlin.collections.ArrayList
-import org.joda.time.DateTime
-import com.github.eunsiljo.timetablelib.data.TimeGridData
-import com.github.eunsiljo.timetablelib.viewholder.TimeTableItemViewHolder
-
-
-
 
 class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
-
+    var builder:SearchDialog?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_searcher, container, false)
@@ -42,8 +29,8 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
 
     override fun initUI() {
         myView.fab.setOnClickListener {
-            val builder = SearchDialog(context!!,this,mPresenter)
-            builder.show()
+            builder = SearchDialog(context!!,this,mPresenter)
+            builder?.show()
         }
         setTimeTable(null)
     }
@@ -53,7 +40,7 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
         if(arr == null){
-            var array2 = ArrayList<TimeTableData>()
+            val array2 = ArrayList<TimeTableData>()
             array2.add(TimeTableData("월", null))
             array2.add(TimeTableData("화", null))
             array2.add(TimeTableData("수", null))

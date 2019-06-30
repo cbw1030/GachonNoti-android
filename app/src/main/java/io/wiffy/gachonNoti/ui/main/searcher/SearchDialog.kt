@@ -9,24 +9,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.content.ContextCompat
-import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainContract
-import kotlinx.android.synthetic.main.activity_detailsetting.*
 import kotlinx.android.synthetic.main.dialog_search.*
-import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class SearchDialog(context: Context,
-                   private val mView: MainContract.FragmentSearcher,
-                   private val mPresenter:MainContract.PresenterSearcher) : Dialog(context),MainContract.PresenterSearchDialog  {
+class SearchDialog(
+    context: Context,
+    private val mView: MainContract.FragmentSearcher,
+    private val mPresenter: MainContract.PresenterSearcher
+) : Dialog(context), MainContract.PresenterSearchDialog {
 
     var spinnerSelected = 0
-    lateinit var yearr :String
+    lateinit var yearr: String
     lateinit var semester: String
 
     @SuppressLint("ApplySharedPref")
@@ -38,18 +35,17 @@ class SearchDialog(context: Context,
 
         yearr = Calendar.getInstance().get(Calendar.YEAR).toString()
         val month = Calendar.getInstance().get(Calendar.MONTH)
-        year.setText(
-            when {
-                month <= 7 -> {
-                    semester = "1"
-                    "$yearr 1학기"
-                }
-                else -> {
-                    semester = "2"
-                    "$yearr 2학기"
-                }
+        year.text = when {
+            month <= 7 -> {
+                semester = "1"
+                "$yearr 1학기"
             }
-        )
+            else -> {
+                semester = "2"
+                "$yearr 2학기"
+            }
+        }
+
 
         getdata.setOnClickListener {
             getDataDialog("$yearr-$semester")
@@ -72,6 +68,9 @@ class SearchDialog(context: Context,
 
     }
 
+    override fun dismissSelf() {
+        dismiss()
+    }
 
     override fun getDataDialog(yearSemester: String) {
         val builder = AlertDialog.Builder(context, R.style.light_dialog)
@@ -105,7 +104,7 @@ class SearchDialog(context: Context,
         }
     }
 
-    override fun requestLoad(){
+    override fun requestLoad() {
         mPresenter.isDownloaded(yearr, semester)
     }
 
@@ -114,7 +113,7 @@ class SearchDialog(context: Context,
         cate.adapter = arrayAdapter
     }
 
-    override fun setlistDialog(arrayList: ArrayList<String>) {
+    override fun setListDialog(arrayList: ArrayList<String>) {
         val builder = AlertDialog.Builder(context)
         val adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1)
         for (x in arrayList) {
@@ -122,9 +121,9 @@ class SearchDialog(context: Context,
         }
         builder.setTitle("이용가능한 강의실")
         builder.setAdapter(adapter, DialogInterface.OnClickListener { _, which ->
-            var strName = adapter.getItem(which)
-            mPresenter.loadTable(strName.replace(" ",""))
-            //Toast.makeText(activity, strName, Toast.LENGTH_SHORT).show()
+            val strName = adapter.getItem(which)!!
+            mPresenter.loadTable(strName.replace(" ", ""))
+            dismissSelf()
         })
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
         builder.show()

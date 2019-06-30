@@ -45,9 +45,9 @@ interface MainContract {
         fun showBtn(c: Boolean)
         fun errorDialog()
         fun setSpinner(arrayList:ArrayList<String>)
-        fun setlistDialog(arrayList:ArrayList<String>)
+        fun setListDialog(arrayList:ArrayList<String>)
         fun requestLoad()
-
+        fun dismissSelf()
     }
 
     interface FragmentNotification {

@@ -36,7 +36,6 @@ class SearchAsyncTask(
         val url2 =
             "groupType=20&searchYear=2019&searchTerm=10&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
         try {
-            //Log.d("asdf",url+url2)
             try {
                 val myUrl = URL(url + url2)
                 val conn = myUrl.openConnection() as HttpURLConnection
