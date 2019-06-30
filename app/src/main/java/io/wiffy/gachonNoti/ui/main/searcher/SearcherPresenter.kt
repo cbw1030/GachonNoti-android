@@ -95,9 +95,9 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     )
                     Log.d("asdf",classInformation.name)
                     val roomNM = classInformation.room.split(",")
-                    for(x in roomNM)
+                    for(x in roomNM) {
                         addArray(x.trim())
-
+                    }
 //                    if(roomNM.contains(",")){
 //                        addArray(roomNM.split(",")[0])
 //                        addArray(roomNM.split(",")[1])
