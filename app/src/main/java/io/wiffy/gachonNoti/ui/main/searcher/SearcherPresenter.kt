@@ -185,12 +185,13 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         array2.add(TimeTableData("목", tablearr[3]))
         array2.add(TimeTableData("금", tablearr[4]))
 
+
         mView.setTimeTable(array2)
     }
 
 
     private fun insertTime(str1:ClassDataInformation,str2:String,cnt:Int,start:Long,end:Long){
-        if (str1.room.contains(str2)){
+        if (!str1.name.contains("졸업작품")){
             tablearr[cnt].add(
                 TimeData(
                     1,
@@ -202,6 +203,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                 )
             )
         }
+
     }
 
     private fun numToday(num:Int): String{
@@ -246,41 +248,69 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                         room.item(0).childNodes.item(0).nodeValue
                     )
 
+                    var cntroom = 0
+                    var tmproom = classInformation.room.replace(" ","")
+                    var tmproom2 = classInformation.room.replace(" ","")
                     if (classInformation.room.contains(",")){
+                        tmproom = tmproom.split(",")[0]
+                        tmproom2 = tmproom2.split(",")[1]
+                    }
 
-                    }else{
-                        val time = classInformation.time.split(",")
-                        var data = Array(5){""}
-                        for(t in time){
-                            if (t.contains("월")){
-                                data[0] = "${data[0]},$t"
-                            }
-                            if (t.contains("화")){
-                                data[1] = "${data[1]},$t"
-                            }
-                            if (t.contains("수")){
-                                data[2] = "${data[2]},$t"
-                            }
-                            if (t.contains("목")){
-                                data[3] = "${data[3]},$t"
-                            }
-                            if (t.contains("금")){
-                                data[4] = "${data[4]},$t"
-                            }
+                    val time = classInformation.time.split(",")
+                    var data = Array(5){""}
+                    for(t in time){
+                        if (t.contains("월")){
+                            data[0] = "${data[0]},$t"
                         }
-                        for (i in 0 .. 4){
-                            if (data[i].contains(",")){
-                                var scom = data[i].replace(" ","").split(",")
-                                insertTime(
-                                    classInformation,
-                                    roomNMD,
-                                    i,
-                                    classToTime(scom[1].replace(numToday(i),""))[0],
-                                    classToTime(scom[scom.size-1].replace(numToday(i),""))[1]
-                                )
+                        if (t.contains("화")){
+                            data[1] = "${data[1]},$t"
+                        }
+                        if (t.contains("수")){
+                            data[2] = "${data[2]},$t"
+                        }
+                        if (t.contains("목")){
+                            data[3] = "${data[3]},$t"
+                        }
+                        if (t.contains("금")){
+                            data[4] = "${data[4]},$t"
+                        }
+                    }
+                    for (i in 0 .. 4){
+                        if (data[i].contains(",")){
+                            var scom = data[i].replace(" ","").split(",")
+
+                            if (cntroom == 0){
+                                cntroom += 1
+
+                                if (tmproom.contains(roomNMD)){
+                                    if (classInformation.name.contains("모바일") || classInformation.name.contains("데이터")){
+                                        Log.d("asdf",classInformation.name)
+                                        Log.d("asdf",tmproom)
+                                        Log.d("asdf",roomNMD)
+                                        Log.d("asdf",data[i])
+                                    }
+                                    insertTime(
+                                        classInformation,
+                                        roomNMD,
+                                        i,
+                                        classToTime(scom[1].replace(numToday(i),""))[0],
+                                        classToTime(scom[scom.size-1].replace(numToday(i),""))[1]
+                                    )
+                                }
+                            }else{
+                                if (tmproom2.contains(roomNMD)){
+                                    insertTime(
+                                        classInformation,
+                                        roomNMD,
+                                        i,
+                                        classToTime(scom[1].replace(numToday(i),""))[0],
+                                        classToTime(scom[scom.size-1].replace(numToday(i),""))[1]
+                                    )
+                                }
                             }
                         }
                     }
+
 //                  Log.d("asdf", "${i.toString()}$roomNM")
                 }catch (e:java.lang.Exception){
 //                    Log.d("asdf","wawawa")

@@ -92,8 +92,9 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
     override fun setTimeTable(arr:ArrayList<TimeTableData>) {
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
-        myView.timetable.setTableMode(TimeTableView.TableMode.LONG)
+        myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
         myView.timetable.setTimeTable(Util.classToTime("1")[0], arr)
+
     }
 
     override fun showBtn(c: Boolean) {
@@ -151,7 +152,7 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         builder.setTitle("이용가능한 강의실")
         builder.setAdapter(adapter, DialogInterface.OnClickListener { _, which ->
             var strName = adapter.getItem(which)
-            mPresenter.loadTable(strName)
+            mPresenter.loadTable(strName.replace(" ",""))
             //Toast.makeText(activity, strName, Toast.LENGTH_SHORT).show()
         })
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }

@@ -70,8 +70,8 @@ class Util {
                     try {
                         when (time.toInt()) {
                             in 1..8 -> {
-                                start = "${(time.toInt() + 9)}:00:00"
-                                end = "${(time.toInt() + 9)}:50:00"
+                                start = "${(time.toInt() + 8)}:00:00"
+                                end = "${(time.toInt() + 8)}:50:00"
                             }
                             9->{
                                 start = "17:30:00"
