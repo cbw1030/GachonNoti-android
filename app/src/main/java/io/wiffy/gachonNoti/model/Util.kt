@@ -38,37 +38,6 @@ class Util {
         @JvmStatic
         var novisible = false
 
-        @JvmStatic
-        fun timeToClass(hour: Int, minute: Int, noon: Boolean): ArrayList<String> {
-            // 오전 true 오후 false , hour minute
-            val myList = ArrayList<String>()
-
-            val absoluteMin = minute + 60 * if (noon) {
-                hour - 9
-            } else {
-                hour - 3
-            }
-
-            val relativeHour = absoluteMin / 60 + 1
-            val relativeMin = absoluteMin % 60
-
-            if (relativeHour <= 14 &&
-                relativeMin < 50
-            ) myList.add(relativeHour.toString())
-
-            when (absoluteMin) {
-                in 30 until 105 -> myList.add("A")
-                in 120 until 195 -> myList.add("B")
-                in 210 until 285 -> myList.add("C")
-                in 300 until 375 -> myList.add("D")
-                in 390 until 465 -> myList.add("E")
-                else -> {
-                }
-            }
-
-            return myList
-        }
-
         @SuppressLint("SimpleDateFormat")
         @JvmStatic
         fun classToTime(time: String): LongArray {
