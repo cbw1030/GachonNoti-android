@@ -99,12 +99,39 @@ class Util {
                 }
                 else -> {
                     try {
-                        if (time.toInt() <= 14) {
-                            start = "${(time.toInt() + 9)}:00:00"
-                            end = "${(time.toInt() + 9)}:50:00"
-                        }else{
-                            start = "00:00:00"
-                            end = "00:00:00"
+                        when (time.toInt()) {
+                            in 1..8 -> {
+                                start = "${(time.toInt() + 9)}:00:00"
+                                end = "${(time.toInt() + 9)}:50:00"
+                            }
+                            9->{
+                                start = "17:30:00"
+                                end = "18:20:00"
+                            }
+                            10->{
+                                start = "18:25:00"
+                                end = "19:15:00"
+                            }
+                            11->{
+                                start = "19:20:00"
+                                end = "20:10:00"
+                            }
+                            12->{
+                                start = "20:15:00"
+                                end = "21:05:00"
+                            }
+                            13->{
+                                start = "21:10:00"
+                                end = "22:00:00"
+                            }
+                            14->{
+                                start = "22:05:00"
+                                end = "22:55:00"
+                            }
+                            else -> {
+                                start = "00:00:00"
+                                end = "00:00:00"
+                            }
                         }
                     } catch (e: Exception) {
                         start = "00:00:00"
@@ -113,7 +140,7 @@ class Util {
                 }
             }
 
-            return longArrayOf(dt.parse(start).time,dt.parse(end).time)
+            return longArrayOf(dt.parse(start).time, dt.parse(end).time)
         }
 
 

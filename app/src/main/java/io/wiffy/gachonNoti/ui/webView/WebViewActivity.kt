@@ -24,6 +24,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         setContentView(R.layout.activity_webview)
         val bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
+        webview_text.text = bundle.text
         window.statusBarColor = resources.getColor(R.color.mainBlue)
         mPresenter = WebViewPresenter(this)
         mPresenter.initPresent(bundle.link)
@@ -59,17 +60,17 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     }
 
     private fun visible() {
-        webview.visibility = View.VISIBLE
+        webview_layout.visibility = View.VISIBLE
         web_splash.visibility = View.GONE
-        webview.invalidate()
+        webview_layout.invalidate()
         web_splash.invalidate()
     }
 
     private fun invisible() {
         if (!Util.novisible) {
-            webview.visibility = View.GONE
+            webview_layout.visibility = View.GONE
             web_splash.visibility = View.VISIBLE
-            webview.invalidate()
+            webview_layout.invalidate()
             web_splash.invalidate()
         }
 
