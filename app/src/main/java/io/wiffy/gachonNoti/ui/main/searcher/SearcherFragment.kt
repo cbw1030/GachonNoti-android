@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.ui.main.MainContract
 import java.util.*
 import android.widget.ArrayAdapter
-import androidx.core.view.get
+import android.widget.Toast
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -18,8 +19,6 @@ import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import kotlin.collections.ArrayList
-
-
 
 
 class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
@@ -77,9 +76,10 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
             mPresenter.loadRoom(myView.cate.getItemAtPosition(spinnerSelected).toString())
         }
 
-        myView.cate.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        myView.cate.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 spinnerSelected = position
             }
@@ -164,9 +164,17 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
 
     override fun setlistDialog(arrayList: ArrayList<String>) {
         val builder = AlertDialog.Builder(activity)
+        val adapter = ArrayAdapter<String>(activity!!, android.R.layout.select_dialog_item)
+        for (x in arrayList) {
+            adapter.add(x)
+        }
         builder.setTitle("이용가능한 강의실")
-        builder.setMessage(arrayList.toString())
-        builder.setPositiveButton("OK") { dialog, id -> dialog.cancel() }
+        builder.setAdapter(adapter, DialogInterface.OnClickListener { _, which ->
+            var strName = adapter.getItem(which)
+            Toast.makeText(activity, strName, Toast.LENGTH_SHORT).show()
+        })
+        builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
         builder.show()
+
     }
 }
