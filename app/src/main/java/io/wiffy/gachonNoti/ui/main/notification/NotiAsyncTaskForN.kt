@@ -19,7 +19,7 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}"
+        val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}${Util.seek}${Util.mobileURL3}"
         val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
         for (n in conn) {
             if (n.html().contains("alt=\"공지\"")) {

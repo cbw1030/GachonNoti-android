@@ -12,31 +12,52 @@ import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.activity_detailsetting.*
 
 
-
 class DetailDialog(context: Context) : Dialog(context) {
     lateinit var list: ArrayList<CircleImageView>
     var index = -1
     var preIndex = -1
+    var setNum = 0
 
     @SuppressLint("ApplySharedPref")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailsetting)
 
+        setNum = Util.seek
+        setText.text = setNum.toString()
+
+        toLeft.setOnClickListener {
+            if (setNum > 10) {
+                setNum -= 5
+                setText.text = setNum.toString()
+            }
+        }
+
+        toRight.setOnClickListener {
+            if (setNum < 100) {
+                setNum += 5
+                setText.text = setNum.toString()
+            }
+        }
+
         OK.setBackgroundColor(
-            ContextCompat.getColor(context, when (Util.theme) {
-                "red" -> R.color.red
-                "green" -> R.color.green
-                else -> R.color.main2Blue
-            })
+            ContextCompat.getColor(
+                context, when (Util.theme) {
+                    "red" -> R.color.red
+                    "green" -> R.color.green
+                    else -> R.color.main2Blue
+                }
+            )
 
         )
         Cancel.setBackgroundColor(
-            ContextCompat.getColor(context, when (Util.theme) {
-                "red" -> R.color.red
-                "green" -> R.color.green
-                else -> R.color.main2Blue
-            })
+            ContextCompat.getColor(
+                context, when (Util.theme) {
+                    "red" -> R.color.red
+                    "green" -> R.color.green
+                    else -> R.color.main2Blue
+                }
+            )
         )
 
         index = when (Util.theme) {
@@ -61,36 +82,42 @@ class DetailDialog(context: Context) : Dialog(context) {
                 }
                 index = x
                 OK.setBackgroundColor(
-                    ContextCompat.getColor(context, when (x) {
-                        1 -> R.color.red
-                        2 -> R.color.green
-                        else -> R.color.main2Blue
-                    })
+                    ContextCompat.getColor(
+                        context, when (x) {
+                            1 -> R.color.red
+                            2 -> R.color.green
+                            else -> R.color.main2Blue
+                        }
+                    )
                 )
                 Cancel.setBackgroundColor(
-                    ContextCompat.getColor(context, when (x) {
-                        1 -> R.color.red
-                        2 -> R.color.green
-                        else -> R.color.main2Blue
-                    })
+                    ContextCompat.getColor(
+                        context, when (x) {
+                            1 -> R.color.red
+                            2 -> R.color.green
+                            else -> R.color.main2Blue
+                        }
+                    )
                 )
             }
         }
 
     }
 
-    fun setListener(positiveListener: View.OnClickListener, negativeListener:View.OnClickListener){
+    fun setListener(positiveListener: View.OnClickListener, negativeListener: View.OnClickListener) {
         OK.setOnClickListener(positiveListener)
         Cancel.setOnClickListener(negativeListener)
     }
 
     @SuppressLint("ApplySharedPref")
-    fun okListen(){
+    fun okListen() {
+        Util.seek = setNum
         Util.theme = when (index) {
             1 -> "red"
             2 -> "green"
             else -> "default"
         }
+        Util.sharedPreferences.edit().putInt("seek",Util.seek).commit()
         Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
     }
 }
