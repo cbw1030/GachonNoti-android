@@ -23,5 +23,8 @@ class MyApplication : Application() {
             "theme", "default"
         ) ?: "default"
 
+        Util.seek = Util.sharedPreferences.getInt(
+            "seek", 10
+        )
     }
 }

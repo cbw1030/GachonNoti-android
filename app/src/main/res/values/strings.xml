@@ -14,7 +14,8 @@
     <string name="medical">메디컬</string>
     <string name="global">글로벌</string>
     <string name="info">정보</string>
-    <string name="details">테마 설정</string>
+    <string name="ven">리스트 개수</string>
+    <string name="details">자세한 설정</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
     <string name="searcher">빈 강의실 찾기</string>
