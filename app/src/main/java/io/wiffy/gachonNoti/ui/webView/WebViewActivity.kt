@@ -24,6 +24,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         setContentView(R.layout.activity_webview)
         val bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
+        webview_text.text = bundle.text
         window.statusBarColor = resources.getColor(R.color.mainBlue)
         mPresenter = WebViewPresenter(this)
         mPresenter.initPresent(bundle.link)
@@ -59,17 +60,17 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     }
 
     private fun visible() {
-        webview.visibility = View.VISIBLE
+        webview_layout.visibility = View.VISIBLE
         web_splash.visibility = View.GONE
-        webview.invalidate()
+        webview_layout.invalidate()
         web_splash.invalidate()
     }
 
     private fun invisible() {
         if (!Util.novisible) {
-            webview.visibility = View.GONE
+            webview_layout.visibility = View.GONE
             web_splash.visibility = View.VISIBLE
-            webview.invalidate()
+            webview_layout.invalidate()
             web_splash.invalidate()
         }
 
@@ -119,14 +120,17 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
             ColorDrawable(
                 when (Util.theme) {
                     "red" -> {
+                        webview_layout.setBackgroundColor(resources.getColor(R.color.deepRed))
                         window.statusBarColor = resources.getColor(R.color.red)
                         resources.getColor(R.color.red)
                     }
                     "green" -> {
+                        webview_layout.setBackgroundColor(resources.getColor(R.color.deepGreen))
                         window.statusBarColor = resources.getColor(R.color.green)
                         resources.getColor(R.color.green)
                     }
                     else -> {
+                        webview_layout.setBackgroundColor(resources.getColor(R.color.main2DeepBlue))
                         window.statusBarColor = resources.getColor(R.color.main2Blue)
                         resources.getColor(R.color.main2Blue)
                     }

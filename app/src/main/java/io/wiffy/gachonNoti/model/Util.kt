@@ -38,37 +38,6 @@ class Util {
         @JvmStatic
         var novisible = false
 
-        @JvmStatic
-        fun timeToClass(hour: Int, minute: Int, noon: Boolean): ArrayList<String> {
-            // 오전 true 오후 false , hour minute
-            val myList = ArrayList<String>()
-
-            val absoluteMin = minute + 60 * if (noon) {
-                hour - 9
-            } else {
-                hour - 3
-            }
-
-            val relativeHour = absoluteMin / 60 + 1
-            val relativeMin = absoluteMin % 60
-
-            if (relativeHour <= 14 &&
-                relativeMin < 50
-            ) myList.add(relativeHour.toString())
-
-            when (absoluteMin) {
-                in 30 until 105 -> myList.add("A")
-                in 120 until 195 -> myList.add("B")
-                in 210 until 285 -> myList.add("C")
-                in 300 until 375 -> myList.add("D")
-                in 390 until 465 -> myList.add("E")
-                else -> {
-                }
-            }
-
-            return myList
-        }
-
         @SuppressLint("SimpleDateFormat")
         @JvmStatic
         fun classToTime(time: String): LongArray {
@@ -99,12 +68,39 @@ class Util {
                 }
                 else -> {
                     try {
-                        if (time.toInt() <= 14) {
-                            start = "${(time.toInt() + 9)}:00:00"
-                            end = "${(time.toInt() + 9)}:50:00"
-                        }else{
-                            start = "00:00:00"
-                            end = "00:00:00"
+                        when (time.toInt()) {
+                            in 1..8 -> {
+                                start = "${(time.toInt() + 9)}:00:00"
+                                end = "${(time.toInt() + 9)}:50:00"
+                            }
+                            9->{
+                                start = "17:30:00"
+                                end = "18:20:00"
+                            }
+                            10->{
+                                start = "18:25:00"
+                                end = "19:15:00"
+                            }
+                            11->{
+                                start = "19:20:00"
+                                end = "20:10:00"
+                            }
+                            12->{
+                                start = "20:15:00"
+                                end = "21:05:00"
+                            }
+                            13->{
+                                start = "21:10:00"
+                                end = "22:00:00"
+                            }
+                            14->{
+                                start = "22:05:00"
+                                end = "22:55:00"
+                            }
+                            else -> {
+                                start = "00:00:00"
+                                end = "00:00:00"
+                            }
                         }
                     } catch (e: Exception) {
                         start = "00:00:00"
@@ -113,7 +109,7 @@ class Util {
                 }
             }
 
-            return longArrayOf(dt.parse(start).time,dt.parse(end).time)
+            return longArrayOf(dt.parse(start).time, dt.parse(end).time)
         }
 
 
