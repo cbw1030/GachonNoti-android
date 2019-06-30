@@ -57,7 +57,7 @@
                     android:layout_toEndOf="@+id/getdata"
                     android:visibility="gone"
                     android:dropDownWidth="wrap_content"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dropdown"/>
 
 
             <TimePicker
@@ -73,10 +73,19 @@
             <CheckBox
                     android:layout_below="@+id/getdate"
                     android:text="시간 검색"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkTime"
-            android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"/>
+
+            <Button
+                    android:layout_below="@+id/getdate"
+                    android:text="검색"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/search"/>
 
 
         </RelativeLayout>
@@ -95,11 +104,13 @@
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recylcer"
+        <com.github.eunsiljo.timetablelib.view.TimeTableView
                 android:layout_width="match_parent"
-                android:scrollbars="vertical"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:id="@+id/timetable">
+
+
+        </com.github.eunsiljo.timetablelib.view.TimeTableView>
 
 
     </androidx.cardview.widget.CardView>

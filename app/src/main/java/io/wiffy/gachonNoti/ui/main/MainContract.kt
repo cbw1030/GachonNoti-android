@@ -25,6 +25,7 @@ interface MainContract {
         fun dismissLoad()
         fun errorDialog()
         fun setSpinner(arrayList:ArrayList<String>)
+        fun setlistDialog(arrayList:ArrayList<String>)
     }
 
     interface PresenterSearcher {
@@ -34,6 +35,7 @@ interface MainContract {
         fun showLoad()
         fun dismissLoad()
         fun error()
+        fun loadRoom(roomNM:String)
     }
 
     interface FragmentNotification {
