@@ -62,17 +62,6 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
 
         val yearSemester = "$year-$semester"
 
-        myView.checkTime.setOnClickListener {
-            myView.getdate.visibility =
-                when (myView.checkTime.isChecked) {
-                    true -> {
-                        View.VISIBLE
-                    }
-                    false -> {
-                        View.GONE
-                    }
-                }
-        }
 
         myView.getdata.setOnClickListener {
             getDataDialog(yearSemester)

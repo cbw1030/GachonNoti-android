@@ -19,6 +19,7 @@
                 android:padding="10dp">
 
             <EditText
+                    android:gravity="center"
                     android:id="@+id/year"
                     android:clickable="false"
                     android:cursorVisible="false"
@@ -30,6 +31,7 @@
                     android:text=""/>
 
             <EditText
+                    android:gravity="center"
                     android:layout_marginStart="5dp"
                     android:id="@+id/semester"
                     android:clickable="false"
@@ -50,36 +52,18 @@
                     android:layout_toEndOf="@+id/semester"
                     android:visibility="visible"/>
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/cate"
                     android:layout_toEndOf="@+id/getdata"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:dropDownWidth="wrap_content"
                     android:spinnerMode="dropdown"/>
 
 
-            <TimePicker
-                    android:layout_below="@+id/year"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/getdate"
-                    android:timePickerMode="spinner"
-                    android:visibility="gone">
-
-            </TimePicker>
-
-            <CheckBox
-                    android:layout_below="@+id/getdate"
-                    android:text="시간 검색"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/checkTime"
-                    android:layout_marginBottom="5dp"/>
-
             <Button
-                    android:layout_below="@+id/getdate"
+                    android:layout_below="@+id/getdata"
                     android:text="검색"
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"

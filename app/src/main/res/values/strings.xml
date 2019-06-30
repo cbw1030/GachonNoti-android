@@ -21,7 +21,8 @@
     <string name="searcher">빈 강의실 찾기</string>
     <string name="open">https://github.com/jhy/jsoup\n
         https://github.com/81813780/AVLoadingIndicatorView\n
-        https://github.com/hdodenhof/CircleImageView
+        https://github.com/hdodenhof/CircleImageView\n
+        https://github.com/EunsilJo/TimeTable
     </string>
     <string name="theme">테마</string>
     <string name="helper">도움을 주신 분들</string>
