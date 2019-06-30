@@ -14,6 +14,9 @@ import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 import kotlin.collections.ArrayList
 import kotlin.math.absoluteValue
+import java.util.*
+import java.util.Objects.compare
+import kotlin.Comparator
 
 
 class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : MainContract.PresenterSearcher {
@@ -169,6 +172,13 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         }
     }
 
+
+    class timecompare : Comparator<TimeData<Any?>> {
+        override fun compare(o1: TimeData<Any?>?, o2: TimeData<Any?>?): Int {
+            return o1!!.startMills.compareTo(o2!!.startMills);
+        }
+    }
+
     fun loadTable(str: String) {
         tablearr = ArrayList(6)
         tablearr.add(ArrayList())
@@ -181,6 +191,11 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         findTable(load2, str)
         findTable(load3, str)
 
+        Collections.sort(tablearr[0],timecompare())
+        Collections.sort(tablearr[1],timecompare())
+        Collections.sort(tablearr[2],timecompare())
+        Collections.sort(tablearr[3],timecompare())
+        Collections.sort(tablearr[4],timecompare())
 
         var array2 = ArrayList<TimeTableData>()
         array2.add(TimeTableData("월", tablearr[0]))
@@ -198,13 +213,9 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
 
 
     private fun insertTime(str1: ClassDataInformation, str2: String, cnt: Int, start: Long, end: Long) {
-        if (!str1.name.contains("객체") && !str1.name.contains("졸업")) {
-
-        }
-
         tablearr[cnt].add(
             TimeData(
-                1,
+                2,
                 str1.name,
                Util.getRandomColorId(),
                 R.color.white,
@@ -212,7 +223,8 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                 end
             )
         )
-        Log.d("asdf", str1.name + cnt + "-" + start / 60000 + "-" + end / 60000)
+
+        //Log.d("asdf", str1.name + cnt + "-" + start / 60000 + "-" + end / 60000)
     }
 
     private fun numToday(num: Int): String {
