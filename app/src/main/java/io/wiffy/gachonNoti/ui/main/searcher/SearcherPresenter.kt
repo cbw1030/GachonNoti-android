@@ -226,7 +226,6 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     if (classInformation.room.contains(",")){
 
                     }else{
-                        Log.d("asdf","hi")
                         val time = classInformation.time.split(",")
                         var data = Array(5){""}
 
@@ -249,13 +248,9 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                         }
 
                         for (i in 0 .. 4){
-
                             if (data[i].contains(",")){
-
                                 var scom = data[i].trim().split(",")
-                                Log.d("asdf",data[i])
-                                Log.d("asdf",scom[1][1].toString())
-                                Log.d("asdf",scom[scom.size-1][1].toString())
+
                                 insertTime(
                                     classInformation,
                                     roomNMD,
@@ -263,6 +258,9 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                                     classToTime(scom[1][1].toString())[0],
                                     classToTime(scom[scom.size-1][1].toString())[1]
                                 )
+                                Log.d("asdf",data[i])
+                                Log.d("asdf",scom[1][1].toString())
+                                Log.d("asdf",scom[scom.size-1][1].toString())
                             }
                         }
                     }
