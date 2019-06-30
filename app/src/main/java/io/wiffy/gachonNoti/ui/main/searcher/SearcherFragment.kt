@@ -20,6 +20,11 @@ import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
 import kotlin.collections.ArrayList
+import org.joda.time.DateTime
+import com.github.eunsiljo.timetablelib.data.TimeGridData
+import com.github.eunsiljo.timetablelib.viewholder.TimeTableItemViewHolder
+
+
 
 
 class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
@@ -93,8 +98,7 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
-        myView.timetable.setTimeTable(Util.classToTime("1")[0], arr)
-
+        myView.timetable.setTimeTable(0, arr)
     }
 
     override fun showBtn(c: Boolean) {

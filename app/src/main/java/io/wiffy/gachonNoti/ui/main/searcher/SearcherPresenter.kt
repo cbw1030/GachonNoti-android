@@ -20,12 +20,12 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
 
     private var loadcnt = 0
     private var errorCnt = 0
-    lateinit var findBuilding : ArrayList<String>
-    lateinit var findRoom : ArrayList<String>
-    lateinit var tablearr : ArrayList<ArrayList<TimeData<Any?>>>
-    lateinit var load1 : String
-    lateinit var load2 : String
-    lateinit var load3 : String
+    lateinit var findBuilding: ArrayList<String>
+    lateinit var findRoom: ArrayList<String>
+    lateinit var tablearr: ArrayList<ArrayList<TimeData<Any?>>>
+    lateinit var load1: String
+    lateinit var load2: String
+    lateinit var load3: String
 
     override fun initPresent() {
         mView.initUI()
@@ -63,13 +63,13 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     override fun isDownloaded(year: String, semester: String) {
         load1 = Util.sharedPreferences.getString(
             "$year-$semester-1", "<nodata>"
-        )?:"<nodata>"
+        ) ?: "<nodata>"
         load2 = Util.sharedPreferences.getString(
             "$year-$semester-2", "<nodata>"
-        )?:"<nodata>"
+        ) ?: "<nodata>"
         load3 = Util.sharedPreferences.getString(
             "$year-$semester-3", "<nodata>"
-        )?:"<nodata>"
+        ) ?: "<nodata>"
         if (!load1.contains("<nodata>") &&
             !load2.contains("<nodata>") &&
             !load3.contains("<nodata>")
@@ -84,16 +84,16 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         }
     }
 
-    private fun findBuildingXML(data:String) {
+    private fun findBuildingXML(data: String) {
         try {
             val factory = DocumentBuilderFactory.newInstance()
             val builder = factory.newDocumentBuilder()
-            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>",""))
+            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>", ""))
             val doc: Document = builder.parse(InputSource(sr))
             val nodeList = doc.getElementsByTagName("grid")
 //          Log.d("asdf", doc.xmlEncoding)
             for (i in 0 until nodeList.length) {
-                try{
+                try {
                     val node = nodeList.item(i)
                     val firstElement = node as Element
                     val room = firstElement.getElementsByTagName("room")
@@ -104,44 +104,46 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     )
                     //Log.d("asdf",classInformation.name)
                     val roomNM = classInformation.room.split(",")
-                    for(x in roomNM){
+                    for (x in roomNM) {
                         var tmp = x
-                        if (tmp.contains("-")){
+                        if (tmp.contains("-")) {
                             tmp = tmp.split("-")[0]
                         }
-                        if (!findBuilding.contains(tmp)){
+                        if (!findBuilding.contains(tmp)) {
                             findBuilding.add(tmp)
                         }
                     }
 //                  Log.d("asdf", "${i.toString()}$roomNM")
-                }catch (e:java.lang.Exception){
+                } catch (e: java.lang.Exception) {
 //                    Log.d("asdf","wawawa")
                 }
             }
-        } catch (ex: Exception) { Log.d("asdf", "nononon")}
+        } catch (ex: Exception) {
+            Log.d("asdf", "nononon")
+        }
         findBuilding.sort()
         mView.setSpinner(findBuilding)
     }
 
-    override fun loadRoom(roomNM:String){
+    override fun loadRoom(roomNM: String) {
         findRoom = ArrayList()
-        findRoomXML(load1,roomNM)
-        findRoomXML(load2,roomNM)
-        findRoomXML(load3,roomNM)
+        findRoomXML(load1, roomNM)
+        findRoomXML(load2, roomNM)
+        findRoomXML(load3, roomNM)
         findRoom.sort()
         mView.setlistDialog(findRoom)
     }
 
-    private fun findRoomXML(data:String,roomNMD:String) {
+    private fun findRoomXML(data: String, roomNMD: String) {
         //Log.d("asdf",roomNMD)
         try {
             val factory = DocumentBuilderFactory.newInstance()
             val builder = factory.newDocumentBuilder()
-            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>",""))
+            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>", ""))
             val doc: Document = builder.parse(InputSource(sr))
             val nodeList = doc.getElementsByTagName("grid")
             for (i in 0 until nodeList.length) {
-                try{
+                try {
                     val node = nodeList.item(i)
                     val firstElement = node as Element
                     val room = firstElement.getElementsByTagName("room")
@@ -152,20 +154,22 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     )
                     //Log.d("asdf",classInformation.name)
                     val roomNM = classInformation.room.split(",")
-                    for(x in roomNM){
-                        if (!findRoom.contains(x) && x.contains(roomNMD)){
+                    for (x in roomNM) {
+                        if (!findRoom.contains(x) && x.contains(roomNMD)) {
                             findRoom.add(x)
                         }
                     }
 //                  Log.d("asdf", "${i.toString()}$roomNM")
-                }catch (e:java.lang.Exception){
+                } catch (e: java.lang.Exception) {
 //                    Log.d("asdf","wawawa")
                 }
             }
-        } catch (ex: Exception) { Log.d("asdf", "nononon")}
+        } catch (ex: Exception) {
+            Log.d("asdf", "nononon")
+        }
     }
 
-    fun loadTable(str:String){
+    fun loadTable(str: String) {
         tablearr = ArrayList(6)
         tablearr.add(ArrayList())
         tablearr.add(ArrayList())
@@ -173,9 +177,9 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         tablearr.add(ArrayList())
         tablearr.add(ArrayList())
         tablearr.add(ArrayList())
-        findTable(load1,str)
-        findTable(load2,str)
-        findTable(load3,str)
+        findTable(load1, str)
+        findTable(load2, str)
+        findTable(load3, str)
 
 
         var array2 = ArrayList<TimeTableData>()
@@ -185,61 +189,66 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         array2.add(TimeTableData("목", tablearr[3]))
         array2.add(TimeTableData("금", tablearr[4]))
 
+        for (i in tablearr[4]) {
+            Log.d("asdf", i.title + "---")
+        }
 
         mView.setTimeTable(array2)
     }
 
 
-    private fun insertTime(str1:ClassDataInformation,str2:String,cnt:Int,start:Long,end:Long){
-        if (!str1.name.contains("졸업작품")){
-            tablearr[cnt].add(
-                TimeData(
-                    1,
-                    str1.name,
-                    R.color.mainBlue,
-                    R.color.white,
-                    start,
-                    end
-                )
-            )
+    private fun insertTime(str1: ClassDataInformation, str2: String, cnt: Int, start: Long, end: Long) {
+        if (!str1.name.contains("객체") && !str1.name.contains("졸업")) {
+
         }
 
+        tablearr[cnt].add(
+            TimeData(
+                1,
+                str1.name,
+                R.color.mainBlue,
+                R.color.white,
+                start,
+                end
+            )
+        )
+        Log.d("asdf", str1.name + cnt + "-" + start / 60000 + "-" + end / 60000)
     }
 
-    private fun numToday(num:Int): String{
+    private fun numToday(num: Int): String {
         return when (num) {
-            0 ->{
+            0 -> {
                 "월"
             }
-            1 ->{
+            1 -> {
                 "화"
             }
-            2 ->{
+            2 -> {
                 "수"
             }
-            3 ->{
+            3 -> {
                 "목"
             }
-            4 ->{
+            4 -> {
                 "금"
             }
-            else ->{
+            else -> {
                 "토"
             }
         }
     }
 
-    private fun findTable(data:String,roomNMD:String) {
+    private fun findTable(data: String, roomNMD: String) {
         //Log.d("asdf",roomNMD)
         try {
             val factory = DocumentBuilderFactory.newInstance()
             val builder = factory.newDocumentBuilder()
-            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>",""))
+            val sr = StringReader(data.replace("<?xml version='1.0' encoding='EUC-KR'?>", ""))
             val doc: Document = builder.parse(InputSource(sr))
             val nodeList = doc.getElementsByTagName("grid")
-            for (i in 0 until nodeList.length) {
-                try{
-                    val node = nodeList.item(i)
+            for (a in 0 until nodeList.length) {
+                try {
+                    val node = nodeList.item(a)
                     val firstElement = node as Element
                     val room = firstElement.getElementsByTagName("room")
                     val classInformation = ClassDataInformation(
@@ -249,62 +258,62 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     )
 
                     var cntroom = 0
-                    var tmproom = classInformation.room.replace(" ","")
-                    var tmproom2 = classInformation.room.replace(" ","")
-                    if (classInformation.room.contains(",")){
+                    var tmproom = classInformation.room.replace(" ", "")
+                    var tmproom2 = classInformation.room.replace(" ", "")
+                    if (classInformation.room.contains(",")) {
                         tmproom = tmproom.split(",")[0]
                         tmproom2 = tmproom2.split(",")[1]
                     }
 
                     val time = classInformation.time.split(",")
-                    var data = Array(5){""}
-                    for(t in time){
-                        if (t.contains("월")){
+                    var data = Array(5) { "" }
+                    for (t in time) {
+                        if (t.contains("월")) {
                             data[0] = "${data[0]},$t"
                         }
-                        if (t.contains("화")){
+                        if (t.contains("화")) {
                             data[1] = "${data[1]},$t"
                         }
-                        if (t.contains("수")){
+                        if (t.contains("수")) {
                             data[2] = "${data[2]},$t"
                         }
-                        if (t.contains("목")){
+                        if (t.contains("목")) {
                             data[3] = "${data[3]},$t"
                         }
-                        if (t.contains("금")){
+                        if (t.contains("금")) {
                             data[4] = "${data[4]},$t"
                         }
                     }
-                    for (i in 0 .. 4){
-                        if (data[i].contains(",")){
-                            var scom = data[i].replace(" ","").split(",")
+                    for (i in 0..4) {
+                        if (data[i].contains(",")) {
+                            var scom = data[i].replace(" ", "").split(",")
 
-                            if (cntroom == 0){
+                            if (cntroom == 0) {
                                 cntroom += 1
 
-                                if (tmproom.contains(roomNMD)){
-                                    if (classInformation.name.contains("모바일") || classInformation.name.contains("데이터")){
-                                        Log.d("asdf",classInformation.name)
-                                        Log.d("asdf",tmproom)
-                                        Log.d("asdf",roomNMD)
-                                        Log.d("asdf",data[i])
+                                if (tmproom.contains(roomNMD)) {
+                                    if (classInformation.name.contains("모바일") || classInformation.name.contains("데이터")) {
+//                                        Log.d("asdf",classInformation.name)
+//                                        Log.d("asdf",tmproom)
+//                                        Log.d("asdf",roomNMD)
+//                                        Log.d("asdf",data[i])
                                     }
                                     insertTime(
                                         classInformation,
                                         roomNMD,
                                         i,
-                                        classToTime(scom[1].replace(numToday(i),""))[0],
-                                        classToTime(scom[scom.size-1].replace(numToday(i),""))[1]
+                                        classToTime(scom[1].replace(numToday(i), ""))[0],
+                                        classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
                                     )
                                 }
-                            }else{
-                                if (tmproom2.contains(roomNMD)){
+                            } else {
+                                if (tmproom2.contains(roomNMD)) {
                                     insertTime(
                                         classInformation,
                                         roomNMD,
                                         i,
-                                        classToTime(scom[1].replace(numToday(i),""))[0],
-                                        classToTime(scom[scom.size-1].replace(numToday(i),""))[1]
+                                        classToTime(scom[1].replace(numToday(i), ""))[0],
+                                        classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
                                     )
                                 }
                             }
@@ -312,10 +321,12 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     }
 
 //                  Log.d("asdf", "${i.toString()}$roomNM")
-                }catch (e:java.lang.Exception){
+                } catch (e: java.lang.Exception) {
 //                    Log.d("asdf","wawawa")
                 }
             }
-        } catch (ex: Exception) { Log.d("asdf", "nononon")}
+        } catch (ex: Exception) {
+            Log.d("asdf", "nononon")
+        }
     }
 }
