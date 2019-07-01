@@ -34,10 +34,16 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
+        themeChanger()
         setTimeTable(null, "")
     }
 
     fun themeChanger() {
+myView.fab.backgroundTintList = resources.getColorStateList(when (Util.theme) {
+    "red" -> R.color.red
+    "green" -> R.color.green
+    else -> R.color.main2Blue
+})
         myView.semester.setTextColor(
             resources.getColor(
                 when (Util.theme) {

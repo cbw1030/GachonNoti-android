@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/actionmy"
-            android:title="홈페이지 가기"
+            android:title="홈페이지"
             app:showAsAction="always"/>
 </menu>
