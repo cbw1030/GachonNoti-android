@@ -69,7 +69,7 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
             myView.showtu.visibility = View.VISIBLE
         } else {
             myView.timetable.setOnTimeItemClickListener { _, _, data ->
-                Toast.makeText(activity,data.time.title, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, data.time.title, Toast.LENGTH_SHORT).show()
             }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name

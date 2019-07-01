@@ -95,13 +95,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                     tent.putExtra("app_uid", applicationInfo.uid)
                 }
                 startActivity(tent)
-                finish()
+                Util.sharedPreferences.edit().putBoolean("notiOn", true).commit()
+                FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
             builders.setNegativeButton("Cancel") { _, _ ->
                 Util.notifiSet = false
                 Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
-                finish()
             }
             builders.setCancelable(false)
             builders.show()
