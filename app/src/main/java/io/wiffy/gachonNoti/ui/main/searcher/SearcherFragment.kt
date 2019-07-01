@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.ui.main.MainContract
 import com.github.eunsiljo.timetablelib.view.TimeTableView
@@ -39,11 +40,13 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
     }
 
     fun themeChanger() {
-myView.fab.backgroundTintList = resources.getColorStateList(when (Util.theme) {
-    "red" -> R.color.red
-    "green" -> R.color.green
-    else -> R.color.main2Blue
-})
+        myView.fab.backgroundTintList = resources.getColorStateList(
+            when (Util.theme) {
+                "red" -> R.color.red
+                "green" -> R.color.green
+                else -> R.color.main2Blue
+            }
+        )
         myView.semester.setTextColor(
             resources.getColor(
                 when (Util.theme) {
@@ -61,9 +64,13 @@ myView.fab.backgroundTintList = resources.getColorStateList(when (Util.theme) {
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
+
         if (arr == null) {
             myView.showtu.visibility = View.VISIBLE
         } else {
+            myView.timetable.setOnTimeItemClickListener { _, _, data ->
+                Toast.makeText(activity,data.time.title, Toast.LENGTH_SHORT).show()
+            }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name
             myView.semester.text = when {
