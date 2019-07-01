@@ -25,7 +25,7 @@ interface MainContract {
         fun dismissLoad()
 
 
-        fun setTimeTable(arr:ArrayList<TimeTableData>?)
+        fun setTimeTable(arr:ArrayList<TimeTableData>?,name:String)
     }
 
     interface PresenterSearcher {

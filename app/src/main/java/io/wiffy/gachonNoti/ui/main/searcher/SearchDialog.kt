@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.wiffy.gachonNoti.R
@@ -113,9 +114,11 @@ class SearchDialog(
         cate.adapter = arrayAdapter
     }
 
+
     override fun setListDialog(arrayList: ArrayList<String>) {
         val builder = AlertDialog.Builder(context)
-        val adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1)
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
+        val lp = WindowManager.LayoutParams()
         for (x in arrayList) {
             adapter.add(x)
         }
@@ -126,8 +129,14 @@ class SearchDialog(
             dismissSelf()
         })
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
-        builder.show()
-
+        val myDialog = builder.create()
+        myDialog.show()
+        lp.copyFrom(myDialog.window?.attributes)
+        // Dialog 크기설정은 여기서한다.
+        lp.width = 660
+        lp.height = 880
+        //
+        myDialog.window?.attributes = lp
     }
 
 

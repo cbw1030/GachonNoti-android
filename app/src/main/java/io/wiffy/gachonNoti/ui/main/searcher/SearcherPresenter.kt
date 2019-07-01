@@ -209,7 +209,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         array2.add(TimeTableData("목", tablearr[3]))
         array2.add(TimeTableData("금", tablearr[4]))
 
-        mView.setTimeTable(array2)
+        mView.setTimeTable(array2,str)
         mView.dismissLoad()
     }
 
@@ -275,7 +275,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     }
                     for (i in 0..4) {
                         if (data[i].contains(",")) {
-                            var scom = data[i].replace(" ", "").split(",")
+                            val scom = data[i].replace(" ", "").split(",")
                             if ((cntroom && tempRoom.contains(roomNMD)) ||
                                 (!cntroom && tempRoom2.contains(roomNMD))){
                                 insertTime(

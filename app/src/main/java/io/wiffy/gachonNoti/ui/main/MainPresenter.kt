@@ -23,5 +23,6 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
 
     override fun changeThemes() {
         (mList[Util.STATE_SETTING] as SettingFragment).themeChanger()
+        (mList[Util.STATE_SEARCHER]as SearcherFragment).themeChanger()
     }
 }
