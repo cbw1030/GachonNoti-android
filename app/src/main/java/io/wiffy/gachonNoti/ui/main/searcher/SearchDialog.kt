@@ -39,11 +39,11 @@ class SearchDialog(
         year.text = when {
             month <= 7 -> {
                 semester = "1"
-                "$yearr 1학기"
+                "${yearr}년도 1학기"
             }
             else -> {
                 semester = "2"
-                "$yearr 2학기"
+                "${yearr}년도 2학기"
             }
         }
 
