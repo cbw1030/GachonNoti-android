@@ -27,7 +27,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     lateinit var load1: String
     lateinit var load2: String
     lateinit var load3: String
-    lateinit var mView2 : MainContract.PresenterSearchDialog
+    lateinit var mView2: MainContract.PresenterSearchDialog
 
     override fun initPresent() {
         mView.initUI()
@@ -196,11 +196,11 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         findTable(load2, str)
         findTable(load3, str)
 
-        Collections.sort(tablearr[0],TimeCompare())
-        Collections.sort(tablearr[1],TimeCompare())
-        Collections.sort(tablearr[2],TimeCompare())
-        Collections.sort(tablearr[3],TimeCompare())
-        Collections.sort(tablearr[4],TimeCompare())
+        Collections.sort(tablearr[0], TimeCompare())
+        Collections.sort(tablearr[1], TimeCompare())
+        Collections.sort(tablearr[2], TimeCompare())
+        Collections.sort(tablearr[3], TimeCompare())
+        Collections.sort(tablearr[4], TimeCompare())
 
         val array2 = ArrayList<TimeTableData>()
         array2.add(TimeTableData("월", tablearr[0]))
@@ -214,12 +214,12 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     }
 
 
-    private fun insertTime(str1: ClassDataInformation, str2: String, cnt: Int, start: Long, end: Long) {
+    private fun insertTime(str1: ClassDataInformation, cnt: Int, start: Long, end: Long) {
         tablearr[cnt].add(
             TimeData(
                 2,
                 str1.name,
-               Util.getRandomColorId(),
+                Util.getRandomColorId(),
                 R.color.white,
                 start,
                 end
@@ -229,24 +229,12 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
 
     private fun numToday(num: Int): String {
         return when (num) {
-            0 -> {
-                "월"
-            }
-            1 -> {
-                "화"
-            }
-            2 -> {
-                "수"
-            }
-            3 -> {
-                "목"
-            }
-            4 -> {
-                "금"
-            }
-            else -> {
-                "토"
-            }
+            0 -> { "월" }
+            1 -> { "화" }
+            2 -> { "수" }
+            3 -> { "목" }
+            4 -> { "금" }
+            else -> { "토" }
         }
     }
 
@@ -261,69 +249,44 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                 try {
                     val node = nodeList.item(a)
                     val firstElement = node as Element
-                    val room = firstElement.getElementsByTagName("room")
                     val classInformation = ClassDataInformation(
                         firstElement.getElementsByTagName("subjectNm").item(0).childNodes.item(0).nodeValue,
                         firstElement.getElementsByTagName("time").item(0).childNodes.item(0).nodeValue,
-                        room.item(0).childNodes.item(0).nodeValue
+                        firstElement.getElementsByTagName("room").item(0).childNodes.item(0).nodeValue
                     )
 
-                    var cntroom = 0
-                    var tempRoom = classInformation.room.replace(" ", "")
-                    var tempRoom2 = classInformation.room.replace(" ", "")
-                    if (classInformation.room.contains(",")) {
-                        tempRoom = tempRoom.split(",")[0]
-                        tempRoom2 = tempRoom2.split(",")[1]
+                    var cntroom = true
+                    val tmpR = classInformation.room.replace(" ", "")
+                    var tempRoom = tmpR
+                    var tempRoom2 = tmpR
+                    if (tmpR.contains(",")) {
+                        tempRoom = tmpR.split(",")[0]
+                        tempRoom2 = tmpR.split(",")[1]
                     }
 
                     val time = classInformation.time.split(",")
                     val data = Array(5) { "" }
                     for (t in time) {
-                        if (t.contains("월")) {
-                            data[0] = "${data[0]},$t"
-                        }
-                        if (t.contains("화")) {
-                            data[1] = "${data[1]},$t"
-                        }
-                        if (t.contains("수")) {
-                            data[2] = "${data[2]},$t"
-                        }
-                        if (t.contains("목")) {
-                            data[3] = "${data[3]},$t"
-                        }
-                        if (t.contains("금")) {
-                            data[4] = "${data[4]},$t"
-                        }
+                        if (t.contains("월")) { data[0] = "${data[0]},$t" }
+                        if (t.contains("화")) { data[1] = "${data[1]},$t" }
+                        if (t.contains("수")) { data[2] = "${data[2]},$t" }
+                        if (t.contains("목")) { data[3] = "${data[3]},$t" }
+                        if (t.contains("금")) { data[4] = "${data[4]},$t" }
                     }
                     for (i in 0..4) {
                         if (data[i].contains(",")) {
                             var scom = data[i].replace(" ", "").split(",")
-
-                            if (cntroom == 0) {
-                                cntroom += 1
-
-                                if (tempRoom.contains(roomNMD)) {
-                                    if (classInformation.name.contains("모바일") || classInformation.name.contains("데이터")) {
-
-                                    }
-                                    insertTime(
-                                        classInformation,
-                                        roomNMD,
-                                        i,
-                                        classToTime(scom[1].replace(numToday(i), ""))[0],
-                                        classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
-                                    )
-                                }
-                            } else {
-                                if (tempRoom2.contains(roomNMD)) {
-                                    insertTime(
-                                        classInformation,
-                                        roomNMD,
-                                        i,
-                                        classToTime(scom[1].replace(numToday(i), ""))[0],
-                                        classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
-                                    )
-                                }
+                            if ((cntroom && tempRoom.contains(roomNMD)) ||
+                                (!cntroom && tempRoom2.contains(roomNMD))){
+                                insertTime(
+                                    classInformation,
+                                    i,
+                                    classToTime(scom[1].replace(numToday(i), ""))[0],
+                                    classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
+                                )
+                            }
+                            if (cntroom){
+                                cntroom = false
                             }
                         }
                     }
@@ -333,7 +296,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                 }
             }
         } catch (ex: Exception) {
-            Log.d("asdf", "nononon")
+            //Log.d("asdf", "nononon")
         }
     }
 }

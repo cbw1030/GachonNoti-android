@@ -6,14 +6,19 @@
         android:layout_height="match_parent">
 
 
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
 
         <RelativeLayout
                 android:id="@+id/card2"
                 android:layout_below="@+id/card1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp">
+                android:layout_height="match_parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab"
@@ -37,8 +42,10 @@
 
             <RelativeLayout
                     android:id="@+id/showtu"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true">
 
                 <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/animation_view"
@@ -51,19 +58,21 @@
                         app:lottie_loop="true"/>
 
                 <TextView
+                        android:layout_marginTop="-100dp"
                         android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/animation_view"
-                        android:text="오른쪽 하단 검색으로\n시간표룰 불러오세요"/>
-            </RelativeLayout>
+                        android:text="오른쪽 하단 검색으로\n강의실 시간표룰 불러오세요"/>
 
+            </RelativeLayout>
 
 
         </RelativeLayout>
 
 
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

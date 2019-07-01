@@ -27,7 +27,7 @@
                     android:maxLines="1"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:text="가천대학교, 최고라는 사실 밝혀져..."
+                    android:text=""
             />
 
             <androidx.cardview.widget.CardView

@@ -75,7 +75,7 @@ class SearchDialog(
     override fun getDataDialog(yearSemester: String) {
         val builder = AlertDialog.Builder(context, R.style.light_dialog)
         builder.setTitle("시간표 데이터를 가져옵니다.")
-        builder.setMessage("시간이 다소 걸릴 수 있으니 중간에 앱을 종료하지 마세요.")
+        builder.setMessage("시간이 다소 걸릴 수 있으니 중간에 앱을 종료하지 마세요.\n(최초 한번만 다운로드 합니다.)")
         builder.setPositiveButton("OK") { _, _ ->
             mPresenter.getData(yearSemester)
         }

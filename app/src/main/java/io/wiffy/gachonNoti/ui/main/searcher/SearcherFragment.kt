@@ -40,13 +40,6 @@ class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
         if(arr == null){
-            val array2 = ArrayList<TimeTableData>()
-            array2.add(TimeTableData("월", null))
-            array2.add(TimeTableData("화", null))
-            array2.add(TimeTableData("수", null))
-            array2.add(TimeTableData("목", null))
-            array2.add(TimeTableData("금", null))
-            myView.timetable.setTimeTable(0, array2)
             myView.showtu.visibility = View.VISIBLE
         }else{
             myView.timetable.setTimeTable(0, arr)

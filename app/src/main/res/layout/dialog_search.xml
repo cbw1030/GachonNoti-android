@@ -18,7 +18,7 @@
                 android:padding="10dp">
 
             <TextView
-                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/year"
@@ -31,7 +31,9 @@
             <Button
                     android:text="시간표 가져오기"
                     android:layout_below="@+id/year"
-                    android:layout_margin="10dp"
+                    android:backgroundTint="@color/ran1"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/getdata"
