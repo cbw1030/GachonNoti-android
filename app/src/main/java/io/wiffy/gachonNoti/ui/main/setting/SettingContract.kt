@@ -5,7 +5,7 @@ interface SettingContract {
         fun changeView()
         fun executeTask(query:String)
         fun builderUp()
-        fun builderDismissAndContactUp()
+        fun builderDismissAndContactUp(list:ArrayList<ContactInformation>)
     }
 
     interface Presenter {

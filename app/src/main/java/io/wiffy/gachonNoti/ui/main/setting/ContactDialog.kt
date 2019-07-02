@@ -31,14 +31,16 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
         }
         search2.setOnClickListener {
             val text = editor1.text.toString()
-            val query =
-                when (spinnerSelected) {
-                    1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
+            if (text.isNotBlank()) {
+                val query =
+                    when (spinnerSelected) {
+                        1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
 
-                    else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
-                }
-            mView.executeTask(query)
-            dismiss()
+                        else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
+                    }
+                mView.executeTask(query)
+                dismiss()
+            }
         }
     }
 }

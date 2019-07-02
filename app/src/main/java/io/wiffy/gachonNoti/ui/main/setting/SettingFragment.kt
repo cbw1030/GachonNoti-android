@@ -28,15 +28,10 @@ import kotlinx.android.synthetic.main.fragment_setting.view.*
 class SettingFragment : Fragment(), SettingContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
-    lateinit var builder: Dialog
+    var builderIn: Dialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
-        builder = Dialog(activity!!)
-        builder.setContentView(R.layout.builder)
-        builder.setCancelable(false)
-        builder.setCanceledOnTouchOutside(false)
-        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
         mPresenter = SettingPresenter(this)
         mPresenter.initPresent()
 
@@ -134,7 +129,7 @@ class SettingFragment : Fragment(), SettingContract.View {
     }
 
     override fun executeTask(query: String) {
-        ContactAsyncTask(this).execute()
+        ContactAsyncTask(this, query).execute()
     }
 
     fun themeChanger() {
@@ -161,13 +156,23 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     override fun builderUp() {
         Handler(Looper.getMainLooper()).post {
-            builder.show()
+            builderIn = null
+            builderIn = Dialog(activity!!)
+            builderIn?.setContentView(R.layout.builder)
+            builderIn?.setCancelable(false)
+            builderIn?.setCanceledOnTouchOutside(false)
+            builderIn?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            builderIn?.show()
         }
     }
 
-    override fun builderDismissAndContactUp() {
+    override fun builderDismissAndContactUp(list: ArrayList<ContactInformation>) {
         Handler(Looper.getMainLooper()).post {
-            builder.dismiss()
+            if (builderIn != null) {
+                builderIn?.dismiss()
+                val myBuilder = ContactListDialog(activity!!,list)
+                myBuilder.show()
+            }
         }
     }
 
