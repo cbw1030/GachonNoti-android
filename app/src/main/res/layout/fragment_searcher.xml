@@ -10,6 +10,7 @@
             android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
             android:layout_marginStart="20dp"
+            android:layout_marginBottom="-10dp"
             android:id="@+id/tables"
             android:visibility="gone"
             android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         <TextView
                 android:id="@+id/semester"
                 android:layout_alignParentTop="true"
+                android:layout_marginStart="3dp"
                 android:text="2019년 1학기"
                 android:textSize="11sp"
                 android:layout_width="wrap_content"

@@ -18,6 +18,7 @@
     <string name="details">자세한 설정</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
+    <string name="calling">교내 연락처</string>
     <string name="searcher">강의실 시간표 검색</string>
     <string name="open">https://github.com/jhy/jsoup\n
         https://github.com/81813780/AVLoadingIndicatorView\n

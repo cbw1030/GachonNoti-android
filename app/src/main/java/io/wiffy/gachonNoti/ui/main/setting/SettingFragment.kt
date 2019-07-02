@@ -2,14 +2,19 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
@@ -23,8 +28,15 @@ import kotlinx.android.synthetic.main.fragment_setting.view.*
 class SettingFragment : Fragment(), SettingContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
+    lateinit var builder: Dialog
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
+        builder = Dialog(activity!!)
+        builder.setContentView(R.layout.builder)
+        builder.setCancelable(false)
+        builder.setCanceledOnTouchOutside(false)
+        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
         mPresenter = SettingPresenter(this)
         mPresenter.initPresent()
 
@@ -114,8 +126,15 @@ class SettingFragment : Fragment(), SettingContract.View {
             ) { _, _ -> }
             builder.show()
         }
+        myView.calling.setOnClickListener {
+            val builder = ContactDialog(context!!, this)
+            builder.show()
+        }
 
+    }
 
+    override fun executeTask(query: String) {
+        ContactAsyncTask(this).execute()
     }
 
     fun themeChanger() {
@@ -138,6 +157,18 @@ class SettingFragment : Fragment(), SettingContract.View {
 
         myView.notiSwitch.thumbTintList = ColorStateList(themeColorArray, color)
         myView.notiSwitch.trackTintList = ColorStateList(themeColorArray, lightColor)
+    }
+
+    override fun builderUp() {
+        Handler(Looper.getMainLooper()).post {
+            builder.show()
+        }
+    }
+
+    override fun builderDismissAndContactUp() {
+        Handler(Looper.getMainLooper()).post {
+            builder.dismiss()
+        }
     }
 
     @SuppressLint("ApplySharedPref")
