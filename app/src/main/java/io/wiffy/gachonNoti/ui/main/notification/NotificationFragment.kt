@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.MainContract
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 
-class NotificationFragment : Fragment(), MainContract.FragmentNotification {
+class NotificationFragment : Fragment(), NotificationContract.View{
 
     lateinit var myView: View
     var mPresenter: NotificationPresenter? = null
@@ -37,7 +36,7 @@ class NotificationFragment : Fragment(), MainContract.FragmentNotification {
     }
 
     override fun changeUI(list: ParseList) {
-        adapter = MainAdapter(list, activity?.applicationContext!!,activity as MainActivity)
+        adapter = MainAdapter(list, activity?.applicationContext!!, activity as MainActivity)
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
         myView.recylcer.addItemDecoration(VerticalSpaceItemDecoration(2))

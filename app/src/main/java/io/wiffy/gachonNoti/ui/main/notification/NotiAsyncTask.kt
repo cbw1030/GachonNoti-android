@@ -4,13 +4,11 @@ import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.MainContract
 import org.jsoup.Jsoup
-import java.lang.StringBuilder
 import java.net.URL
 
 
-class NotiAsyncTask(private val list: ParseList, private val mPresenter: MainContract.PresenterNotification) :
+class NotiAsyncTask(private val list: ParseList, private val mPresenter: NotificationPresenter) :
     AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {

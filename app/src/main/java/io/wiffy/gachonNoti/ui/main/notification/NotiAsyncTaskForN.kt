@@ -10,7 +10,7 @@ import java.lang.StringBuilder
 import java.net.URL
 
 
-class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: MainContract.PresenterNotification) :
+class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: NotificationPresenter) :
     AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {

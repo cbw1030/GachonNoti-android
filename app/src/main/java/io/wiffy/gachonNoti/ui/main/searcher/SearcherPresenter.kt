@@ -6,7 +6,6 @@ import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.Util.Companion.classToTime
-import io.wiffy.gachonNoti.ui.main.MainContract
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader
@@ -17,7 +16,7 @@ import java.util.*
 import kotlin.Comparator
 
 
-class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : MainContract.PresenterSearcher {
+class SearcherPresenter(private val mView: SearchContract.View) : SearchContract.Presenter {
 
     private var loadcnt = 0
     private var errorCnt = 0
@@ -27,13 +26,13 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
     lateinit var load1: String
     lateinit var load2: String
     lateinit var load3: String
-    lateinit var mView2: MainContract.PresenterSearchDialog
+    lateinit var mView2: SearchContract.DialogPresenter
 
     override fun initPresent() {
         mView.initUI()
     }
 
-    override fun initPresentDialog(tmp: MainContract.PresenterSearchDialog) {
+    override fun initPresentDialog(tmp: SearchContract.DialogPresenter) {
         mView2 = tmp
     }
 
@@ -209,7 +208,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
         array2.add(TimeTableData("목", tablearr[3]))
         array2.add(TimeTableData("금", tablearr[4]))
 
-        mView.setTimeTable(array2,str)
+        mView.setTimeTable(array2, str)
         mView.dismissLoad()
     }
 
@@ -229,12 +228,24 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
 
     private fun numToday(num: Int): String {
         return when (num) {
-            0 -> { "월" }
-            1 -> { "화" }
-            2 -> { "수" }
-            3 -> { "목" }
-            4 -> { "금" }
-            else -> { "토" }
+            0 -> {
+                "월"
+            }
+            1 -> {
+                "화"
+            }
+            2 -> {
+                "수"
+            }
+            3 -> {
+                "목"
+            }
+            4 -> {
+                "금"
+            }
+            else -> {
+                "토"
+            }
         }
     }
 
@@ -267,17 +278,28 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                     val time = classInformation.time.split(",")
                     val data = Array(5) { "" }
                     for (t in time) {
-                        if (t.contains("월")) { data[0] = "${data[0]},$t" }
-                        if (t.contains("화")) { data[1] = "${data[1]},$t" }
-                        if (t.contains("수")) { data[2] = "${data[2]},$t" }
-                        if (t.contains("목")) { data[3] = "${data[3]},$t" }
-                        if (t.contains("금")) { data[4] = "${data[4]},$t" }
+                        if (t.contains("월")) {
+                            data[0] = "${data[0]},$t"
+                        }
+                        if (t.contains("화")) {
+                            data[1] = "${data[1]},$t"
+                        }
+                        if (t.contains("수")) {
+                            data[2] = "${data[2]},$t"
+                        }
+                        if (t.contains("목")) {
+                            data[3] = "${data[3]},$t"
+                        }
+                        if (t.contains("금")) {
+                            data[4] = "${data[4]},$t"
+                        }
                     }
                     for (i in 0..4) {
                         if (data[i].contains(",")) {
                             val scom = data[i].replace(" ", "").split(",")
                             if ((cntroom && tempRoom.contains(roomNMD)) ||
-                                (!cntroom && tempRoom2.contains(roomNMD))){
+                                (!cntroom && tempRoom2.contains(roomNMD))
+                            ) {
                                 insertTime(
                                     classInformation,
                                     i,
@@ -285,7 +307,7 @@ class SearcherPresenter(private val mView: MainContract.FragmentSearcher) : Main
                                     classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
                                 )
                             }
-                            if (cntroom){
+                            if (cntroom) {
                                 cntroom = false
                             }
                         }

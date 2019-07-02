@@ -1,8 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-import io.wiffy.gachonNoti.ui.main.MainContract
 
-class NotificationPresenter(private val mView:MainContract.FragmentNotification):MainContract.PresenterNotification {
+class NotificationPresenter(private val mView: NotificationContract.View) : NotificationContract.Presenter {
 
     private var list = ParseList()
     private var isloading = true
@@ -13,8 +12,8 @@ class NotificationPresenter(private val mView:MainContract.FragmentNotification)
         NotiAsyncTaskForN(list, this).execute()
     }
 
-    override fun load(){
-        if(!isloading){
+    override fun load() {
+        if (!isloading) {
             request()
         }
     }
@@ -28,21 +27,21 @@ class NotificationPresenter(private val mView:MainContract.FragmentNotification)
         mView.changeUI(list)
     }
 
-    override fun update(data: ParseList){
+    override fun update(data: ParseList) {
         isloading = false
         list = data
         mView.updateUI(list)
     }
 
-    override fun show(){
+    override fun show() {
         mView.showLoad()
     }
 
-    override fun dismiss(){
+    override fun dismiss() {
         mView.dismissLoad()
     }
 
-    override fun request(){
+    override fun request() {
         isloading = true
         NotiAsyncTask(list, this).execute()
     }

@@ -17,11 +17,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import io.wiffy.gachonNoti.ui.main.MainContract
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 
 
-class SettingFragment : Fragment(), MainContract.FragmentSetting {
+class SettingFragment : Fragment(), SettingContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -17,7 +17,7 @@ import io.wiffy.gachonNoti.model.Util
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SearcherFragment : Fragment(), MainContract.FragmentSearcher {
+class SearcherFragment : Fragment(), SearchContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
     var builder: SearchDialog? = null
