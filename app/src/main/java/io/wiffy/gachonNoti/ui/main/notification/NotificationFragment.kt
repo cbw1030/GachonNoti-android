@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 
 class NotificationFragment : Fragment(), NotificationContract.View{
+    override fun internetUnuseabled() {
+
+    }
 
     lateinit var myView: View
     var mPresenter: NotificationPresenter? = null

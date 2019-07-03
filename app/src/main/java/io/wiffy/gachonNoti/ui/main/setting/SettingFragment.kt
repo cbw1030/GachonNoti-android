@@ -92,12 +92,28 @@ class SettingFragment : Fragment(), SettingContract.View {
         }
         myView.maker.setOnClickListener {
             Util.novisible = true
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/wiffy-io")))
+            //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/wiffy-io")))
+            val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+            builder.setTitle("만든이")
+            builder.setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")
+            builder.setPositiveButton(
+                "OK"
+            ) { _, _ -> }
+            builder.show()
         }
         myView.source.setOnClickListener {
             val builder = AlertDialog.Builder(activity, R.style.light_dialog)
             builder.setTitle(resources.getString(R.string.source))
-            builder.setMessage(resources.getString(R.string.open))
+            builder.setMessage("Lottie\n" +
+                    "com.airbnb.android:lottie:3.0.2\n\n" +
+                    "TimeTable\n" +
+                    "com.github.EunsilJo:TimeTable:1.0\n\n" +
+                    "Jsoup\n" +
+                    "org.jsoup:jsoup:1.11.3\n\n" +
+                    "Library\n" +
+                    "com.wang.avi:library:2.1.3\n\n" +
+                    "Circleimageview\n" +
+                    "de.hdodenhof:circleimageview:3.0.0")
             builder.setPositiveButton(
                 "OK"
             ) { _, _ -> }
