@@ -131,8 +131,8 @@ class SearchDialog(
         myDialog.show()
         lp.copyFrom(myDialog.window?.attributes)
         // Dialog 크기설정은 여기서한다.
-        lp.width = 660
-        lp.height = 880
+        lp.width = 770
+        lp.height = 1200
         //
         myDialog.window?.attributes = lp
     }

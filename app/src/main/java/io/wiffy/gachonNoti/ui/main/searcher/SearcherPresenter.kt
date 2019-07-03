@@ -1,5 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
@@ -67,29 +69,29 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun isDownloaded(year: String, semester: String) {
-        load1 = Util.sharedPreferences.getString(
-            "$year-$semester-1", "<nodata>"
-        ) ?: "<nodata>"
-        load2 = Util.sharedPreferences.getString(
-            "$year-$semester-2", "<nodata>"
-        ) ?: "<nodata>"
-        load3 = Util.sharedPreferences.getString(
-            "$year-$semester-3", "<nodata>"
-        ) ?: "<nodata>"
-        if (!load1.contains("<nodata>") &&
-            !load2.contains("<nodata>") &&
-            !load3.contains("<nodata>")
-        ) {
-            mView2.showBtn(false)
-            findBuilding = ArrayList()
-            findBuildingXML(load1)
-            findBuildingXML(load2)
-            findBuildingXML(load3)
-            findBuilding.sort()
-            mView2.setSpinner(findBuilding)
-        } else {
-            mView2.showBtn(true)
-        }
+            load1 = Util.sharedPreferences.getString(
+                "$year-$semester-1", "<nodata>"
+            ) ?: "<nodata>"
+            load2 = Util.sharedPreferences.getString(
+                "$year-$semester-2", "<nodata>"
+            ) ?: "<nodata>"
+            load3 = Util.sharedPreferences.getString(
+                "$year-$semester-3", "<nodata>"
+            ) ?: "<nodata>"
+            if (!load1.contains("<nodata>") &&
+                !load2.contains("<nodata>") &&
+                !load3.contains("<nodata>")
+            ) {
+                mView2.showBtn(false)
+                findBuilding = ArrayList()
+                findBuildingXML(load1)
+                findBuildingXML(load2)
+                findBuildingXML(load3)
+                findBuilding.sort()
+                mView2.setSpinner(findBuilding)
+            } else {
+                mView2.showBtn(true)
+            }
     }
 
     private fun findBuildingXML(data: String) {

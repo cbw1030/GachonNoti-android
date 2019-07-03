@@ -30,7 +30,7 @@ import android.view.WindowManager
 class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var mPresenter: MainPresenter
     lateinit var adapter: PagerAdapter
-    lateinit var builder: Dialog
+    var builder: Dialog? = null
     var backKeyPressedTime: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +43,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         //supportActionBar?.hide()
         mPresenter = MainPresenter(this)
-        builder = Dialog(this@MainActivity)
-        builder.setContentView(R.layout.builder)
-        builder.setCancelable(false)
-        builder.setCanceledOnTouchOutside(false)
-        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
         mPresenter.initPresent()
     }
 
@@ -110,8 +105,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     override fun builderUp() {
-        Handler(Looper.getMainLooper()).post {
-            builder.show()
+        if (builder == null) {
+            builder = Dialog(this@MainActivity)
+            builder?.setContentView(R.layout.builder)
+            builder?.setCancelable(false)
+            builder?.setCanceledOnTouchOutside(false)
+            builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            Handler(Looper.getMainLooper()).post {
+                builder?.show()
+            }
         }
     }
 
@@ -123,7 +126,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun builderDismiss() {
         Handler(Looper.getMainLooper()).post {
-            builder.dismiss()
+            builder?.dismiss()
+            builder = null
             notiCheck()
         }
     }

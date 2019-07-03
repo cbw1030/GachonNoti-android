@@ -23,11 +23,16 @@ class ContactAsyncTask(private val myView: SettingContract.View, private val que
             for (n in 1 until rows.size) {
                 try {
                     Log.d("asdf", rows[n].select("td")[2].text())
+                    val tel = rows[n].select("td")[3].text()
+
                     myList.add(
                         ContactInformation(
                             rows[n].select("td")[0].text(),
                             rows[n].select("td")[2].text(),
-                            rows[n].select("td")[3].text()
+                            when (tel.length) {
+                                10 -> "${tel.substring(0,3)}-${tel.substring(3,6)}-${tel.substring(6)}"
+                                else -> tel
+                            }
                         )
                     )
                 } catch (e: Exception) {

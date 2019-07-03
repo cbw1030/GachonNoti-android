@@ -1,7 +1,10 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +32,14 @@ class SearcherFragment : Fragment(), SearchContract.View {
         return myView
     }
 
-
     override fun initUI() {
         myView.fab.setOnClickListener {
+            showLoad()
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
+            Handler(Looper.getMainLooper()).post {
+                dismissLoad()
+            }
         }
         themeChanger()
         setTimeTable(null, "")

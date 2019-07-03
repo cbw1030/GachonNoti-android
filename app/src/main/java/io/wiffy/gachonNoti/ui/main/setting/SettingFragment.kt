@@ -170,8 +170,18 @@ class SettingFragment : Fragment(), SettingContract.View {
         Handler(Looper.getMainLooper()).post {
             if (builderIn != null) {
                 builderIn?.dismiss()
-                val myBuilder = ContactListDialog(activity!!,list)
-                myBuilder.show()
+                if (list.isNotEmpty()) {
+                    val myBuilder = ContactListDialog(activity!!, list)
+                    myBuilder.show()
+                }else{
+                    val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+                    builder.setTitle("")
+                    builder.setMessage("목록이 없습니다.")
+                    builder.setPositiveButton(
+                        "OK"
+                    ) { _, _ -> }
+                    builder.show()
+                }
             }
         }
     }
