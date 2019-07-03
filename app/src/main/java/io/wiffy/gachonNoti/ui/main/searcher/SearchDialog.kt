@@ -25,6 +25,7 @@ class SearchDialog(
     lateinit var yearr: String
     lateinit var semester: String
 
+
     @SuppressLint("ApplySharedPref")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

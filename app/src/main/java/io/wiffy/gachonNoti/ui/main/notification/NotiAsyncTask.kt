@@ -13,7 +13,7 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
-            mPresenter.show()
+            //mPresenter.show()
         }
     }
 

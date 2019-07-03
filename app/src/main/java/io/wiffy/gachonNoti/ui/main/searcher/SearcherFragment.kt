@@ -34,15 +34,8 @@ class SearcherFragment : Fragment(), SearchContract.View {
 
     override fun initUI() {
         myView.fab.setOnClickListener {
-            showLoad()
-//            Thread(Runnable {
-//
-//            }).start()
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
-            Handler(Looper.getMainLooper()).post {
-                dismissLoad()
-            }
         }
         themeChanger()
         setTimeTable(null, "")

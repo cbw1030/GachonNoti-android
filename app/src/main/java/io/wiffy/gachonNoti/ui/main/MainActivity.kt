@@ -105,14 +105,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     override fun builderUp() {
-        if (builder == null) {
+        if (builder == null){
             builder = Dialog(this@MainActivity)
             builder?.setContentView(R.layout.builder)
             builder?.setCancelable(false)
             builder?.setCanceledOnTouchOutside(false)
             builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
-
         Handler(Looper.getMainLooper()).post {
             builder?.show()
         }
@@ -125,11 +124,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun builderDismiss() {
-        Handler(Looper.getMainLooper()).post {
-            builder?.dismiss()
-            //builder = null
-            notiCheck()
+        if (builder != null){
+            Handler(Looper.getMainLooper()).post {
+                builder?.dismiss()
+                notiCheck()
+            }
         }
+
     }
 
     fun themeChange() {
