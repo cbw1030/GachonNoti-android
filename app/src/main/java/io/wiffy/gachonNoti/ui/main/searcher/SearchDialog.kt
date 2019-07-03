@@ -5,6 +5,8 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
@@ -52,6 +54,9 @@ class SearchDialog(
         }
 
         search.setOnClickListener {
+            Handler(Looper.getMainLooper()).post {
+                mView.showLoad()
+            }
             mPresenter.loadRoom(cate.getItemAtPosition(spinnerSelected).toString())
         }
 
@@ -66,6 +71,10 @@ class SearchDialog(
 
         mPresenter.isDownloaded(yearr, semester)
 
+    }
+
+    override fun cate_invi(){
+        cate.visibility = View.INVISIBLE
     }
 
     override fun dismissSelf() {
@@ -109,6 +118,7 @@ class SearchDialog(
     }
 
     override fun setSpinner(arrayList: ArrayList<String>) {
+        cate.visibility = View.VISIBLE
         val arrayAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
         cate.adapter = arrayAdapter
     }

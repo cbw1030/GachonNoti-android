@@ -24,6 +24,7 @@ interface SearchContract {
     }
 
     interface DialogPresenter {
+        fun cate_invi()
         fun getDataDialog(yearSemester: String)
         fun showBtn(c: Boolean)
         fun errorDialog()

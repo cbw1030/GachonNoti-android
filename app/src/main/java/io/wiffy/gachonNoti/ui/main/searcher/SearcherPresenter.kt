@@ -83,12 +83,19 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
                 !load3.contains("<nodata>")
             ) {
                 mView2.showBtn(false)
+                Handler(Looper.getMainLooper()).post {
+                    mView2.cate_invi()
+                }
                 findBuilding = ArrayList()
-                findBuildingXML(load1)
-                findBuildingXML(load2)
-                findBuildingXML(load3)
-                findBuilding.sort()
-                mView2.setSpinner(findBuilding)
+                Thread(Runnable {
+                    findBuildingXML(load1)
+                    findBuildingXML(load2)
+                    findBuildingXML(load3)
+                    findBuilding.sort()
+                    Handler(Looper.getMainLooper()).post {
+                        mView2.setSpinner(findBuilding)
+                    }
+                }).start()
             } else {
                 mView2.showBtn(true)
             }
@@ -135,12 +142,18 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun loadRoom(roomNM: String) {
-        findRoom = ArrayList()
-        findRoomXML(load1, roomNM)
-        findRoomXML(load2, roomNM)
-        findRoomXML(load3, roomNM)
-        findRoom.sort()
-        mView2.setListDialog(findRoom)
+        Thread(Runnable {
+            findRoom = ArrayList()
+            findRoomXML(load1, roomNM)
+            findRoomXML(load2, roomNM)
+            findRoomXML(load3, roomNM)
+            findRoom.sort()
+            Handler(Looper.getMainLooper()).post {
+                mView2.setListDialog(findRoom)
+                mView.dismissLoad()
+            }
+        }).start()
+
     }
 
     private fun findRoomXML(data: String, roomNMD: String) {
@@ -185,33 +198,39 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun loadTable(str: String) {
-        mView.showLoad()
-        tablearr = ArrayList(6)
-        tablearr.add(ArrayList())
-        tablearr.add(ArrayList())
-        tablearr.add(ArrayList())
-        tablearr.add(ArrayList())
-        tablearr.add(ArrayList())
-        tablearr.add(ArrayList())
-        findTable(load1, str)
-        findTable(load2, str)
-        findTable(load3, str)
+        Handler(Looper.getMainLooper()).post {
+            mView.showLoad()
+        }
+        Thread(Runnable {
+            tablearr = ArrayList(6)
+            tablearr.add(ArrayList())
+            tablearr.add(ArrayList())
+            tablearr.add(ArrayList())
+            tablearr.add(ArrayList())
+            tablearr.add(ArrayList())
+            tablearr.add(ArrayList())
+            findTable(load1, str)
+            findTable(load2, str)
+            findTable(load3, str)
 
-        Collections.sort(tablearr[0], TimeCompare())
-        Collections.sort(tablearr[1], TimeCompare())
-        Collections.sort(tablearr[2], TimeCompare())
-        Collections.sort(tablearr[3], TimeCompare())
-        Collections.sort(tablearr[4], TimeCompare())
+            Collections.sort(tablearr[0], TimeCompare())
+            Collections.sort(tablearr[1], TimeCompare())
+            Collections.sort(tablearr[2], TimeCompare())
+            Collections.sort(tablearr[3], TimeCompare())
+            Collections.sort(tablearr[4], TimeCompare())
 
-        val array2 = ArrayList<TimeTableData>()
-        array2.add(TimeTableData("월", tablearr[0]))
-        array2.add(TimeTableData("화", tablearr[1]))
-        array2.add(TimeTableData("수", tablearr[2]))
-        array2.add(TimeTableData("목", tablearr[3]))
-        array2.add(TimeTableData("금", tablearr[4]))
+            val array2 = ArrayList<TimeTableData>()
+            array2.add(TimeTableData("월", tablearr[0]))
+            array2.add(TimeTableData("화", tablearr[1]))
+            array2.add(TimeTableData("수", tablearr[2]))
+            array2.add(TimeTableData("목", tablearr[3]))
+            array2.add(TimeTableData("금", tablearr[4]))
 
-        mView.setTimeTable(array2, str)
-        mView.dismissLoad()
+            Handler(Looper.getMainLooper()).post {
+                mView.setTimeTable(array2, str)
+                mView.dismissLoad()
+            }
+        }).start()
     }
 
 
