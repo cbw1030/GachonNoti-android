@@ -128,14 +128,15 @@ class SearchDialog(
             dismissSelf()
         }
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
-        val myDialog = builder.create()
-        myDialog.show()
-        lp.copyFrom(myDialog.window?.attributes)
-        // Dialog 크기설정은 여기서한다.
-        lp.width = 770
-        lp.height = 1200
-        //
-        myDialog.window?.attributes = lp
+        builder.show()
+//        val myDialog = builder.create()
+//        myDialog.show()
+//        lp.copyFrom(myDialog.window?.attributes)
+//        // Dialog 크기설정은 여기서한다.
+//        lp.width = 770
+//        lp.height = 1200
+//        //
+//        myDialog.window?.attributes = lp
     }
 
 
