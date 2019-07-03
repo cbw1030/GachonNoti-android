@@ -2,6 +2,8 @@ package io.wiffy.gachonNoti.ui.main.notification
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,7 @@ import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 
-class NotificationFragment : Fragment(), NotificationContract.View{
+class NotificationFragment : Fragment(), NotificationContract.View {
 
     lateinit var myView: View
     var mPresenter: NotificationPresenter? = null
@@ -33,6 +35,20 @@ class NotificationFragment : Fragment(), NotificationContract.View{
             mPresenter?.uno()
         }
         return myView
+    }
+
+    override fun internetUnusable() {
+        Handler(Looper.getMainLooper()).post {
+            myView.recylcer.visibility = View.GONE
+            myView.lottieXX.visibility = View.VISIBLE
+        }
+    }
+
+    override fun internetUsable() {
+        Handler(Looper.getMainLooper()).post {
+            myView.recylcer.visibility = View.VISIBLE
+            myView.lottieXX.visibility = View.GONE
+        }
     }
 
     override fun changeUI(list: ParseList) {

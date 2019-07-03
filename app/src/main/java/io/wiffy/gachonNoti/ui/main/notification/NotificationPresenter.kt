@@ -8,8 +8,8 @@ class NotificationPresenter(private val mView: NotificationContract.View) : Noti
 
 
     override fun initPresent() {
-        mView.changeUI(list)
         NotiAsyncTaskForN(list, this).execute()
+        mView.changeUI(list)
     }
 
     override fun load() {
@@ -47,6 +47,10 @@ class NotificationPresenter(private val mView: NotificationContract.View) : Noti
     }
 
     override fun internetInterrupted() {
+        mView.internetUnusable()
+    }
 
+    override fun internetNotInterrupted() {
+        mView.internetUsable()
     }
 }
