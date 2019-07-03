@@ -111,10 +111,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             builder?.setCancelable(false)
             builder?.setCanceledOnTouchOutside(false)
             builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
 
-            Handler(Looper.getMainLooper()).post {
-                builder?.show()
-            }
+        Handler(Looper.getMainLooper()).post {
+            builder?.show()
         }
     }
 
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun builderDismiss() {
         Handler(Looper.getMainLooper()).post {
             builder?.dismiss()
-            builder = null
+            //builder = null
             notiCheck()
         }
     }
