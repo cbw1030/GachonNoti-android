@@ -15,7 +15,7 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Not
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
-            //mPresenter.show()
+            mPresenter.show()
         }
     }
 
