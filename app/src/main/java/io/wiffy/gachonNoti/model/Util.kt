@@ -5,12 +5,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.os.Handler
 import androidx.core.content.ContextCompat
 import io.wiffy.gachonNoti.R
 import java.lang.Exception
 import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 
 class Util {
@@ -61,8 +63,8 @@ class Util {
         )[Random().nextInt(8)]
 
         @JvmStatic
-        fun isNetworkConnected(): Boolean = try {
-            !InetAddress.getByName("google.com").equals("")
+        fun isNetworkConnected(context:Context): Boolean = try {
+            (context.getSystemService(Context.CONNECTIVITY_SERVICE)as ConnectivityManager).activeNetworkInfo!=null
         } catch (e: Exception) {
             false
         }

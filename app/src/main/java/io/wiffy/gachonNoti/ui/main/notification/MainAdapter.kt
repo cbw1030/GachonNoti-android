@@ -7,6 +7,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -91,10 +92,16 @@ class MainAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        Util.novisible = true
-                        val myIntent = Intent(act, WebViewActivity::class.java)
-                        myIntent.putExtra("bundle", item)
-                        act.startActivity(myIntent)
+                        if (Util.isNetworkConnected(act)) {
+                            Util.novisible = true
+                            val myIntent = Intent(act, WebViewActivity::class.java)
+                            myIntent.putExtra("bundle", item)
+                            act.startActivity(myIntent)
+                        } else {
+                            Toast.makeText(act, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                        }
+
+
                     }
                     itemView.setOnLongClickListener {
                         (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =

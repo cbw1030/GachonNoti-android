@@ -1,15 +1,17 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import android.content.Context
 
-class NotificationPresenter(private val mView: NotificationContract.View) : NotificationContract.Presenter {
+class NotificationPresenter(private val mView: NotificationContract.View, private val context: Context?) :
+    NotificationContract.Presenter {
 
     private var list = ParseList()
     private var isloading = true
 
 
     override fun initPresent() {
-        NotiAsyncTaskForN(list, this).execute()
         mView.changeUI(list)
+        NotiAsyncTaskForN(list, this, context).execute()
     }
 
     override fun load() {
@@ -20,7 +22,7 @@ class NotificationPresenter(private val mView: NotificationContract.View) : Noti
 
     override fun resetList() {
         list.clear()
-        NotiAsyncTaskForN(list, this).execute()
+        NotiAsyncTaskForN(list, this, context).execute()
     }
 
     override fun uno() {

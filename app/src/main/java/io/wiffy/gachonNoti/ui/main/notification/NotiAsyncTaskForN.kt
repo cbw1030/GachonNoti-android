@@ -1,16 +1,22 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.MainContract
 import org.jsoup.Jsoup
 import java.lang.StringBuilder
 import java.net.URL
 
-
-class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: NotificationPresenter) :
+@SuppressLint("StaticFieldLeak")
+class NotiAsyncTaskForN(
+    private val list: ParseList,
+    private val mPresenter: NotificationPresenter,
+    private val context: Context?
+) :
     AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {
@@ -20,7 +26,8 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Not
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!Util.isNetworkConnected()) return -1
+        if (!Util.isNetworkConnected(context!!)) return -1
+
         val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}${Util.seek}${Util.mobileURL3}"
         val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
         for (n in conn) {
@@ -71,6 +78,7 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Not
                 Util.index = 0
                 mPresenter.request()
             } else {
+                mPresenter.dismiss()
                 mPresenter.internetInterrupted()
             }
         }

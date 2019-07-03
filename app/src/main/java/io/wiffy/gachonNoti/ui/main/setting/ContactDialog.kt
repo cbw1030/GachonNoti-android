@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_contact.*
 
 class ContactDialog(context: Context, private val mView: SettingContract.View) : Dialog(context) {
@@ -30,16 +32,20 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
             }
         }
         search2.setOnClickListener {
-            val text = editor1.text.toString()
-            if (text.isNotBlank()) {
-                val query =
-                    when (spinnerSelected) {
-                        1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
+            if (Util.isNetworkConnected(context)) {
+                val text = editor1.text.toString()
+                if (text.isNotBlank()) {
+                    val query =
+                        when (spinnerSelected) {
+                            1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
 
-                        else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
-                    }
-                mView.executeTask(query)
-                dismiss()
+                            else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
+                        }
+                    mView.executeTask(query)
+                    dismiss()
+                }
+            } else {
+                Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -28,11 +28,16 @@ class NotificationFragment : Fragment(), NotificationContract.View {
             myView.swipe.isRefreshing = false
         }
         if (mPresenter == null) {
-            mPresenter = NotificationPresenter(this)
+            mPresenter = NotificationPresenter(this, context)
             mPresenter?.initPresent()
         } else {
-            changeTheme()
-            mPresenter?.uno()
+            if (Util.isNetworkConnected(activity!!)) {
+                internetUsable()
+                changeTheme()
+                mPresenter?.uno()
+            } else {
+                internetUnusable()
+            }
         }
         return myView
     }
