@@ -46,4 +46,7 @@ class NotificationPresenter(private val mView: NotificationContract.View) : Noti
         NotiAsyncTask(list, this).execute()
     }
 
+    override fun internetInterrupted() {
+
+    }
 }

@@ -2,9 +2,13 @@ package io.wiffy.gachonNoti.model
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
+import androidx.core.content.ContextCompat
 import io.wiffy.gachonNoti.R
 import java.lang.Exception
+import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -56,6 +60,12 @@ class Util {
             R.color.ran8
         )[Random().nextInt(8)]
 
+        @JvmStatic
+        fun isNetworkConnected(): Boolean = try {
+            !InetAddress.getByName("google.com").equals("")
+        } catch (e: Exception) {
+            false
+        }
 
 
         @SuppressLint("SimpleDateFormat")
