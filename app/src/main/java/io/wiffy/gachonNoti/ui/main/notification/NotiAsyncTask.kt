@@ -18,6 +18,8 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
     }
 
     override fun doInBackground(vararg params: Void?): Int {
+        if(!Util.isNetworkConnected())return -1
+
         val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}${Util.seek}${Util.mobileURL3}"
         val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
         for (n in conn) {
@@ -59,8 +61,12 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
             mPresenter.dismiss()
-            mPresenter.update(list)
-            Util.index += 1
+            if (result == 0) {
+                mPresenter.update(list)
+                Util.index += 1
+            } else {
+                mPresenter.internetInterrupted()
+            }
         }
     }
 }

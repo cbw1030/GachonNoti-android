@@ -6,9 +6,11 @@ interface NotificationContract {
         fun updateUI(list: ParseList)
         fun showLoad()
         fun dismissLoad()
+        fun internetUnuseabled()
     }
 
     interface Presenter {
+        fun internetInterrupted()
         fun resetList()
         fun uno()
         fun initPresent()
