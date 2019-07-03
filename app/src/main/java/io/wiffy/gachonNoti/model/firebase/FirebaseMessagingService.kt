@@ -19,8 +19,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
 
     override fun onMessageReceived(p0: RemoteMessage?) {
-        if(p0?.notification !=null)
-        {
+        if (p0?.notification != null) {
             sendNotification(p0)
         }
     }
@@ -32,8 +31,8 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
 
     private fun sendNotification(p0: RemoteMessage) {
-        val title = p0.notification?.title?:getString(R.string.app_name)
-        val message = p0.notification?.body?:""
+        val title = p0.notification?.title ?: getString(R.string.app_name)
+        val message = p0.notification?.body ?: ""
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
                 val notificationBuilder = NotificationCompat.Builder(this, getString(R.string.channel))

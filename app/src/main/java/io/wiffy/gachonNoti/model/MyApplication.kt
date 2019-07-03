@@ -24,7 +24,7 @@ class MyApplication : Application() {
         ) ?: "default"
 
         Util.seek = Util.sharedPreferences.getInt(
-            "seek", 10
+            "seek", 20
         )
     }
 }

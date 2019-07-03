@@ -3,7 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
     <color name="WHITE">#FFFFFF</color>
     <color name="BLACK">#000000</color>
     <color name="gray">#33ffffff</color>
@@ -29,7 +28,6 @@
     <color name="main2LightBlue">#A9C1EC</color>
     <color name="main2DeepBlue">#2F5AA8</color>
     <color name="notiBackground">#FEF6E3</color>
-
     <color name="ran1">#EF8676</color>
     <color name="ran2">#ECC269</color>
     <color name="ran3">#A7C96F</color>
@@ -38,5 +36,4 @@
     <color name="ran6">#FBAA67</color>
     <color name="ran7">#9E86E1</color>
     <color name="ran8">#76CA88</color>
-
 </resources>

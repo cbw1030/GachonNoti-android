@@ -10,7 +10,8 @@ import java.lang.StringBuilder
 import java.net.URL
 
 
-class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: MainContract.PresenterNotification) : AsyncTask<Void, Void, Int>() {
+class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: NotificationPresenter) :
+    AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -31,17 +32,19 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
                         x.substring(v.length + 2),
                         n.select("span.data").text(),
                         true,
-                        when{
-                            n.html().contains("icon_new.gif")->{
+                        when {
+                            n.html().contains("icon_new.gif") -> {
                                 true
-                            }else ->{
+                            }
+                            else -> {
                                 false
                             }
                         },
-                        when{
-                            n.html().contains("icon_file.gif")->{
+                        when {
+                            n.html().contains("icon_file.gif") -> {
                                 true
-                            }else ->{
+                            }
+                            else -> {
                                 false
                             }
                         },
@@ -51,7 +54,7 @@ class NotiAsyncTaskForN(private val list: ParseList, private val mPresenter: Mai
             }
         }
         val help = URL("http://wiffy.io/gachon/thanks.txt").readText().split(",")
-        val newString= StringBuilder()
+        val newString = StringBuilder()
         for (k in help) {
             newString.append("$k\n")
         }

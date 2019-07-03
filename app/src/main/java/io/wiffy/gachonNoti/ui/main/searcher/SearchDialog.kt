@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.ui.main.MainContract
 import kotlinx.android.synthetic.main.dialog_search.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -18,9 +17,9 @@ import kotlin.collections.ArrayList
 
 class SearchDialog(
     context: Context,
-    private val mView: MainContract.FragmentSearcher,
-    private val mPresenter: MainContract.PresenterSearcher
-) : Dialog(context), MainContract.PresenterSearchDialog {
+    private val mView: SearchContract.View,
+    private val mPresenter: SearcherPresenter
+) : Dialog(context), SearchContract.DialogPresenter {
 
     var spinnerSelected = 0
     lateinit var yearr: String
@@ -38,11 +37,11 @@ class SearchDialog(
         year.text = when {
             month <= 7 -> {
                 semester = "1"
-                "$yearr 1학기"
+                "${yearr}년도 1학기"
             }
             else -> {
                 semester = "2"
-                "$yearr 2학기"
+                "${yearr}년도 2학기"
             }
         }
 
@@ -113,21 +112,29 @@ class SearchDialog(
         cate.adapter = arrayAdapter
     }
 
+
     override fun setListDialog(arrayList: ArrayList<String>) {
         val builder = AlertDialog.Builder(context)
-        val adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1)
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
+        val lp = WindowManager.LayoutParams()
         for (x in arrayList) {
             adapter.add(x)
         }
         builder.setTitle("이용가능한 강의실")
-        builder.setAdapter(adapter, DialogInterface.OnClickListener { _, which ->
+        builder.setAdapter(adapter) { _, which ->
             val strName = adapter.getItem(which)!!
             mPresenter.loadTable(strName.replace(" ", ""))
             dismissSelf()
-        })
+        }
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
-        builder.show()
-
+        val myDialog = builder.create()
+        myDialog.show()
+        lp.copyFrom(myDialog.window?.attributes)
+        // Dialog 크기설정은 여기서한다.
+        lp.width = 770
+        lp.height = 1200
+        //
+        myDialog.window?.attributes = lp
     }
 
 

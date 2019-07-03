@@ -2,14 +2,19 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
@@ -17,13 +22,14 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import io.wiffy.gachonNoti.ui.main.MainContract
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 
 
-class SettingFragment : Fragment(), MainContract.FragmentSetting {
+class SettingFragment : Fragment(), SettingContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
+    var builderIn: Dialog? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
         mPresenter = SettingPresenter(this)
@@ -115,8 +121,15 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
             ) { _, _ -> }
             builder.show()
         }
+        myView.calling.setOnClickListener {
+            val builder = ContactDialog(context!!, this)
+            builder.show()
+        }
 
+    }
 
+    override fun executeTask(query: String) {
+        ContactAsyncTask(this, query).execute()
     }
 
     fun themeChanger() {
@@ -139,6 +152,38 @@ class SettingFragment : Fragment(), MainContract.FragmentSetting {
 
         myView.notiSwitch.thumbTintList = ColorStateList(themeColorArray, color)
         myView.notiSwitch.trackTintList = ColorStateList(themeColorArray, lightColor)
+    }
+
+    override fun builderUp() {
+        Handler(Looper.getMainLooper()).post {
+            builderIn = null
+            builderIn = Dialog(activity!!)
+            builderIn?.setContentView(R.layout.builder)
+            builderIn?.setCancelable(false)
+            builderIn?.setCanceledOnTouchOutside(false)
+            builderIn?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            builderIn?.show()
+        }
+    }
+
+    override fun builderDismissAndContactUp(list: ArrayList<ContactInformation>) {
+        Handler(Looper.getMainLooper()).post {
+            if (builderIn != null) {
+                builderIn?.dismiss()
+                if (list.isNotEmpty()) {
+                    val myBuilder = ContactListDialog(activity!!, list)
+                    myBuilder.show()
+                }else{
+                    val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+                    builder.setTitle("")
+                    builder.setMessage("목록이 없습니다.")
+                    builder.setPositiveButton(
+                        "OK"
+                    ) { _, _ -> }
+                    builder.show()
+                }
+            }
+        }
     }
 
     @SuppressLint("ApplySharedPref")

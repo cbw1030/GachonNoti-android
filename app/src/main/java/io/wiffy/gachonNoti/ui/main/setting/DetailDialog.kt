@@ -117,7 +117,7 @@ class DetailDialog(context: Context) : Dialog(context) {
             2 -> "green"
             else -> "default"
         }
-        Util.sharedPreferences.edit().putInt("seek",Util.seek).commit()
+        Util.sharedPreferences.edit().putInt("seek", Util.seek).commit()
         Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
     }
 }

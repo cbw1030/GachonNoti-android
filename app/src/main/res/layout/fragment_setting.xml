@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:background="@color/table_out"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/table_out"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ScrollView
             android:layout_width="match_parent"
@@ -53,7 +54,9 @@
                             android:layout_height="wrap_content"/>
                 </RelativeLayout>
             </TableRow>
-            <TableRow><View android:layout_height="1dp" android:layout_width="match_parent"/></TableRow>
+            <TableRow>
+                <View android:layout_height="1dp" android:layout_width="match_parent"/>
+            </TableRow>
             <TableRow>
                 <RelativeLayout
                         android:id="@+id/detailSetting"
@@ -74,7 +77,10 @@
 
                 </RelativeLayout>
             </TableRow>
-            <TableRow><View android:layout_height="1dp" android:layout_width="match_parent"/></TableRow>
+            <TableRow>
+                <View android:layout_height="1dp" android:layout_width="match_parent"/>
+            </TableRow>
+
             <TableRow>
                 <RelativeLayout
                         android:id="@+id/money"
@@ -119,6 +125,29 @@
                     />
                 </RelativeLayout>
             </TableRow>
+            <TableRow>
+                <RelativeLayout
+                        android:id="@+id/calling"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/setting_button"
+                >
+                    <TextView
+                            android:layout_alignParentStart="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="@string/calling"
+                            android:textColor="@color/BLACK"
+                            android:layout_marginStart="15dp"
+                    />
+
+                </RelativeLayout>
+            </TableRow>
+            <TableRow>
+                <View android:layout_height="1dp" android:layout_width="match_parent"/>
+            </TableRow>
 
             <TableRow>
                 <RelativeLayout
@@ -140,7 +169,10 @@
 
                 </RelativeLayout>
             </TableRow>
-            <TableRow><View android:layout_height="1dp" android:layout_width="match_parent"/></TableRow>
+            <TableRow>
+                <View android:layout_height="1dp"
+                      android:layout_width="match_parent"/>
+            </TableRow>
             <TableRow>
                 <RelativeLayout
                         android:id="@+id/source"
@@ -161,7 +193,9 @@
 
                 </RelativeLayout>
             </TableRow>
-            <TableRow><View android:layout_height="1dp" android:layout_width="match_parent"/></TableRow>
+            <TableRow>
+                <View android:layout_height="1dp" android:layout_width="match_parent"/>
+            </TableRow>
             <TableRow>
                 <RelativeLayout
                         android:id="@+id/helper"
@@ -182,7 +216,10 @@
 
                 </RelativeLayout>
             </TableRow>
-            <TableRow><View android:layout_height="1dp" android:layout_width="match_parent"/></TableRow>
+            <TableRow>
+                <View android:layout_height="1dp"
+                      android:layout_width="match_parent"/>
+            </TableRow>
             <TableRow>
                 <RelativeLayout
                         android:id="@+id/version"

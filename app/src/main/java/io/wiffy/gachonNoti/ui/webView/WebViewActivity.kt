@@ -22,7 +22,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     lateinit var mPresenter: WebViewPresenter
     lateinit var builder: Dialog
-    lateinit var bundle:Parse
+    lateinit var bundle: Parse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,8 +125,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         return true
     }
 
-    private fun goPage()
-    {
+    private fun goPage() {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bundle.link)))
     }
 

@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.MainContract
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
@@ -19,7 +18,7 @@ class SearchAsyncTask(
     private val data: String,
     private val cate: String,
     private val yearSemester: String,
-    private val mPresenter: MainContract.PresenterSearcher
+    private val mPresenter: SearchContract.Presenter
 ) :
     AsyncTask<Void, Void, Int>() {
 

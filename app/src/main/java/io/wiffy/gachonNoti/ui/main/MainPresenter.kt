@@ -14,7 +14,7 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
     override fun initPresent() {
         val notificationFragment = NotificationFragment()
         val searcherFragment = SearcherFragment()
-        val settingFragment=SettingFragment()
+        val settingFragment = SettingFragment()
         mList.add(notificationFragment)
         mList.add(searcherFragment)
         mList.add(settingFragment)
@@ -23,5 +23,6 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
 
     override fun changeThemes() {
         (mList[Util.STATE_SETTING] as SettingFragment).themeChanger()
+        (mList[Util.STATE_SEARCHER] as SearcherFragment).themeChanger()
     }
 }

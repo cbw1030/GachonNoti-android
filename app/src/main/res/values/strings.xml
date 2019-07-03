@@ -18,12 +18,14 @@
     <string name="details">자세한 설정</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
-    <string name="searcher">빈 강의실 찾기</string>
+    <string name="calling">교내 연락처</string>
+    <string name="searcher">강의실 시간표 검색</string>
     <string name="open">https://github.com/jhy/jsoup\n
         https://github.com/81813780/AVLoadingIndicatorView\n
         https://github.com/hdodenhof/CircleImageView\n
         https://github.com/EunsilJo/TimeTable
     </string>
+    <string name="load">오른쪽 하단 검색으로\n강의실 시간표를 불러오세요.</string>
     <string name="theme">테마</string>
     <string name="helper">도움을 주신 분들</string>
     <string name="version">버전</string>

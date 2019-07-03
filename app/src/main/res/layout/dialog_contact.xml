@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-            android:id="@+id/card1"
+            android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="5dp"
@@ -22,47 +22,49 @@
                     android:layout_marginTop="3dp"
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/year"
+                    android:id="@+id/year2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/BLACK"
                     android:textSize="18sp"
-                    android:text="asdad"/>
-
-            <Button
-                    android:text="시간표 가져오기"
-                    android:layout_below="@+id/year"
-                    android:backgroundTint="@color/ran1"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/getdata"
-                    android:visibility="visible"/>
+                    android:text="교내연락처"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
-                    android:layout_width="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:minWidth="20dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cate"
+                    android:id="@+id/cate2"
                     android:visibility="visible"
                     android:dropDownWidth="wrap_content"
-                    android:layout_below="@+id/year"
-                    android:layout_toStartOf="@+id/search"
+                    android:layout_below="@+id/year2"
+                    android:layout_toStartOf="@+id/editor1"
                     android:spinnerMode="dropdown"/>
-
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/year2"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/editor1"
+                    android:layout_width="180dp"
+                    android:maxLength="10"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/search2"
+                    android:hint="입력해주세요."/>
             <Button
                     android:text="검색"
+                    android:layout_centerVertical="true"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/year"
+                    android:layout_below="@+id/year2"
                     android:backgroundTint="@color/ran1"
                     android:textColor="@color/white"
                     android:layout_marginStart="0dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/search"/>
+                    android:id="@+id/search2"/>
 
 
         </RelativeLayout>
