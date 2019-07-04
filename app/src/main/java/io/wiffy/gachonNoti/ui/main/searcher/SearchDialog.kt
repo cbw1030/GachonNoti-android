@@ -39,14 +39,23 @@ class SearchDialog(
 
         yearr = Calendar.getInstance().get(Calendar.YEAR).toString()
         val month = Calendar.getInstance().get(Calendar.MONTH)
-        year.text = when {
-            month <= 7 -> {
+        year.text = when(month) {
+            in 2..5 -> {
                 semester = "1"
                 "${yearr}년도 1학기"
             }
-            else -> {
+            in 6..7->{
+                semester = "3"
+                "${yearr}년도 여름학기"
+            }
+
+           in 8..11 -> {
                 semester = "2"
                 "${yearr}년도 2학기"
+            }
+            else->{
+                semester = "4"
+                "${yearr}년도 겨울학기"
             }
         }
 

@@ -1,16 +1,12 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
 
-import android.app.Dialog
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import io.wiffy.gachonNoti.ui.main.MainContract
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -75,9 +71,11 @@ class SearcherFragment : Fragment(), SearchContract.View {
             }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name
-            myView.semester.text = when {
-                month <= 7 -> "${year}년도 1학기"
-                else -> "${year}년도 2학기"
+            myView.semester.text = when (month) {
+                in 2..5 -> "${year}년도 1학기"
+                in 6..7 -> "${year}년도 여름학기"
+                in 8..11 -> "${year}년도 2학기"
+                else -> "${year}년도 겨울학기"
             }
             themeChanger()
             myView.tables.visibility = View.VISIBLE

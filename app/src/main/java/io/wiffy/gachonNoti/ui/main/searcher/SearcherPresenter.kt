@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -68,37 +69,61 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
     }
 
+    @SuppressLint("ApplySharedPref")
     override fun isDownloaded(year: String, semester: String) {
-            load1 = Util.sharedPreferences.getString(
-                "$year-$semester-1", "<nodata>"
-            ) ?: "<nodata>"
-            load2 = Util.sharedPreferences.getString(
-                "$year-$semester-2", "<nodata>"
-            ) ?: "<nodata>"
-            load3 = Util.sharedPreferences.getString(
-                "$year-$semester-3", "<nodata>"
-            ) ?: "<nodata>"
-            if (!load1.contains("<nodata>") &&
-                !load2.contains("<nodata>") &&
-                !load3.contains("<nodata>")
-            ) {
-                mView2.showBtn(false)
-                Handler(Looper.getMainLooper()).post {
-                    mView2.cate_invi()
+        val underYear: String
+        val underSemester: String
+        when (semester) {
+            "1" -> {
+                underYear = try {
+                    (year.toInt() - 1).toString()
+                } catch (e: Exception) {
+                    "2018"
                 }
-                findBuilding = ArrayList()
-                Thread(Runnable {
-                    findBuildingXML(load1)
-                    findBuildingXML(load2)
-                    findBuildingXML(load3)
-                    findBuilding.sort()
-                    Handler(Looper.getMainLooper()).post {
-                        mView2.setSpinner(findBuilding)
-                    }
-                }).start()
-            } else {
-                mView2.showBtn(true)
+                underSemester = "4"
             }
+            else -> {
+                underYear = year
+                underSemester = (semester.toInt()-1).toString()
+            }
+        }
+        try {
+            Util.sharedPreferences.edit().putString("$underYear-$underSemester-1", "").commit()
+            Util.sharedPreferences.edit().putString("$underYear-$underSemester-2", "").commit()
+            Util.sharedPreferences.edit().putString("$underYear-$underSemester-3", "").commit()
+        } catch (e: Exception) {
+        }
+
+        load1 = Util.sharedPreferences.getString(
+            "$year-$semester-1", "<nodata>"
+        ) ?: "<nodata>"
+        load2 = Util.sharedPreferences.getString(
+            "$year-$semester-2", "<nodata>"
+        ) ?: "<nodata>"
+        load3 = Util.sharedPreferences.getString(
+            "$year-$semester-3", "<nodata>"
+        ) ?: "<nodata>"
+        if (!load1.contains("<nodata>") &&
+            !load2.contains("<nodata>") &&
+            !load3.contains("<nodata>")
+        ) {
+            mView2.showBtn(false)
+            Handler(Looper.getMainLooper()).post {
+                mView2.cate_invi()
+            }
+            findBuilding = ArrayList()
+            Thread(Runnable {
+                findBuildingXML(load1)
+                findBuildingXML(load2)
+                findBuildingXML(load3)
+                findBuilding.sort()
+                Handler(Looper.getMainLooper()).post {
+                    mView2.setSpinner(findBuilding)
+                }
+            }).start()
+        } else {
+            mView2.showBtn(true)
+        }
     }
 
     private fun findBuildingXML(data: String) {
