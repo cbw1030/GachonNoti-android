@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import io.wiffy.gachonNoti.model.Util
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -75,7 +74,6 @@ class SearchAsyncTask(
         }
         return 0
     }
-
 
     @SuppressLint("ApplySharedPref")
     override fun onPostExecute(result: Int?) {

@@ -26,7 +26,6 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                 channelMessage.setShowBadge(false)
                 channelMessage.vibrationPattern = addList()
                 notiChannel.createNotificationChannel(channelMessage)
-
             }
             mView.subscribe()
         }

@@ -147,18 +147,11 @@ class Util {
         const val mobileURL2 = "&pageSize="
         const val mobileURL3 = "&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val appConstantPreferences = "GACHONNOTICE"
-        const val RESULT_SETTING_CHANGED = 123
 
         const val STATE_NOTIFICATION = 0
         const val STATE_SEARCHER = 1
         const val STATE_SETTING = 2
         const val STATE_WEBVIEW = 3
-
-        const val MONDAY = 0
-        const val TUESDAY = 1
-        const val WEDNESDAY = 2
-        const val THURSDAY = 3
-        const val FRIDAY = 4
 
     }
 }

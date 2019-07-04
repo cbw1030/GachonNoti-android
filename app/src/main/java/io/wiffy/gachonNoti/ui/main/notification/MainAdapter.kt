@@ -74,9 +74,7 @@ class MainAdapter(
                     save.visibility =
                         when {
                             item.isSave -> View.VISIBLE
-
                             else -> View.GONE
-
                         }
                     date.text = item.data
 
