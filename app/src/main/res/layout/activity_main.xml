@@ -44,9 +44,7 @@
                 app:tabIndicatorHeight="3dp"
                 android:background="@color/main2Blue"
                 app:tabRippleColor="@color/WHITE"
-                android:layout_height="50dp">
-
-        </com.google.android.material.tabs.TabLayout>
+                android:layout_height="50dp"/>
 
 
         <androidx.viewpager.widget.ViewPager

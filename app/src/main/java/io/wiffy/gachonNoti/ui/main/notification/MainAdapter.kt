@@ -7,7 +7,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -44,12 +43,8 @@ class MainAdapter(
                 Handler(Looper.getMainLooper()).post {
                     itemView.setBackgroundResource(
                         when {
-                            item.isNoti -> {
-                                R.color.notiBackground
-                            }
-                            else -> {
-                                R.color.WHITE
-                            }
+                            item.isNoti -> R.color.notiBackground
+                            else -> R.color.WHITE
                         }
                     )
                     title.text = item.text
@@ -73,21 +68,15 @@ class MainAdapter(
                     )
                     new.visibility =
                         when {
-                            item.isNew -> {
-                                View.VISIBLE
-                            }
-                            else -> {
-                                View.GONE
-                            }
+                            item.isNew -> View.VISIBLE
+                            else -> View.GONE
                         }
                     save.visibility =
                         when {
-                            item.isSave -> {
-                                View.VISIBLE
-                            }
-                            else -> {
-                                View.GONE
-                            }
+                            item.isSave -> View.VISIBLE
+
+                            else -> View.GONE
+
                         }
                     date.text = item.data
 
@@ -100,7 +89,6 @@ class MainAdapter(
                         } else {
                             Toast.makeText(act, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
                         }
-
 
                     }
                     itemView.setOnLongClickListener {

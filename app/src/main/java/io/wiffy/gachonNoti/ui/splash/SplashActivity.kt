@@ -39,7 +39,6 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     override fun changeUI() {
-
         mPresenter.move()
     }
 

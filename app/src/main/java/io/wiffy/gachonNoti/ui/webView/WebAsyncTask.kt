@@ -4,10 +4,7 @@ import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.MainContract
 import org.jsoup.Jsoup
-import java.lang.StringBuilder
 import java.net.URL
 
 
@@ -29,9 +26,7 @@ class WebAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
         val address = when (redirect) {
-            true -> {
-                url
-            }
+            true -> url
             false -> {
                 val newSeq = url.split("boardType_seq=")[1].split("&")[0]
                 val newNo = url.split("board_no=")[1].split("&")[0]

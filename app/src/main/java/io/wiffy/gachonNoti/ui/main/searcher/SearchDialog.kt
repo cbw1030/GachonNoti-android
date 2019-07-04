@@ -39,21 +39,21 @@ class SearchDialog(
 
         yearr = Calendar.getInstance().get(Calendar.YEAR).toString()
         val month = Calendar.getInstance().get(Calendar.MONTH)
-        year.text = when(month) {
+        year.text = when (month) {
             in 2..5 -> {
                 semester = "1"
                 "${yearr}년도 1학기"
             }
-            in 6..7->{
+            in 6..7 -> {
                 semester = "3"
                 "${yearr}년도 여름학기"
             }
 
-           in 8..11 -> {
+            in 8..11 -> {
                 semester = "2"
                 "${yearr}년도 2학기"
             }
-            else->{
+            else -> {
                 semester = "4"
                 "${yearr}년도 겨울학기"
             }
@@ -81,7 +81,6 @@ class SearchDialog(
         }
 
         mPresenter.isDownloaded(yearr, semester)
-
     }
 
     override fun cate_invi() {
@@ -101,8 +100,8 @@ class SearchDialog(
                 mPresenter.getData(yearSemester)
             }
             builder.show()
-        }else{
-            Toast.makeText(context,"인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -138,7 +137,6 @@ class SearchDialog(
         cate.adapter = arrayAdapter
     }
 
-
     override fun setListDialog(arrayList: ArrayList<String>) {
         val builder = AlertDialog.Builder(context)
         val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
@@ -146,7 +144,7 @@ class SearchDialog(
         for (x in arrayList) {
             adapter.add(x)
         }
-        builder.setTitle("이용가능한 강의실")
+        builder.setTitle("강의실 목록")
         builder.setAdapter(adapter) { _, which ->
             val strName = adapter.getItem(which)!!
             mPresenter.loadTable(strName.replace(" ", ""))
@@ -154,14 +152,6 @@ class SearchDialog(
         }
         builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
         builder.show()
-//        val myDialog = builder.create()
-//        myDialog.show()
-//        lp.copyFrom(myDialog.window?.attributes)
-//        // Dialog 크기설정은 여기서한다.
-//        lp.width = 770
-//        lp.height = 1200
-//        //
-//        myDialog.window?.attributes = lp
     }
 
 

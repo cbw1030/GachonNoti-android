@@ -3,19 +3,16 @@ package io.wiffy.gachonNoti.ui.webView
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.Parse
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : AppCompatActivity(), WebViewContract.View {
@@ -78,7 +75,6 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
             webview_layout.invalidate()
             web_splash.invalidate()
         }
-
     }
 
     override fun onAttachedToWindow() {

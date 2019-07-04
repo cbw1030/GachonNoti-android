@@ -21,10 +21,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.activity_main.*
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.view.WindowManager
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -37,11 +33,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
-        //supportActionBar?.hide()
         mPresenter = MainPresenter(this)
         mPresenter.initPresent()
     }
@@ -105,7 +99,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     override fun builderUp() {
-        if (builder == null){
+        if (builder == null) {
             builder = Dialog(this@MainActivity)
             builder?.setContentView(R.layout.builder)
             builder?.setCancelable(false)
@@ -124,7 +118,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun builderDismiss() {
-        if (builder != null){
+        if (builder != null) {
             Handler(Looper.getMainLooper()).post {
                 builder?.dismiss()
                 notiCheck()
@@ -168,11 +162,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
         navigation.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -213,7 +205,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun visible() {
-
         main_main.visibility = View.VISIBLE
         main_splash.visibility = View.GONE
         main_splash.invalidate()
@@ -238,6 +229,5 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         super.onDetachedFromWindow()
     }
-
 
 }

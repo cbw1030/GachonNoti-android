@@ -84,7 +84,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             }
             else -> {
                 underYear = year
-                underSemester = (semester.toInt()-1).toString()
+                underSemester = (semester.toInt() - 1).toString()
             }
         }
         try {
@@ -272,27 +272,13 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         )
     }
 
-    private fun numToday(num: Int): String {
-        return when (num) {
-            0 -> {
-                "월"
-            }
-            1 -> {
-                "화"
-            }
-            2 -> {
-                "수"
-            }
-            3 -> {
-                "목"
-            }
-            4 -> {
-                "금"
-            }
-            else -> {
-                "토"
-            }
-        }
+    private fun numToday(num: Int): String = when (num) {
+        0 -> "월"
+        1 -> "화"
+        2 -> "수"
+        3 -> "목"
+        4 -> "금"
+        else -> "토"
     }
 
     private fun findTable(data: String, roomNMD: String) {

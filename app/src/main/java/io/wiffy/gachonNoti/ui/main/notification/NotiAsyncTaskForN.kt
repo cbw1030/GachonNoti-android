@@ -1,7 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
@@ -41,20 +40,12 @@ class NotiAsyncTaskForN(
                         n.select("span.data").text(),
                         true,
                         when {
-                            n.html().contains("icon_new.gif") -> {
-                                true
-                            }
-                            else -> {
-                                false
-                            }
+                            n.html().contains("icon_new.gif") -> true
+                            else -> false
                         },
                         when {
-                            n.html().contains("icon_file.gif") -> {
-                                true
-                            }
-                            else -> {
-                                false
-                            }
+                            n.html().contains("icon_file.gif") -> true
+                            else -> false
                         },
                         "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                     )
