@@ -15,6 +15,7 @@ interface MainContract {
     interface Presenter {
         fun initPresent()
         fun changeThemes()
+        fun floatingButtonControl():Boolean
     }
 
 }

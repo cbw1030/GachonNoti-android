@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
-        mPresenter = MainPresenter(this,this@MainActivity)
+        mPresenter = MainPresenter(this, this@MainActivity)
         mPresenter.initPresent()
     }
 
@@ -176,6 +177,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (Util.state == Util.STATE_SEARCHER) mPresenter.floatingButtonControl()
                 Util.state = tab?.position ?: Util.STATE_NOTIFICATION
                 pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
             }
@@ -195,6 +197,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         builder.show()
     }
 
+
     override fun onBackPressed() {
         when (Util.state) {
             Util.STATE_NOTIFICATION -> {
@@ -206,8 +209,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 }
             }
             Util.STATE_SEARCHER -> {
-                pager.currentItem = Util.STATE_NOTIFICATION
-                Util.state = Util.STATE_NOTIFICATION
+                if (!mPresenter.floatingButtonControl()) {
+                    pager.currentItem = Util.STATE_NOTIFICATION
+                    Util.state = Util.STATE_NOTIFICATION
+                }
             }
             Util.STATE_SETTING -> {
                 pager.currentItem = Util.STATE_NOTIFICATION

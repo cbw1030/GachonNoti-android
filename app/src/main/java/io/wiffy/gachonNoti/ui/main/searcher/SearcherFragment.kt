@@ -3,9 +3,13 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.eunsiljo.timetablelib.view.TimeTableView
@@ -14,13 +18,16 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SearcherFragment : Fragment(), SearchContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
+    lateinit var fabOpen: Animation
+    lateinit var fabClose: Animation
+
     var builder: SearchDialog? = null
+    var isFABOpen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_searcher, container, false)
@@ -30,12 +37,57 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     override fun initUI() {
+        fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
+        fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
+            floatingButtonControl()
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
+        myView.fab.setOnLongClickListener {
+            anim()
+            true
+        }
+        myView.subFab1.setOnClickListener {
+            Toast.makeText(context, "SUB FLOATING ACTION BUTTON IS CLICKED", Toast.LENGTH_SHORT).show()
+            anim()
+        }
+        myView.superParentOfSearcher.setOnTouchListener { _, _ ->
+            if (isFABOpen) {
+                anim()
+                true
+            } else false
+        }
+        myView.card2.setOnTouchListener { _, _ ->
+            if (isFABOpen) {
+                anim()
+                true
+            } else false
+        }
         themeChanger()
         setTimeTable(null, "")
+    }
+
+    override fun floatingButtonControl() =
+        if (isFABOpen) {
+            Handler(Looper.getMainLooper()).post {
+                anim()
+            }
+            true
+        } else false
+
+
+    private fun anim() {
+        isFABOpen = if (isFABOpen) {
+            myView.subFab1.startAnimation(fabClose)
+            myView.subFab1.visibility = View.GONE
+            false
+        } else {
+            myView.subFab1.startAnimation(fabOpen)
+            myView.subFab1.visibility = View.VISIBLE
+            true
+        }
+
     }
 
     fun themeChanger() {
@@ -44,6 +96,13 @@ class SearcherFragment : Fragment(), SearchContract.View {
                 "red" -> R.color.red
                 "green" -> R.color.green
                 else -> R.color.main2Blue
+            }
+        )
+        myView.subFab1.backgroundTintList = resources.getColorStateList(
+            when (Util.theme) {
+                "red" -> R.color.deepRed
+                "green" -> R.color.deepGreen
+                else -> R.color.main2DeepBlue
             }
         )
         myView.semester.setTextColor(
@@ -71,11 +130,11 @@ class SearcherFragment : Fragment(), SearchContract.View {
             }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name
-            myView.semester.text = "${Util.YEAR}년도 ${when(Util.SEMESTER){
-                1->"1"
-                2->"2"
-                3->"여름"
-                else->"겨울"
+            myView.semester.text = "${Util.YEAR}년도 ${when (Util.SEMESTER) {
+                1 -> "1"
+                2 -> "2"
+                3 -> "여름"
+                else -> "겨울"
             }}학기"
             themeChanger()
             myView.tables.visibility = View.VISIBLE

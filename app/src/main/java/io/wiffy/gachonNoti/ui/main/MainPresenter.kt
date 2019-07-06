@@ -9,7 +9,7 @@ import io.wiffy.gachonNoti.ui.main.searcher.SearcherFragment
 import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 
 
-class MainPresenter(private val mView: MainContract.View,private val context:Activity) : MainContract.Presenter {
+class MainPresenter(private val mView: MainContract.View, private val context: Activity) : MainContract.Presenter {
 
     private val mList = ArrayList<Fragment>()
 
@@ -21,7 +21,7 @@ class MainPresenter(private val mView: MainContract.View,private val context:Act
         mList.add(searcherFragment)
         mList.add(settingFragment)
         mView.changeUI(mList)
-        if(!Util.sharedPreferences.getBoolean(context.resources.getString(R.string.whatVersion),false)) {
+        if (!Util.sharedPreferences.getBoolean(context.resources.getString(R.string.whatVersion), false)) {
             mView.updatedContents()
         }
     }
@@ -30,4 +30,6 @@ class MainPresenter(private val mView: MainContract.View,private val context:Act
         (mList[Util.STATE_SETTING] as SettingFragment).themeChanger()
         (mList[Util.STATE_SEARCHER] as SearcherFragment).themeChanger()
     }
+
+    override fun floatingButtonControl() = (mList[Util.STATE_SEARCHER] as SearcherFragment).floatingButtonControl()
 }

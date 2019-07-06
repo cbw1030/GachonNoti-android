@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
+        android:id="@+id/superParentOfSearcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -50,16 +51,38 @@
                 android:layout_height="match_parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/subFab1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="88dp"
+                    android:layout_marginEnd="19dp"
+                    android:padding="0dp"
+                    app:fabCustomSize="50dp"
+                    app:elevation="6dp"
+                    android:src="@drawable/outline_autorenew_white_24dp"
+                    app:pressedTranslationZ="12dp"
+                    app:maxImageSize="18dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+            />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    app:fabSize="normal"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:src="@drawable/search"
-                    android:layout_gravity="bottom|end"
+                    android:layout_gravity="center"
                     android:layout_margin="15dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"/>
+
 
             <com.github.eunsiljo.timetablelib.view.TimeTableView
                     android:layout_marginTop="-1dp"

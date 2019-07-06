@@ -9,7 +9,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_splash.*
+
 
 class SplashActivity : AppCompatActivity(), SplashContract.View {
 
@@ -23,15 +23,6 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_splash)
-//        logo_text.setTextColor(
-//            resources.getColorStateList(
-//                when (Util.theme) {
-//                    "red" -> R.color.deepRed
-//                    "green" -> R.color.deepGreen
-//                    else -> R.color.main2DeepBlue
-//                }
-//            )
-//        )
         supportActionBar?.hide()
 
         mPresenter = SplashPresenter(this, applicationContext)
