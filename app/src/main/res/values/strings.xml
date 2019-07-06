@@ -25,6 +25,10 @@
     <string name="theme">테마</string>
     <string name="helper">도움을 주신 분들</string>
     <string name="version">버전</string>
-    <string name="whatVersion">1.0.0</string>
+    <string name="whatVersion">1.0.1</string>
     <string name="ssss">설정을 확인해주세요.</string>
+    <string name="update">
+        계절학기 시간표 추가\n
+        다이얼로그 버그수정\n
+    </string>
 </resources>

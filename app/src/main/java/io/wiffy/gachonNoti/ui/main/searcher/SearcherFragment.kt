@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,9 +57,8 @@ class SearcherFragment : Fragment(), SearchContract.View {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String) {
-        val year = Calendar.getInstance().get(Calendar.YEAR).toString()
-        val month = Calendar.getInstance().get(Calendar.MONTH)
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
@@ -71,12 +71,12 @@ class SearcherFragment : Fragment(), SearchContract.View {
             }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name
-            myView.semester.text = when (month) {
-                in 2..5 -> "${year}년도 1학기"
-                in 6..7 -> "${year}년도 여름학기"
-                in 8..11 -> "${year}년도 2학기"
-                else -> "${year}년도 겨울학기"
-            }
+            myView.semester.text = "${Util.YEAR}년도 ${when(Util.SEMESTER){
+                1->"1"
+                2->"2"
+                3->"여름"
+                else->"겨울"
+            }}학기"
             themeChanger()
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE

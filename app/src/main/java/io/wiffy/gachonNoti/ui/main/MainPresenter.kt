@@ -1,13 +1,15 @@
 package io.wiffy.gachonNoti.ui.main
 
+import android.app.Activity
 import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.searcher.SearcherFragment
 import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 
 
-class MainPresenter(private val mView: MainContract.View) : MainContract.Presenter {
+class MainPresenter(private val mView: MainContract.View,private val context:Activity) : MainContract.Presenter {
 
     private val mList = ArrayList<Fragment>()
 
@@ -19,6 +21,9 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
         mList.add(searcherFragment)
         mList.add(settingFragment)
         mView.changeUI(mList)
+        if(!Util.sharedPreferences.getBoolean(context.resources.getString(R.string.whatVersion),false)) {
+            mView.updatedContents()
+        }
     }
 
     override fun changeThemes() {

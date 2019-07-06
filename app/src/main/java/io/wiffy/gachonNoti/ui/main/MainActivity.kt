@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
-        mPresenter = MainPresenter(this)
+        mPresenter = MainPresenter(this,this@MainActivity)
         mPresenter.initPresent()
     }
 
@@ -107,9 +107,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
         Handler(Looper.getMainLooper()).post {
-            try{
+            try {
                 builder?.show()
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
         }
@@ -124,9 +124,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun builderDismiss() {
         if (builder != null) {
             Handler(Looper.getMainLooper()).post {
-                try{
+                try {
                     builder?.dismiss()
-                }catch (e:Exception){
+                } catch (e: Exception) {
 
                 }
                 notiCheck()
@@ -181,6 +181,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
         })
 
+    }
+
+    @SuppressLint("ApplySharedPref")
+    override fun updatedContents() {
+        Util.sharedPreferences.edit().putBoolean(resources.getString(R.string.whatVersion), true).commit()
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("${resources.getString(R.string.whatVersion)} 버전 업데이트")
+        builder.setMessage(resources.getString(R.string.update))
+        builder.setPositiveButton(
+            "OK"
+        ) { _, _ -> }
+        builder.show()
     }
 
     override fun onBackPressed() {

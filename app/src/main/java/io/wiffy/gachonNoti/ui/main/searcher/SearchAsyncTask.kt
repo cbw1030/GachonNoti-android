@@ -22,14 +22,10 @@ class SearchAsyncTask(
     AsyncTask<Void, Void, Int>() {
 
     private var done = ""
-    val mySemester = when (try {
-        yearSemester.split("-")[1]
-    } catch (e: Exception) {
-        "2"
-    }) {
-        "1" -> 10
-        "3" -> 11
-        "4" -> 21
+    private val mySemester = when (Util.SEMESTER) {
+        1 -> 10
+        3 -> 11
+        4 -> 21
         else -> 20
     }
 

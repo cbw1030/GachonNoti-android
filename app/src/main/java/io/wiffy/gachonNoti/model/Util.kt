@@ -18,6 +18,12 @@ class Util {
         lateinit var sharedPreferences: SharedPreferences
 
         @JvmStatic
+        var YEAR = "2019"
+
+        @JvmStatic
+        var SEMESTER = 1
+
+        @JvmStatic
         var seek = 20
 
         @JvmStatic

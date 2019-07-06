@@ -9,6 +9,7 @@ interface MainContract {
         fun builderUp()
         fun builderDismiss()
         fun makeToast(str: String)
+        fun updatedContents()
     }
 
     interface Presenter {

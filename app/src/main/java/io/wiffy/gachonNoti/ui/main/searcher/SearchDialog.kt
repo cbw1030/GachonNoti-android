@@ -26,42 +26,24 @@ class SearchDialog(
 ) : Dialog(context), SearchContract.DialogPresenter {
 
     var spinnerSelected = 0
-    lateinit var yearr: String
-    lateinit var semester: String
 
-
-    @SuppressLint("ApplySharedPref")
+    @SuppressLint("ApplySharedPref", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_search)
 
         mPresenter.initPresentDialog(this)
-
-        yearr = Calendar.getInstance().get(Calendar.YEAR).toString()
-        val month = Calendar.getInstance().get(Calendar.MONTH)
-        year.text = when (month) {
-            in 2..5 -> {
-                semester = "1"
-                "${yearr}년도 1학기"
-            }
-            in 6..7 -> {
-                semester = "3"
-                "${yearr}년도 여름학기"
-            }
-
-            in 8..11 -> {
-                semester = "2"
-                "${yearr}년도 2학기"
-            }
-            else -> {
-                semester = "4"
-                "${yearr}년도 겨울학기"
-            }
+        year.text = "${Util.YEAR}년도 ${when(Util.SEMESTER){
+            1->"1"
+            2->"2"
+            3->"여름"
+            else->"겨울"
         }
+        }학기"
 
 
         getdata.setOnClickListener {
-            getDataDialog("$yearr-$semester")
+            getDataDialog("${Util.YEAR}-${Util.SEMESTER}")
         }
 
         search.setOnClickListener {
@@ -80,7 +62,7 @@ class SearchDialog(
             }
         }
 
-        mPresenter.isDownloaded(yearr, semester)
+        mPresenter.isDownloaded(Util.YEAR, Util.SEMESTER.toString())
     }
 
     override fun cate_invi() {
@@ -128,7 +110,7 @@ class SearchDialog(
     }
 
     override fun requestLoad() {
-        mPresenter.isDownloaded(yearr, semester)
+        mPresenter.isDownloaded(Util.YEAR,Util.SEMESTER.toString())
     }
 
     override fun setSpinner(arrayList: ArrayList<String>) {
