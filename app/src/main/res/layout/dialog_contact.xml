@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/BLACK"
                     android:textSize="20sp"
-                    android:text="교내연락처"/>
+                    android:text="연락처"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
                     android:layout_marginTop="2dp"
@@ -42,6 +42,7 @@
                     android:layout_below="@+id/year2"
                     android:spinnerMode="dropdown"/>
             <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_marginStart="-5dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginEnd="10dp"
                     android:layout_below="@+id/year2"
