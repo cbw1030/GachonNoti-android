@@ -1,8 +1,6 @@
 # GachonNoti-android
 
-<h1>PlayStore</h1>
 <pre><a href="https://itunes.apple.com/us/app/bitmex-ticker/id1450104461?l=ko&ls=1&mt=8">https://itunes.apple.com/us/app/bitmex-ticker/id1450104461?l=ko&ls=1&mt=8</a></pre>
-
 
 Screenshot
 <br>
