@@ -93,7 +93,7 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.maker.setOnClickListener {
             Util.novisible = true
             //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/wiffy-io")))
-            val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+            val builder = AlertDialog.Builder(activity)
             builder.setTitle("만든이")
             builder.setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")
             builder.setPositiveButton(
@@ -102,7 +102,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             builder.show()
         }
         myView.source.setOnClickListener {
-            val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+            val builder = AlertDialog.Builder(activity)
             builder.setTitle(resources.getString(R.string.source))
             builder.setMessage("Lottie\n" +
                     "com.airbnb.android:lottie:3.0.2\n\n" +
@@ -120,7 +120,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             builder.show()
         }
         myView.helper.setOnClickListener {
-            val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+            val builder = AlertDialog.Builder(activity)
             builder.setTitle("후원 목록")
             builder.setMessage(Util.helper)
             builder.setPositiveButton(
@@ -129,7 +129,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             builder.show()
         }
         myView.version.setOnClickListener {
-            val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+            val builder = AlertDialog.Builder(activity)
             builder.setTitle(resources.getString(R.string.version))
             builder.setMessage(resources.getString(R.string.whatVersion))
             builder.setPositiveButton(
@@ -190,7 +190,7 @@ class SettingFragment : Fragment(), SettingContract.View {
                     val myBuilder = ContactListDialog(activity!!, list)
                     myBuilder.show()
                 }else{
-                    val builder = AlertDialog.Builder(activity, R.style.light_dialog)
+                    val builder = AlertDialog.Builder(activity)
                     builder.setTitle("")
                     builder.setMessage("목록이 없습니다.")
                     builder.setPositiveButton(

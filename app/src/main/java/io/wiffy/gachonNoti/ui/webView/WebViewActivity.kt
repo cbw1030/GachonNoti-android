@@ -14,6 +14,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.Parse
 import kotlinx.android.synthetic.main.activity_webview.*
+import java.lang.Exception
 
 class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
@@ -24,13 +25,13 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
+        initBuild()
         bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
         webview_text.text = bundle.text
         window.statusBarColor = resources.getColor(R.color.mainBlue)
         mPresenter = WebViewPresenter(this)
         mPresenter.initPresent(bundle.link)
-        initBuild()
         themeChange()
     }
 
@@ -52,8 +53,12 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun changeUI(javaS: String) {
-        webview.settings?.javaScriptEnabled = true
-        webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
+        try{
+            webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
+            webview.settings?.javaScriptEnabled = true
+        }catch (e:Exception){
+
+        }
     }
 
     override fun onUserLeaveHint() {

@@ -23,15 +23,15 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_splash)
-        logo_text.setTextColor(
-            resources.getColorStateList(
-                when (Util.theme) {
-                    "red" -> R.color.deepRed
-                    "green" -> R.color.deepGreen
-                    else -> R.color.main2DeepBlue
-                }
-            )
-        )
+//        logo_text.setTextColor(
+//            resources.getColorStateList(
+//                when (Util.theme) {
+//                    "red" -> R.color.deepRed
+//                    "green" -> R.color.deepGreen
+//                    else -> R.color.main2DeepBlue
+//                }
+//            )
+//        )
         supportActionBar?.hide()
 
         mPresenter = SplashPresenter(this, applicationContext)

@@ -33,33 +33,40 @@ class WebAsyncTask(
                 "http://www.gachon.ac.kr/community/opencampus/03.jsp?mode=view&boardType_seq=$newSeq&board_no=$newNo"
             }
         }
-        val doc = Jsoup.parseBodyFragment(URL(address).readText())
-        for (div in doc.select("div")) {
-            if (div.hasClass("boardview")) {
-                for (td in div.select("td")) {
-                    if (td.hasClass("td")) {
-                        val tmp = td.html()
-                        if (tmp.contains("첨부")) {
-                            javaS = "$javaS$tmp<hr>"
+
+        try{
+            val doc = Jsoup.parseBodyFragment(URL(address).readText())
+            for (div in doc.select("div")) {
+                if (div.hasClass("boardview")) {
+                    for (td in div.select("td")) {
+                        if (td.hasClass("td")) {
+                            val tmp = td.html()
+                            if (tmp.contains("첨부")) {
+                                javaS = "$javaS$tmp<hr>"
+                            }
                         }
-                    }
-                    if (td.hasClass("text")) {
-                        javaS = "$javaS${td.html()}"
-                        if (javaS.contains("<script>document.location.href=\"")) {
-                            goHref = javaS.split("<script>document.location.href=\"")[1].split("\";</script>")[0]
-                        } else {
-                            javaS = javaS.replace("src=\"/", "src=\"http://www.gachon.ac.kr/")
-                            javaS = javaS.replace("href=\"/", "href=\"http://www.gachon.ac.kr/")
-                            Handler(Looper.getMainLooper()).post {
-                                mPresenter.updateWeb(javaS)
-                                mPresenter.builderDismiss()
+                        if (td.hasClass("text")) {
+                            javaS = "$javaS${td.html()}"
+                            if (javaS.contains("<script>document.location.href=\"")) {
+                                goHref = javaS.split("<script>document.location.href=\"")[1].split("\";</script>")[0]
+                            } else {
+                                javaS = javaS.replace("src=\"/", "src=\"http://www.gachon.ac.kr/")
+                                javaS = javaS.replace("href=\"/", "href=\"http://www.gachon.ac.kr/")
+                                Handler(Looper.getMainLooper()).post {
+                                    mPresenter.updateWeb(javaS)
+                                    mPresenter.builderDismiss()
+                                }
                             }
                         }
                     }
+                    break
                 }
-                break
             }
+        }catch (e:Exception){
+            mPresenter.updateWeb("<p>인터넷 연결을 확인해주세요.</p>")
+            mPresenter.builderDismiss()
         }
+
         return 0
     }
 

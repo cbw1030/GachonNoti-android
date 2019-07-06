@@ -45,7 +45,7 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
 
     override fun request() {
         isloading = true
-        NotiAsyncTask(list, this).execute()
+        NotiAsyncTask(list, this,context).execute()
     }
 
     override fun internetInterrupted() {

@@ -4,6 +4,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/actionmy"
-            android:title="홈페이지"
+            android:title="웹페이지 이동"
             app:showAsAction="always"/>
 </menu>

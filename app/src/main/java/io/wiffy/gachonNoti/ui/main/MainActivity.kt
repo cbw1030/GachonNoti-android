@@ -20,6 +20,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 .areNotificationsEnabled() == false and Util.notifiSet
         ) {
 
-            val builders = AlertDialog.Builder(this, R.style.light_dialog)
+            val builders = AlertDialog.Builder(this)
             builders.setTitle("알림 설정 확인")
             builders.setMessage("가천 알림이의 알림을 허용하시겠습니까?")
             builders.setPositiveButton("OK") { _, _ ->
@@ -106,7 +107,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
         Handler(Looper.getMainLooper()).post {
-            builder?.show()
+            try{
+                builder?.show()
+            }catch (e:Exception){
+
+            }
         }
     }
 
@@ -119,7 +124,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun builderDismiss() {
         if (builder != null) {
             Handler(Looper.getMainLooper()).post {
-                builder?.dismiss()
+                try{
+                    builder?.dismiss()
+                }catch (e:Exception){
+
+                }
                 notiCheck()
             }
         }
