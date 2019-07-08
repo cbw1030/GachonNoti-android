@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card3"
+            android:background="@color/table_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cate3"
+                    android:visibility="visible"
+                    android:dropDownWidth="wrap_content"
+                    android:spinnerMode="dropdown"/>
+
+            <RelativeLayout
+                    android:id="@+id/editor2"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/cate3"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+                <View
+                        android:background="@color/gray2"
+                        android:id="@+id/viewleft"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"/>
+                <View
+                        android:background="@color/gray2"
+                        android:id="@+id/viewright"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"/>
+                <View
+                        android:background="@color/gray2"
+                        android:id="@+id/viewtop"
+                        android:layout_alignParentTop="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                <View
+                        android:background="@color/gray2"
+                        android:id="@+id/viewbottom"
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_toEndOf="@id/viewleft"
+                        android:layout_toStartOf="@+id/viewright"
+                        android:layout_above="@+id/viewbottom"
+                        android:layout_below="@+id/viewtop"
+                        android:id="@+id/editor2_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="입력해주세요."/>
+            </RelativeLayout>
+
+            <Button
+                    android:text="전송"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_below="@+id/editor2"
+                    android:backgroundTint="@color/ran1"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search3"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

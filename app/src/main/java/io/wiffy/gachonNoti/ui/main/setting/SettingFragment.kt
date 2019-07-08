@@ -86,6 +86,10 @@ class SettingFragment : Fragment(), SettingContract.View {
                 })
 
         }
+        myView.bugReport.setOnClickListener {
+            val reporter = ReportDialog(context!!, this)
+            reporter.show()
+        }
         myView.money.setOnClickListener {
             Util.novisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
@@ -104,16 +108,18 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.source.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setTitle(resources.getString(R.string.source))
-            builder.setMessage("Lottie\n" +
-                    "com.airbnb.android:lottie:3.0.2\n\n" +
-                    "TimeTable\n" +
-                    "com.github.EunsilJo:TimeTable:1.0\n\n" +
-                    "Jsoup\n" +
-                    "org.jsoup:jsoup:1.11.3\n\n" +
-                    "Library\n" +
-                    "com.wang.avi:library:2.1.3\n\n" +
-                    "Circleimageview\n" +
-                    "de.hdodenhof:circleimageview:3.0.0")
+            builder.setMessage(
+                "Lottie\n" +
+                        "com.airbnb.android:lottie:3.0.2\n\n" +
+                        "TimeTable\n" +
+                        "com.github.EunsilJo:TimeTable:1.0\n\n" +
+                        "Jsoup\n" +
+                        "org.jsoup:jsoup:1.11.3\n\n" +
+                        "Library\n" +
+                        "com.wang.avi:library:2.1.3\n\n" +
+                        "Circleimageview\n" +
+                        "de.hdodenhof:circleimageview:3.0.0"
+            )
             builder.setPositiveButton(
                 "OK"
             ) { _, _ -> }
@@ -148,6 +154,10 @@ class SettingFragment : Fragment(), SettingContract.View {
         ContactAsyncTask(this, query).execute()
     }
 
+    override fun executeTask2(query: String) {
+        ReportAsyncTask(this,query).execute()
+    }
+
     fun themeChanger() {
         val themeColorArray = arrayOf(
             intArrayOf(
@@ -170,6 +180,12 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.notiSwitch.trackTintList = ColorStateList(themeColorArray, lightColor)
     }
 
+    override fun makeToast(string: String) {
+        Handler(Looper.getMainLooper()).post {
+         Toast.makeText(context!!,string,Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun builderUp() {
         Handler(Looper.getMainLooper()).post {
             builderIn = null
@@ -189,7 +205,7 @@ class SettingFragment : Fragment(), SettingContract.View {
                 if (list.isNotEmpty()) {
                     val myBuilder = ContactListDialog(activity!!, list)
                     myBuilder.show()
-                }else{
+                } else {
                     val builder = AlertDialog.Builder(activity)
                     builder.setTitle("")
                     builder.setMessage("목록이 없습니다.")
@@ -199,6 +215,12 @@ class SettingFragment : Fragment(), SettingContract.View {
                     builder.show()
                 }
             }
+        }
+    }
+
+    override fun builderDismiss() {
+        Handler(Looper.getMainLooper()).post {
+            if (builderIn != null) builderIn?.dismiss()
         }
     }
 
