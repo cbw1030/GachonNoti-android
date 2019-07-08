@@ -159,5 +159,9 @@ class Util {
         const val STATE_SETTING = 2
         const val STATE_WEBVIEW = 3
 
+        const val NOT_UPDATED_YET = -99
+        const val ACTION_SUCCESS = 0
+        const val ACTION_FAILURE = -1
+
     }
 }
