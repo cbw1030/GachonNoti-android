@@ -68,7 +68,7 @@ class SearchAsyncTask(
             }
         } catch (e: Exception) {
         }
-        return 0
+        return Util.ACTION_SUCCESS
     }
 
     @SuppressLint("ApplySharedPref")

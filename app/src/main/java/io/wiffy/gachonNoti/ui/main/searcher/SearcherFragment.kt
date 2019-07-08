@@ -69,11 +69,11 @@ class SearcherFragment : Fragment(), SearchContract.View {
         setTimeTable(null, "")
     }
 
-    fun resetDialog() {
-        val buildern = AlertDialog.Builder(context)
-        //builder.setTitle("오류")
-        buildern.setMessage("저장된 데이터를 재설정 할까요?")
-        buildern.setPositiveButton(
+    @SuppressLint("ApplySharedPref")
+    private fun resetDialog() {
+        val mBuilder = AlertDialog.Builder(context)
+        mBuilder.setMessage("저장된 데이터를 재설정 할까요?")
+        mBuilder.setPositiveButton(
             "OK"
         ) { _, _ ->
             val year = Util.YEAR
@@ -84,7 +84,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
-        buildern.show()
+        mBuilder.show()
     }
 
     override fun floatingButtonControl() =

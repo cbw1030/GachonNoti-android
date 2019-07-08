@@ -25,7 +25,7 @@ class NotiAsyncTaskForN(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!Util.isNetworkConnected(context!!)) return -1
+        if (!Util.isNetworkConnected(context!!)) return Util.ACTION_FAILURE
 
         try{
             val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}${Util.seek}${Util.mobileURL3}"
@@ -69,7 +69,7 @@ class NotiAsyncTaskForN(
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-            if (result == 0) {
+            if (result == Util.ACTION_SUCCESS) {
                 mPresenter.internetNotInterrupted()
                 Util.index = 0
                 mPresenter.request()

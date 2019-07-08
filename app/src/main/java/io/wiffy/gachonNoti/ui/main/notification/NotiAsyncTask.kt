@@ -19,7 +19,7 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!Util.isNetworkConnected(context!!)) return -1
+        if (!Util.isNetworkConnected(context!!)) return Util.ACTION_FAILURE
 
         try{
             val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}${Util.seek}${Util.mobileURL3}"
@@ -56,16 +56,16 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
                     )
                 }
             }
-            return 0
+            return Util.ACTION_SUCCESS
         }catch (e:Exception){
-            return -1
+            return Util.ACTION_FAILURE
         }
 
     }
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-            if (result == 0) {
+            if (result == Util.ACTION_SUCCESS) {
                 mPresenter.dismiss()
                 mPresenter.update(list)
                 Util.index += 1

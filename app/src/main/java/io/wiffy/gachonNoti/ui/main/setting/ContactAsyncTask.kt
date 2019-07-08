@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.os.AsyncTask
 import android.util.Log
+import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import java.lang.Exception
@@ -38,7 +39,7 @@ class ContactAsyncTask(private val myView: SettingContract.View, private val que
                 } catch (e: Exception) {
                 }
             }
-        return 0
+        return Util.ACTION_SUCCESS
     }
 
     override fun onPostExecute(result: Int?) {
