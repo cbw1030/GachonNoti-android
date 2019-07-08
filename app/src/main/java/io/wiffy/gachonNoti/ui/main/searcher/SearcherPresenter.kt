@@ -69,6 +69,10 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
     }
 
+    override fun resetdata(){
+
+    }
+
     @SuppressLint("ApplySharedPref")
     override fun isDownloaded(year: String, semester: String) {
         val underYear: String

@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -49,7 +50,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
             true
         }
         myView.subFab1.setOnClickListener {
-            Toast.makeText(context, "SUB FLOATING ACTION BUTTON IS CLICKED", Toast.LENGTH_SHORT).show()
+            resetDialog()
             anim()
         }
         myView.superParentOfSearcher.setOnTouchListener { _, _ ->
@@ -66,6 +67,24 @@ class SearcherFragment : Fragment(), SearchContract.View {
         }
         themeChanger()
         setTimeTable(null, "")
+    }
+
+    fun resetDialog() {
+        val buildern = AlertDialog.Builder(context)
+        //builder.setTitle("오류")
+        buildern.setMessage("저장된 데이터를 재설정 할까요?")
+        buildern.setPositiveButton(
+            "OK"
+        ) { _, _ ->
+            val year = Util.YEAR
+            val semester = Util.SEMESTER.toString()
+            Util.sharedPreferences.edit().putString("$year-$semester-1", "<nodata>").commit()
+            Util.sharedPreferences.edit().putString("$year-$semester-2", "<nodata>").commit()
+            Util.sharedPreferences.edit().putString("$year-$semester-3", "<nodata>").commit()
+            builder = SearchDialog(context!!, this, mPresenter)
+            builder?.show()
+        }
+        buildern.show()
     }
 
     override fun floatingButtonControl() =

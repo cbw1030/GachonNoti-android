@@ -79,6 +79,7 @@
                     android:focusable="true"
                     android:src="@drawable/search"
                     android:layout_gravity="center"
+                    app:maxImageSize="30dp"
                     android:layout_margin="15dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"/>

@@ -22,6 +22,7 @@ interface SearchContract {
         fun error()
         fun loadRoom(roomNM: String)
         fun loadTable(str: String)
+        fun resetdata()
     }
 
     interface DialogPresenter {
