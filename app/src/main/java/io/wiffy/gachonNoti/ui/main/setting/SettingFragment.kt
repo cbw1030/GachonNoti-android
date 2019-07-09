@@ -3,7 +3,6 @@ package io.wiffy.gachonNoti.ui.main.setting
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -14,8 +13,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -32,6 +29,7 @@ class SettingFragment : Fragment(), SettingContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
     var builderIn: Dialog? = null
+    private var secretCount = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
@@ -45,7 +43,6 @@ class SettingFragment : Fragment(), SettingContract.View {
     override fun changeView() {
         myView.notiSwitch.isChecked = Util.notifiSet
         themeChanger()
-
         myView.notiSwitch.setOnCheckedChangeListener { switch, isChecked ->
             when (isChecked) {
                 false -> setOff()
@@ -106,7 +103,8 @@ class SettingFragment : Fragment(), SettingContract.View {
                 .setView(container)
                 .setMessage("\n버그나 개선하고자 하는 사항을 입력해주세요.")
                 .setPositiveButton("OK") { _, _ ->
-                    checkReport(editText.text.toString())
+                    val msg = editText.text.toString()
+                    if(msg.isNotBlank()) checkReport(msg)
                 }
                 .setNegativeButton("Cancel") { _, _ -> }
             reporter.create().show()
@@ -145,6 +143,20 @@ class SettingFragment : Fragment(), SettingContract.View {
                 "OK"
             ) { _, _ -> }
             builder.show()
+        }
+        myView.secretText.setOnClickListener {
+            if (secretCount == 4) {
+                val builder = AlertDialog.Builder(activity)
+                builder.setTitle("뭐야 왜 이걸..")
+                builder.setMessage("너.. 심심하구나..?")
+                builder.setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+                builder.show()
+                secretCount = 0
+            } else {
+                secretCount += 1
+            }
         }
         myView.helper.setOnClickListener {
             val builder = AlertDialog.Builder(activity)

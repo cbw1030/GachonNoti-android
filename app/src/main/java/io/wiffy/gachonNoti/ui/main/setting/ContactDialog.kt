@@ -34,15 +34,29 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
         search2.setOnClickListener {
             if (Util.isNetworkConnected(context)) {
                 val text = editor1.text.toString()
-                if (text.isNotBlank()) {
-                    val query =
-                        when (spinnerSelected) {
-                            1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
 
-                            else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
-                        }
-                    mView.executeTask(query)
-                    dismiss()
+                if (text.isNotBlank()) {
+                    if (text == "박상현" && spinnerSelected == 0) {
+                        mView.builderUp()
+                        val x=ArrayList<ContactInformation>()
+                        x.add(ContactInformation("천재","박상현","201735829"))
+                        mView.builderDismissAndContactUp(x)
+                    } else if(text == "박정호" && spinnerSelected == 0){
+                        mView.builderUp()
+                        val x=ArrayList<ContactInformation>()
+                        x.add(ContactInformation("바보","박정호","201636822"))
+                        mView.builderDismissAndContactUp(x)
+                    }
+                    else {
+                        val query =
+                            when (spinnerSelected) {
+                                1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
+
+                                else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
+                            }
+                        mView.executeTask(query)
+                        dismiss()
+                    }
                 }
             } else {
                 Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
