@@ -102,9 +102,9 @@ class SettingFragment : Fragment(), SettingContract.View {
             container.addView(editText)
             editText.hint = "내용"
             val reporter = AlertDialog.Builder(activity)
-            reporter.setTitle("버그리포트 / 개선사항\n")
+            reporter.setTitle("버그리포트 / 개선사항")
                 .setView(container)
-                .setMessage("버그나 개선하고자 하는 사항을 입력해주세요.")
+                .setMessage("\n버그나 개선하고자 하는 사항을 입력해주세요.")
                 .setPositiveButton("OK") { _, _ ->
                     checkReport(editText.text.toString())
                 }

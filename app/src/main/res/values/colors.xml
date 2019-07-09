@@ -7,6 +7,7 @@
     <color name="BLACK">#000000</color>
     <color name="gray">#33ffffff</color>
     <color name="gray2">#8A8989</color>
+    <color name="supergray">#99ffffff</color>
     <color name="lightGray">#B4B4B4</color>
     <color name="mainBlue">#053463</color>
     <color name="mainDeepBlue">#052544</color>
