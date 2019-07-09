@@ -20,19 +20,19 @@
     <string name="source">오픈소스 정보</string>
     <string name="calling">교내 연락처</string>
     <string name="searcher">강의실 시간표 검색</string>
-    <string name="open"></string>
+    <string name="open"/>
     <string name="load">오른쪽 하단 검색으로\n강의실 시간표를 불러오세요.</string>
     <string name="theme">테마</string>
     <string name="helper">도움을 주신 분들</string>
     <string name="version">버전</string>
-    <string name="whatVersion">1.0.1</string>
+    <string name="whatVersion">1.0.2</string>
     <string name="ssss">설정을 확인해주세요.</string>
     <string name="wiffy">\@wiffy-io</string>
     <string name="report">버그리포트 / 개선사항</string>
+    <string name="values">캠퍼스 설정</string>
     <string name="update">
-        계절학기 시간표 추가\n
-        다이얼로그 버그수정\n
-        버그 리포트 추가\n
-        강의실 시간표 데이터 삭제 기능\n
+        메디컬 캠퍼스 강의실 업데이트\n
+        (설정)에서 글로벌/메디컬 선택 가능
     </string>
+
 </resources>

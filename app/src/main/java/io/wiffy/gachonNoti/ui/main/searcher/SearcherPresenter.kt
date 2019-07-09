@@ -29,6 +29,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     lateinit var load1: String
     lateinit var load2: String
     lateinit var load3: String
+    lateinit var load4: String
     lateinit var mView2: SearchContract.DialogPresenter
 
     override fun initPresent() {
@@ -43,9 +44,10 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         loadcnt = 0
         errorCnt = 0
         mView.showLoad()
-        SearchAsyncTask("searchIsuCD=002", "1", yearSemester, this).execute()
-        SearchAsyncTask("searchIsuCD=001", "2", yearSemester, this).execute()
-        SearchAsyncTask("searchIsuCD=004", "3", yearSemester, this).execute()
+        SearchAsyncTask("searchIsuCD=001", "1", yearSemester, this).execute()
+        SearchAsyncTask("searchIsuCD=002", "2", yearSemester, this).execute()
+        SearchAsyncTask("searchIsuCD=003", "3", yearSemester, this).execute()
+        SearchAsyncTask("searchIsuCD=004", "4", yearSemester, this).execute()
     }
 
     override fun showLoad() {
@@ -54,7 +56,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
     override fun dismissLoad() {
         loadcnt += 1
-        if (loadcnt >= 3) {
+        if (loadcnt >= 4) {
             mView2.showBtn(false)
             mView2.requestLoad()
             mView.dismissLoad()
@@ -69,7 +71,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
     }
 
-    override fun resetdata(){
+    override fun resetdata() {
 
     }
 
@@ -92,24 +94,35 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             }
         }
         try {
-            Util.sharedPreferences.edit().putString("$underYear-$underSemester-1", "").commit()
-            Util.sharedPreferences.edit().putString("$underYear-$underSemester-2", "").commit()
-            Util.sharedPreferences.edit().putString("$underYear-$underSemester-3", "").commit()
+            for (x in arrayOf("global", "medical")) {
+                Util.sharedPreferences.edit().putString("$underYear-$underSemester-1-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().putString("$underYear-$underSemester-2-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().putString("$underYear-$underSemester-3-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().putString("$underYear-$underSemester-4-$x", "<nodata>").commit()
+            }
         } catch (e: Exception) {
         }
-
+        val temp = if (Util.campus) {
+            "global"
+        } else {
+            "medical"
+        }
         load1 = Util.sharedPreferences.getString(
-            "$year-$semester-1", "<nodata>"
+            "$year-$semester-1-$temp", "<nodata>"
         ) ?: "<nodata>"
         load2 = Util.sharedPreferences.getString(
-            "$year-$semester-2", "<nodata>"
+            "$year-$semester-2-$temp", "<nodata>"
         ) ?: "<nodata>"
         load3 = Util.sharedPreferences.getString(
-            "$year-$semester-3", "<nodata>"
+            "$year-$semester-3-$temp", "<nodata>"
+        ) ?: "<nodata>"
+        load4 = Util.sharedPreferences.getString(
+            "$year-$semester-4-$temp", "<nodata>"
         ) ?: "<nodata>"
         if (!load1.contains("<nodata>") &&
             !load2.contains("<nodata>") &&
-            !load3.contains("<nodata>")
+            !load3.contains("<nodata>") &&
+            !load4.contains("<nodata>")
         ) {
             mView2.showBtn(false)
             Handler(Looper.getMainLooper()).post {
@@ -120,6 +133,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
                 findBuildingXML(load1)
                 findBuildingXML(load2)
                 findBuildingXML(load3)
+                findBuildingXML(load4)
                 findBuilding.sort()
                 Handler(Looper.getMainLooper()).post {
                     mView2.setSpinner(findBuilding)
@@ -176,6 +190,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             findRoomXML(load1, roomNM)
             findRoomXML(load2, roomNM)
             findRoomXML(load3, roomNM)
+            findRoomXML(load4, roomNM)
             findRoom.sort()
             Handler(Looper.getMainLooper()).post {
                 mView2.setListDialog(findRoom)

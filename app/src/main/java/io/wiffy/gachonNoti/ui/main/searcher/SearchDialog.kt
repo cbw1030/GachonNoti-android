@@ -15,7 +15,6 @@ import android.widget.Toast
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_search.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -33,7 +32,7 @@ class SearchDialog(
         setContentView(R.layout.dialog_search)
 
         mPresenter.initPresentDialog(this)
-        year.text = "${Util.YEAR}년도 ${when(Util.SEMESTER){
+        year.text = "[${if(Util.campus){"글로벌"}else{"매디컬"}}] ${Util.YEAR}년도 ${when(Util.SEMESTER){
             1->"1"
             2->"2"
             3->"여름"

@@ -78,9 +78,12 @@ class SearcherFragment : Fragment(), SearchContract.View {
         ) { _, _ ->
             val year = Util.YEAR
             val semester = Util.SEMESTER.toString()
-            Util.sharedPreferences.edit().putString("$year-$semester-1", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-2", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-3", "<nodata>").commit()
+            for (x in arrayOf("global", "medical")) {
+                Util.sharedPreferences.edit().putString("$year-$semester-1-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().putString("$year-$semester-2-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().putString("$year-$semester-3-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().putString("$year-$semester-4-$x", "<nodata>").commit()
+            }
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
@@ -154,7 +157,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
-            }}학기"
+            }}학기 [${if(Util.campus){"G"}else{"M"}}]"
             themeChanger()
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE

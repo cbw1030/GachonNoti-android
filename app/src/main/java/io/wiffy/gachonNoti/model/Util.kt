@@ -54,6 +54,9 @@ class Util {
         var novisible = false
 
         @JvmStatic
+        var campus = true
+
+        @JvmStatic
         fun getRandomColorId(): Int = intArrayOf(
             R.color.ran1,
             R.color.ran2,

@@ -166,7 +166,52 @@
                         android:background="@drawable/right_touch"/>
             </RelativeLayout>
         </TableRow>
-
+        <TableRow>
+            <RelativeLayout>
+                <TextView
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="bottom"
+                        android:text="@string/values"
+                        android:textColor="@color/title2"
+                        android:textStyle="bold"
+                        android:layout_marginStart="15dp"
+                />
+            </RelativeLayout>
+        </TableRow>
+        <TableRow>
+            <RelativeLayout
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent">
+                <RadioGroup
+                        android:id="@+id/myRadio"
+                        android:orientation="horizontal"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:buttonTint="@color/red"
+                            android:id="@+id/global"
+                            android:textColor="@color/red"
+                            android:layout_marginEnd="25dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/global"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:buttonTint="@color/green"
+                            android:id="@+id/medical"
+                            android:textColor="@color/green"
+                            android:layout_marginStart="25dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/medical"/>
+                </RadioGroup>
+            </RelativeLayout>
+        </TableRow>
         <TableRow>
             <RelativeLayout
                     android:layout_height="wrap_content"

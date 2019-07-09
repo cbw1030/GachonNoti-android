@@ -17,6 +17,7 @@ class DetailDialog(context: Context) : Dialog(context) {
     var index = -1
     var preIndex = -1
     var setNum = 0
+    var tempCampus = true
 
     @SuppressLint("ApplySharedPref")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,18 @@ class DetailDialog(context: Context) : Dialog(context) {
 
         setNum = Util.seek
         setText.text = setNum.toString()
+
+        tempCampus = Util.campus
+        if (tempCampus) {
+            global.isChecked = true
+        } else {
+            medical.isChecked = true
+        }
+
+
+        myRadio.setOnCheckedChangeListener { _, _ ->
+            tempCampus = global.isChecked
+        }
 
         toLeft.setOnClickListener {
             if (setNum > 10) {
@@ -111,6 +124,7 @@ class DetailDialog(context: Context) : Dialog(context) {
 
     @SuppressLint("ApplySharedPref")
     fun okListen() {
+        Util.campus = tempCampus
         Util.seek = setNum
         Util.theme = when (index) {
             1 -> "red"
@@ -119,5 +133,6 @@ class DetailDialog(context: Context) : Dialog(context) {
         }
         Util.sharedPreferences.edit().putInt("seek", Util.seek).commit()
         Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
+        Util.sharedPreferences.edit().putBoolean("campus", Util.campus).commit()
     }
 }

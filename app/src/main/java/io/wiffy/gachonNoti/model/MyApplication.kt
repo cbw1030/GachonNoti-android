@@ -28,8 +28,10 @@ class MyApplication : Application() {
             "seek", 20
         )
 
+        Util.campus = Util.sharedPreferences.getBoolean("campus", true)
+
         Util.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
-        Util.SEMESTER =when (Calendar.getInstance().get(Calendar.MONTH)) {
+        Util.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {
             in 2..5 -> 1
             in 6..7 -> 3
             in 8..11 -> 2

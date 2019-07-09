@@ -37,10 +37,10 @@ class SearchAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
 
-
+        val type = if(Util.campus){20}else{21}
         val url = "http://gcis.gachon.ac.kr/haksa/src/jsp/ssu/ssu1000q.jsp?"
         val url2 =
-            "groupType=20&searchYear=2019&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
+            "groupType=$type&searchYear=2019&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
         try {
             try {
                 val myUrl = URL(url + url2)
@@ -59,7 +59,7 @@ class SearchAsyncTask(
 
                 var line = reader.readLine()
                 while (line != null) {
-                    builder.append(line + "\n")
+                    builder.append(line.replace("(M)","") + "\n")
                     line = reader.readLine()
                 }
 
@@ -74,15 +74,16 @@ class SearchAsyncTask(
     @SuppressLint("ApplySharedPref")
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
+            val campus = if(Util.campus){"global"}else{"medical"}
             if (mySemester == 10 || mySemester == 20) {
                 if (done.contains("<haksuNo>")) {
-                    Util.sharedPreferences.edit().putString("$yearSemester-$cate", done).commit()
+                    Util.sharedPreferences.edit().putString("$yearSemester-$cate-$campus", done).commit()
                     mPresenter.dismissLoad()
                 } else {
                     mPresenter.error()
                 }
             } else {
-                Util.sharedPreferences.edit().putString("$yearSemester-$cate", done).commit()
+                Util.sharedPreferences.edit().putString("$yearSemester-$cate-$campus", done).commit()
                 mPresenter.dismissLoad()
             }
         }
