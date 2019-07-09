@@ -32,5 +32,7 @@
     <string name="update">
         계절학기 시간표 추가\n
         다이얼로그 버그수정\n
+        버그 리포트 추가\n
+        강의실 시간표 데이터 삭제 기능\n
     </string>
 </resources>
