@@ -262,7 +262,20 @@
 
                 </RelativeLayout>
             </TableRow>
-
+            <TableRow>
+                <RelativeLayout>
+                    <TextView
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="bottom"
+                            android:text="@string/wiffy"
+                            android:textColor="@color/supergray"
+                            android:layout_marginEnd="15dp"
+                    />
+                </RelativeLayout>
+            </TableRow>
         </TableLayout>
     </ScrollView>
 </RelativeLayout>

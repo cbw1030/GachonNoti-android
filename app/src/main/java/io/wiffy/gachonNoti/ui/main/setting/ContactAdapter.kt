@@ -1,9 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
 import android.net.Uri
 import android.text.Html
 import android.view.LayoutInflater
