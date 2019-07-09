@@ -2,11 +2,12 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.os.AsyncTask
 import io.wiffy.gachonNoti.model.Util
+import java.net.URL
 
 class ReportAsyncTask(private val myView: SettingContract.View, private val query: String) :
     AsyncTask<Void, Void, Int>() {
 
-    private val url = "http://wiffy.io/gachon/report?content="
+    private val url = "http://wiffy.io/gachon/report.php?content="
 
     override fun onPreExecute() {
         myView.builderUp()
@@ -14,15 +15,11 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
 
     override fun doInBackground(vararg params: Void?): Int =
         try {
-            TODO(
-                "query는 버그리포트:내용 혹은 개선사항:내용으로 이루어짐" +
-                        "여기만 추가하면 끝!"
-            )
+            val v = URL("$url$query").readText()
             Util.ACTION_SUCCESS
         } catch (e: Exception) {
             Util.ACTION_FAILURE
         } catch (e: NotImplementedError) {
-            // TODO하면 여기로 빠짐
             Util.NOT_UPDATED_YET
         }
 
