@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.setting
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -15,6 +16,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
@@ -87,8 +90,26 @@ class SettingFragment : Fragment(), SettingContract.View {
 
         }
         myView.bugReport.setOnClickListener {
-            val reporter = ReportDialog(context!!, this)
-            reporter.show()
+            //            val reporter = ReportDialog(context!!, this)
+//            reporter.show()
+            val container = FrameLayout(context!!)
+            val params =
+                FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            params.marginStart = 30
+            params.marginEnd = 30
+            val editText = EditText(activity)
+            editText.layoutParams = params
+            container.addView(editText)
+            editText.hint = "내용"
+            val reporter = AlertDialog.Builder(activity)
+            reporter.setTitle("버그리포트 / 개선사항\n")
+                .setView(container)
+                .setMessage("버그나 개선하고자 하는 사항을 입력해주세요.")
+                .setPositiveButton("OK") { _, _ ->
+                    checkReport(editText.text.toString())
+                }
+                .setNegativeButton("Cancel") { _, _ -> }
+            reporter.create().show()
         }
         myView.money.setOnClickListener {
             Util.novisible = true
@@ -150,12 +171,27 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     }
 
+    private fun checkReport(str: String) {
+        val builder = AlertDialog.Builder(activity)
+        builder.setTitle("다음과 같은 내용으로 보내시겠습니까?")
+        builder.setMessage(str)
+        builder.setPositiveButton(
+            "OK"
+        ) { _, _ ->
+            executeTask2(str)
+        }
+        builder.setNegativeButton(
+            "Cancel"
+        ) { _, _ -> }
+        builder.create().show()
+    }
+
     override fun executeTask(query: String) {
         ContactAsyncTask(this, query).execute()
     }
 
     override fun executeTask2(query: String) {
-        ReportAsyncTask(this,query).execute()
+        ReportAsyncTask(this, query).execute()
     }
 
     fun themeChanger() {
@@ -182,7 +218,7 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     override fun makeToast(string: String) {
         Handler(Looper.getMainLooper()).post {
-         Toast.makeText(context!!,string,Toast.LENGTH_SHORT).show()
+            Toast.makeText(context!!, string, Toast.LENGTH_SHORT).show()
         }
     }
 
