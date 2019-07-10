@@ -11,6 +11,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import kotlinx.android.synthetic.main.activity_splash.*
 
 
 class SplashActivity : AppCompatActivity(), SplashContract.View {
@@ -32,6 +33,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     override fun changeUI() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash.setImageResource(R.drawable.defaults)
         mPresenter.move()
     }
 

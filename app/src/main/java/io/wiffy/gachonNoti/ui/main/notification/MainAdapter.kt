@@ -79,15 +79,18 @@ class MainAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        if (Util.isNetworkConnected(act)) {
-                            Util.novisible = true
-                            val myIntent = Intent(act, WebViewActivity::class.java)
-                            myIntent.putExtra("bundle", item)
-                            act.startActivity(myIntent)
-                        } else {
-                            Toast.makeText(act, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                        if(!Util.surfing) {
+                            Util.surfing = true
+                            if (Util.isNetworkConnected(act)) {
+                                Util.novisible = true
+                                val myIntent = Intent(act, WebViewActivity::class.java)
+                                myIntent.putExtra("bundle", item)
+                                act.startActivity(myIntent)
+                            } else {
+                                Util.surfing = false
+                                Toast.makeText(act, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                            }
                         }
-
                     }
                     itemView.setOnLongClickListener {
                         (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =

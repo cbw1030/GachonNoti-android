@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,6 +20,8 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
+import kotlinx.android.synthetic.main.fragment_searcher.*
+import kotlinx.android.synthetic.main.fragment_searcher.view.subFab1
 import kotlin.collections.ArrayList
 
 class SearcherFragment : Fragment(), SearchContract.View {
@@ -38,6 +41,11 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     override fun initUI() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            myView.subFab1.setImageResource(R.drawable.outline_autorenew_white_24dp)
+            myView.fab.setImageResource(R.drawable.search)
+        }else{
+        }
         fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
         fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
