@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
-        if (NotificationManagerCompat.from(applicationContext)
-                .areNotificationsEnabled() == false and Util.notifiSet
+        if ( (!NotificationManagerCompat.from(applicationContext)
+                .areNotificationsEnabled()) and (Util.notifiSet)
         ) {
 
             val builders = AlertDialog.Builder(this)
