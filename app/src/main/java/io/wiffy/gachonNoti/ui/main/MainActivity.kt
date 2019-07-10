@@ -163,6 +163,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun changeUI(mList: ArrayList<Fragment>) {
         themeChange()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash2.setImageResource(R.drawable.defaults)
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))

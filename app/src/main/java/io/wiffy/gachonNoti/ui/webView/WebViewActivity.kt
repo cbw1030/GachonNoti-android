@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -36,6 +37,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     }
 
     private fun initBuild() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash3.setImageResource(R.drawable.defaults)
         builder = Dialog(this@WebViewActivity)
         builder.setContentView(R.layout.builder)
         builder.setCancelable(false)
@@ -53,10 +55,10 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun changeUI(javaS: String) {
-        try{
+        try {
             webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
             webview.settings?.javaScriptEnabled = true
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
         }
     }
@@ -89,6 +91,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     override fun onStart() {
         visible()
+        Util.surfing = true
         super.onStart()
     }
 
@@ -106,6 +109,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     override fun onStop() {
         invisible()
+        Util.surfing = false
         Util.novisible = false
         super.onStop()
     }
@@ -117,6 +121,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        Util.surfing = false
         Util.novisible = true
         finish()
     }

@@ -42,9 +42,16 @@ class SettingFragment : Fragment(), SettingContract.View {
     }
 
 
+    @SuppressLint("ApplySharedPref")
     override fun changeView() {
         myView.notiSwitch.isChecked = Util.notifiSet
         themeChanger()
+        myView.campustext.text =
+            if (Util.campus) {
+                "글로벌"
+            } else {
+                "메디컬"
+            }
         myView.notiSwitch.setOnCheckedChangeListener { switch, isChecked ->
             when (isChecked) {
                 false -> setOff()
@@ -160,6 +167,30 @@ class SettingFragment : Fragment(), SettingContract.View {
                 secretCount += 1
             }
         }
+        myView.campusSetting.setOnClickListener {
+            val item = arrayOf("글로벌", "메디컬")
+            val myBuilder = AlertDialog.Builder(activity)
+            myBuilder.setTitle("캠퍼스 설정")
+                .setSingleChoiceItems(
+                    item, if (Util.campus) {
+                        0
+                    } else {
+                        1
+                    }
+                ) { dialog, num ->
+                    changeCampus(
+                        when (num) {
+                            0 -> true
+                            else -> false
+                        }
+                    )
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+            myBuilder.create().show()
+        }
         myView.helper.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setTitle("후원 목록")
@@ -183,6 +214,18 @@ class SettingFragment : Fragment(), SettingContract.View {
             builder.show()
         }
 
+    }
+
+    @SuppressLint("ApplySharedPref")
+    override fun changeCampus(bool: Boolean) {
+        myView.campustext.text =
+            if (bool) {
+                "글로벌"
+            } else {
+                "메디컬"
+            }
+        Util.sharedPreferences.edit().putBoolean("campus", bool).commit()
+        Util.campus = bool
     }
 
     private fun checkReport(str: String) {
@@ -285,9 +328,7 @@ class SettingFragment : Fragment(), SettingContract.View {
     private fun setOff() {
         Util.notifiSet = false
         Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti").addOnCompleteListener {
-            Log.d("asdf", "${it.isSuccessful}")
-        }
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }
 
 }

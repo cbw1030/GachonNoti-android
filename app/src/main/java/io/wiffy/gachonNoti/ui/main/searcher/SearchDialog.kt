@@ -32,7 +32,7 @@ class SearchDialog(
         setContentView(R.layout.dialog_search)
 
         mPresenter.initPresentDialog(this)
-        year.text = "[${if(Util.campus){"글로벌"}else{"매디컬"}}] ${Util.YEAR}년도 ${when(Util.SEMESTER){
+        year.text = "[${if(Util.campus){"글로벌"}else{"메디컬"}}] ${Util.YEAR}년도 ${when(Util.SEMESTER){
             1->"1"
             2->"2"
             3->"여름"

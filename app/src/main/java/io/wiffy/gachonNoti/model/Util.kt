@@ -21,6 +21,9 @@ class Util {
         var YEAR = "2019"
 
         @JvmStatic
+        var surfing = false
+
+        @JvmStatic
         var SEMESTER = 1
 
         @JvmStatic
