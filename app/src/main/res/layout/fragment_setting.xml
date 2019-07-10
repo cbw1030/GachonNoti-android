@@ -82,6 +82,38 @@
             </TableRow>
             <TableRow>
                 <RelativeLayout
+                        android:id="@+id/campusSetting"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/setting_button"
+                >
+                    <TextView
+                            android:layout_alignParentStart="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="@string/mCampus"
+                            android:textColor="@color/BLACK"
+                            android:layout_marginStart="15dp"
+                    />
+                    <TextView
+                            android:id="@+id/campustext"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="@string/mCampus"
+                            android:textColor="@color/BLACK"
+                            android:layout_marginEnd="15dp"
+                    />
+                </RelativeLayout>
+            </TableRow>
+            <TableRow>
+                <View android:layout_height="1dp" android:layout_width="match_parent"/>
+            </TableRow>
+            <TableRow>
+                <RelativeLayout
                         android:id="@+id/bugReport"
                         android:layout_width="match_parent"
                         android:background="@drawable/setting_button"

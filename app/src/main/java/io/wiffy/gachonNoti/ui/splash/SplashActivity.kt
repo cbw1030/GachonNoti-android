@@ -1,10 +1,12 @@
 package io.wiffy.gachonNoti.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
@@ -34,8 +36,12 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
 
+    @SuppressLint("ApplySharedPref")
     override fun subscribe() {
-        FirebaseMessaging.getInstance().subscribeToTopic("noti")
+        FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
+            Util.sharedPreferences.edit().putBoolean("firstBooting", false).commit()
+            Log.d("asdf","noti success")
+        }
         changeUI()
     }
 

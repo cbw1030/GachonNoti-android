@@ -9,6 +9,7 @@ interface SettingContract {
         fun builderDismissAndContactUp(list:ArrayList<ContactInformation>)
         fun builderDismiss()
         fun makeToast(string:String)
+        fun changeCampus(bool:Boolean)
     }
 
     interface Presenter {
