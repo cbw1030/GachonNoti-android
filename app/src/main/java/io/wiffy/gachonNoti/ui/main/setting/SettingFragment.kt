@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -104,7 +106,7 @@ class SettingFragment : Fragment(), SettingContract.View {
                 .setMessage("\n버그나 개선하고자 하는 사항을 입력해주세요.")
                 .setPositiveButton("OK") { _, _ ->
                     val msg = editText.text.toString()
-                    if(msg.isNotBlank()) checkReport(msg)
+                    if (msg.isNotBlank()) checkReport(msg)
                 }
                 .setNegativeButton("Cancel") { _, _ -> }
             reporter.create().show()
@@ -283,7 +285,9 @@ class SettingFragment : Fragment(), SettingContract.View {
     private fun setOff() {
         Util.notifiSet = false
         Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti").addOnCompleteListener {
+            Log.d("asdf", "${it.isSuccessful}")
+        }
     }
 
 }
