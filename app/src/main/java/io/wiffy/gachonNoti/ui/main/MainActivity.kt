@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle("${resources.getString(R.string.whatVersion)} 버전 업데이트")
-        builder.setMessage(resources.getString(R.string.update))
+        builder.setMessage(" ${resources.getString(R.string.update)}")
         builder.setPositiveButton(
             "OK"
         ) { _, _ -> }

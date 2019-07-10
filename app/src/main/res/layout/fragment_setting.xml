@@ -30,7 +30,6 @@
             </TableRow>
             <TableRow>
                 <RelativeLayout
-                        android:id="@+id/notiSet"
                         android:layout_width="match_parent"
                         android:background="@drawable/setting_button"
                 >

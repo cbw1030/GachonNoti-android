@@ -10,13 +10,11 @@
     <color name="supergray">#99ffffff</color>
     <color name="lightGray">#B4B4B4</color>
     <color name="mainBlue">#053463</color>
-    <color name="mainDeepBlue">#052544</color>
     <color name="mainBackground">#f8f8f8</color>
     <color name="table_in">#ffffffff</color>
     <color name="table_in_click">#1A121F30</color>
 
     <color name="table_out">#efeff3</color>
-    <color name="title">#ff303030</color>
     <color name="title2">#ff646464</color>
     <color name="red">#E6C84646</color>
     <color name="deepRed">#E68F3636</color>
