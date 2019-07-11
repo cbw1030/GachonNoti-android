@@ -36,10 +36,6 @@
         </activity>
         <activity android:name=".ui.webView.WebViewActivity"/>
         <activity android:name="io.wiffy.gachonNoti.ui.main.MainActivity"/>
-        <!--<activity android:name=".ui.splash.FirstBootActivity"-->
-        <!--android:theme="@style/dialog"/>-->
-        <!--<activity android:name=".ui.main.setting.LanguageActivity"-->
-        <!--android:theme="@style/dialog"/>-->
         <service
                 android:name=".model.firebase.FirebaseMessagingService"
                 android:exported="false"
