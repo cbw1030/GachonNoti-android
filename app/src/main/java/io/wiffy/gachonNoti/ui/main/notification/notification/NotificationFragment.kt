@@ -14,6 +14,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.MainAdapter
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -102,10 +103,3 @@ class NotificationFragment : Fragment(),
 }
 
 
-class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        if (parent.getChildAdapterPosition(view) != parent.adapter?.itemCount!! - 1) {
-            outRect.bottom = verticalSpaceHeight
-        }
-    }
-}

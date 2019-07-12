@@ -10,7 +10,7 @@ class NewsPresenter(val mView: NewsContract.View, private val context: Context?)
 
     override fun initPresent() {
         mView.changeUI(list)
-        //asynctask
+        NewsAsyncTask(list,this,context).execute()
     }
 
     override fun load() {
@@ -44,11 +44,11 @@ class NewsPresenter(val mView: NewsContract.View, private val context: Context?)
 
     override fun request() {
         isloading = true
-        // async
+        NewsAsyncTask(list,this,context).execute()
     }
 
     override fun resetList() {
         list.clear()
-        //async
+        NewsAsyncTask(list,this,context).execute()
     }
 }

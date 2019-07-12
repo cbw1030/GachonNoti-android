@@ -59,7 +59,7 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
         fragmentList = ArrayList()
         mPresenter.fragmentInflation(fragmentList)
         initInflation()
-        themeChanger()
+
 
         myView.fragmentBottomView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -75,57 +75,53 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
     private fun initInflation() {
         for (x in 0..3)
             childFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragmentList[x]!!)
-                .commitAllowingStateLoss()
+                .commit()
 
         inflateNotification()
     }
 
     override fun inflateNotification() {
         childFragmentManager.beginTransaction().hide(fragmentList[1]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[2]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[3]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().show(fragmentList[0]!!)
-            .commitAllowingStateLoss()
-        mPresenter.themeChange1()
+            .commit()
     }
 
     override fun inflateNews() {
         childFragmentManager.beginTransaction().hide(fragmentList[0]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[2]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[3]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().show(fragmentList[1]!!)
-            .commitAllowingStateLoss()
-        mPresenter.themeChange2()
+            .commit()
     }
 
     override fun inflateEvent() {
         childFragmentManager.beginTransaction().hide(fragmentList[0]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[1]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[3]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().show(fragmentList[2]!!)
-            .commitAllowingStateLoss()
-        mPresenter.themeChange3()
+            .commit()
     }
 
     override fun inflateScholarship() {
         childFragmentManager.beginTransaction().hide(fragmentList[0]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[2]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().hide(fragmentList[1]!!)
-            .commitAllowingStateLoss()
+            .commit()
         childFragmentManager.beginTransaction().show(fragmentList[3]!!)
-            .commitAllowingStateLoss()
-        mPresenter.themeChange4()
+            .commit()
     }
 
     override fun showLoad() {
