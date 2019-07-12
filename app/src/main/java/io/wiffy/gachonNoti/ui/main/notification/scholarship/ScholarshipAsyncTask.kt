@@ -28,7 +28,7 @@ class ScholarshipAsyncTask(
 
         try {
             val address =
-                "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${Util.NotificationIndex}&pageSize=${Util.seek}&boardType_seq=361&approve=&secret=&answer=&branch=&searchopt=&searchword="
+                "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${Util.ScholarshipIndex}&pageSize=${Util.seek}&boardType_seq=361&approve=&secret=&answer=&branch=&searchopt=&searchword="
             val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
             for (n in conn) {
                 if (!n.html().contains("alt=\"공지\"")) {
