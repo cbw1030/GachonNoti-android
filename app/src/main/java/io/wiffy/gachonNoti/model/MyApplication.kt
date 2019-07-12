@@ -27,7 +27,7 @@ class MyApplication : Application() {
         Util.seek = Util.sharedPreferences.getInt(
             "seek", 20
         )
-        Util.initCount = booleanArrayOf(false,false,false)
+        Util.initCount = booleanArrayOf(false,false,false,false)
 
         Util.campus = Util.sharedPreferences.getBoolean("campus", true)
 
