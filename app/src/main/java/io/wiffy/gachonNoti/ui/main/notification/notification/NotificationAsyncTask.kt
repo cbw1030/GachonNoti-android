@@ -11,7 +11,7 @@ import org.jsoup.Jsoup
 import java.net.URL
 
 
-class NotiAsyncTask(
+class NotificationAsyncTask(
     private val list: ParseList,
     private val mPresenter: NotificationPresenter,
     private val context: Context?

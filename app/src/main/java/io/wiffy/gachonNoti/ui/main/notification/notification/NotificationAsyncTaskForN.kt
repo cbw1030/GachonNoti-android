@@ -13,7 +13,7 @@ import java.lang.StringBuilder
 import java.net.URL
 
 @SuppressLint("StaticFieldLeak")
-class NotiAsyncTaskForN(
+class NotificationAsyncTaskForN(
     private val list: ParseList,
     private val mPresenter: NotificationPresenter,
     private val context: Context?

@@ -12,7 +12,7 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
 
     override fun initPresent() {
         mView.changeUI(list)
-        NotiAsyncTaskForN(list, this, context).execute()
+        NotificationAsyncTaskForN(list, this, context).execute()
     }
 
     override fun load() {
@@ -23,7 +23,7 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
 
     override fun resetList() {
         list.clear()
-        NotiAsyncTaskForN(list, this, context).execute()
+        NotificationAsyncTaskForN(list, this, context).execute()
     }
 
 
@@ -43,7 +43,7 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
 
     override fun request() {
         isloading = true
-        NotiAsyncTask(list, this, context).execute()
+        NotificationAsyncTask(list, this, context).execute()
     }
 
     override fun internetInterrupted() {
