@@ -1,4 +1,6 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.notification
+
+import io.wiffy.gachonNoti.model.ParseList
 
 interface NotificationContract {
     interface View {

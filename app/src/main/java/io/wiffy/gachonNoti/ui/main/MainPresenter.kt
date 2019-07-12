@@ -4,7 +4,7 @@ import android.app.Activity
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
+import io.wiffy.gachonNoti.ui.main.notification.NotificationMainFragment
 import io.wiffy.gachonNoti.ui.main.searcher.SearcherFragment
 import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 
@@ -14,7 +14,7 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
     private val mList = ArrayList<Fragment>()
 
     override fun initPresent() {
-        val notificationFragment = NotificationFragment()
+        val notificationFragment = NotificationMainFragment()
         val searcherFragment = SearcherFragment()
         val settingFragment = SettingFragment()
         mList.add(notificationFragment)
@@ -27,6 +27,7 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
     }
 
     override fun changeThemes() {
+        (mList[Util.STATE_NOTIFICATION] as NotificationMainFragment).themeChanger()
         (mList[Util.STATE_SETTING] as SettingFragment).themeChanger()
         (mList[Util.STATE_SEARCHER] as SearcherFragment).themeChanger()
     }

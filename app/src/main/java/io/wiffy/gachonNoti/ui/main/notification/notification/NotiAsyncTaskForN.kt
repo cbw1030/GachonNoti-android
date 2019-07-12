@@ -1,10 +1,12 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.notification
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.gachonNoti.model.Parse
+import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
 import java.lang.StringBuilder

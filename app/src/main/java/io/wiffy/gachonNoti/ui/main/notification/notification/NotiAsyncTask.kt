@@ -1,15 +1,17 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.notification
 
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.gachonNoti.model.Parse
+import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
 import java.net.URL
 
 
-class NotiAsyncTask(private val list: ParseList, private val mPresenter: NotificationPresenter,private val context: Context?) :
+class NotiAsyncTask(private val list: ParseList, private val mPresenter: NotificationPresenter, private val context: Context?) :
     AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {

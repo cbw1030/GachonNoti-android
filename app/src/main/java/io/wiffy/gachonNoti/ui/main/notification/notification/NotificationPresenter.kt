@@ -1,6 +1,7 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.notification
 
 import android.content.Context
+import io.wiffy.gachonNoti.model.ParseList
 
 class NotificationPresenter(private val mView: NotificationContract.View, private val context: Context?) :
     NotificationContract.Presenter {
@@ -45,7 +46,7 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
 
     override fun request() {
         isloading = true
-        NotiAsyncTask(list, this,context).execute()
+        NotiAsyncTask(list, this, context).execute()
     }
 
     override fun internetInterrupted() {

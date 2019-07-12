@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.notification
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -11,34 +11,37 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
-import kotlinx.android.synthetic.main.fragment_notification.view.*
+import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
+
 import io.wiffy.gachonNoti.ui.main.MainActivity
 
-class NotificationFragment : Fragment(), NotificationContract.View {
+class NotificationFragment : Fragment(),
+    NotificationContract.View {
 
     lateinit var myView: View
     var mPresenter: NotificationPresenter? = null
     lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        myView = inflater.inflate(R.layout.fragment_notification, container, false)
+        myView = inflater.inflate(R.layout.fragment_notification_notification, container, false)
         myView.swipe.setOnRefreshListener {
             mPresenter?.resetList()
             myView.swipe.isRefreshing = false
         }
-        if (mPresenter == null) {
+//        if (mPresenter == null) {
             mPresenter = NotificationPresenter(this, context)
             mPresenter?.initPresent()
-        } else {
-            if (Util.isNetworkConnected(activity!!)) {
-                internetUsable()
-                changeTheme()
-                mPresenter?.uno()
-            } else {
-                internetUnusable()
-            }
-        }
+//        } else {
+//            if (Util.isNetworkConnected(activity!!)) {
+//                internetUsable()
+//                changeTheme()
+//                mPresenter?.uno()
+//            } else {
+//                internetUnusable()
+//            }
+//        }
         return myView
     }
 
@@ -57,10 +60,18 @@ class NotificationFragment : Fragment(), NotificationContract.View {
     }
 
     override fun changeUI(list: ParseList) {
-        adapter = MainAdapter(list, activity?.applicationContext!!, activity as MainActivity)
+        adapter = MainAdapter(
+            list,
+            activity?.applicationContext!!,
+            activity as MainActivity
+        )
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
-        myView.recylcer.addItemDecoration(VerticalSpaceItemDecoration(2))
+        myView.recylcer.addItemDecoration(
+            VerticalSpaceItemDecoration(
+                2
+            )
+        )
         myView.recylcer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -88,11 +99,11 @@ class NotificationFragment : Fragment(), NotificationContract.View {
     }
 
     override fun showLoad() {
-        (activity as MainActivity).builderUp()
+        MainActivity.mView.builderUp()
     }
 
     override fun dismissLoad() {
-        (activity as MainActivity).builderDismiss()
+        MainActivity.mView.builderDismiss()
     }
 
 }

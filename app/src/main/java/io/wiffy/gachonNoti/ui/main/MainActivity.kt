@@ -25,15 +25,20 @@ import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
-    lateinit var mPresenter: MainPresenter
+
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
     var backKeyPressedTime: Long = 0L
+    lateinit var mPresenter: MainPresenter
+
+    companion object {
+        lateinit var mView: MainContract.View
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
+        mView = this
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
@@ -66,7 +71,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
-        if ( (!NotificationManagerCompat.from(applicationContext)
+        if ((!NotificationManagerCompat.from(applicationContext)
                 .areNotificationsEnabled()) and (Util.notifiSet)
         ) {
 
@@ -169,6 +174,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
         pager.adapter = adapter
+        pager.offscreenPageLimit = mList.size
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
         navigation.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -181,6 +187,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 if (Util.state == Util.STATE_SEARCHER) mPresenter.floatingButtonControl()
                 Util.state = tab?.position ?: Util.STATE_NOTIFICATION
                 pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
+
             }
         })
 
