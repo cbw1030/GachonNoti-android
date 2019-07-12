@@ -11,7 +11,11 @@ import org.jsoup.Jsoup
 import java.net.URL
 
 
-class NotiAsyncTask(private val list: ParseList, private val mPresenter: NotificationPresenter, private val context: Context?) :
+class NotiAsyncTask(
+    private val list: ParseList,
+    private val mPresenter: NotificationPresenter,
+    private val context: Context?
+) :
     AsyncTask<Void, Void, Int>() {
 
     override fun onPreExecute() {
@@ -23,8 +27,9 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
     override fun doInBackground(vararg params: Void?): Int {
         if (!Util.isNetworkConnected(context!!)) return Util.ACTION_FAILURE
 
-        try{
-            val address = "${Util.mobileURL1}${Util.index}${Util.mobileURL2}${Util.seek}${Util.mobileURL3}"
+        try {
+            val address =
+                "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${Util.NotificationIndex}&pageSize=${Util.seek}&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
             val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
             for (n in conn) {
                 if (!n.html().contains("alt=\"공지\"")) {
@@ -37,29 +42,15 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
                             x.substring(v.length + 2),
                             n.select("span.data").text(),
                             false,
-                            when {
-                                n.html().contains("icon_new.gif") -> {
-                                    true
-                                }
-                                else -> {
-                                    false
-                                }
-                            },
-                            when {
-                                n.html().contains("icon_file.gif") -> {
-                                    true
-                                }
-                                else -> {
-                                    false
-                                }
-                            },
+                                n.html().contains("icon_new.gif"),
+                                n.html().contains("icon_file.gif"),
                             "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                         )
                     )
                 }
             }
             return Util.ACTION_SUCCESS
-        }catch (e:Exception){
+        } catch (e: Exception) {
             return Util.ACTION_FAILURE
         }
 
@@ -68,9 +59,10 @@ class NotiAsyncTask(private val list: ParseList, private val mPresenter: Notific
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
             if (result == Util.ACTION_SUCCESS) {
+                if(!Util.initCount.contains(false))
                 mPresenter.dismiss()
                 mPresenter.update(list)
-                Util.index += 1
+                Util.NotificationIndex += 1
             } else {
                 mPresenter.dismiss()
                 mPresenter.internetInterrupted()

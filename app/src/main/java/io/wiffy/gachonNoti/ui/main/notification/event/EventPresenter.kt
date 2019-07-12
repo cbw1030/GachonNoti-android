@@ -1,31 +1,24 @@
-package io.wiffy.gachonNoti.ui.main.notification.news
+package io.wiffy.gachonNoti.ui.main.notification.event
 
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 
-class NewsPresenter(val mView: NewsContract.View, private val context: Context?) : NewsContract.Presenter {
+class EventPresenter(val mView: EventContract.View, private val context: Context?) : EventContract.Presenter {
 
     private var list = ParseList()
     private var isloading = true
 
+
     override fun initPresent() {
         mView.changeUI(list)
-        NewsAsyncTask(list,this,context).execute()
+        EventAsyncTask(list, this, context).execute()
     }
 
     override fun load() {
         if (!isloading) {
             request()
         }
-    }
-
-    override fun internetInterrupted() {
-        mView.internetUnusable()
-    }
-
-    override fun internetNotInterrupted() {
-        mView.internetUsable()
     }
 
     override fun update(data: ParseList) {
@@ -45,12 +38,20 @@ class NewsPresenter(val mView: NewsContract.View, private val context: Context?)
 
     override fun request() {
         isloading = true
-        NewsAsyncTask(list,this,context).execute()
+        EventAsyncTask(list, this, context).execute()
     }
 
     override fun resetList() {
-        Util.NewsIndex = 0
+        Util.EventIndex = 0
         list.clear()
-        NewsAsyncTask(list,this,context).execute()
+        EventAsyncTask(list, this, context).execute()
+    }
+
+    override fun internetInterrupted() {
+        mView.internetUnusable()
+    }
+
+    override fun internetNotInterrupted() {
+        mView.internetUsable()
     }
 }

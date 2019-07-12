@@ -14,11 +14,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-
 class Util {
     companion object {
         @JvmStatic
         lateinit var sharedPreferences: SharedPreferences
+
+        @JvmStatic
+        lateinit var initCount: BooleanArray
 
         @JvmStatic
         var YEAR = "2019"
@@ -36,7 +38,16 @@ class Util {
         var firstBoot = true
 
         @JvmStatic
-        var index = 0
+        var NotificationIndex = 0
+
+        @JvmStatic
+        var NewsIndex = 0
+
+        @JvmStatic
+        var EventIndex = 0
+
+        @JvmStatic
+        var ScholarshipIndex = 0
 
         @JvmStatic
         var looper = true
@@ -75,8 +86,8 @@ class Util {
         )[Random().nextInt(8)]
 
         @JvmStatic
-        fun isNetworkConnected(context:Context): Boolean = try {
-            (context.getSystemService(Context.CONNECTIVITY_SERVICE)as ConnectivityManager).activeNetworkInfo!=null
+        fun isNetworkConnected(context: Context): Boolean = try {
+            (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo != null
         } catch (e: Exception) {
             false
         }
@@ -158,9 +169,6 @@ class Util {
         }
 
 
-        const val mobileURL1 = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum="
-        const val mobileURL2 = "&pageSize="
-        const val mobileURL3 = "&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val appConstantPreferences = "GACHONNOTICE"
 
         const val STATE_NOTIFICATION = 0

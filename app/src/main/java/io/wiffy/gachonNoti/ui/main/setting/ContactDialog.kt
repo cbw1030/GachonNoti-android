@@ -50,9 +50,9 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
                     else {
                         val query =
                             when (spinnerSelected) {
-                                1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
+                                1 -> "http://m.gachon.ac.kr/number/NotificationIndex.jsp?search=1&searchopt=dept&searchword=$text"
 
-                                else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
+                                else -> "http://m.gachon.ac.kr/number/NotificationIndex.jsp?search=1&searchopt=name&searchword=$text"
                             }
                         mView.executeTask(query)
                         dismiss()

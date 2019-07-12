@@ -111,12 +111,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             builder?.setCancelable(false)
             builder?.setCanceledOnTouchOutside(false)
             builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-            Handler(Looper.getMainLooper()).post {
-                try {
-                    builder?.show()
-                } catch (e: Exception) {
 
-                }
+        }
+        Handler(Looper.getMainLooper()).post {
+            try {
+                if (builder?.isShowing == false)
+                    builder?.show()
+            } catch (e: Exception) {
+
             }
         }
     }
@@ -131,7 +133,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         if (builder != null) {
             Handler(Looper.getMainLooper()).post {
                 try {
-                    builder?.dismiss()
+                    if (builder?.isShowing == true)
+                        builder?.dismiss()
                 } catch (e: Exception) {
 
                 }

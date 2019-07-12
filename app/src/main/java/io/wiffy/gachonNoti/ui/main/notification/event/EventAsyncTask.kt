@@ -1,24 +1,22 @@
-package io.wiffy.gachonNoti.ui.main.notification.news
+package io.wiffy.gachonNoti.ui.main.notification.event
 
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
-import java.lang.Exception
 import java.net.URL
 
-class NewsAsyncTask(private val list: ParseList, private val mPresenter: NewsPresenter, private val context: Context?) :
+class EventAsyncTask (private val list: ParseList, private val mPresenter: EventPresenter, private val context: Context?) :
     AsyncTask<Void, Void, Int>() {
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
             if (!Util.initCount.contains(true))
                 mPresenter.show()
-            Util.initCount[1] = true
+            Util.initCount[2] = true
         }
     }
 
@@ -26,20 +24,21 @@ class NewsAsyncTask(private val list: ParseList, private val mPresenter: NewsPre
         if (!Util.isNetworkConnected(context!!)) return Util.ACTION_FAILURE
         try {
             val address =
-                "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${Util.NewsIndex}&pageSize=${Util.seek}&boardType_seq=359&approve=&secret=&answer=&branch=&searchopt=&searchword="
+                "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${Util.EventIndex}&pageSize=${Util.seek}&boardType_seq=360&approve=&secret=&answer=&branch=&searchopt=&searchword="
             val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
 
-            for (n in conn) {
+            for(n in conn){
                 val x = n.select("a").text()
+                val v = x.split("]")[0]
 
                 list.add(
                     Parse(
-                        "",
-                        x,
+                        "$v]",
+                        x.substring(v.length + 2),
                         n.select("span.data").text(),
                         false,
                         n.html().contains("icon_new.gif"),
-                        n.html().contains("icon_file.gif"),
+                        n.html().contains("icon_file.gif") ,
                         "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                     )
                 )
@@ -47,20 +46,20 @@ class NewsAsyncTask(private val list: ParseList, private val mPresenter: NewsPre
             }
 
         } catch (e: Exception) {
-            Log.d("asdf", "what?")
             return Util.ACTION_FAILURE
         }
 
         return Util.ACTION_SUCCESS
-    }
 
+
+    }
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
             if (result == Util.ACTION_SUCCESS) {
                 if(!Util.initCount.contains(false))
                 mPresenter.dismiss()
                 mPresenter.update(list)
-                Util.NewsIndex += 1
+                Util.EventIndex += 1
             } else {
                 mPresenter.dismiss()
                 mPresenter.internetInterrupted()
