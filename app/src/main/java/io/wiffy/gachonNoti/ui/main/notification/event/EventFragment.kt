@@ -12,6 +12,11 @@ class EventFragment:Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification_event, container, false)
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return myView
+    }
+
+    fun changeTheme()
+    {
+
     }
 }

@@ -1,18 +1,16 @@
-package io.wiffy.gachonNoti.ui.main.notification.notification
+package io.wiffy.gachonNoti.ui.main.notification.news
 
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 
-class NotificationPresenter(private val mView: NotificationContract.View, private val context: Context?) :
-    NotificationContract.Presenter {
+class NewsPresenter(val mView: NewsContract.View, private val context: Context?) : NewsContract.Presenter {
 
     private var list = ParseList()
     private var isloading = true
 
-
     override fun initPresent() {
         mView.changeUI(list)
-        NotiAsyncTaskForN(list, this, context).execute()
+        //asynctask
     }
 
     override fun load() {
@@ -21,11 +19,13 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
         }
     }
 
-    override fun resetList() {
-        list.clear()
-        NotiAsyncTaskForN(list, this, context).execute()
+    override fun internetInterrupted() {
+        mView.internetUnusable()
     }
 
+    override fun internetNotInterrupted() {
+        mView.internetUsable()
+    }
 
     override fun update(data: ParseList) {
         isloading = false
@@ -41,16 +41,14 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
         mView.dismissLoad()
     }
 
+
     override fun request() {
         isloading = true
-        NotiAsyncTask(list, this, context).execute()
+        // async
     }
 
-    override fun internetInterrupted() {
-        mView.internetUnusable()
-    }
-
-    override fun internetNotInterrupted() {
-        mView.internetUsable()
+    override fun resetList() {
+        list.clear()
+        //async
     }
 }

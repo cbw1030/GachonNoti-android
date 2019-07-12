@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.MainAdapter
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
@@ -21,27 +22,19 @@ class NotificationFragment : Fragment(),
     NotificationContract.View {
 
     lateinit var myView: View
-    var mPresenter: NotificationPresenter? = null
+    lateinit var mPresenter: NotificationPresenter
     lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification_notification, container, false)
+
+        mPresenter = NotificationPresenter(this, context)
         myView.swipe.setOnRefreshListener {
-            mPresenter?.resetList()
+            mPresenter.resetList()
             myView.swipe.isRefreshing = false
         }
-//        if (mPresenter == null) {
-            mPresenter = NotificationPresenter(this, context)
-            mPresenter?.initPresent()
-//        } else {
-//            if (Util.isNetworkConnected(activity!!)) {
-//                internetUsable()
-//                changeTheme()
-//                mPresenter?.uno()
-//            } else {
-//                internetUnusable()
-//            }
-//        }
+        mPresenter.initPresent()
+
         return myView
     }
 
@@ -76,7 +69,7 @@ class NotificationFragment : Fragment(),
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    mPresenter?.load()
+                    mPresenter.load()
                 }
             }
         })
@@ -84,7 +77,7 @@ class NotificationFragment : Fragment(),
 
     }
 
-    private fun changeTheme() {
+    fun changeTheme() {
         myView.swipe.setColorSchemeColors(
             when (Util.theme) {
                 "red" -> resources.getColor(R.color.red)

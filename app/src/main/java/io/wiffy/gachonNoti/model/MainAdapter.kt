@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.notification.notification
+package io.wiffy.gachonNoti.model
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -19,8 +19,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.ParseList
-import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
 

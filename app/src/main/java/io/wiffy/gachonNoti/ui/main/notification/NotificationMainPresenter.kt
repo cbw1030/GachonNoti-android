@@ -10,16 +10,16 @@ import io.wiffy.gachonNoti.ui.main.notification.scholarship.ScholarshipFragment
 class NotificationMainPresenter(private val mView: NotificationMainContract.View) : NotificationMainContract.Presenter {
 
 
-
     override fun initPresent() {
         mView.initView()
     }
-    lateinit var notifications: NotificationFragment
-    lateinit var news: NewsFragment
-    lateinit var event: EventFragment
-    lateinit var scholarship: ScholarshipFragment
 
-    override fun fragmentInflation(list: ArrayList<Fragment>) {
+    var notifications: NotificationFragment? = null
+    var news: NewsFragment? = null
+    var event: EventFragment? = null
+    var scholarship: ScholarshipFragment? = null
+
+    override fun fragmentInflation(list: ArrayList<Fragment?>) {
         notifications = NotificationFragment()
         news = NewsFragment()
         event = EventFragment()
@@ -28,5 +28,28 @@ class NotificationMainPresenter(private val mView: NotificationMainContract.View
         list.add(news)
         list.add(event)
         list.add(scholarship)
+    }
+
+    override fun themeChange() {
+        if (notifications != null) notifications?.changeTheme()
+        if (news != null) news?.changeTheme()
+        if (event != null) event?.changeTheme()
+        if (scholarship != null) scholarship?.changeTheme()
+    }
+
+    override fun themeChange1() {
+        if (notifications != null) notifications?.changeTheme()
+    }
+
+    override fun themeChange2() {
+        if (news != null) news?.changeTheme()
+    }
+
+    override fun themeChange3() {
+        if (event != null) event?.changeTheme()
+    }
+
+    override fun themeChange4() {
+        if (scholarship != null) scholarship?.changeTheme()
     }
 }
