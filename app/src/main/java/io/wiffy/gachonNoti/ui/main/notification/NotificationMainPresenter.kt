@@ -37,19 +37,4 @@ class NotificationMainPresenter(private val mView: NotificationMainContract.View
         if (scholarship != null) scholarship?.changeTheme()
     }
 
-    override fun themeChange1() {
-        if (notifications != null) notifications?.changeTheme()
-    }
-
-    override fun themeChange2() {
-        if (news != null) news?.changeTheme()
-    }
-
-    override fun themeChange3() {
-        if (event != null) event?.changeTheme()
-    }
-
-    override fun themeChange4() {
-        if (scholarship != null) scholarship?.changeTheme()
-    }
 }

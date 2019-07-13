@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -19,6 +18,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         lateinit var mView: MainContract.View
     }
 
+    override fun setTabText(str:String) {
+        navigation.getTabAt(0)?.text =str
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -169,7 +172,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         )
     }
 
-    override fun changeUI(mList: ArrayList<Fragment>) {
+    override fun changeUI(mList: ArrayList<Fragment?>) {
         themeChange()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash2.setImageResource(R.drawable.defaults)
         adapter = PagerAdapter(supportFragmentManager, mList)

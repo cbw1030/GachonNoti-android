@@ -6,15 +6,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
+import kotlinx.android.synthetic.main.fragment_notification.view.navigation2
 
 class NotificationMainFragment : Fragment(), NotificationMainContract.View {
     lateinit var myView: View
     lateinit var mPresenter: NotificationMainPresenter
+    lateinit var adapter: PagerAdapter
 
     companion object {
         lateinit var fragmentList: ArrayList<Fragment?>
@@ -28,7 +36,7 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
         return myView
     }
 
-    fun themeChanger() {
+    fun themeChanger(bool: Boolean) {
         val themeColorArray = arrayOf(
             intArrayOf(-android.R.attr.state_checked),
             intArrayOf(android.R.attr.state_checked)
@@ -50,79 +58,46 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
 
             )
         }
-        mPresenter.themeChange()
-        myView.fragmentBottomView.itemTextColor = ColorStateList(themeColorArray, color)
+        if (bool)
+            mPresenter.themeChange()
+        myView.navigation2.tabTextColors = ColorStateList(themeColorArray, color)
+        myView.navigation2.setSelectedTabIndicatorColor(color[1])
 
     }
 
     override fun initView() {
         fragmentList = ArrayList()
         mPresenter.fragmentInflation(fragmentList)
-        initInflation()
-
-
-        myView.fragmentBottomView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.notification -> inflateNotification()
-                R.id.news -> inflateNews()
-                R.id.event -> inflateEvent()
-                R.id.scholarship -> inflateScholarship()
+        adapter = PagerAdapter(activity?.supportFragmentManager, fragmentList)
+        myView.navigation2.addTab(myView.navigation2.newTab().setText("공지사항"))
+        myView.navigation2.addTab(myView.navigation2.newTab().setText("가천뉴스"))
+        myView.navigation2.addTab(myView.navigation2.newTab().setText("행사소식"))
+        myView.navigation2.addTab(myView.navigation2.newTab().setText("장학소식"))
+        myView.pager2.adapter = adapter
+        myView.pager2.offscreenPageLimit = fragmentList.size
+        myView.pager2.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(myView.navigation2))
+        myView.navigation2.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
             }
-            true
-        }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                myView.pager2.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
+                MainActivity.mView.setTabText(
+                    when (tab?.position) {
+                        1 -> "가천뉴스"
+                        2 -> "행사소식"
+                        3 -> "장학소식"
+                        else -> "공지사항"
+                    }
+                )
+            }
+        })
+        themeChanger(false)
     }
 
-    private fun initInflation() {
-        for (x in 0..3)
-            childFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragmentList[x]!!)
-                .commit()
-
-        inflateNotification()
-    }
-
-    override fun inflateNotification() {
-        childFragmentManager.beginTransaction().hide(fragmentList[1]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[2]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[3]!!)
-            .commit()
-        childFragmentManager.beginTransaction().show(fragmentList[0]!!)
-            .commit()
-    }
-
-    override fun inflateNews() {
-        childFragmentManager.beginTransaction().hide(fragmentList[0]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[2]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[3]!!)
-            .commit()
-        childFragmentManager.beginTransaction().show(fragmentList[1]!!)
-            .commit()
-    }
-
-    override fun inflateEvent() {
-        childFragmentManager.beginTransaction().hide(fragmentList[0]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[1]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[3]!!)
-            .commit()
-        childFragmentManager.beginTransaction().show(fragmentList[2]!!)
-            .commit()
-    }
-
-    override fun inflateScholarship() {
-        childFragmentManager.beginTransaction().hide(fragmentList[0]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[2]!!)
-            .commit()
-        childFragmentManager.beginTransaction().hide(fragmentList[1]!!)
-            .commit()
-        childFragmentManager.beginTransaction().show(fragmentList[3]!!)
-            .commit()
-    }
 
     override fun showLoad() {
         (activity as MainActivity).builderUp()

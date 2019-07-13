@@ -11,7 +11,7 @@ import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 
 class MainPresenter(private val mView: MainContract.View, private val context: Activity) : MainContract.Presenter {
 
-    private val mList = ArrayList<Fragment>()
+    private val mList = ArrayList<Fragment?>()
 
     override fun initPresent() {
         val notificationFragment = NotificationMainFragment()
@@ -27,7 +27,7 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
     }
 
     override fun changeThemes() {
-        (mList[Util.STATE_NOTIFICATION] as NotificationMainFragment).themeChanger()
+        (mList[Util.STATE_NOTIFICATION] as NotificationMainFragment).themeChanger(true)
         (mList[Util.STATE_SETTING] as SettingFragment).themeChanger()
         (mList[Util.STATE_SEARCHER] as SearcherFragment).themeChanger()
     }

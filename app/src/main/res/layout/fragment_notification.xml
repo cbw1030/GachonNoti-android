@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tool="http://schemas.android.com/tools"
         android:background="@color/table_out"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <FrameLayout
-            android:id="@+id/fragmentContainer"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/fragmentBottomView"
-    />
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            app:menu="@menu/notification_menu"
-            android:id="@+id/fragmentBottomView"
-            android:layout_alignParentBottom="true"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            android:layout_width="match_parent"
-            app:itemIconTint="@color/main2Blue"
-            app:itemTextColor="@color/main2Blue"
-            android:background="@color/table_out"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            android:layout_height="wrap_content">
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/navigation2"
+                app:tabMode="fixed"
+                android:elevation="0dp"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorColor="@color/gray2"
+                android:layout_width="match_parent"
+                app:tabSelectedTextColor="@color/WHITE"
+                app:tabTextColor="@color/gray"
+                app:tabIndicatorHeight="3dp"
+                android:background="@color/white"
+                app:tabRippleColor="@color/gray2"
+                android:layout_alignParentBottom="true"
+                android:layout_height="40dp"/>
+
+
+        <androidx.viewpager.widget.ViewPager
+                android:layout_above="@+id/navigation2"
+                android:id="@+id/pager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_alignParentTop="true"/>
+
 
 </RelativeLayout>
