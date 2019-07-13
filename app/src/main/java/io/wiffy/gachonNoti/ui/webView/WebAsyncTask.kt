@@ -51,6 +51,10 @@ class WebAsyncTask(
                             if (javaS.contains("<script>document.location.href=\"")) {
                                 goHref = javaS.split("<script>document.location.href=\"")[1].split("\";</script>")[0]
                             } else {
+                                javaS = javaS.replace("src=\"/Files/",
+                                    "width='100%'src=\"/Files/")
+                                javaS = javaS.replace("src=\"http://www.gachon.ac.kr/Files/",
+                                    "width='100%'src=\"http://www.gachon.ac.kr/Files/")
                                 javaS = javaS.replace("src=\"/", "src=\"http://www.gachon.ac.kr/")
                                 javaS = javaS.replace("href=\"/", "href=\"http://www.gachon.ac.kr/")
                                 Handler(Looper.getMainLooper()).post {
