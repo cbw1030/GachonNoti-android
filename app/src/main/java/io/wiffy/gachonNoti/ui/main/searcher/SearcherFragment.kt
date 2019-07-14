@@ -41,11 +41,12 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     override fun initUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             myView.subFab1.setImageResource(R.drawable.outline_autorenew_white_24dp)
             myView.fab.setImageResource(R.drawable.search)
-        }else{
+        } else {
         }
+        bringToFrontFAB()
         fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
         fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
@@ -53,6 +54,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
+
         myView.fab.setOnLongClickListener {
             anim()
             true
@@ -165,13 +167,22 @@ class SearcherFragment : Fragment(), SearchContract.View {
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
-            }}학기 [${if(Util.campus){"G"}else{"M"}}]"
+            }}학기 [${if (Util.campus) {
+                "G"
+            } else {
+                "M"
+            }}]"
             themeChanger()
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE
         }
+        bringToFrontFAB()
     }
 
+    private fun bringToFrontFAB() {
+        myView.fab.bringToFront()
+        myView.subFab1.bringToFront()
+    }
 
     override fun showLoad() {
         (activity as MainActivity).builderUp()
