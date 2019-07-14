@@ -50,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+<<<<<<< Updated upstream
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/subFab1"
                     android:layout_width="50dp"
@@ -84,12 +85,13 @@
                     android:layout_alignParentBottom="true"/>
 
 
+=======
+>>>>>>> Stashed changes
             <com.github.eunsiljo.timetablelib.view.TimeTableView
                     android:layout_marginTop="-1dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/timetable"/>
-
 
             <RelativeLayout
                     android:id="@+id/showtu"
@@ -121,9 +123,5 @@
 
 
         </RelativeLayout>
-
-
     </androidx.cardview.widget.CardView>
-
-
 </RelativeLayout>
