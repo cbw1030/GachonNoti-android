@@ -20,7 +20,6 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
-import kotlinx.android.synthetic.main.fragment_searcher.*
 import kotlinx.android.synthetic.main.fragment_searcher.view.subFab1
 import kotlin.collections.ArrayList
 
@@ -46,7 +45,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
             myView.fab.setImageResource(R.drawable.search)
         } else {
         }
-        bringToFrontFAB()
+
         fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
         fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
@@ -176,13 +175,10 @@ class SearcherFragment : Fragment(), SearchContract.View {
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE
         }
-        bringToFrontFAB()
+
     }
 
-    private fun bringToFrontFAB() {
-        myView.fab.bringToFront()
-        myView.subFab1.bringToFront()
-    }
+
 
     override fun showLoad() {
         (activity as MainActivity).builderUp()
