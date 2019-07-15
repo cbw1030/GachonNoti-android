@@ -7,8 +7,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.system.Os
 import android.text.Html
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -16,6 +16,9 @@ import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_detailsetting.*
+import android.app.AlertDialog
+import io.wiffy.gachonNoti.model.StudentInformation
+import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
 class DetailDialog(context: Context) : Dialog(context) {
@@ -35,6 +38,9 @@ class DetailDialog(context: Context) : Dialog(context) {
 
         settingColor(Util.theme)
 
+        logout.setOnClickListener {
+            logout()
+        }
         isLogin(Util.isLogin)
         gachon.text = Html.fromHtml(
             "<u>가천대학교 홈페이지</u>"
@@ -92,7 +98,7 @@ class DetailDialog(context: Context) : Dialog(context) {
 
     private fun isLogin(bool: Boolean) {
         login.setOnClickListener {
-            Toast.makeText(context, "로그인하자", Toast.LENGTH_SHORT).show()
+            login()
         }
         tempLogin = bool
         if (bool) {
@@ -149,12 +155,67 @@ class DetailDialog(context: Context) : Dialog(context) {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun login() {
+        val li = LayoutInflater.from(context)
+        val prompt = li.inflate(R.layout.dialog_login, null)
+        val alertDialogBuilder = AlertDialog.Builder(context)
+        alertDialogBuilder.setView(prompt)
+
+        //user.setText(Login_USER); //login_USER and PASS are loaded from previous session (optional)
+        //pass.setText(Login_PASS);
+        alertDialogBuilder.setTitle("계정 정보")
+        alertDialogBuilder.setCancelable(false)
+            .setPositiveButton("로그인") { dialog, _ ->
+                if (Util.isNetworkConnected(context)) {
+                    executeLogin(prompt.login_name.text.toString(), prompt.login_password.text.toString())
+                } else {
+                    Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                    dialog.cancel()
+                }
+            }
+        prompt.reference.text = Html.fromHtml(
+            "<u>참고 코드</u>"
+        )
+        prompt.reference.setOnClickListener {
+            Util.novisible = true
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://github.com/wiffy-io/GachonNoti-android")
+                )
+            )
+        }
+        alertDialogBuilder.setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
+
+        alertDialogBuilder.show()
 
     }
 
-    private fun nonLogin() {
+    private fun executeLogin(id: String, password: String) {
+        LoginAsyncTask(id, password, context, this).execute()
+        TODO()
+    }
 
+    @SuppressLint("ApplySharedPref")
+    private fun logout() {
+        Util.sharedPreferences.edit().remove("id").commit()
+        Util.sharedPreferences.edit().remove("password").commit()
+        Util.sharedPreferences.edit().remove("name").commit()
+        Util.sharedPreferences.edit().remove("number").commit()
+        Util.sharedPreferences.edit().putBoolean("login", false).commit()
+        Util.isLogin = false
+        isLogin(false)
+    }
+
+    fun saveInformation(information: StudentInformation)
+    {
+        isLogin(true)
+        Toast.makeText(context,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show()
+    }
+    fun loginFailed()
+    {
+        Toast.makeText(context,"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("ApplySharedPref")
