@@ -26,6 +26,9 @@ class Util {
         var YEAR = "2019"
 
         @JvmStatic
+        var isLogined = false
+
+        @JvmStatic
         var surfing = false
 
         @JvmStatic

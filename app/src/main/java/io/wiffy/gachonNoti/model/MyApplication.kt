@@ -14,21 +14,12 @@ class MyApplication : Application() {
         super.onCreate()
 
         Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE)
-        Util.firstBoot = Util.sharedPreferences.getBoolean(
-            "firstBooting", true
-        )
-        Util.notifiSet = Util.sharedPreferences.getBoolean(
-            "notiOn", true
-        )
-        Util.theme = Util.sharedPreferences.getString(
-            "theme", "default"
-        ) ?: "default"
-
-        Util.seek = Util.sharedPreferences.getInt(
-            "seek", 20
-        )
+        Util.firstBoot = Util.sharedPreferences.getBoolean("firstBooting", true)
+        Util.notifiSet = Util.sharedPreferences.getBoolean("notiOn", true)
+        Util.theme = Util.sharedPreferences.getString("theme", "default") ?: "default"
+        Util.seek = Util.sharedPreferences.getInt("seek", 20)
         Util.initCount = booleanArrayOf(false, false, false, false)
-
+        Util.isLogined = Util.sharedPreferences.getBoolean("login", false)
         Util.campus = Util.sharedPreferences.getBoolean("campus", true)
 
         Util.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
