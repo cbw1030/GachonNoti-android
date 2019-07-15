@@ -5,7 +5,9 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.system.Os
 import android.text.Html
 import android.view.View
 import android.widget.Toast
@@ -96,24 +98,33 @@ class DetailDialog(context: Context) : Dialog(context) {
         if (bool) {
             frame_logined.visibility = View.VISIBLE
             frame_none_logined.visibility = View.GONE
-            login()
         } else {
             frame_logined.visibility = View.GONE
             frame_none_logined.visibility = View.VISIBLE
-            nonLogin()
+
         }
     }
 
-    private fun settingColor(int:Int)
-    {
+    private fun settingColor(int: Int) {
         val color = when (int) {
             2 -> R.color.green
             1 -> R.color.red
             else -> R.color.main2Blue
         }
-        OK.setBackgroundColor(ContextCompat.getColor(context, color))
-        Cancel.setBackgroundColor(ContextCompat.getColor(context, color))
-        login.setBackgroundColor(ContextCompat.getColor(context, color))
+        val style = when (color) {
+            R.color.green -> R.drawable.dialog_button_green
+            R.color.red -> R.drawable.dialog_button_red
+            else -> R.drawable.dialog_button_default
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            OK.setBackgroundResource(style)
+            Cancel.setBackgroundResource(style)
+            login.setBackgroundResource(style)
+        } else {
+            OK.setBackgroundColor(ContextCompat.getColor(context, color))
+            Cancel.setBackgroundColor(ContextCompat.getColor(context, color))
+            login.setBackgroundColor(ContextCompat.getColor(context, color))
+        }
     }
 
     private fun settingColor(str: String) {
@@ -122,10 +133,20 @@ class DetailDialog(context: Context) : Dialog(context) {
             "red" -> R.color.red
             else -> R.color.main2Blue
         }
-
-        OK.setBackgroundColor(ContextCompat.getColor(context, color))
-        Cancel.setBackgroundColor(ContextCompat.getColor(context, color))
-        login.setBackgroundColor(ContextCompat.getColor(context, color))
+        val style = when (color) {
+            R.color.green -> R.drawable.dialog_button_green
+            R.color.red -> R.drawable.dialog_button_red
+            else -> R.drawable.dialog_button_default
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            OK.setBackgroundResource(style)
+            Cancel.setBackgroundResource(style)
+            login.setBackgroundResource(style)
+        } else {
+            OK.setBackgroundColor(ContextCompat.getColor(context, color))
+            Cancel.setBackgroundColor(ContextCompat.getColor(context, color))
+            login.setBackgroundColor(ContextCompat.getColor(context, color))
+        }
     }
 
     private fun login() {
