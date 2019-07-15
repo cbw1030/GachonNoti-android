@@ -42,51 +42,13 @@
             android:layout_margin="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
-
-
         <RelativeLayout
                 android:id="@+id/card2"
                 android:layout_below="@+id/card1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-<<<<<<< Updated upstream
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/subFab1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:clickable="true"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="88dp"
-                    android:layout_marginEnd="19dp"
-                    android:padding="0dp"
-                    app:fabCustomSize="50dp"
-                    app:elevation="0dp"
-                    app:pressedTranslationZ="12dp"
-                    app:maxImageSize="18dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-            />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab"
-                    app:fabSize="normal"
-                    app:elevation="0dp"
-                    android:layout_width="58dp"
-                    android:layout_height="58dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:layout_gravity="center"
-                    app:maxImageSize="30dp"
-                    android:layout_margin="15dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"/>
-
-
-=======
->>>>>>> Stashed changes
             <com.github.eunsiljo.timetablelib.view.TimeTableView
                     android:layout_marginTop="-1dp"
                     android:layout_width="match_parent"
@@ -120,7 +82,38 @@
                         android:text="@string/load"/>
 
             </RelativeLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/subFab1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="88dp"
+                    android:layout_marginEnd="19dp"
+                    android:padding="0dp"
+                    app:fabCustomSize="50dp"
+                    app:elevation="0dp"
+                    app:pressedTranslationZ="12dp"
+                    app:maxImageSize="18dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+            />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    app:fabSize="normal"
+                    app:elevation="0dp"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="center"
+                    app:maxImageSize="30dp"
+                    android:layout_margin="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
