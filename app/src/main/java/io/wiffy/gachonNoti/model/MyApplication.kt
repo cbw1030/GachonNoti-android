@@ -19,7 +19,7 @@ class MyApplication : Application() {
         Util.theme = Util.sharedPreferences.getString("theme", "default") ?: "default"
         Util.seek = Util.sharedPreferences.getInt("seek", 20)
         Util.initCount = booleanArrayOf(false, false, false, false)
-        Util.isLogined = Util.sharedPreferences.getBoolean("login", false)
+        Util.isLogin = Util.sharedPreferences.getBoolean("login", false)
         Util.campus = Util.sharedPreferences.getBoolean("campus", true)
 
         Util.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
