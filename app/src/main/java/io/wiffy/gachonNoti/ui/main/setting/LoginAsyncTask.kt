@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import android.widget.Toast
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -24,7 +23,7 @@ class LoginAsyncTask(val ids: String, val password: String, val context: Context
         if (!Util.isNetworkConnected(context)) return Util.ACTION_FAILURE
         try {
 //            TODO()
-            studentInformation = StudentInformation("박상현", "201735829", "okpsh0033", "1q2w3e4r")
+            studentInformation = StudentInformation("박상현", "201735829", ids, password)
         }catch (e:Exception){
             return Util.ACTION_FAILURE
         }
