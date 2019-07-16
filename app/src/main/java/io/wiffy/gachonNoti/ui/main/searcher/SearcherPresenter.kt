@@ -126,7 +126,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         ) {
             mView2.showBtn(false)
             Handler(Looper.getMainLooper()).post {
-                mView2.categoryinvisible()
+                mView2.categoryInvisible()
             }
             findBuilding = ArrayList()
             Thread(Runnable {

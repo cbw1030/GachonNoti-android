@@ -26,7 +26,7 @@ interface SearchContract {
     }
 
     interface DialogPresenter {
-        fun categoryinvisible()
+        fun categoryInvisible()
         fun getDataDialog(yearSemester: String)
         fun showBtn(c: Boolean)
         fun errorDialog()

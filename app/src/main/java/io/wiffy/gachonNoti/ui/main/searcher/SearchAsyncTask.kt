@@ -37,29 +37,33 @@ class SearchAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
 
-        val type = if(Util.campus){20}else{21}
+        val type = if (Util.campus) {
+            20
+        } else {
+            21
+        }
         val url = "http://gcis.gachon.ac.kr/haksa/src/jsp/ssu/ssu1000q.jsp?"
         val url2 =
             "groupType=$type&searchYear=2019&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
         try {
             try {
                 val myUrl = URL(url + url2)
-                val conn = myUrl.openConnection() as HttpURLConnection
-                conn.requestMethod = "GET"
-                conn.instanceFollowRedirects = true
-                HttpURLConnection.setFollowRedirects(true)
-
-                conn.doOutput = true
-                conn.doInput = true
-                conn.useCaches = false
-                conn.defaultUseCaches = false
+                val conn = (myUrl.openConnection() as HttpURLConnection).apply {
+                    requestMethod = "GET"
+                    instanceFollowRedirects = true
+                    HttpURLConnection.setFollowRedirects(true)
+                    doOutput = true
+                    doInput = true
+                    useCaches = false
+                    defaultUseCaches = false
+                }
                 val `is` = conn.inputStream
                 val builder = StringBuilder()
                 val reader = BufferedReader(InputStreamReader(`is`, "euc-kr"))
 
                 var line = reader.readLine()
                 while (line != null) {
-                    builder.append(line.replace("(M)","") + "\n")
+                    builder.append(line.replace("(M)", "") + "\n")
                     line = reader.readLine()
                 }
 
@@ -74,7 +78,11 @@ class SearchAsyncTask(
     @SuppressLint("ApplySharedPref")
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-            val campus = if(Util.campus){"global"}else{"medical"}
+            val campus = if (Util.campus) {
+                "global"
+            } else {
+                "medical"
+            }
             if (mySemester == 10 || mySemester == 20) {
                 if (done.contains("<haksuNo>")) {
                     Util.sharedPreferences.edit().putString("$yearSemester-$cate-$campus", done).commit()

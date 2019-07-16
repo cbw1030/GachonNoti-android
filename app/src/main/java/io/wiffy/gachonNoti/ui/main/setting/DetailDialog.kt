@@ -204,11 +204,13 @@ class DetailDialog(context: Context) : Dialog(context) {
 
     @SuppressLint("ApplySharedPref")
     private fun logout() {
-        Util.sharedPreferences.edit().remove("id").commit()
-        Util.sharedPreferences.edit().remove("password").commit()
-        Util.sharedPreferences.edit().remove("name").commit()
-        Util.sharedPreferences.edit().remove("number").commit()
-        Util.sharedPreferences.edit().putBoolean("login", false).commit()
+        Util.sharedPreferences.edit().apply {
+            remove("id")
+            remove("password")
+            remove("name")
+            remove("number")
+            putBoolean("login", false)
+        }.commit()
         Util.isLogin = false
         isLogin(false)
     }
@@ -217,12 +219,14 @@ class DetailDialog(context: Context) : Dialog(context) {
     fun saveInformation(information: StudentInformation) {
         isLogin(true)
         with(information) {
-            Util.sharedPreferences.edit().putString("id", id).commit()
-            Util.sharedPreferences.edit().putString("password", password).commit()
-            Util.sharedPreferences.edit().putString("name", name).commit()
-            Util.sharedPreferences.edit().putString("number", number).commit()
+            Util.sharedPreferences.edit().apply {
+                putString("id", id)
+                putString("password", password)
+                putString("name", name)
+                putString("number", number)
+                putBoolean("login", true)
+            }.commit()
         }
-        Util.sharedPreferences.edit().putBoolean("login", true).commit()
         Util.isLogin = true
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
     }
@@ -239,7 +243,9 @@ class DetailDialog(context: Context) : Dialog(context) {
             2 -> "green"
             else -> "default"
         }
-        Util.sharedPreferences.edit().putInt("seek", Util.seek).commit()
-        Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
+        Util.sharedPreferences.edit().apply {
+            putInt("seek", Util.seek)
+            putString("theme", Util.theme)
+        }.commit()
     }
 }
