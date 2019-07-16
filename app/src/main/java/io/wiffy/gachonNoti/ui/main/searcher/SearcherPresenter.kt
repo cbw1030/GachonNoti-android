@@ -95,10 +95,13 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
         try {
             for (x in arrayOf("global", "medical")) {
-                Util.sharedPreferences.edit().putString("$underYear-$underSemester-1-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$underYear-$underSemester-2-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$underYear-$underSemester-3-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$underYear-$underSemester-4-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().apply {
+                    putString("$underYear-$underSemester-1-$x", "<nodata>")
+                    putString("$underYear-$underSemester-2-$x", "<nodata>")
+                    putString("$underYear-$underSemester-3-$x", "<nodata>")
+                    putString("$underYear-$underSemester-4-$x", "<nodata>")
+                }.commit()
+
             }
         } catch (e: Exception) {
         }
@@ -107,18 +110,22 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         } else {
             "medical"
         }
-        load1 = Util.sharedPreferences.getString(
-            "$year-$semester-1-$temp", "<nodata>"
-        ) ?: "<nodata>"
-        load2 = Util.sharedPreferences.getString(
-            "$year-$semester-2-$temp", "<nodata>"
-        ) ?: "<nodata>"
-        load3 = Util.sharedPreferences.getString(
-            "$year-$semester-3-$temp", "<nodata>"
-        ) ?: "<nodata>"
-        load4 = Util.sharedPreferences.getString(
-            "$year-$semester-4-$temp", "<nodata>"
-        ) ?: "<nodata>"
+        with(Util.sharedPreferences)
+        {
+            load1 = getString(
+                "$year-$semester-1-$temp", "<nodata>"
+            ) ?: "<nodata>"
+            load2 = getString(
+                "$year-$semester-2-$temp", "<nodata>"
+            ) ?: "<nodata>"
+            load3 = getString(
+                "$year-$semester-3-$temp", "<nodata>"
+            ) ?: "<nodata>"
+            load4 = getString(
+                "$year-$semester-4-$temp", "<nodata>"
+            ) ?: "<nodata>"
+        }
+
         if (!load1.contains("<nodata>") &&
             !load2.contains("<nodata>") &&
             !load3.contains("<nodata>") &&
@@ -247,28 +254,32 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
         Thread(Runnable {
             tablearr = ArrayList(6)
-            tablearr.add(ArrayList())
-            tablearr.add(ArrayList())
-            tablearr.add(ArrayList())
-            tablearr.add(ArrayList())
-            tablearr.add(ArrayList())
-            tablearr.add(ArrayList())
+            with(tablearr)
+            {
+                add(ArrayList())
+                add(ArrayList())
+                add(ArrayList())
+                add(ArrayList())
+                add(ArrayList())
+                add(ArrayList())
+            }
+
             findTable(load1, str)
             findTable(load2, str)
             findTable(load3, str)
-
             Collections.sort(tablearr[0], TimeCompare())
             Collections.sort(tablearr[1], TimeCompare())
             Collections.sort(tablearr[2], TimeCompare())
             Collections.sort(tablearr[3], TimeCompare())
             Collections.sort(tablearr[4], TimeCompare())
 
-            val array2 = ArrayList<TimeTableData>()
-            array2.add(TimeTableData("월", tablearr[0]))
-            array2.add(TimeTableData("화", tablearr[1]))
-            array2.add(TimeTableData("수", tablearr[2]))
-            array2.add(TimeTableData("목", tablearr[3]))
-            array2.add(TimeTableData("금", tablearr[4]))
+            val array2 = ArrayList<TimeTableData>().apply {
+                add(TimeTableData("월", tablearr[0]))
+                add(TimeTableData("화", tablearr[1]))
+                add(TimeTableData("수", tablearr[2]))
+                add(TimeTableData("목", tablearr[3]))
+                add(TimeTableData("금", tablearr[4]))
+            }
 
             Handler(Looper.getMainLooper()).post {
                 mView.setTimeTable(array2, str)

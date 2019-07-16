@@ -19,12 +19,14 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                 val channelName = context.getString(R.string.app_name)
                 val notiChannel =
                     context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                val channelMessage = NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT)
-                channelMessage.description = ""
-                channelMessage.enableLights(true)
-                channelMessage.enableVibration(true)
-                channelMessage.setShowBadge(false)
-                channelMessage.vibrationPattern = addList()
+                val channelMessage =
+                    NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                        description = ""
+                        enableLights(true)
+                        enableVibration(true)
+                        setShowBadge(false)
+                        vibrationPattern = addList()
+                    }
                 notiChannel.createNotificationChannel(channelMessage)
             }
             mView.subscribe()
@@ -32,13 +34,12 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         false -> mView.changeUI()
     }
 
-    private fun addList(): LongArray {
-        val myList = LongArray(4)
-        myList[0] = 100
-        myList[1] = 200
-        myList[2] = 100
-        myList[3] = 200
-        return myList
+
+    private fun addList() = LongArray(4).apply {
+        this[0] = 100
+        this[1] = 200
+        this[2] = 100
+        this[3] = 200
     }
 
     override fun move() {

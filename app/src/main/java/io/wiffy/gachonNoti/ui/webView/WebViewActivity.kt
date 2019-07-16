@@ -41,11 +41,13 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     private fun initBuild() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash3.setImageResource(R.drawable.defaults)
-        builder = Dialog(this@WebViewActivity)
-        builder.setContentView(R.layout.builder)
-        builder.setCancelable(false)
-        builder.setCanceledOnTouchOutside(false)
-        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        builder = Dialog(this@WebViewActivity).apply {
+            setContentView(R.layout.builder)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+            this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
     }
 
     override fun builderUp() {
