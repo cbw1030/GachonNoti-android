@@ -3,8 +3,9 @@ package io.wiffy.gachonNoti.ui.main.notification.news
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
-class NewsPresenter(val mView: NewsContract.View, private val context: Context?) : NewsContract.Presenter {
+class NewsPresenter(val mView: NotificationComponentContract.View, private val context: Context?) : NotificationComponentContract.Presenter {
 
     private var list = ParseList()
     private var isloading = true
