@@ -22,11 +22,11 @@ interface SearchContract {
         fun error()
         fun loadRoom(roomNM: String)
         fun loadTable(str: String)
-        fun resetdata()
+        fun resetData()
     }
 
     interface DialogPresenter {
-        fun cate_invi()
+        fun categoryinvisible()
         fun getDataDialog(yearSemester: String)
         fun showBtn(c: Boolean)
         fun errorDialog()

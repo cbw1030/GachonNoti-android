@@ -55,15 +55,17 @@ class ScholarshipAsyncTask(
     }
 
     override fun onPostExecute(result: Int?) {
-        Handler(Looper.getMainLooper()).post {
-            if (result == Util.ACTION_SUCCESS) {
-                if(!Util.initCount.contains(false))
-                    mPresenter.dismiss()
-                mPresenter.update(list)
-                Util.ScholarshipIndex += 1
-            } else {
-                mPresenter.dismiss()
-                mPresenter.internetInterrupted()
+        with(mPresenter) {
+            Handler(Looper.getMainLooper()).post {
+                if (result == Util.ACTION_SUCCESS) {
+                    if (!Util.initCount.contains(false))
+                        dismiss()
+                    update(list)
+                    Util.ScholarshipIndex += 1
+                } else {
+                    dismiss()
+                    internetInterrupted()
+                }
             }
         }
     }

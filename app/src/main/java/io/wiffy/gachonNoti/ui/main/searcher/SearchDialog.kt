@@ -64,7 +64,7 @@ class SearchDialog(
         mPresenter.isDownloaded(Util.YEAR, Util.SEMESTER.toString())
     }
 
-    override fun cate_invi() {
+    override fun categoryinvisible() {
         cate.visibility = View.INVISIBLE
     }
 

@@ -72,22 +72,26 @@ class DetailDialog(context: Context) : Dialog(context) {
         preIndex = index
 
         list = ArrayList()
-        list.add(defaultColor)
-        list.add(redColor)
-        list.add(greenColor)
-        list[index].borderWidth = 4
-        for (x in 0 until list.size) {
-            list[x].setOnClickListener {
-                for (v in 0 until list.size) {
-                    if (x == v)
-                        list[v].borderWidth = 4
-                    else
-                        list[v].borderWidth = 0
+        with(list)
+        {
+            add(defaultColor)
+            add(redColor)
+            add(greenColor)
+            this[index].borderWidth = 4
+            for (x in 0 until size) {
+                this[x].setOnClickListener {
+                    for (v in 0 until size) {
+                        if (x == v)
+                            this[v].borderWidth = 4
+                        else
+                            this[v].borderWidth = 0
+                    }
+                    index = x
+                    settingColor(x)
                 }
-                index = x
-                settingColor(x)
             }
         }
+
 
     }
 
@@ -160,13 +164,12 @@ class DetailDialog(context: Context) : Dialog(context) {
         val li = LayoutInflater.from(context)
         val prompt = li.inflate(R.layout.dialog_login, null)
         val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setView(prompt)
+        alertDialogBuilder.run {
+            setView(prompt)
 
-        //user.setText(Login_USER); //login_USER and PASS are loaded from previous session (optional)
-        //pass.setText(Login_PASS);
-        alertDialogBuilder.setTitle("계정 정보")
-        alertDialogBuilder.setCancelable(false)
-            .setPositiveButton("로그인") { dialog, _ ->
+            setTitle("계정 정보")
+            setCancelable(false)
+            setPositiveButton("로그인") { dialog, _ ->
                 if (Util.isNetworkConnected(context)) {
                     executeLogin(prompt.login_name.text.toString(), prompt.login_password.text.toString())
                 } else {
@@ -174,27 +177,29 @@ class DetailDialog(context: Context) : Dialog(context) {
                     dialog.cancel()
                 }
             }
-        prompt.reference.text = Html.fromHtml(
-            "<u>참고 코드</u>"
-        )
-        prompt.reference.setOnClickListener {
-            Util.novisible = true
-            context.startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://github.com/wiffy-io/GachonNoti-android")
-                )
+            prompt.reference.text = Html.fromHtml(
+                "<u>참고 코드</u>"
             )
-        }
-        alertDialogBuilder.setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
+            prompt.reference.setOnClickListener {
+                Util.novisible = true
+                context.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://github.com/wiffy-io/GachonNoti-android")
+                    )
+                )
+            }
+            setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
 
-        alertDialogBuilder.show()
+            show()
+        }
+
 
     }
 
     private fun executeLogin(id: String, password: String) {
         LoginAsyncTask(id, password, context, this).execute()
-        TODO()
+//        TODO()
     }
 
     @SuppressLint("ApplySharedPref")
@@ -208,14 +213,22 @@ class DetailDialog(context: Context) : Dialog(context) {
         isLogin(false)
     }
 
-    fun saveInformation(information: StudentInformation)
-    {
+    @SuppressLint("ApplySharedPref")
+    fun saveInformation(information: StudentInformation) {
         isLogin(true)
-        Toast.makeText(context,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show()
+        with(information) {
+            Util.sharedPreferences.edit().putString("id", id).commit()
+            Util.sharedPreferences.edit().putString("password", password).commit()
+            Util.sharedPreferences.edit().putString("name", name).commit()
+            Util.sharedPreferences.edit().putString("number", number).commit()
+        }
+        Util.sharedPreferences.edit().putBoolean("login", true).commit()
+        Util.isLogin = true
+        Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
     }
-    fun loginFailed()
-    {
-        Toast.makeText(context,"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show()
+
+    fun loginFailed() {
+        Toast.makeText(context, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("ApplySharedPref")

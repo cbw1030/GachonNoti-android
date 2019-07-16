@@ -22,8 +22,8 @@ class NotificationAsyncTaskForN(
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
-            if(!Util.initCount.contains(true))
-            mPresenter.show()
+            if (!Util.initCount.contains(true))
+                mPresenter.show()
         }
         Util.initCount[0] = true
     }
@@ -67,14 +67,16 @@ class NotificationAsyncTaskForN(
 
 
     override fun onPostExecute(result: Int?) {
-        Handler(Looper.getMainLooper()).post {
-            if (result == Util.ACTION_SUCCESS) {
-                mPresenter.internetNotInterrupted()
-                Util.NotificationIndex = 0
-                mPresenter.request()
-            } else {
-                mPresenter.dismiss()
-                mPresenter.internetInterrupted()
+        with(mPresenter) {
+            Handler(Looper.getMainLooper()).post {
+                if (result == Util.ACTION_SUCCESS) {
+                    internetNotInterrupted()
+                    Util.NotificationIndex = 0
+                    request()
+                } else {
+                    dismiss()
+                    internetInterrupted()
+                }
             }
         }
     }

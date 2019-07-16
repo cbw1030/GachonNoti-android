@@ -71,7 +71,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
     }
 
-    override fun resetdata() {
+    override fun resetData() {
 
     }
 
@@ -126,7 +126,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         ) {
             mView2.showBtn(false)
             Handler(Looper.getMainLooper()).post {
-                mView2.cate_invi()
+                mView2.categoryinvisible()
             }
             findBuilding = ArrayList()
             Thread(Runnable {

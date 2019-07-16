@@ -23,7 +23,7 @@ class LoginAsyncTask(val ids: String, val password: String, val context: Context
     override fun doInBackground(vararg params: Void?): Int {
         if (!Util.isNetworkConnected(context)) return Util.ACTION_FAILURE
         try {
-            TODO()
+//            TODO()
             studentInformation = StudentInformation("박상현", "201735829", "okpsh0033", "1q2w3e4r")
         }catch (e:Exception){
             return Util.ACTION_FAILURE
