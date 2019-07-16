@@ -16,9 +16,10 @@ import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
 class NotificationFragment : Fragment(),
-    NotificationContract.View {
+    NotificationComponentContract.View {
 
     lateinit var myView: View
     lateinit var mPresenter: NotificationPresenter

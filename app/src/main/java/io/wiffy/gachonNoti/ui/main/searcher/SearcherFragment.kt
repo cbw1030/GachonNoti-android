@@ -88,10 +88,13 @@ class SearcherFragment : Fragment(), SearchContract.View {
             val year = Util.YEAR
             val semester = Util.SEMESTER.toString()
             for (x in arrayOf("global", "medical")) {
-                Util.sharedPreferences.edit().putString("$year-$semester-1-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$year-$semester-2-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$year-$semester-3-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$year-$semester-4-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().apply {
+                    putString("$year-$semester-1-$x", "<nodata>")
+                    putString("$year-$semester-2-$x", "<nodata>")
+                    putString("$year-$semester-3-$x", "<nodata>")
+                    putString("$year-$semester-4-$x", "<nodata>")
+                }.commit()
+
             }
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
@@ -177,7 +180,6 @@ class SearcherFragment : Fragment(), SearchContract.View {
         }
 
     }
-
 
 
     override fun showLoad() {

@@ -1,8 +1,8 @@
-package io.wiffy.gachonNoti.ui.main.notification.notification
+package io.wiffy.gachonNoti.ui.main.notification
 
 import io.wiffy.gachonNoti.model.ParseList
 
-interface NotificationContract {
+interface NotificationComponentContract {
     interface View {
         fun changeUI(list: ParseList)
         fun updateUI(list: ParseList)

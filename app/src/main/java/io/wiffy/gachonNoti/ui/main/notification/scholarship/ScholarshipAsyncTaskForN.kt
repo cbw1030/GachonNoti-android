@@ -55,14 +55,17 @@ class ScholarshipAsyncTaskForN(
     }
 
     override fun onPostExecute(result: Int?) {
-        Handler(Looper.getMainLooper()).post {
-            if (result == Util.ACTION_SUCCESS) {
-                mPresenter.internetNotInterrupted()
-                Util.ScholarshipIndex = 0
-                mPresenter.request()
-            } else {
-                mPresenter.dismiss()
-                mPresenter.internetInterrupted()
+        with(mPresenter)
+        {
+            Handler(Looper.getMainLooper()).post {
+                if (result == Util.ACTION_SUCCESS) {
+                    internetNotInterrupted()
+                    Util.ScholarshipIndex = 0
+                    request()
+                } else {
+                    dismiss()
+                    internetInterrupted()
+                }
             }
         }
     }

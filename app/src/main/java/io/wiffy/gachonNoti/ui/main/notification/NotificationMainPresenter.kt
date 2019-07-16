@@ -20,14 +20,17 @@ class NotificationMainPresenter(private val mView: NotificationMainContract.View
     var scholarship: ScholarshipFragment? = null
 
     override fun fragmentInflation(list: ArrayList<Fragment?>) {
-        notifications = NotificationFragment()
-        news = NewsFragment()
-        event = EventFragment()
-        scholarship = ScholarshipFragment()
-        list.add(notifications)
-        list.add(news)
-        list.add(event)
-        list.add(scholarship)
+        with(list){
+            notifications = NotificationFragment()
+            news = NewsFragment()
+            event = EventFragment()
+            scholarship = ScholarshipFragment()
+            add(notifications)
+            add(news)
+            add(event)
+            add(scholarship)
+        }
+
     }
 
     override fun themeChange() {

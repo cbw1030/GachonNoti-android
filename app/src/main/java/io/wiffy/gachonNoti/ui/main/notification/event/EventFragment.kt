@@ -14,9 +14,10 @@ import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 import kotlinx.android.synthetic.main.fragment_notification_event.view.*
 
-class EventFragment : Fragment(), EventContract.View {
+class EventFragment : Fragment(), NotificationComponentContract.View {
     lateinit var myView: View
     lateinit var mPresenter: EventPresenter
     lateinit var adapter: EventAdapter

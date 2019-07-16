@@ -2,9 +2,10 @@ package io.wiffy.gachonNoti.ui.main.notification.scholarship
 
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
-class ScholarshipPresenter(private val mView: ScholarshipContract.View, private val context: Context?) :
-    ScholarshipContract.Presenter {
+class ScholarshipPresenter(private val mView: NotificationComponentContract.View, private val context: Context?) :
+    NotificationComponentContract.Presenter {
     private var list = ParseList()
     private var isloading = true
 

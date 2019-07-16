@@ -42,8 +42,8 @@ class NotificationAsyncTask(
                             x.substring(v.length + 2),
                             n.select("span.data").text(),
                             false,
-                                n.html().contains("icon_new.gif"),
-                                n.html().contains("icon_file.gif"),
+                            n.html().contains("icon_new.gif"),
+                            n.html().contains("icon_file.gif"),
                             "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                         )
                     )
@@ -57,15 +57,17 @@ class NotificationAsyncTask(
     }
 
     override fun onPostExecute(result: Int?) {
-        Handler(Looper.getMainLooper()).post {
-            if (result == Util.ACTION_SUCCESS) {
-                if(!Util.initCount.contains(false))
-                mPresenter.dismiss()
-                mPresenter.update(list)
-                Util.NotificationIndex += 1
-            } else {
-                mPresenter.dismiss()
-                mPresenter.internetInterrupted()
+        with(mPresenter) {
+            Handler(Looper.getMainLooper()).post {
+                if (result == Util.ACTION_SUCCESS) {
+                    if (!Util.initCount.contains(false))
+                        dismiss()
+                    update(list)
+                    Util.NotificationIndex += 1
+                } else {
+                    dismiss()
+                    internetInterrupted()
+                }
             }
         }
     }
