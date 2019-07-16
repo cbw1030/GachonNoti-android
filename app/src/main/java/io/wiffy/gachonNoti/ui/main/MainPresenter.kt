@@ -17,9 +17,14 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         val notificationFragment = NotificationMainFragment()
         val searcherFragment = SearcherFragment()
         val settingFragment = SettingFragment()
-        mList.add(notificationFragment)
-        mList.add(searcherFragment)
-        mList.add(settingFragment)
+
+        with(mList)
+        {
+            add(notificationFragment)
+            add(searcherFragment)
+            add(settingFragment)
+        }
+
         mView.changeUI(mList)
         if (!Util.sharedPreferences.getBoolean(context.resources.getString(R.string.whatVersion), false)) {
             mView.updatedContents()

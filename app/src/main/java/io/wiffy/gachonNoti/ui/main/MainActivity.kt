@@ -35,9 +35,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         lateinit var mView: MainContract.View
     }
 
-    override fun setTabText(str:String) {
-        navigation.getTabAt(0)?.text =str
+    override fun setTabText(str: String) {
+        navigation.getTabAt(0)?.text = str
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -109,12 +110,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun builderUp() {
         if (builder == null) {
-            builder = Dialog(this@MainActivity)
-            builder?.setContentView(R.layout.builder)
-            builder?.setCancelable(false)
-            builder?.setCanceledOnTouchOutside(false)
-            builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
+            builder = Dialog(this@MainActivity).apply {
+                setContentView(R.layout.builder)
+                setCancelable(false)
+                setCanceledOnTouchOutside(false)
+                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            }
         }
         Handler(Looper.getMainLooper()).post {
             try {
@@ -201,21 +202,24 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
-        Util.sharedPreferences.edit().putBoolean(resources.getString(R.string.whatVersion), true).commit()
         val year = Util.YEAR
         val semester = Util.SEMESTER.toString()
-        // 다음 업데이트시 삭제
-        Util.sharedPreferences.edit().putString("2019-3-1", "<nodata>").commit()
-        Util.sharedPreferences.edit().putString("2019-3-2", "<nodata>").commit()
-        Util.sharedPreferences.edit().putString("2019-3-3", "<nodata>").commit()
-        Util.sharedPreferences.edit().putString("2019-3-4", "<nodata>").commit()
-        //
-        for (x in arrayOf("global", "medical")) {
-            Util.sharedPreferences.edit().putString("$year-$semester-1-$x", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-2-$x", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-3-$x", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-4-$x", "<nodata>").commit()
-        }
+        Util.sharedPreferences.edit().apply {
+            putBoolean(resources.getString(R.string.whatVersion), true)
+
+            // 다음 업데이트시 삭제
+            putString("2019-3-1", "<nodata>")
+            putString("2019-3-2", "<nodata>")
+            putString("2019-3-3", "<nodata>")
+            putString("2019-3-4", "<nodata>")
+            //
+            for (x in arrayOf("global", "medical")) {
+                putString("$year-$semester-1-$x", "<nodata>")
+                putString("$year-$semester-2-$x", "<nodata>")
+                putString("$year-$semester-3-$x", "<nodata>")
+                putString("$year-$semester-4-$x", "<nodata>")
+            }
+        }.commit()
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle("${resources.getString(R.string.whatVersion)} 버전 업데이트")
         builder.setMessage(" ${resources.getString(R.string.update)}")
