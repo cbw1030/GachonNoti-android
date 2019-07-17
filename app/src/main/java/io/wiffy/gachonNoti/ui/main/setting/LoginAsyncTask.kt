@@ -9,9 +9,16 @@ import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import java.lang.Exception
 
-class LoginAsyncTask(val ids: String, val password: String, val context: Context, val mView:DetailDialog) : AsyncTask<Void, Void, Int>() {
+class LoginAsyncTask(
+    private val ids: String,
+    private val password: String,
+    val context: Context,
+    val mView: DetailDialog
+) : AsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
+    val ids_encoded =Util.getBase64Encode(ids)
+    val password_encoded = Util.getBase64Encode(password)
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -24,7 +31,7 @@ class LoginAsyncTask(val ids: String, val password: String, val context: Context
         try {
 //            TODO()
             studentInformation = StudentInformation("박상현", "201735829", ids, password)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             return Util.ACTION_FAILURE
         }
         return Util.ACTION_SUCCESS
@@ -36,7 +43,7 @@ class LoginAsyncTask(val ids: String, val password: String, val context: Context
         }
         when (result ?: Util.ACTION_FAILURE) {
             Util.ACTION_SUCCESS -> {
-               mView.saveInformation(studentInformation)
+                mView.saveInformation(studentInformation)
             }
             else -> {
                 mView.loginFailed()
