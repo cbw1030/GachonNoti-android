@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -35,11 +36,13 @@ class LoginAsyncTask(
     override fun doInBackground(vararg params: Void?): Int {
         if (!Util.isNetworkConnected(context)) return Util.ACTION_FAILURE
         try {
-            TODO()
-            val x =HashMap<String,String>()
-            x.put("user_id","okpsh0033")
-            x.put("password","Ok00330246!@")
-
+            val x = HashMap<String, String>().apply {
+                put("user_id", "pkc707")
+                put("password", "hoho8033!")
+                put("return_url","aHR0cDovL20uZ2FjaG9uLmFjLmtyLw%3D%3D")
+                put("x","49")
+                put("y","13")
+            }
             val loginPageResponse =
                 Jsoup.connect("http://www.gachon.ac.kr/inc/_mobile_login_action.jsp")
                     .timeout(3000)
@@ -49,17 +52,23 @@ class LoginAsyncTask(
                         "image/gif,image/jpeg,image/pjpeg,application/x-ms-application,application/xaml+xml,application/x-ms-xbap,*/*"
                     )
                     .data(x)
+                    .followRedirects(true)
+                    .ignoreHttpErrors(true)
+                    .ignoreContentType(true)
                     .header("Accept-Language", "ko-KR")
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .header("Accept-Encoding", "gzip, deflate")
                     .header("Host", "www.gachon.ac.kr")
                     .header("Connection", "Keep-Alive")
-                    .userAgent("Mozilla")
+                    .userAgent("Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)")
                     .method(Connection.Method.POST)
                     .execute()
 
             val loginTryCookie = loginPageResponse.cookies()
             val loginPageDocument = loginPageResponse.parse()
+
+            Log.d("asdf","Status Code ::"+loginPageResponse.statusCode().toString())
+            if(loginPageResponse.statusCode() !=200)return Util.ACTION_FAILURE
 
             studentInformation = StudentInformation("박상현", "201735829", ids, password)
         } catch (e: Exception) {
