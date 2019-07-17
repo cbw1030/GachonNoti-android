@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Rect
 import android.net.ConnectivityManager
+import android.util.Base64
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
@@ -94,6 +95,12 @@ class Util {
         } catch (e: Exception) {
             false
         }
+
+        @JvmStatic
+        fun getBase64Encode(content:String):String = Base64.encodeToString(content.toByteArray(), 0)
+
+       @JvmStatic
+       fun getBase64Decode(content:String):String = String(Base64.decode(content,0))
 
         @SuppressLint("SimpleDateFormat")
         @JvmStatic
