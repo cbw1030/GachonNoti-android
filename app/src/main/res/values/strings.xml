@@ -26,6 +26,7 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
+        로그인 기능 / QR코드 기능 추가 \n
         가천뉴스, 행사소식, 장학소식 업데이트\n
         공지사항 이미지 크기 수정\n
         (간혹 크기가 이상한게 있어요)\n
