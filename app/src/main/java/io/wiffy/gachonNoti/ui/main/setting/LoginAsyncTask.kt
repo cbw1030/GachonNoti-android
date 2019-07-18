@@ -46,9 +46,19 @@ class LoginAsyncTask(
             val httpClient = DefaultHttpClient()
             val httpPost = HttpPost("http://smart.gachon.ac.kr:8080//WebJSON")
             httpPost.entity = StringEntity(sendObject.toString())
-            val getObject = JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity))
-            
-            studentInformation = StudentInformation("박상현", "201735829", ids, password)
+            val getObject =
+                JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
+                    val number = getString("userUniqNo")
+                    studentInformation = StudentInformation(
+                        getString("userNm"),
+                        number,
+                        ids,
+                        password,
+                        getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
+                        "https://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
+                    )
+                }
+
         } catch (e: Exception) {
             return Util.ACTION_FAILURE
         }
