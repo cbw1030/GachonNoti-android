@@ -4,11 +4,17 @@ package io.wiffy.gachonNoti.model
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.util.Base64
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.WriterException
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -17,67 +23,47 @@ import java.util.*
 
 class Util {
     companion object {
-        @JvmStatic
+
         lateinit var sharedPreferences: SharedPreferences
 
-        @JvmStatic
         lateinit var initCount: BooleanArray
 
-        @JvmStatic
         var YEAR = "2019"
 
-        @JvmStatic
         var isLogin = false
 
-        @JvmStatic
         var surfing = false
 
-        @JvmStatic
         var SEMESTER = 1
 
-        @JvmStatic
         var seek = 20
 
-        @JvmStatic
         var firstBoot = true
 
-        @JvmStatic
         var NotificationIndex = 0
 
-        @JvmStatic
         var NewsIndex = 0
 
-        @JvmStatic
         var EventIndex = 0
 
-        @JvmStatic
         var ScholarshipIndex = 0
 
-        @JvmStatic
         var looper = true
 
-        @JvmStatic
         var notifiSet = true
 
-        @JvmStatic
         var state = 0
 
-        @JvmStatic
         var helper = "인터넷 연결을 확인해주세요."
 
-        @JvmStatic
         var theme = "default"
 
-        @JvmStatic
         var made = true
 
-        @JvmStatic
         var novisible = false
 
-        @JvmStatic
         var campus = true
 
-        @JvmStatic
         fun getRandomColorId(): Int = intArrayOf(
             R.color.ran1,
             R.color.ran2,
@@ -89,21 +75,47 @@ class Util {
             R.color.ran8
         )[Random().nextInt(8)]
 
-        @JvmStatic
         fun isNetworkConnected(context: Context): Boolean = try {
             (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo != null
         } catch (e: Exception) {
             false
         }
 
-        @JvmStatic
-        fun getBase64Encode(content:String):String = Base64.encodeToString(content.toByteArray(), 0)
+        fun toBitmap(matrix: BitMatrix): Bitmap {
+            val bmp = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565)
+            for (x in 0 until matrix.width)
+                for (y in 0 until matrix.height)
+                    bmp.setPixel(
+                        x, y, if (matrix.get(x, y)) {
+                            Color.BLACK
+                        } else {
+                            Color.WHITE
+                        }
+                    )
+            return bmp
+        }
 
-       @JvmStatic
-       fun getBase64Decode(content:String):String = String(Base64.decode(content,0))
+//        fun unUsed()
+//        {
+//            val text = editText.text.toString()
+//            x.edit().putString("temp", text).commit()
+//            try {
+//                val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+//                val output = StringBuilder("m$text$format")
+//                output.append(Integer.parseInt("0A", 16))
+//                val qrCodeWriter = QRCodeWriter()
+//                bitmap = toBitmap(qrCodeWriter.encode(output.toString(), BarcodeFormat.QR_CODE, 200, 200))
+//                images.setImageBitmap(bitmap)
+//            } catch (e: WriterException) {
+//            }
+//        }
+
+        fun getBase64Encode(content: String): String = Base64.encodeToString(content.toByteArray(), 0)
+
+        fun getBase64Decode(content: String): String = String(Base64.decode(content, 0))
 
         @SuppressLint("SimpleDateFormat")
-        @JvmStatic
+
         fun classToTime(time: String): LongArray {
             val dt = SimpleDateFormat("HH:mm:ss")
             var start: String
@@ -173,11 +185,8 @@ class Util {
                 end = "00:00:00"
             }
 
-
-
             return longArrayOf(dt.parse(start).time, dt.parse(end).time)
         }
-
 
         const val appConstantPreferences = "GACHONNOTICE"
 

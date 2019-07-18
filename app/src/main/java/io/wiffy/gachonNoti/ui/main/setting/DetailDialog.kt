@@ -212,6 +212,8 @@ class DetailDialog(context: Context) : Dialog(context) {
             remove("password")
             remove("name")
             remove("number")
+            remove("department")
+            remove("image")
             putBoolean("login", false)
         }.commit()
         Util.isLogin = false
@@ -227,12 +229,15 @@ class DetailDialog(context: Context) : Dialog(context) {
                 putString("password", password)
                 putString("name", name)
                 putString("number", number)
+                putString("department", department)
+                putString("image", imageURL)
                 putBoolean("login", true)
             }.commit()
         }
         Util.isLogin = true
         isLogin(true)
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, information.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun loginFailed() {
