@@ -19,6 +19,7 @@ import io.wiffy.gachonNoti.R
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.net.ssl.HttpsURLConnection
 
 
 class Util {
@@ -94,21 +95,6 @@ class Util {
                     )
             return bmp
         }
-
-//        fun unUsed()
-//        {
-//            val text = editText.text.toString()
-//            x.edit().putString("temp", text).commit()
-//            try {
-//                val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
-//                val output = StringBuilder("m$text$format")
-//                output.append(Integer.parseInt("0A", 16))
-//                val qrCodeWriter = QRCodeWriter()
-//                bitmap = toBitmap(qrCodeWriter.encode(output.toString(), BarcodeFormat.QR_CODE, 200, 200))
-//                images.setImageBitmap(bitmap)
-//            } catch (e: WriterException) {
-//            }
-//        }
 
         fun getBase64Encode(content: String): String = Base64.encodeToString(content.toByteArray(), 0)
 
