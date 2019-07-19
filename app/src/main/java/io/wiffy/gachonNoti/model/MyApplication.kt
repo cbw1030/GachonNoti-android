@@ -12,7 +12,7 @@ class MyApplication : Application() {
     @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
         super.onCreate()
-
+        SslConnect.postHttps("https://gcis.gachon.ac.kr/", 3000, 3000)
         Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE).apply {
             Util.firstBoot = getBoolean("firstBooting", true)
             Util.notifiSet = getBoolean("notiOn", true)

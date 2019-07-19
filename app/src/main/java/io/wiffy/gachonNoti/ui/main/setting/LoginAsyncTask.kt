@@ -1,9 +1,14 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
+import io.wiffy.gachonNoti.model.SslConnect
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -13,6 +18,8 @@ import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
 import java.lang.Exception
+import java.net.URL
+import javax.net.ssl.HttpsURLConnection
 
 class LoginAsyncTask(
     private val ids: String,
@@ -33,6 +40,7 @@ class LoginAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
         if (!Util.isNetworkConnected(context)) return Util.ACTION_FAILURE
+        val number: String
         try {
             val sendObject = JSONObject().apply {
                 put("fsp_cmd", "login")
@@ -48,7 +56,7 @@ class LoginAsyncTask(
             httpPost.entity = StringEntity(sendObject.toString())
             val getObject =
                 JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
-                    val number = getString("userUniqNo")
+                    number = getString("userUniqNo")
                     studentInformation = StudentInformation(
                         getString("userNm"),
                         number,
@@ -58,6 +66,7 @@ class LoginAsyncTask(
                         "https://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
                     )
                 }
+
 
         } catch (e: Exception) {
             return Util.ACTION_FAILURE
@@ -78,4 +87,5 @@ class LoginAsyncTask(
             }
         }
     }
+
 }

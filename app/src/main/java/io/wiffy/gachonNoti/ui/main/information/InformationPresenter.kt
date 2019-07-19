@@ -1,6 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.information.example.ExampleFragment
 
 class InformationPresenter(val mView: InformationContract.View) : InformationContract.Presenter {
@@ -8,7 +10,7 @@ class InformationPresenter(val mView: InformationContract.View) : InformationCon
         mView.initView()
     }
 
-    var example: ExampleFragment? = null
+    private var example: ExampleFragment? = null
 
     override fun fragmentInflation(list: ArrayList<Fragment?>) {
         with(list) {
@@ -23,5 +25,21 @@ class InformationPresenter(val mView: InformationContract.View) : InformationCon
 
     override fun isNotLogin() {
 
+    }
+
+    override fun loginSetting() {
+        with(Util.sharedPreferences)
+        {
+            if (example != null) example?.loginInformationSetting(
+              StudentInformation(
+                  getString("name","null")?:"null",
+                  getString("number","null")?:"null",
+                  getString("id","null")?:"null",
+                  getString("password","null")?:"null",
+                  getString("department","null")?:"null",
+                  getString("imageURL","null")?:"null"
+              )
+            )
+        }
     }
 }

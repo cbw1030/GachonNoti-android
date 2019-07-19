@@ -22,7 +22,6 @@ class MyInformationDialog(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_myinfo)
-        SslConnect.postHttps("https://gcis.gachon.ac.kr/", 3000, 3000)
         if (!Util.isLogin) {
             info_on.visibility = View.GONE
             info_off.visibility = View.VISIBLE
@@ -48,7 +47,8 @@ class MyInformationDialog(context: Context) : Dialog(context) {
                 val output = StringBuilder("m$number$format")
                 output.append(Integer.parseInt("0A", 16))
                 val qrCodeWriter = QRCodeWriter()
-                val bitmap = Util.toBitmap(qrCodeWriter.encode(output.toString(), BarcodeFormat.QR_CODE, 200, 200))
+                val bitmap =
+                    Util.matrixToBitmap(qrCodeWriter.encode(output.toString(), BarcodeFormat.QR_CODE, 200, 200))
                 myText.text = "성명 : $name \n 학번 : $number"
                 yourQRcode.setImageBitmap(bitmap)
             }

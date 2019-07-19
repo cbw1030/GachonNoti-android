@@ -15,5 +15,6 @@ interface InformationContract {
         fun fragmentInflation(list:ArrayList<Fragment?>)
         fun themeChange()
         fun isNotLogin()
+        fun loginSetting()
     }
 }

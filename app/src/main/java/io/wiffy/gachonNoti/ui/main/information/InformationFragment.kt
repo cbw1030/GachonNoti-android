@@ -29,7 +29,6 @@ class InformationFragment : Fragment(), InformationContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information, container, false)
         mPresenter = InformationPresenter(this)
-        loginExecute()
         mPresenter.initPresent()
         return myView
     }
@@ -45,6 +44,7 @@ class InformationFragment : Fragment(), InformationContract.View {
     override fun isLogin() {
         myView.information_true.visibility = View.VISIBLE
         myView.information_false.visibility = View.GONE
+        mPresenter.loginSetting()
     }
 
     override fun isNotLogin() {
@@ -56,7 +56,7 @@ class InformationFragment : Fragment(), InformationContract.View {
         fragmentList = ArrayList()
         mPresenter.fragmentInflation(fragmentList)
         adapter = PagerAdapter(activity?.supportFragmentManager, fragmentList)
-        myView.navigation3.addTab(myView.navigation3.newTab().setText("내정보"))
+        myView.navigation3.addTab(myView.navigation3.newTab().setText("학생증"))
         myView.pager3.adapter = adapter
         myView.pager3.offscreenPageLimit = fragmentList.size
         myView.pager3.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(myView.navigation3))
@@ -74,8 +74,6 @@ class InformationFragment : Fragment(), InformationContract.View {
         themeChanger(false)
 
         myView.login2.setOnClickListener {
-
-
             val builder = DetailDialog(context!!)
             builder.show()
             builder.setListener(
@@ -90,8 +88,7 @@ class InformationFragment : Fragment(), InformationContract.View {
                     builder.dismiss()
                 })
         }
-
-
+        loginExecute()
     }
 
     override fun showLoad() {

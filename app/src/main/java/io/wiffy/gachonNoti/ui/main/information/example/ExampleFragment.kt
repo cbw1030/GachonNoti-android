@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.StudentInformation
 
 class ExampleFragment : Fragment(), ExampleContract.View {
     lateinit var myView: View
@@ -23,6 +24,11 @@ class ExampleFragment : Fragment(), ExampleContract.View {
     }
 
     fun changeTheme() {
+
+    }
+
+    fun loginInformationSetting(info:StudentInformation)
+    {
 
     }
 }
