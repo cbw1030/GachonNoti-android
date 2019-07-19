@@ -1,17 +1,23 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.ui.main.information.example.ExampleFragment
 
-class InformationPresenter(val mView:InformationContract.View):InformationContract.Presenter {
+class InformationPresenter(val mView: InformationContract.View) : InformationContract.Presenter {
     override fun initPresent() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mView.initView()
     }
 
+    var example: ExampleFragment? = null
+
     override fun fragmentInflation(list: ArrayList<Fragment?>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       with(list){
+           example = ExampleFragment()
+           add(example)
+       }
     }
 
     override fun themeChange() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       if(example!=null)example?.changeTheme()
     }
 }
