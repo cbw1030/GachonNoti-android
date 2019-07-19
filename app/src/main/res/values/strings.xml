@@ -14,7 +14,7 @@
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
     <string name="calling">교내 연락처</string>
-    <string name="searcher">강의실 시간표 검색</string>
+    <string name="searcher">강의실</string>
     <string name="load">오른쪽 하단 검색으로\n강의실 시간표를 불러오세요.</string>
     <string name="theme">테마</string>
     <string name="helper">도움을 주신 분들</string>
@@ -26,7 +26,7 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
-        로그인 기능 / QR코드 기능 추가 \n
+        로그인 기능 / 학생증 추가 \n
         가천뉴스, 행사소식, 장학소식 업데이트\n
         공지사항 이미지 크기 수정\n
         (간혹 크기가 이상한게 있어요)\n

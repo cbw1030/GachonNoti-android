@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.information.example
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +17,20 @@ import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.fragment_information_example.view.*
 import java.text.SimpleDateFormat
 
+
 class ExampleFragment : Fragment(), ExampleContract.View {
+    val SECOND = 300000
+    val SECOND_STRING ="05 분 00 초"
     var myView: View? = null
     lateinit var mPresenter: ExamplePresenter
     var mInfo: StudentInformation? = null
+    lateinit var handler: Handler
+        var count =SECOND
+    private var handlerTask: Runnable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information_example, container, false)
+        handler = Handler()
         mPresenter = ExamplePresenter(this)
         mPresenter.initPresent()
         return myView
@@ -71,6 +79,29 @@ class ExampleFragment : Fragment(), ExampleContract.View {
 
     @SuppressLint("SimpleDateFormat")
     fun setTimerAndQRCode(number: String) {
+        if (handlerTask != null) handler.removeCallbacks(handlerTask)
+        myView?.timer?.text = SECOND_STRING
+        count = SECOND
+        handlerTask = object : Runnable {
+            @SuppressLint("SetTextI18n")
+            override fun run() {
+                count -= 1000
+                val m = (count / 1000) / 60
+                val s = (count / 1000) % 60
+
+                myView?.timer?.text = "0$m 분 ${when {
+                    s < 10 -> "0$s"
+                    else -> "$s"
+                }
+                } 초"
+                if (count > 0) handler.postDelayed(this, 1000)
+                else handler.removeCallbacks(this)
+
+            }
+        }
+
+        handler.post(handlerTask)
+
         val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
         val output = StringBuilder("m$number$format")
         output.append(Integer.parseInt("0A", 16))

@@ -217,6 +217,7 @@ class DetailDialog(context: Context) : Dialog(context) {
             remove("image")
             putBoolean("login", false)
         }.commit()
+        (MainActivity.mView).changeTheme()
         Util.isLogin = false
         isLogin(false)
     }
@@ -239,7 +240,6 @@ class DetailDialog(context: Context) : Dialog(context) {
         isLogin(true)
         (MainActivity.mView).changeTheme()
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-        Toast.makeText(context, information.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun loginFailed() {

@@ -124,6 +124,15 @@ class InformationFragment : Fragment(), InformationContract.View {
         }
         if (bool)
             mPresenter.themeChange()
+
+        myView.login2.setBackgroundResource(
+            when(Util.theme)
+            {
+                "red"->R.drawable.dialog_button_red
+                "green"->R.drawable.dialog_button_green
+                else ->R.drawable.dialog_button_default
+            }
+        )
         myView.navigation3.tabTextColors = ColorStateList(themeColorArray, color)
         myView.navigation3.setSelectedTabIndicatorColor(color[1])
 

@@ -81,7 +81,7 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:layout_centerHorizontal="true"
-                    android:text="04 분 59 초"
+                    android:text="05 분 00 초"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <ImageView
@@ -89,11 +89,11 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/timer"
                     android:id="@+id/qrcode"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"/>
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"/>
             <TextView
                     android:layout_marginBottom="5dp"
-                    android:text="유효기간이 종료되면 자동으로 재발급됩니다."
+                    android:text="유효기간이 종료되면 재발급을 받으시기 바랍니다."
                     android:layout_above="@+id/rebalgup"
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
