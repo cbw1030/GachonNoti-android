@@ -158,8 +158,8 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.secretText.setOnClickListener {
             if (secretCount == 4) {
                 val builder = AlertDialog.Builder(activity)
-                builder.setTitle("뭐야 왜 이걸..")
-                builder.setMessage("너.. 심심하구나..?")
+                builder.setTitle("Build Information")
+                builder.setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}")
                 builder.setPositiveButton(
                     "OK"
                 ) { _, _ -> }
