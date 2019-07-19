@@ -217,9 +217,9 @@ class DetailDialog(context: Context) : Dialog(context) {
             remove("image")
             putBoolean("login", false)
         }.commit()
-        (MainActivity.mView).changeTheme()
         Util.isLogin = false
         isLogin(false)
+        (MainActivity.mView).changeTheme()
     }
 
     @SuppressLint("ApplySharedPref")
