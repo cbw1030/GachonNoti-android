@@ -84,7 +84,6 @@ class InformationFragment : Fragment(), InformationContract.View {
                     builder.dismiss()
                 },
                 View.OnClickListener {
-                    (activity as MainActivity).mPresenter.changeThemes()
                     builder.dismiss()
                 })
         }

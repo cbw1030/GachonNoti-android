@@ -83,7 +83,6 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.detailSetting.setOnClickListener {
             val builder = DetailDialog(context!!)
             builder.show()
-            builder.setCancelable(false)
             builder.setListener(
                 View.OnClickListener {
                     builder.okListen()
