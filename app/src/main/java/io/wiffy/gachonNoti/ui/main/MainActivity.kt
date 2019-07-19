@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     companion object {
         lateinit var mView: MainContract.View
+
     }
 
     override fun setTabText(str: String) {
@@ -291,5 +292,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         super.onDetachedFromWindow()
     }
+    override fun changeTheme()
+    {
+        mPresenter.changeThemes()
+    }
+
 
 }

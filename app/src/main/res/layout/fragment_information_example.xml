@@ -27,8 +27,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="15dp"
                 android:src="@drawable/defaultimage"
-                android:layout_width="180dp"
-                android:layout_height="240dp"/>
+                android:layout_width="120dp"
+                android:layout_height="160dp"/>
         <TextView
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="40dp"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textColor="@color/black"
                 android:text="박상현"
         />
@@ -46,7 +46,7 @@
                 android:layout_marginStart="15dp"
                 android:id="@+id/number"
                 android:text="201735829"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:layout_toEndOf="@id/imageonyou"
                 android:layout_below="@+id/yourname"
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
         <TextView
                 android:id="@+id/depart"
                 android:text="소프트웨어학과"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
                 android:layout_toEndOf="@id/imageonyou"
@@ -67,15 +67,16 @@
                 android:src="@drawable/gachon"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/depart"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"/>
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
         <RelativeLayout
                 android:layout_below="@id/gachonlogo"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             <TextView
                     android:id="@+id/timer"
-                    android:layout_marginTop="5dp"
+
                     android:layout_alignParentTop="true"
                     android:gravity="center"
                     android:textSize="20sp"
@@ -84,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/timer"
                     android:id="@+id/qrcode"
@@ -99,14 +100,16 @@
                       android:layout_height="wrap_content"/>
             <Button
                     android:text="재발급"
+                    android:layout_marginBottom="3dp"
                     android:id="@+id/rebalgup"
+                    android:background="@drawable/dialog_button_default"
                     android:textColor="@color/white"
                     android:textSize="22sp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"/>
+                    android:layout_height="50dp"/>
         </RelativeLayout>
 
     </RelativeLayout>

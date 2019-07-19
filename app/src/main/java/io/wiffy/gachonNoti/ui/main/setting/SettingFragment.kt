@@ -82,6 +82,7 @@ class SettingFragment : Fragment(), SettingContract.View {
         }
         myView.detailSetting.setOnClickListener {
             val builder = DetailDialog(context!!)
+            builder.show()
             builder.setCancelable(false)
             builder.setListener(
                 View.OnClickListener {
@@ -91,10 +92,9 @@ class SettingFragment : Fragment(), SettingContract.View {
                     builder.dismiss()
                 },
                 View.OnClickListener {
-                    (activity as MainActivity).mPresenter.changeThemes()
                     builder.dismiss()
                 })
-            builder.show()
+
         }
         myView.bugReport.setOnClickListener {
             //            val reporter = ReportDialog(context!!, this)

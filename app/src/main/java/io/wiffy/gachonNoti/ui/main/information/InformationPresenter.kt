@@ -37,7 +37,7 @@ class InformationPresenter(val mView: InformationContract.View) : InformationCon
                   getString("id","null")?:"null",
                   getString("password","null")?:"null",
                   getString("department","null")?:"null",
-                  getString("imageURL","null")?:"null"
+                  getString("image","null")?:"null"
               )
             )
         }

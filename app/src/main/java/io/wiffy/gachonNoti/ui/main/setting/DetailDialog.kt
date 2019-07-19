@@ -18,6 +18,7 @@ import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_detailsetting.*
 import android.app.AlertDialog
 import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
@@ -236,6 +237,7 @@ class DetailDialog(context: Context) : Dialog(context) {
         }
         Util.isLogin = true
         isLogin(true)
+        (MainActivity.mView).changeTheme()
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
         Toast.makeText(context, information.toString(), Toast.LENGTH_SHORT).show()
     }

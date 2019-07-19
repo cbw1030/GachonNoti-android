@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
@@ -17,6 +18,7 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
+import java.io.InputStream
 import java.lang.Exception
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
@@ -57,6 +59,7 @@ class LoginAsyncTask(
             val getObject =
                 JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
                     number = getString("userUniqNo")
+
                     studentInformation = StudentInformation(
                         getString("userNm"),
                         number,
