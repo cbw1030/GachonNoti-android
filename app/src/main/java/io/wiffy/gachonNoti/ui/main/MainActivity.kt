@@ -178,6 +178,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash2.setImageResource(R.drawable.defaults)
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
+        navigation.addTab(navigation.newTab().setText("내 정보"))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
         pager.adapter = adapter
@@ -239,6 +240,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 } else {
                     finish()
                 }
+            }
+            Util.STATE_INFORMATION->{
+                pager.currentItem = Util.STATE_NOTIFICATION
+                Util.state = Util.STATE_NOTIFICATION
             }
             Util.STATE_SEARCHER -> {
                 if (!mPresenter.floatingButtonControl()) {
