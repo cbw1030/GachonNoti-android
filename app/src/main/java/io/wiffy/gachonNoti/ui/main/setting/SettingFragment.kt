@@ -10,7 +10,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -44,7 +42,7 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     @SuppressLint("ApplySharedPref")
     override fun changeView() {
-        myView.notiSwitch.isChecked = Util.notifiSet
+        myView.notiSwitch.isChecked = Util.notificationSet
         themeChanger()
         myView.campustext.text =
             if (Util.campus) {
@@ -208,7 +206,7 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.version.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setTitle(resources.getString(R.string.version))
-            builder.setMessage(resources.getString(R.string.whatVersion))
+            builder.setMessage(Util.version)
             builder.setPositiveButton(
                 "OK"
             ) { _, _ -> }
@@ -324,14 +322,14 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     @SuppressLint("ApplySharedPref")
     private fun setOn() {
-        Util.notifiSet = true
+        Util.notificationSet = true
         Util.sharedPreferences.edit().putBoolean("notiOn", true).commit()
         FirebaseMessaging.getInstance().subscribeToTopic("noti")
     }
 
     @SuppressLint("ApplySharedPref")
     private fun setOff() {
-        Util.notifiSet = false
+        Util.notificationSet = false
         Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }

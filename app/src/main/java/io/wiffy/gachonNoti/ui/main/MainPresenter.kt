@@ -29,7 +29,7 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         }
 
         mView.changeUI(mList)
-        if (!Util.sharedPreferences.getBoolean(context.resources.getString(R.string.whatVersion), false)) {
+        if (!Util.sharedPreferences.getBoolean(Util.version, false)) {
             mView.updatedContents()
         }
     }

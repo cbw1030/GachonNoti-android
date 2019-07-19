@@ -18,13 +18,13 @@ import java.text.SimpleDateFormat
 
 
 class ExampleFragment : Fragment(), ExampleContract.View {
-    val SECOND = 300000
-    val SECOND_STRING ="05 분 00 초"
+   private val initiation = 300000
+    private val initiationText ="05 분 00 초"
     var myView: View? = null
     lateinit var mPresenter: ExamplePresenter
-    var mInfo: StudentInformation? = null
+    private var mInfo: StudentInformation? = null
     lateinit var handler: Handler
-        var count =SECOND
+        var count =initiation
     private var handlerTask: Runnable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -81,8 +81,8 @@ class ExampleFragment : Fragment(), ExampleContract.View {
     @SuppressLint("SimpleDateFormat")
     fun setTimerAndQRCode(number: String) {
         if (handlerTask != null) handler.removeCallbacks(handlerTask)
-        myView?.timer?.text = SECOND_STRING
-        count = SECOND
+        myView?.timer?.text = initiationText
+        count = initiation
         handlerTask = object : Runnable {
             @SuppressLint("SetTextI18n")
             override fun run() {

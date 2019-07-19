@@ -53,7 +53,9 @@ class Util {
 
         var looper = true
 
-        var notifiSet = true
+        var version = "1.0.0"
+
+        var notificationSet = true
 
         var state = 0
 

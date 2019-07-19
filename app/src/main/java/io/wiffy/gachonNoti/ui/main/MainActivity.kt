@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
         if ((!NotificationManagerCompat.from(applicationContext)
-                .areNotificationsEnabled()) and (Util.notifiSet)
+                .areNotificationsEnabled()) and (Util.notificationSet)
         ) {
 
             val builders = AlertDialog.Builder(this)
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
             builders.setNegativeButton("Cancel") { _, _ ->
-                Util.notifiSet = false
+                Util.notificationSet = false
                 Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
             }
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         val year = Util.YEAR
         val semester = Util.SEMESTER.toString()
         Util.sharedPreferences.edit().apply {
-            putBoolean(resources.getString(R.string.whatVersion), true)
+            putBoolean(Util.version, true)
 
             // 다음 업데이트시 삭제
             putString("2019-3-1", "<nodata>")
@@ -224,7 +224,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
         }.commit()
         val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("${resources.getString(R.string.whatVersion)} 버전 업데이트")
+        builder.setTitle("${Util.version} 버전 업데이트")
         builder.setMessage(" ${resources.getString(R.string.update)}")
         builder.setPositiveButton(
             "OK"

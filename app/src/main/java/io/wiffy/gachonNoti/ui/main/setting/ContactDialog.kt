@@ -44,7 +44,7 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
                     } else if(text == "박정호" && spinnerSelected == 0){
                         mView.builderUp()
                         val x=ArrayList<ContactInformation>()
-                        x.add(ContactInformation("바보","박정호","201636822"))
+                        x.add(ContactInformation("바보","박정호","201635812"))
                         mView.builderDismissAndContactUp(x)
                     }
                     else {

@@ -44,7 +44,7 @@ class NotificationAdapter(
                 Handler(Looper.getMainLooper()).post {
                     itemView.setBackgroundResource(
                         when {
-                            item.isNoti -> R.color.notiBackground
+                            item.isNotification -> R.color.notiBackground
                             else -> R.color.WHITE
                         }
                     )

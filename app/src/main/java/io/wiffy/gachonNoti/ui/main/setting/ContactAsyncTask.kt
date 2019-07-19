@@ -23,7 +23,6 @@ class ContactAsyncTask(private val myView: SettingContract.View, private val que
         if (rows.size > 1)
             for (n in 1 until rows.size) {
                 try {
-                    Log.d("asdf", rows[n].select("td")[2].text())
                     val tel = rows[n].select("td")[3].text()
 
                     myList.add(

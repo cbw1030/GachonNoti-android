@@ -31,7 +31,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
     lateinit var fabClose: Animation
 
     var builder: SearchDialog? = null
-    var isFABOpen = false
+    private var isFABOpen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_searcher, container, false)
