@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -19,21 +18,31 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
-    lateinit var mPresenter: MainPresenter
+
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
     var backKeyPressedTime: Long = 0L
+    lateinit var mPresenter: MainPresenter
+
+    companion object {
+        lateinit var mView: MainContract.View
+    }
+
+    override fun setTabText(str: String) {
+        navigation.getTabAt(0)?.text = str
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
+        mView = this
         setContentView(R.layout.activity_main)
         Util.state = Util.STATE_NOTIFICATION
         invisible()
@@ -66,7 +75,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
-        if ( (!NotificationManagerCompat.from(applicationContext)
+        if ((!NotificationManagerCompat.from(applicationContext)
                 .areNotificationsEnabled()) and (Util.notifiSet)
         ) {
 
@@ -101,15 +110,17 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun builderUp() {
         if (builder == null) {
-            builder = Dialog(this@MainActivity)
-            builder?.setContentView(R.layout.builder)
-            builder?.setCancelable(false)
-            builder?.setCanceledOnTouchOutside(false)
-            builder?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            builder = Dialog(this@MainActivity).apply {
+                setContentView(R.layout.builder)
+                setCancelable(false)
+                setCanceledOnTouchOutside(false)
+                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            }
         }
         Handler(Looper.getMainLooper()).post {
             try {
-                builder?.show()
+                if (builder?.isShowing == false)
+                    builder?.show()
             } catch (e: Exception) {
 
             }
@@ -126,7 +137,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         if (builder != null) {
             Handler(Looper.getMainLooper()).post {
                 try {
-                    builder?.dismiss()
+                    if (builder?.isShowing == true)
+                        builder?.dismiss()
                 } catch (e: Exception) {
 
                 }
@@ -161,7 +173,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         )
     }
 
-    override fun changeUI(mList: ArrayList<Fragment>) {
+    override fun changeUI(mList: ArrayList<Fragment?>) {
         themeChange()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash2.setImageResource(R.drawable.defaults)
         adapter = PagerAdapter(supportFragmentManager, mList)
@@ -169,6 +181,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
         pager.adapter = adapter
+        pager.offscreenPageLimit = mList.size
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
         navigation.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -181,6 +194,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 if (Util.state == Util.STATE_SEARCHER) mPresenter.floatingButtonControl()
                 Util.state = tab?.position ?: Util.STATE_NOTIFICATION
                 pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
+
             }
         })
 
@@ -188,21 +202,24 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
-        Util.sharedPreferences.edit().putBoolean(resources.getString(R.string.whatVersion), true).commit()
         val year = Util.YEAR
         val semester = Util.SEMESTER.toString()
-        // 다음 업데이트시 삭제
-        Util.sharedPreferences.edit().putString("2019-3-1", "<nodata>").commit()
-        Util.sharedPreferences.edit().putString("2019-3-2", "<nodata>").commit()
-        Util.sharedPreferences.edit().putString("2019-3-3", "<nodata>").commit()
-        Util.sharedPreferences.edit().putString("2019-3-4", "<nodata>").commit()
-        //
-        for (x in arrayOf("global", "medical")) {
-            Util.sharedPreferences.edit().putString("$year-$semester-1-$x", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-2-$x", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-3-$x", "<nodata>").commit()
-            Util.sharedPreferences.edit().putString("$year-$semester-4-$x", "<nodata>").commit()
-        }
+        Util.sharedPreferences.edit().apply {
+            putBoolean(resources.getString(R.string.whatVersion), true)
+
+            // 다음 업데이트시 삭제
+            putString("2019-3-1", "<nodata>")
+            putString("2019-3-2", "<nodata>")
+            putString("2019-3-3", "<nodata>")
+            putString("2019-3-4", "<nodata>")
+            //
+            for (x in arrayOf("global", "medical")) {
+                putString("$year-$semester-1-$x", "<nodata>")
+                putString("$year-$semester-2-$x", "<nodata>")
+                putString("$year-$semester-3-$x", "<nodata>")
+                putString("$year-$semester-4-$x", "<nodata>")
+            }
+        }.commit()
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle("${resources.getString(R.string.whatVersion)} 버전 업데이트")
         builder.setMessage(" ${resources.getString(R.string.update)}")

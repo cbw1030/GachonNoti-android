@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.model
 
 import java.io.Serializable
 

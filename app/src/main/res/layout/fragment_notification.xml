@@ -5,44 +5,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/navigation2"
+                app:tabMode="fixed"
+                android:elevation="0dp"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorColor="@color/gray2"
+                android:layout_width="match_parent"
+                app:tabSelectedTextColor="@color/WHITE"
+                app:tabTextColor="@color/gray"
+                app:tabIndicatorHeight="3dp"
+                android:background="@color/white"
+                app:tabRippleColor="@color/gray2"
+                android:layout_alignParentBottom="true"
+                android:layout_height="40dp"/>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
-            <RelativeLayout
-                    android:visibility="gone"
-                    android:id="@+id/lottieXX"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/animation_viewa"
-                        android:layout_width="250dp"
-                        android:layout_height="250dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        app:lottie_autoPlay="true"
-                        app:lottie_fileName="notfound.json"
-                        app:lottie_loop="true"/>
 
-                <TextView
-                        android:layout_marginTop="-100dp"
-                        android:layout_width="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/animation_viewa"
-                        android:text="인터넷 연결을 확인해주세요."/>
-            </RelativeLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="visible"
-                    android:id="@+id/recylcer"
-                    android:layout_width="match_parent"
-                    android:paddingBottom="3dp"
-                    android:scrollbars="vertical"
-                    android:layout_height="match_parent"/>
-        </FrameLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <androidx.viewpager.widget.ViewPager
+                android:layout_above="@+id/navigation2"
+                android:id="@+id/pager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_alignParentTop="true"/>
+
 
 </RelativeLayout>

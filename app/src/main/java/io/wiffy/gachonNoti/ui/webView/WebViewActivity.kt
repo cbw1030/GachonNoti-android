@@ -10,10 +10,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.WebSettings
 import androidx.appcompat.app.AppCompatActivity
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.notification.Parse
+import io.wiffy.gachonNoti.model.Parse
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
@@ -26,6 +27,8 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
+        webview.settings.builtInZoomControls = true
+        webview.settings.setSupportZoom(true)
         initBuild()
         bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
@@ -38,11 +41,13 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     private fun initBuild() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash3.setImageResource(R.drawable.defaults)
-        builder = Dialog(this@WebViewActivity)
-        builder.setContentView(R.layout.builder)
-        builder.setCancelable(false)
-        builder.setCanceledOnTouchOutside(false)
-        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        builder = Dialog(this@WebViewActivity).apply {
+            setContentView(R.layout.builder)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+            this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
     }
 
     override fun builderUp() {

@@ -13,22 +13,15 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE)
-        Util.firstBoot = Util.sharedPreferences.getBoolean(
-            "firstBooting", true
-        )
-        Util.notifiSet = Util.sharedPreferences.getBoolean(
-            "notiOn", true
-        )
-        Util.theme = Util.sharedPreferences.getString(
-            "theme", "default"
-        ) ?: "default"
-
-        Util.seek = Util.sharedPreferences.getInt(
-            "seek", 20
-        )
-
-        Util.campus = Util.sharedPreferences.getBoolean("campus", true)
+        Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE).apply {
+            Util.firstBoot = getBoolean("firstBooting", true)
+            Util.notifiSet = getBoolean("notiOn", true)
+            Util.theme = getString("theme", "default") ?: "default"
+            Util.seek = getInt("seek", 20)
+            Util.initCount = booleanArrayOf(false, false, false, false)
+            Util.isLogin = getBoolean("login", false)
+            Util.campus = getBoolean("campus", true)
+        }
 
         Util.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
         Util.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {

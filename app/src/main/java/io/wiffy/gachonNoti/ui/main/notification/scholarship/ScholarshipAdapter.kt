@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.scholarship
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -19,24 +19,21 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
 
-
-class MainAdapter(
+class ScholarshipAdapter(
     var items: ParseList,
     private val context: Context,
     private val act: Activity
-) :
-    RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = MainViewHolder(parent)
-
+) : RecyclerView.Adapter<ScholarshipAdapter.ScholarshipViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = ScholarshipViewHolder(parent)
     override fun getItemCount(): Int = items.size()
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ScholarshipViewHolder, position: Int) {
 
         items.get(position).let { item ->
             with(holder) {
@@ -102,7 +99,6 @@ class MainAdapter(
             }
         }
     }
-
     fun update(list: ParseList) {
         items = list
         notificationUpdate()
@@ -116,7 +112,7 @@ class MainAdapter(
         }
     }
 
-    inner class MainViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    inner class ScholarshipViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter, parent, false)
     ) {
         val title: TextView = itemView.titleIn
@@ -126,5 +122,4 @@ class MainAdapter(
         val save: ImageView = itemView.save
         val card: CardView = itemView.contexts
     }
-
 }

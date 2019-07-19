@@ -1,9 +1,11 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.ui.main.notification.event
 
 import android.content.Context
+import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
-class NotificationPresenter(private val mView: NotificationContract.View, private val context: Context?) :
-    NotificationContract.Presenter {
+class EventPresenter(val mView: NotificationComponentContract.View, private val context: Context?) : NotificationComponentContract.Presenter {
 
     private var list = ParseList()
     private var isloading = true
@@ -11,22 +13,13 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
 
     override fun initPresent() {
         mView.changeUI(list)
-        NotiAsyncTaskForN(list, this, context).execute()
+        EventAsyncTask(list, this, context).execute()
     }
 
     override fun load() {
         if (!isloading) {
             request()
         }
-    }
-
-    override fun resetList() {
-        list.clear()
-        NotiAsyncTaskForN(list, this, context).execute()
-    }
-
-    override fun uno() {
-        mView.changeUI(list)
     }
 
     override fun update(data: ParseList) {
@@ -43,9 +36,16 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
         mView.dismissLoad()
     }
 
+
     override fun request() {
         isloading = true
-        NotiAsyncTask(list, this,context).execute()
+        EventAsyncTask(list, this, context).execute()
+    }
+
+    override fun resetList() {
+        Util.EventIndex = 0
+        list.clear()
+        EventAsyncTask(list, this, context).execute()
     }
 
     override fun internetInterrupted() {

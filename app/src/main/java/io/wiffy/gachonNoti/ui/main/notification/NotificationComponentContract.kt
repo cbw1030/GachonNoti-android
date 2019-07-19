@@ -1,6 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-interface NotificationContract {
+import io.wiffy.gachonNoti.model.ParseList
+
+interface NotificationComponentContract {
     interface View {
         fun changeUI(list: ParseList)
         fun updateUI(list: ParseList)
@@ -14,7 +16,6 @@ interface NotificationContract {
         fun internetInterrupted()
         fun internetNotInterrupted()
         fun resetList()
-        fun uno()
         fun initPresent()
         fun load()
         fun update(data: ParseList)

@@ -10,7 +10,7 @@ import java.net.URL
 
 class ContactAsyncTask(private val myView: SettingContract.View, private val query: String) :
     AsyncTask<Void, Void, Int>() {
-    val myList = ArrayList<ContactInformation>()
+    private val myList = ArrayList<ContactInformation>()
 
     override fun onPreExecute() {
         myView.builderUp()

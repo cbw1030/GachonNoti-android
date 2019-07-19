@@ -4,62 +4,67 @@ package io.wiffy.gachonNoti.model
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Rect
 import android.net.ConnectivityManager
+import android.util.Base64
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.WriterException
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
-
+import javax.net.ssl.HttpsURLConnection
 
 
 class Util {
     companion object {
-        @JvmStatic
+
         lateinit var sharedPreferences: SharedPreferences
 
-        @JvmStatic
+        lateinit var initCount: BooleanArray
+
         var YEAR = "2019"
 
-        @JvmStatic
+        var isLogin = false
+
         var surfing = false
 
-        @JvmStatic
         var SEMESTER = 1
 
-        @JvmStatic
         var seek = 20
 
-        @JvmStatic
         var firstBoot = true
 
-        @JvmStatic
-        var index = 0
+        var NotificationIndex = 0
 
-        @JvmStatic
+        var NewsIndex = 0
+
+        var EventIndex = 0
+
+        var ScholarshipIndex = 0
+
         var looper = true
 
-        @JvmStatic
         var notifiSet = true
 
-        @JvmStatic
         var state = 0
 
-        @JvmStatic
         var helper = "인터넷 연결을 확인해주세요."
 
-        @JvmStatic
         var theme = "default"
 
-        @JvmStatic
         var made = true
 
-        @JvmStatic
         var novisible = false
 
-        @JvmStatic
         var campus = true
 
-        @JvmStatic
         fun getRandomColorId(): Int = intArrayOf(
             R.color.ran1,
             R.color.ran2,
@@ -71,15 +76,32 @@ class Util {
             R.color.ran8
         )[Random().nextInt(8)]
 
-        @JvmStatic
-        fun isNetworkConnected(context:Context): Boolean = try {
-            (context.getSystemService(Context.CONNECTIVITY_SERVICE)as ConnectivityManager).activeNetworkInfo!=null
+        fun isNetworkConnected(context: Context): Boolean = try {
+            (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo != null
         } catch (e: Exception) {
             false
         }
 
+        fun toBitmap(matrix: BitMatrix): Bitmap {
+            val bmp = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565)
+            for (x in 0 until matrix.width)
+                for (y in 0 until matrix.height)
+                    bmp.setPixel(
+                        x, y, if (matrix.get(x, y)) {
+                            Color.BLACK
+                        } else {
+                            Color.WHITE
+                        }
+                    )
+            return bmp
+        }
+
+        fun getBase64Encode(content: String): String = Base64.encodeToString(content.toByteArray(), 0)
+
+        fun getBase64Decode(content: String): String = String(Base64.decode(content, 0))
+
         @SuppressLint("SimpleDateFormat")
-        @JvmStatic
+
         fun classToTime(time: String): LongArray {
             val dt = SimpleDateFormat("HH:mm:ss")
             var start: String
@@ -95,16 +117,16 @@ class Util {
                         end = "12:15:00"
                     }
                     "C" -> {
-                        start = "12:30:00"
-                        end = "13:45:00"
+                        start = "13:00:00"
+                        end = "14:15:00"
                     }
                     "D" -> {
-                        start = "14:00:00"
-                        end = "15:15:00"
+                        start = "14:30:00"
+                        end = "15:45:00"
                     }
                     "E" -> {
-                        start = "15:30:00"
-                        end = "16:45:00"
+                        start = "16:00:00"
+                        end = "17:15:00"
                     }
                     else -> {
 
@@ -149,15 +171,9 @@ class Util {
                 end = "00:00:00"
             }
 
-
-
             return longArrayOf(dt.parse(start).time, dt.parse(end).time)
         }
 
-
-        const val mobileURL1 = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum="
-        const val mobileURL2 = "&pageSize="
-        const val mobileURL3 = "&boardType_seq=358&approve=&secret=&answer=&branch=&searchopt=&searchword="
         const val appConstantPreferences = "GACHONNOTICE"
 
         const val STATE_NOTIFICATION = 0
@@ -169,5 +185,13 @@ class Util {
         const val ACTION_SUCCESS = 0
         const val ACTION_FAILURE = -1
 
+    }
+}
+
+class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        if (parent.getChildAdapterPosition(view) != parent.adapter?.itemCount!! - 1) {
+            outRect.bottom = verticalSpaceHeight
+        }
     }
 }

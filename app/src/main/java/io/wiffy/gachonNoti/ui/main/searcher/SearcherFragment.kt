@@ -20,7 +20,6 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
-import kotlinx.android.synthetic.main.fragment_searcher.*
 import kotlinx.android.synthetic.main.fragment_searcher.view.subFab1
 import kotlin.collections.ArrayList
 
@@ -41,11 +40,12 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     override fun initUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             myView.subFab1.setImageResource(R.drawable.outline_autorenew_white_24dp)
             myView.fab.setImageResource(R.drawable.search)
-        }else{
+        } else {
         }
+
         fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
         fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
@@ -53,6 +53,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
+
         myView.fab.setOnLongClickListener {
             anim()
             true
@@ -87,10 +88,13 @@ class SearcherFragment : Fragment(), SearchContract.View {
             val year = Util.YEAR
             val semester = Util.SEMESTER.toString()
             for (x in arrayOf("global", "medical")) {
-                Util.sharedPreferences.edit().putString("$year-$semester-1-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$year-$semester-2-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$year-$semester-3-$x", "<nodata>").commit()
-                Util.sharedPreferences.edit().putString("$year-$semester-4-$x", "<nodata>").commit()
+                Util.sharedPreferences.edit().apply {
+                    putString("$year-$semester-1-$x", "<nodata>")
+                    putString("$year-$semester-2-$x", "<nodata>")
+                    putString("$year-$semester-3-$x", "<nodata>")
+                    putString("$year-$semester-4-$x", "<nodata>")
+                }.commit()
+
             }
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
@@ -165,11 +169,16 @@ class SearcherFragment : Fragment(), SearchContract.View {
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
-            }}학기 [${if(Util.campus){"G"}else{"M"}}]"
+            }}학기 [${if (Util.campus) {
+                "G"
+            } else {
+                "M"
+            }}]"
             themeChanger()
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE
         }
+
     }
 
 
