@@ -12,6 +12,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import io.wiffy.gachonNoti.ui.main.setting.DetailDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
@@ -20,14 +21,35 @@ class InformationFragment : Fragment(), InformationContract.View {
     lateinit var myView: View
     lateinit var mPresenter: InformationPresenter
     lateinit var adapter: PagerAdapter
+
     companion object {
         lateinit var fragmentList: ArrayList<Fragment?>
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information, container, false)
         mPresenter = InformationPresenter(this)
+        loginExecute()
         mPresenter.initPresent()
         return myView
+    }
+
+    private fun loginExecute() {
+        if (Util.isLogin) {
+            isLogin()
+        } else {
+            isNotLogin()
+        }
+    }
+
+    override fun isLogin() {
+        myView.information_true.visibility = View.VISIBLE
+        myView.information_false.visibility = View.GONE
+    }
+
+    override fun isNotLogin() {
+        myView.information_true.visibility = View.GONE
+        myView.information_false.visibility = View.VISIBLE
     }
 
     override fun initView() {
@@ -50,6 +72,26 @@ class InformationFragment : Fragment(), InformationContract.View {
             }
         })
         themeChanger(false)
+
+        myView.login2.setOnClickListener {
+
+
+            val builder = DetailDialog(context!!)
+            builder.show()
+            builder.setListener(
+                View.OnClickListener {
+                    builder.okListen()
+                    (activity as MainActivity).themeChange()
+                    (activity as MainActivity).mPresenter.changeThemes()
+                    builder.dismiss()
+                },
+                View.OnClickListener {
+                    (activity as MainActivity).mPresenter.changeThemes()
+                    builder.dismiss()
+                })
+        }
+
+
     }
 
     override fun showLoad() {
@@ -61,6 +103,7 @@ class InformationFragment : Fragment(), InformationContract.View {
     }
 
     fun themeChanger(bool: Boolean) {
+        loginExecute()
         val themeColorArray = arrayOf(
             intArrayOf(-android.R.attr.state_checked),
             intArrayOf(android.R.attr.state_checked)

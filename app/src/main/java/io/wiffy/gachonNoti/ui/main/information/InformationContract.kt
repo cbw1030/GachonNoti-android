@@ -7,10 +7,13 @@ interface InformationContract {
         fun initView()
         fun showLoad()
         fun dismissLoad()
+        fun isLogin()
+        fun isNotLogin()
     }
     interface Presenter{
         fun initPresent()
         fun fragmentInflation(list:ArrayList<Fragment?>)
         fun themeChange()
+        fun isNotLogin()
     }
 }

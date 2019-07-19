@@ -11,13 +11,17 @@ class InformationPresenter(val mView: InformationContract.View) : InformationCon
     var example: ExampleFragment? = null
 
     override fun fragmentInflation(list: ArrayList<Fragment?>) {
-       with(list){
-           example = ExampleFragment()
-           add(example)
-       }
+        with(list) {
+            example = ExampleFragment()
+            add(example)
+        }
     }
 
     override fun themeChange() {
-       if(example!=null)example?.changeTheme()
+        if (example != null) example?.changeTheme()
+    }
+
+    override fun isNotLogin() {
+
     }
 }

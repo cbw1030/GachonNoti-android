@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
 
-class ExampleFragment:Fragment(),ExampleContract.View {
+class ExampleFragment : Fragment(), ExampleContract.View {
     lateinit var myView: View
-    lateinit var mPresenter:ExamplePresenter
+    lateinit var mPresenter: ExamplePresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information_example, container, false)
@@ -22,8 +22,7 @@ class ExampleFragment:Fragment(),ExampleContract.View {
 
     }
 
-    fun changeTheme()
-    {
+    fun changeTheme() {
 
     }
 }
