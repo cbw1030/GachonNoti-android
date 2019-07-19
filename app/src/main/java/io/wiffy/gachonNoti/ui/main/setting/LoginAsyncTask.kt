@@ -6,10 +6,6 @@ import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
-import io.wiffy.gachonNoti.model.SslConnect
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -18,10 +14,8 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
-import java.io.InputStream
 import java.lang.Exception
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
+
 
 class LoginAsyncTask(
     private val ids: String,
@@ -31,8 +25,6 @@ class LoginAsyncTask(
 ) : AsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
-    val ids_encoded = Util.getBase64Encode(ids)
-    val password_encoded = Util.getBase64Encode(password)
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -56,7 +48,6 @@ class LoginAsyncTask(
             val httpClient = DefaultHttpClient()
             val httpPost = HttpPost("http://smart.gachon.ac.kr:8080//WebJSON")
             httpPost.entity = StringEntity(sendObject.toString())
-            val getObject =
                 JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
                     number = getString("userUniqNo")
 
@@ -66,7 +57,7 @@ class LoginAsyncTask(
                         ids,
                         password,
                         getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
-                        "https://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
+                        "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
                     )
                 }
 

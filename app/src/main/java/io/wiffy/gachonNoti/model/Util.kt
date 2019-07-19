@@ -98,27 +98,6 @@ class Util {
             return bmp
         }
 
-        fun bitmapToString(bitmap: Bitmap?):String{
-            val baos = ByteArrayOutputStream()
-            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, baos)
-            val b = baos.toByteArray()
-            return Base64.encodeToString(b, Base64.DEFAULT)
-        }
-        fun stringToBitmap(string:String):Bitmap?=try {
-            val imageBytes =Base64.decode(string,0)
-            val image= BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-           image
-        } catch(e:Exception) {
-           null
-        }
-
-
-        fun getBase64Encode(content: String): String = Base64.encodeToString(content.toByteArray(), 0)
-
-        fun getBase64Decode(content: String): String = String(Base64.decode(content, 0))
-
-
-
         @SuppressLint("SimpleDateFormat")
         fun classToTime(time: String): LongArray {
             val dt = SimpleDateFormat("HH:mm:ss")

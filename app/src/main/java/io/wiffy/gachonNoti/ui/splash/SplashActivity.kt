@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
@@ -33,7 +34,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     override fun changeUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash.setImageResource(R.drawable.defaults)
+        Glide.with(this).load(R.drawable.defaults).into(logo_splash)
         mPresenter.move()
     }
 

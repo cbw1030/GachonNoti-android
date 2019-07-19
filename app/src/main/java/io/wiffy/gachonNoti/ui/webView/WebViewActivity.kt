@@ -12,9 +12,11 @@ import android.view.MenuItem
 import android.view.View
 import android.webkit.WebSettings
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.Parse
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
@@ -40,7 +42,7 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     }
 
     private fun initBuild() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash3.setImageResource(R.drawable.defaults)
+        Glide.with(this).load(R.drawable.defaults).into(logo_splash3)
         builder = Dialog(this@WebViewActivity).apply {
             setContentView(R.layout.builder)
             setCancelable(false)

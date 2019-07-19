@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
@@ -176,7 +177,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
         themeChange()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash2.setImageResource(R.drawable.defaults)
+        Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
         navigation.addTab(navigation.newTab().setText("내 정보"))

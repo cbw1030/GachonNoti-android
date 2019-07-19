@@ -12,8 +12,7 @@ import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.StudentInformation
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.*
 import kotlinx.android.synthetic.main.fragment_information_example.view.*
 import java.text.SimpleDateFormat
 
@@ -66,7 +65,9 @@ class ExampleFragment : Fragment(), ExampleContract.View {
                 myView?.yourname?.text = name
                 myView?.number?.text = number
                 myView?.depart?.text = department
-                Glide.with(activity!!).load(imageURL)
+
+                Glide.with(activity!!)
+                    .load(imageURL)
                     .override(myView?.imageonyou?.width!!, myView?.imageonyou?.height!!)
                     .into(myView?.imageonyou!!)
 

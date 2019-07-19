@@ -14,6 +14,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -40,11 +41,9 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     override fun initUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            myView.subFab1.setImageResource(R.drawable.outline_autorenew_white_24dp)
-            myView.fab.setImageResource(R.drawable.search)
-        } else {
-        }
+
+        Glide.with(this).load(R.drawable.outline_autorenew_white_24dp).into(myView.subFab1)
+        Glide.with(this).load(R.drawable.search).into(myView.fab)
 
         fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
         fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
