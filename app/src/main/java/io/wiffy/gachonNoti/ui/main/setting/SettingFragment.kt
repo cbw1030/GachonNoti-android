@@ -147,7 +147,11 @@ class SettingFragment : Fragment(), SettingContract.View {
                         "Library\n" +
                         "com.wang.avi:library:2.1.3\n\n" +
                         "Circleimageview\n" +
-                        "de.hdodenhof:circleimageview:3.0.0"
+                        "de.hdodenhof:circleimageview:3.0.0\n\n"+
+                        "Glide\n"+
+                        "com.github.bumptech.glide:glide:4.9.0\n\n"+
+                        "QRCode\n"+
+                        "com.journeyapps:zxing-android-embedded:3.5.0"
             )
             builder.setPositiveButton(
                 "OK"
