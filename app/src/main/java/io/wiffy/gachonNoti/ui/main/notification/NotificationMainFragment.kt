@@ -1,13 +1,16 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.PagerAdapter
@@ -58,6 +61,13 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
 
             )
         }
+        myView.fab_main.backgroundTintList = resources.getColorStateList(
+            when (Util.theme) {
+                "red" -> R.color.red
+                "green" -> R.color.green
+                else -> R.color.main2Blue
+            }
+        )
         if (bool)
             mPresenter.themeChange()
         myView.navigation2.tabTextColors = ColorStateList(themeColorArray, color)
@@ -66,6 +76,29 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
     }
 
     override fun initView() {
+        Glide.with(context!!).load(R.drawable.search).into(myView.fab_main)
+        myView.fab_main.setOnClickListener {
+            val ad = AlertDialog.Builder(activity)
+            ad.setTitle(
+                "검색 [${when (Util.checkStateInNotification) {
+                    0 -> "공지사항"
+                    1 -> "가천뉴스"
+                    2 -> "행사소식"
+                    3 -> "장학소식"
+                    else -> ""
+                }}]"
+            )
+            val et = EditText(activity)
+            ad.setView(et)
+            ad.setPositiveButton("검색") { dialog, _ ->
+                mPresenter.search(Util.checkStateInNotification, et.text.toString())
+                dialog.dismiss()
+            }
+            ad.setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            ad.show()
+        }
         fragmentList = ArrayList()
         mPresenter.fragmentInflation(fragmentList)
         adapter = PagerAdapter(activity?.supportFragmentManager, fragmentList)
@@ -85,6 +118,7 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 myView.pager2.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
+                Util.checkStateInNotification = tab?.position ?: Util.STATE_NOTIFICATION
                 MainActivity.mView.setTabText(
                     when (tab?.position) {
                         1 -> "가천뉴스"

@@ -37,13 +37,31 @@
                         android:layout_below="@+id/animation_viewa2"
                         android:text="인터넷 연결을 확인해주세요."/>
             </RelativeLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="visible"
-                    android:id="@+id/recylcer2"
-                    android:layout_width="match_parent"
-                    android:paddingBottom="3dp"
-                    android:scrollbars="vertical"
-                    android:layout_height="match_parent"/>
+            <RelativeLayout
+                    android:id="@+id/par2"
+                    android:layout_width="match_parent" android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="visible"
+                        android:id="@+id/recylcer2"
+                        android:layout_width="match_parent"
+                        android:paddingBottom="3dp"
+                        android:scrollbars="vertical"
+                        android:layout_height="match_parent"/>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:visibility="gone"
+                        android:id="@+id/fab_news"
+                        app:fabSize="normal"
+                        app:elevation="0dp"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center"
+                        app:maxImageSize="30dp"
+                        android:layout_margin="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

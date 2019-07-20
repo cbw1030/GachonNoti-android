@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.notification.notification
 
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentAsyncTask
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
@@ -35,6 +36,11 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
         mView.updateUI(list)
     }
 
+    override fun search(src: String) {
+        Util.NotificationIndex = 0
+        list.clear()
+        NotificationComponentAsyncTask(list,this,context,1,src).execute()
+    }
     override fun show() {
         mView.showLoad()
     }

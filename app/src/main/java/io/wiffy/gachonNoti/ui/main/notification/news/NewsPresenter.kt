@@ -49,7 +49,11 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
         isloading = true
         NotificationComponentAsyncTask(list,this,context,2,null).execute()
     }
-
+    override fun search(src: String) {
+        Util.NewsIndex = 0
+        list.clear()
+        NotificationComponentAsyncTask(list,this,context,2,src).execute()
+    }
     override fun resetList() {
         Util.NewsIndex = 0
         list.clear()

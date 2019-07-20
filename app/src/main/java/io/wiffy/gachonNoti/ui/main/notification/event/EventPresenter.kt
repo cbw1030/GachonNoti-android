@@ -48,7 +48,11 @@ class EventPresenter(val mView: NotificationComponentContract.View, private val 
         list.clear()
         NotificationComponentAsyncTask(list,this,context,3,null).execute()
     }
-
+    override fun search(src: String) {
+        list.clear()
+        Util.EventIndex = 0
+        NotificationComponentAsyncTask(list,this,context,3,src).execute()
+    }
     override fun internetInterrupted() {
         mView.internetUnusable()
     }

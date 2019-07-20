@@ -19,7 +19,6 @@ import android.app.AlertDialog
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
-import kotlinx.android.synthetic.main.fragment_information.*
 
 
 class LoginlDialog(context: Context) : Dialog(context) {
@@ -141,6 +140,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
         Util.isLogin = false
         isLogin(false)
         (MainActivity.mView).changeTheme()
+        Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
         dismiss()
     }
 

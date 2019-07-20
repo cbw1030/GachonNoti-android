@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
+import kotlinx.android.synthetic.main.fragment_notification_scholarship.view.*
 
 class NotificationFragment : Fragment(),
     NotificationComponentContract.View {
@@ -40,14 +42,14 @@ class NotificationFragment : Fragment(),
 
     override fun internetUnusable() {
         Handler(Looper.getMainLooper()).post {
-            myView.recylcer.visibility = View.GONE
+            myView.par1.visibility = View.GONE
             myView.lottieXX.visibility = View.VISIBLE
         }
     }
 
     override fun internetUsable() {
         Handler(Looper.getMainLooper()).post {
-            myView.recylcer.visibility = View.VISIBLE
+            myView.par1.visibility = View.VISIBLE
             myView.lottieXX.visibility = View.GONE
         }
     }
@@ -78,6 +80,7 @@ class NotificationFragment : Fragment(),
     }
 
     fun changeTheme() {
+
         myView.swipe.setColorSchemeColors(
             when (Util.theme) {
                 "red" -> resources.getColor(R.color.red)
@@ -98,7 +101,10 @@ class NotificationFragment : Fragment(),
     override fun dismissLoad() {
         MainActivity.mView.builderDismiss()
     }
-
+    fun search(str:String)
+    {
+        mPresenter.search(str)
+    }
 }
 
 

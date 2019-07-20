@@ -9,6 +9,7 @@ interface NotificationMainContract {
         fun dismissLoad()
     }
     interface Presenter{
+        fun search(state:Int,str:String)
         fun initPresent()
         fun fragmentInflation(list:ArrayList<Fragment?>)
         fun themeChange()
