@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_notification_scholarship.view.*
 class NewsFragment : Fragment(), NotificationComponentContract.View {
     lateinit var myView: View
     lateinit var mPresenter: NewsPresenter
-    lateinit var adapter: NotificationAdapter
+    lateinit var adapter: NewsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification_news, container, false)
@@ -38,7 +38,7 @@ class NewsFragment : Fragment(), NotificationComponentContract.View {
     }
 
     override fun changeUI(list: ParseList) {
-        adapter = NotificationAdapter(
+        adapter = NewsAdapter(
             list,
             activity?.applicationContext!!,
             activity as MainActivity
