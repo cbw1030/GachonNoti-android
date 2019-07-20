@@ -11,6 +11,7 @@
             android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
+                android:visibility="gone"
                 android:id="@+id/navigation3"
                 app:tabMode="fixed"
                 android:elevation="0dp"
