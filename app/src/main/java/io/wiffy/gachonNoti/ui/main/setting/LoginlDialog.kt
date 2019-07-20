@@ -53,7 +53,6 @@ class LoginlDialog(context: Context) : Dialog(context) {
         if (bool) {
             frame_logined.visibility = View.VISIBLE
             frame_none_logined.visibility = View.GONE
-            welcome.text = "${Util.sharedPreferences.getString("name", "사용자")}님 안녕하세요!"
         } else {
             frame_logined.visibility = View.GONE
             frame_none_logined.visibility = View.VISIBLE
