@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.information.example
+package io.wiffy.gachonNoti.ui.main.information.idCard
 
 interface ExampleContract {
     interface View{

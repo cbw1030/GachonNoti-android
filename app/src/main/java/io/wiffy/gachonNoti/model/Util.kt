@@ -5,23 +5,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.util.Base64
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
-import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
-import java.io.ByteArrayOutputStream
 import java.lang.Exception
+import java.net.NetworkInterface
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.net.ssl.HttpsURLConnection
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
 
 class Util {
@@ -38,8 +36,6 @@ class Util {
         var surfing = false
 
         var SEMESTER = 1
-
-        var seek = 20
 
         var firstBoot = true
 
@@ -65,11 +61,85 @@ class Util {
 
         var theme = "default"
 
-        var made = true
-
         var novisible = false
 
         var campus = true
+
+        fun getMACAddress(): String {
+            try {
+                val interfaces = Collections.list(NetworkInterface.getNetworkInterfaces())
+                for (`interface` in interfaces) {
+                    if (`interface` != null) {
+                        if (!`interface`.name.equals("wlan0", true)) continue
+                    }
+                    val mac = `interface`.hardwareAddress ?: return ""
+                    val buf = StringBuilder()
+                    for (idx in 0 until mac.size) buf.append(String.format("%02X:", mac[idx]))
+                    if (buf.isNotEmpty()) buf.deleteCharAt(buf.length - 1)
+                    return buf.toString()
+                }
+            } catch (e: Exception) {
+            }
+            return "park"
+        }
+
+
+        @Throws(Exception::class)
+        fun decrypt(text: String, key: String): String {
+
+            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+
+            val keyBytes = ByteArray(16)
+
+            val b = key.toByteArray(charset("UTF-8"))
+
+            var len = b.size
+
+            if (len > keyBytes.size) len = keyBytes.size
+
+            System.arraycopy(b, 0, keyBytes, 0, len)
+
+            val keySpec = SecretKeySpec(keyBytes, "AES")
+
+            val ivSpec = IvParameterSpec(keyBytes)
+
+            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec)
+
+            val results = cipher.doFinal(Base64.decode(text, 0))
+
+            return String(results, Charsets.UTF_8)
+
+        }
+
+
+        @Throws(Exception::class)
+        fun encrypt(text: String, key: String): String {
+
+            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+
+            val keyBytes = ByteArray(16)
+
+            val b = key.toByteArray(charset("UTF-8"))
+
+            var len = b.size
+
+            if (len > keyBytes.size) len = keyBytes.size
+
+            System.arraycopy(b, 0, keyBytes, 0, len)
+
+            val keySpec = SecretKeySpec(keyBytes, "AES")
+
+            val ivSpec = IvParameterSpec(keyBytes)
+
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec)
+
+
+            val results = cipher.doFinal(text.toByteArray(charset("UTF-8")))
+
+            return Base64.encodeToString(results, 0)
+
+
+        }
 
         fun getRandomColorId(): Int = intArrayOf(
             R.color.ran1,
@@ -87,6 +157,7 @@ class Util {
         } catch (e: Exception) {
             false
         }
+
 
         fun matrixToBitmap(matrix: BitMatrix): Bitmap {
             val bmp = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565)

@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 
-class InformationFragment : Fragment(), InformationContract.View {
+class IDCardFragment : Fragment(), IDCardContract.View {
     lateinit var myView: View
-    lateinit var mPresenter: InformationPresenter
+    lateinit var mPresenter: IDCardPresenter
     lateinit var adapter: PagerAdapter
 
     companion object {
@@ -28,7 +28,7 @@ class InformationFragment : Fragment(), InformationContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information, container, false)
-        mPresenter = InformationPresenter(this)
+        mPresenter = IDCardPresenter(this)
         mPresenter.initPresent()
         return myView
     }

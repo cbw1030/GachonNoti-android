@@ -16,6 +16,8 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
@@ -83,6 +85,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
 
     @SuppressLint("InflateParams")
     private fun login() {
+
         val li = LayoutInflater.from(context)
         val prompt = li.inflate(R.layout.dialog_login, null)
         val alertDialogBuilder = AlertDialog.Builder(context)
@@ -102,23 +105,10 @@ class LoginlDialog(context: Context) : Dialog(context) {
                     executeLogin(prompt.login_name.text.toString(), prompt.login_password.text.toString())
                 }
             }
-            prompt.reference.text = Html.fromHtml(
-                "<u>참고 코드</u>"
-            )
-            prompt.reference.setOnClickListener {
-                Util.novisible = true
-                context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://github.com/wiffy-io/GachonNoti-android")
-                    )
-                )
-            }
             setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
 
             show()
         }
-
 
     }
 
@@ -144,13 +134,13 @@ class LoginlDialog(context: Context) : Dialog(context) {
         dismiss()
     }
 
-    @SuppressLint("ApplySharedPref")
+    @SuppressLint("ApplySharedPref", "SetTextI18n")
     fun saveInformation(information: StudentInformation) {
 
         with(information) {
             Util.sharedPreferences.edit().apply {
                 putString("id", id)
-                putString("password", password)
+                putString("password", Util.encrypt(password,Util.getMACAddress()))
                 putString("name", name)
                 putString("number", number)
                 putString("department", department)

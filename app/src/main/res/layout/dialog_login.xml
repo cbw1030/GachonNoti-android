@@ -9,6 +9,8 @@
               android:paddingEnd='10sp'>
 
     <EditText
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:id='@+id/login_name'
             android:layout_width='fill_parent'
             android:layout_height='wrap_content'
@@ -22,6 +24,8 @@
             android:id='@+id/login_password'
             android:layout_width='match_parent'
             android:layout_height='wrap_content'
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:hint='Password'
             android:ems='10'
             android:inputType='textPassword' >
@@ -32,16 +36,7 @@
             android:layout_gravity="center"
             android:textColor="#FF0000"
             android:textSize="10sp"
-            android:text="저희는 계정 정보를 절대로 서버에 저장하지 않습니다."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    <TextView
-            android:id="@+id/reference"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:textColor="#FF0000"
-            android:textSize="10sp"
-            android:text="참고 코드 (클릭)"
+            android:text="계정 정보는 기기내에 안전하게 암호화되어 저장됩니다."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

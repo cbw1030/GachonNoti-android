@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_setting.view.redColor
 
 
 class SettingFragment : Fragment(), SettingContract.View {
-    val myBorder = 5
+    private val myBorder = 5
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
     lateinit var list: ArrayList<CircleImageView>
@@ -179,6 +179,7 @@ class SettingFragment : Fragment(), SettingContract.View {
                 val builder = AlertDialog.Builder(activity)
                 builder.setTitle("Build Information")
                 builder.setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}")
+
                 builder.setPositiveButton(
                     "OK"
                 ) { _, _ -> }

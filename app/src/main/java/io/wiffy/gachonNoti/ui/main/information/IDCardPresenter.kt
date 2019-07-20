@@ -3,9 +3,9 @@ package io.wiffy.gachonNoti.ui.main.information
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.information.example.ExampleFragment
+import io.wiffy.gachonNoti.ui.main.information.idCard.ExampleFragment
 
-class InformationPresenter(val mView: InformationContract.View) : InformationContract.Presenter {
+class IDCardPresenter(val mView: IDCardContract.View) : IDCardContract.Presenter {
     override fun initPresent() {
         mView.initView()
     }

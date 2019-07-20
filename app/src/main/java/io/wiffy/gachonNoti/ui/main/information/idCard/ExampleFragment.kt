@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.information.example
+package io.wiffy.gachonNoti.ui.main.information.idCard
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.*
-import kotlinx.android.synthetic.main.fragment_information_example.view.*
+import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
 
 
@@ -28,7 +28,7 @@ class ExampleFragment : Fragment(), ExampleContract.View {
     private var handlerTask: Runnable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        myView = inflater.inflate(R.layout.fragment_information_example, container, false)
+        myView = inflater.inflate(R.layout.fragment_information_idcard, container, false)
         handler = Handler()
         mPresenter = ExamplePresenter(this)
         mPresenter.initPresent()

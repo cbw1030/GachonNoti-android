@@ -5,4 +5,5 @@ data class StudentInformation(val name:String, val number:String, val id:String,
     override fun toString(): String {
         return "name:$name\nnumber:$number\ndepartment:$department"
     }
+
 }
