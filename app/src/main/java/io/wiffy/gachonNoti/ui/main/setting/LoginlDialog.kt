@@ -19,6 +19,7 @@ import android.app.AlertDialog
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
+import kotlinx.android.synthetic.main.fragment_information.*
 
 
 class LoginlDialog(context: Context) : Dialog(context) {
@@ -38,6 +39,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
         gachon.text = Html.fromHtml(
             "<u>가천대학교 홈페이지</u>"
         )
+        gachonname.text = "${Util.sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
         gachon.setOnClickListener {
             Util.novisible = true
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://gachon.ac.kr/")))
@@ -73,8 +75,10 @@ class LoginlDialog(context: Context) : Dialog(context) {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             login.setBackgroundResource(style)
+            logout.setBackgroundResource(style)
         } else {
             login.setBackgroundColor(ContextCompat.getColor(context, color))
+            logout.setBackgroundColor(ContextCompat.getColor(context, color))
         }
     }
 
@@ -137,6 +141,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
         Util.isLogin = false
         isLogin(false)
         (MainActivity.mView).changeTheme()
+        dismiss()
     }
 
     @SuppressLint("ApplySharedPref")
@@ -153,6 +158,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
                 putBoolean("login", true)
             }.commit()
         }
+        gachonname.text = "${Util.sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
         Util.isLogin = true
         isLogin(true)
         (MainActivity.mView).changeTheme()
@@ -164,8 +170,4 @@ class LoginlDialog(context: Context) : Dialog(context) {
         Toast.makeText(context, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    @SuppressLint("ApplySharedPref")
-    fun okListen() {
-
-    }
 }
