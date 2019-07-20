@@ -78,6 +78,9 @@ class NotificationComponentAsyncTask(
         try {
             val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
             for (n in conn) {
+                if (n.html().contains("등록된 정보가 없습니다.")){
+                    continue
+                }
                 if ((type == 0 || type == 4) && n.html().contains("alt=\"공지\"")) {
                     val x = n.select("a").text()
                     val v = x.split("]")[0]
