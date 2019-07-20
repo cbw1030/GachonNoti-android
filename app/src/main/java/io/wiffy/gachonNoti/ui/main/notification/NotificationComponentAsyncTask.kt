@@ -29,10 +29,10 @@ class NotificationComponentAsyncTask(
 //        5 -> SCHOLARSHIP
 
     private val address = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${when (type) {
-        0, 1 -> "${Util.NotificationIndex}&pageSize=${Util.seek}&boardType_seq=358"
-        2 -> "${Util.NewsIndex}&pageSize=${Util.seek}&boardType_seq=359"
-        3 -> "${Util.EventIndex}&pageSize=${Util.seek}&boardType_seq=360"
-        else -> "${Util.ScholarshipIndex}&pageSize=${Util.seek}&boardType_seq=361"
+        0, 1 -> "${Util.NotificationIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=358"
+        2 -> "${Util.NewsIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=359"
+        3 -> "${Util.EventIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=360"
+        else -> "${Util.ScholarshipIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=361"
     }}&approve=&secret=&answer=&branch=&searchopt=title&searchword=${if (type == 0 || type == 4) {
         ""
     } else {

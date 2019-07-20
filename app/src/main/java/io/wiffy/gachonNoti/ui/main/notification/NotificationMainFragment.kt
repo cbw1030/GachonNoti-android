@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.core.view.get
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -16,9 +16,6 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.navigation2
 
@@ -78,8 +75,17 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
     override fun initView() {
         Glide.with(context!!).load(R.drawable.search).into(myView.fab_main)
         myView.fab_main.setOnClickListener {
-            val ad = AlertDialog.Builder(activity)
-            ad.setTitle(
+            val container = FrameLayout(context!!)
+            val params =
+                FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            params.marginStart = 40
+            params.marginEnd = 40
+            val editText = EditText(activity)
+            editText.layoutParams = params
+            container.addView(editText)
+            editText.hint = "내용"
+            val msd = AlertDialog.Builder(activity)
+            msd.setTitle(
                 "검색 [${when (Util.checkStateInNotification) {
                     0 -> "공지사항"
                     1 -> "가천뉴스"
@@ -88,16 +94,15 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
                     else -> ""
                 }}]"
             )
-            val et = EditText(activity)
-            ad.setView(et)
-            ad.setPositiveButton("검색") { dialog, _ ->
-                mPresenter.search(Util.checkStateInNotification, et.text.toString())
-                dialog.dismiss()
-            }
-            ad.setNegativeButton("취소") { dialog, _ ->
-                dialog.dismiss()
-            }
-            ad.show()
+                .setView(container)
+                .setMessage("\n검색어를 입력해주세요.")
+                .setPositiveButton("검색") { _, _ ->
+                    val msg = editText.text.toString()
+                    if (msg.isNotBlank())
+                        mPresenter.search(Util.checkStateInNotification, msg)
+                }
+                .setNegativeButton("취소") { _, _ -> }
+            msd.create().show()
         }
         fragmentList = ArrayList()
         mPresenter.fragmentInflation(fragmentList)

@@ -18,13 +18,13 @@ import java.text.SimpleDateFormat
 
 
 class ExampleFragment : Fragment(), ExampleContract.View {
-   private val initiation = 300000
-    private val initiationText ="05 분 00 초"
+    private val initiation = 300000
+    private val initiationText = "05 분 00 초"
     var myView: View? = null
     lateinit var mPresenter: ExamplePresenter
     private var mInfo: StudentInformation? = null
     lateinit var handler: Handler
-        var count =initiation
+    var count = initiation
     private var handlerTask: Runnable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
