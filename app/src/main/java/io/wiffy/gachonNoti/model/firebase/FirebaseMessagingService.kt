@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.model.firebase
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -35,6 +36,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
                 val notificationBuilder = NotificationCompat.Builder(this, getString(R.string.channel))
+                    .setLargeIcon(BitmapFactory.decodeResource( resources, R.drawable.defaults))
                     .setSmallIcon(R.drawable.defaults)
                     .setContentTitle(title)
                     .setContentText(message)
@@ -46,6 +48,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             }
             else -> {
                 val notificationBuilder = NotificationCompat.Builder(this, "")
+                    .setLargeIcon(BitmapFactory.decodeResource( resources, R.drawable.defaults))
                     .setSmallIcon(R.drawable.defaults)
                     .setContentTitle(title)
                     .setContentText(message)
