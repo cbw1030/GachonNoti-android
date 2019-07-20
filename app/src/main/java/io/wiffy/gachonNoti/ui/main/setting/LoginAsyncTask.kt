@@ -1,8 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
@@ -21,7 +19,7 @@ class LoginAsyncTask(
     private val ids: String,
     private val password: String,
     val context: Context,
-    val mView: DetailDialog
+    val mView: LoginlDialog
 ) : AsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation

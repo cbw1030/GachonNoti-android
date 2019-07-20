@@ -17,7 +17,7 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
     override fun doInBackground(vararg params: Void?): Int =
         try {
 
-            val v = URL("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})").readText()
+            URL("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})").readText()
             Util.ACTION_SUCCESS
         } catch (e: Exception) {
             Util.ACTION_FAILURE

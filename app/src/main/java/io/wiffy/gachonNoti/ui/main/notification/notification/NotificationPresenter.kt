@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.notification.notification
 
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentAsyncTask
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
 class NotificationPresenter(private val mView: NotificationComponentContract.View, private val context: Context?) :
@@ -13,7 +14,7 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
 
     override fun initPresent() {
         mView.changeUI(list)
-        NotificationAsyncTaskForN(list, this, context).execute()
+        NotificationComponentAsyncTask(list,this,context,0,null).execute()
     }
 
     override fun load() {
@@ -24,7 +25,7 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
 
     override fun resetList() {
         list.clear()
-        NotificationAsyncTaskForN(list, this, context).execute()
+        NotificationComponentAsyncTask(list,this,context,0,null).execute()
     }
 
 
@@ -44,7 +45,7 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
 
     override fun request() {
         isloading = true
-        NotificationAsyncTask(list, this, context).execute()
+        NotificationComponentAsyncTask(list,this,context,1,null).execute()
     }
 
     override fun internetInterrupted() {

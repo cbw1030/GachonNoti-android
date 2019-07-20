@@ -16,7 +16,6 @@ class MyApplication : Application() {
             Util.firstBoot = getBoolean("firstBooting", true)
             Util.notificationSet = getBoolean("notiOn", true)
             Util.theme = getString("theme", "default") ?: "default"
-            Util.seek = getInt("seek", 20)
             Util.initCount = booleanArrayOf(false, false, false, false)
             Util.isLogin = getBoolean("login", false)
             Util.campus = getBoolean("campus", true)

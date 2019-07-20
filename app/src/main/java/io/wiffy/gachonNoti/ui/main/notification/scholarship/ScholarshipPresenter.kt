@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.notification.scholarship
 
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentAsyncTask
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
 class ScholarshipPresenter(private val mView: NotificationComponentContract.View, private val context: Context?) :
@@ -11,17 +12,17 @@ class ScholarshipPresenter(private val mView: NotificationComponentContract.View
 
     override fun resetList() {
         list.clear()
-        ScholarshipAsyncTaskForN(list, this, context).execute()
+        NotificationComponentAsyncTask(list,this,context,4,null).execute()
     }
 
     override fun initPresent() {
         mView.changeUI(list)
-        ScholarshipAsyncTaskForN(list, this, context).execute()
+        NotificationComponentAsyncTask(list,this,context,4,null).execute()
     }
 
     override fun request() {
         isloading = true
-        ScholarshipAsyncTask(list, this, context).execute()
+        NotificationComponentAsyncTask(list,this,context,5,null).execute()
     }
 
 
