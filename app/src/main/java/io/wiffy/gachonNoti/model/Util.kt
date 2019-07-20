@@ -61,6 +61,8 @@ class Util {
 
         var helper = "인터넷 연결을 확인해주세요."
 
+        var checkStateInNotification = 0
+
         var theme = "default"
 
         var made = true

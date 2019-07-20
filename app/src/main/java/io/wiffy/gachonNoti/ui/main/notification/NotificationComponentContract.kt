@@ -22,5 +22,6 @@ interface NotificationComponentContract {
         fun show()
         fun dismiss()
         fun request()
+        fun search(src:String)
     }
 }

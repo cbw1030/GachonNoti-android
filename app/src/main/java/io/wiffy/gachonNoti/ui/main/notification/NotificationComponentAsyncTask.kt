@@ -33,7 +33,11 @@ class NotificationComponentAsyncTask(
         2 -> "${Util.NewsIndex}&pageSize=${Util.seek}&boardType_seq=359"
         3 -> "${Util.EventIndex}&pageSize=${Util.seek}&boardType_seq=360"
         else -> "${Util.ScholarshipIndex}&pageSize=${Util.seek}&boardType_seq=361"
-    }}&approve=&secret=&answer=&branch=&searchopt=&searchword=${keyword ?: ""}"
+    }}&approve=&secret=&answer=&branch=&searchopt=title&searchword=${if (type == 0 || type == 4) {
+        ""
+    } else {
+        keyword ?: ""
+    }}"
 
 
     override fun onPreExecute() {
@@ -138,7 +142,7 @@ class NotificationComponentAsyncTask(
 
             return Util.ACTION_SUCCESS
         } catch (e: Exception) {
-            return Util.ACTION_FAILURE
+            return 33
         }
     }
 
@@ -184,6 +188,11 @@ class NotificationComponentAsyncTask(
                             Util.ScholarshipIndex += 1
                         }
                     }
+                } else if(result == 33)
+                {
+                    dismiss()
+                    list.clear()
+                    update(list)
                 } else {
                     dismiss()
                     internetInterrupted()

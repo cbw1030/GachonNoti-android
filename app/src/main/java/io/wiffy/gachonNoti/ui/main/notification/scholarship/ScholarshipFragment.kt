@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
@@ -32,17 +33,21 @@ class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
         mPresenter.initPresent()
         return myView
     }
+
     override fun internetUnusable() {
         Handler(Looper.getMainLooper()).post {
-            myView.recylcer4.visibility = View.GONE
+            myView.par4.visibility = View.GONE
             myView.lottieXX4.visibility = View.VISIBLE
         }
     }
 
     override fun changeUI(list: ParseList) {
-        adapter= ScholarshipAdapter(list,
-            activity?.applicationContext!!,activity as MainActivity)
-        myView.recylcer4.adapter=adapter
+
+        adapter = ScholarshipAdapter(
+            list,
+            activity?.applicationContext!!, activity as MainActivity
+        )
+        myView.recylcer4.adapter = adapter
         myView.recylcer4.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
         myView.recylcer4.addItemDecoration(VerticalSpaceItemDecoration(2))
         myView.recylcer4.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -55,6 +60,7 @@ class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
         })
         changeTheme()
     }
+
     override fun updateUI(list: ParseList) {
         adapter.update(list)
     }
@@ -66,19 +72,26 @@ class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
     override fun dismissLoad() {
         MainActivity.mView.builderDismiss()
     }
+
     override fun internetUsable() {
         Handler(Looper.getMainLooper()).post {
-            myView.recylcer4.visibility = View.VISIBLE
+            myView.par4.visibility = View.VISIBLE
             myView.lottieXX4.visibility = View.GONE
         }
     }
+
     fun changeTheme() {
-        myView?.swipe4?.setColorSchemeColors(
+
+        myView.swipe4?.setColorSchemeColors(
             when (Util.theme) {
                 "red" -> resources.getColor(R.color.red)
                 "green" -> resources.getColor(R.color.green)
                 else -> resources.getColor(R.color.main2Blue)
             }
         )
+    }
+
+    fun search(str: String) {
+        mPresenter.search(str)
     }
 }
