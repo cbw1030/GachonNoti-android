@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Rect
 import android.net.ConnectivityManager
@@ -16,6 +17,7 @@ import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,7 +53,9 @@ class Util {
 
         var looper = true
 
-        var notifiSet = true
+        var version = "1.0.0"
+
+        var notificationSet = true
 
         var state = 0
 
@@ -82,7 +86,7 @@ class Util {
             false
         }
 
-        fun toBitmap(matrix: BitMatrix): Bitmap {
+        fun matrixToBitmap(matrix: BitMatrix): Bitmap {
             val bmp = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565)
             for (x in 0 until matrix.width)
                 for (y in 0 until matrix.height)
@@ -96,12 +100,7 @@ class Util {
             return bmp
         }
 
-        fun getBase64Encode(content: String): String = Base64.encodeToString(content.toByteArray(), 0)
-
-        fun getBase64Decode(content: String): String = String(Base64.decode(content, 0))
-
         @SuppressLint("SimpleDateFormat")
-
         fun classToTime(time: String): LongArray {
             val dt = SimpleDateFormat("HH:mm:ss")
             var start: String
@@ -175,12 +174,11 @@ class Util {
         }
 
         const val appConstantPreferences = "GACHONNOTICE"
-
         const val STATE_NOTIFICATION = 0
-        const val STATE_SEARCHER = 1
-        const val STATE_SETTING = 2
-        const val STATE_WEBVIEW = 3
-
+        const val STATE_INFORMATION = 1
+        const val STATE_SEARCHER = 2
+        const val STATE_SETTING = 3
+        const val STATE_WEBVIEW = 4
         const val NOT_UPDATED_YET = -99
         const val ACTION_SUCCESS = 0
         const val ACTION_FAILURE = -1

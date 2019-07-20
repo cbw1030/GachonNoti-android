@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/information_true"
+            android:background="@color/table_out"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/navigation3"
+                app:tabMode="fixed"
+                android:elevation="0dp"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorColor="@color/gray2"
+                android:layout_width="match_parent"
+                app:tabSelectedTextColor="@color/WHITE"
+                app:tabTextColor="@color/gray"
+                app:tabIndicatorHeight="3dp"
+                android:background="@color/white"
+                app:tabRippleColor="@color/gray2"
+                android:layout_alignParentBottom="true"
+                android:layout_height="40dp"/>
+
+
+        <androidx.viewpager.widget.ViewPager
+                android:layout_above="@+id/navigation3"
+                android:id="@+id/pager3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_alignParentTop="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/information_false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="로그인하셔야 이용이 가능합니다."
+                android:layout_centerHorizontal="true"
+              android:layout_above="@+id/login2"
+                android:gravity="center"
+                android:textColor="@color/gray2"
+                android:id="@+id/gachon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <Button
+                android:layout_margin="30dp"
+                android:text="로그인 하러가기"
+                android:layout_centerVertical="true"
+                android:id="@+id/login2"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@drawable/dialog_button_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+    </RelativeLayout>
+</FrameLayout>

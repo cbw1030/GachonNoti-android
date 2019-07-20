@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.notification.news
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentAsyncTask
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
 class NewsPresenter(val mView: NotificationComponentContract.View, private val context: Context?) : NotificationComponentContract.Presenter {
@@ -12,7 +13,7 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
 
     override fun initPresent() {
         mView.changeUI(list)
-        NewsAsyncTask(list,this,context).execute()
+        NotificationComponentAsyncTask(list,this,context,2,null).execute()
     }
 
     override fun load() {
@@ -46,12 +47,12 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
 
     override fun request() {
         isloading = true
-        NewsAsyncTask(list,this,context).execute()
+        NotificationComponentAsyncTask(list,this,context,2,null).execute()
     }
 
     override fun resetList() {
         Util.NewsIndex = 0
         list.clear()
-        NewsAsyncTask(list,this,context).execute()
+        NotificationComponentAsyncTask(list,this,context,2,null).execute()
     }
 }

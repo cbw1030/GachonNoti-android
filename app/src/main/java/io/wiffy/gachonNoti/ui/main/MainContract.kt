@@ -11,6 +11,7 @@ interface MainContract {
         fun makeToast(str: String)
         fun updatedContents()
         fun setTabText(str:String)
+        fun changeTheme()
     }
 
     interface Presenter {

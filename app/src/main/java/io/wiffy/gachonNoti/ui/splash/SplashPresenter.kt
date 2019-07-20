@@ -43,8 +43,6 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
     }
 
     override fun move() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            mView.moveToMain()
-        }, 1234)
+        Handler(Looper.getMainLooper()).post { mView.moveToMain() }
     }
 }

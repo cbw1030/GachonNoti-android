@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     companion object {
         lateinit var mView: MainContract.View
+
     }
 
     override fun setTabText(str: String) {
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     @SuppressLint("ApplySharedPref")
     private fun notiCheck() {
         if ((!NotificationManagerCompat.from(applicationContext)
-                .areNotificationsEnabled()) and (Util.notifiSet)
+                .areNotificationsEnabled()) and (Util.notificationSet)
         ) {
 
             val builders = AlertDialog.Builder(this)
@@ -98,7 +100,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
             builders.setNegativeButton("Cancel") { _, _ ->
-                Util.notifiSet = false
+                Util.notificationSet = false
                 Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
             }
@@ -175,9 +177,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
         themeChange()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) logo_splash2.setImageResource(R.drawable.defaults)
+        Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
+        navigation.addTab(navigation.newTab().setText("내 정보"))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
         navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
         pager.adapter = adapter
@@ -205,7 +208,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         val year = Util.YEAR
         val semester = Util.SEMESTER.toString()
         Util.sharedPreferences.edit().apply {
-            putBoolean(resources.getString(R.string.whatVersion), true)
+            putBoolean(Util.version, true)
 
             // 다음 업데이트시 삭제
             putString("2019-3-1", "<nodata>")
@@ -221,7 +224,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
         }.commit()
         val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("${resources.getString(R.string.whatVersion)} 버전 업데이트")
+        builder.setTitle("${Util.version} 버전 업데이트")
         builder.setMessage(" ${resources.getString(R.string.update)}")
         builder.setPositiveButton(
             "OK"
@@ -239,6 +242,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 } else {
                     finish()
                 }
+            }
+            Util.STATE_INFORMATION->{
+                pager.currentItem = Util.STATE_NOTIFICATION
+                Util.state = Util.STATE_NOTIFICATION
             }
             Util.STATE_SEARCHER -> {
                 if (!mPresenter.floatingButtonControl()) {
@@ -286,5 +293,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         super.onDetachedFromWindow()
     }
+    override fun changeTheme()
+    {
+        mPresenter.changeThemes()
+    }
+
 
 }

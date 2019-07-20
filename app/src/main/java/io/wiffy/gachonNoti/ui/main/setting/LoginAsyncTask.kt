@@ -14,16 +14,15 @@ import org.apache.http.util.EntityUtils
 import org.json.JSONObject
 import java.lang.Exception
 
+
 class LoginAsyncTask(
     private val ids: String,
     private val password: String,
     val context: Context,
-    val mView: DetailDialog
+    val mView: LoginlDialog
 ) : AsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
-    val ids_encoded = Util.getBase64Encode(ids)
-    val password_encoded = Util.getBase64Encode(password)
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -33,6 +32,7 @@ class LoginAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
         if (!Util.isNetworkConnected(context)) return Util.ACTION_FAILURE
+        val number: String
         try {
             val sendObject = JSONObject().apply {
                 put("fsp_cmd", "login")
@@ -46,18 +46,19 @@ class LoginAsyncTask(
             val httpClient = DefaultHttpClient()
             val httpPost = HttpPost("http://smart.gachon.ac.kr:8080//WebJSON")
             httpPost.entity = StringEntity(sendObject.toString())
-            val getObject =
                 JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
-                    val number = getString("userUniqNo")
+                    number = getString("userUniqNo")
+
                     studentInformation = StudentInformation(
                         getString("userNm"),
                         number,
                         ids,
                         password,
                         getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
-                        "https://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
+                        "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
                     )
                 }
+
 
         } catch (e: Exception) {
             return Util.ACTION_FAILURE
@@ -78,4 +79,5 @@ class LoginAsyncTask(
             }
         }
     }
+
 }

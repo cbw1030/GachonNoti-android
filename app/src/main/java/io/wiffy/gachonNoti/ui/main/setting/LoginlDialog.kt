@@ -12,29 +12,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
-import kotlinx.android.synthetic.main.dialog_detailsetting.*
+import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
 import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
-class DetailDialog(context: Context) : Dialog(context) {
-    lateinit var list: ArrayList<CircleImageView>
-    var index = -1
-    var preIndex = -1
-    var setNum = 0
+class LoginlDialog(context: Context) : Dialog(context) {
     var tempLogin = false
 
     @SuppressLint("ApplySharedPref")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_detailsetting)
-
-        setNum = Util.seek
-        setText.text = setNum.toString()
+        setContentView(R.layout.dialog_sign_in)
 
         settingColor(Util.theme)
 
@@ -49,55 +42,6 @@ class DetailDialog(context: Context) : Dialog(context) {
             Util.novisible = true
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://gachon.ac.kr/")))
         }
-        toLeft.setOnClickListener {
-            if (setNum > 10) {
-                setNum -= 5
-                setText.text = setNum.toString()
-            }
-        }
-
-        toRight.setOnClickListener {
-            if (setNum < 100) {
-                setNum += 5
-                setText.text = setNum.toString()
-            }
-        }
-
-
-        index = when (Util.theme) {
-            "red" -> 1
-            "green" -> 2
-            else -> 0
-        }
-        preIndex = index
-
-        list = ArrayList()
-        with(list)
-        {
-            add(defaultColor)
-            add(redColor)
-            add(greenColor)
-            this[index].borderWidth = 4
-            for (x in 0 until size) {
-                this[x].setOnClickListener {
-                    for (v in 0 until size) {
-                        if (x == v)
-                            this[v].borderWidth = 4
-                        else
-                            this[v].borderWidth = 0
-                    }
-                    index = x
-                    settingColor(x)
-                }
-            }
-        }
-
-
-    }
-
-    fun setListener(positiveListener: View.OnClickListener, negativeListener: View.OnClickListener) {
-        OK.setOnClickListener(positiveListener)
-        Cancel.setOnClickListener(negativeListener)
     }
 
     @SuppressLint("SetTextI18n")
@@ -109,34 +53,12 @@ class DetailDialog(context: Context) : Dialog(context) {
         if (bool) {
             frame_logined.visibility = View.VISIBLE
             frame_none_logined.visibility = View.GONE
-            welcome.text = "${Util.sharedPreferences.getString("name", "사용자")}님 안녕하세요!"
         } else {
             frame_logined.visibility = View.GONE
             frame_none_logined.visibility = View.VISIBLE
         }
     }
 
-    private fun settingColor(int: Int) {
-        val color = when (int) {
-            2 -> R.color.green
-            1 -> R.color.red
-            else -> R.color.main2Blue
-        }
-        val style = when (color) {
-            R.color.green -> R.drawable.dialog_button_green
-            R.color.red -> R.drawable.dialog_button_red
-            else -> R.drawable.dialog_button_default
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            OK.setBackgroundResource(style)
-            Cancel.setBackgroundResource(style)
-            login.setBackgroundResource(style)
-        } else {
-            OK.setBackgroundColor(ContextCompat.getColor(context, color))
-            Cancel.setBackgroundColor(ContextCompat.getColor(context, color))
-            login.setBackgroundColor(ContextCompat.getColor(context, color))
-        }
-    }
 
     private fun settingColor(str: String) {
         val color = when (str) {
@@ -150,12 +72,8 @@ class DetailDialog(context: Context) : Dialog(context) {
             else -> R.drawable.dialog_button_default
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            OK.setBackgroundResource(style)
-            Cancel.setBackgroundResource(style)
             login.setBackgroundResource(style)
         } else {
-            OK.setBackgroundColor(ContextCompat.getColor(context, color))
-            Cancel.setBackgroundColor(ContextCompat.getColor(context, color))
             login.setBackgroundColor(ContextCompat.getColor(context, color))
         }
     }
@@ -218,6 +136,7 @@ class DetailDialog(context: Context) : Dialog(context) {
         }.commit()
         Util.isLogin = false
         isLogin(false)
+        (MainActivity.mView).changeTheme()
     }
 
     @SuppressLint("ApplySharedPref")
@@ -236,8 +155,9 @@ class DetailDialog(context: Context) : Dialog(context) {
         }
         Util.isLogin = true
         isLogin(true)
+        (MainActivity.mView).changeTheme()
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-        Toast.makeText(context, information.toString(), Toast.LENGTH_SHORT).show()
+        dismiss()
     }
 
     fun loginFailed() {
@@ -246,15 +166,6 @@ class DetailDialog(context: Context) : Dialog(context) {
 
     @SuppressLint("ApplySharedPref")
     fun okListen() {
-        Util.seek = setNum
-        Util.theme = when (index) {
-            1 -> "red"
-            2 -> "green"
-            else -> "default"
-        }
-        Util.sharedPreferences.edit().apply {
-            putInt("seek", Util.seek)
-            putString("theme", Util.theme)
-        }.commit()
+
     }
 }

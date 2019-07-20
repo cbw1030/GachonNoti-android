@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
 import android.os.AsyncTask
+import android.os.Build
 import io.wiffy.gachonNoti.model.Util
 import java.net.URL
 
@@ -15,7 +16,8 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
 
     override fun doInBackground(vararg params: Void?): Int =
         try {
-            val v = URL("$url$query").readText()
+
+            URL("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})").readText()
             Util.ACTION_SUCCESS
         } catch (e: Exception) {
             Util.ACTION_FAILURE

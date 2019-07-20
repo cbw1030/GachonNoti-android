@@ -10,7 +10,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,18 +19,24 @@ import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
+import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_setting.view.*
+import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
+import kotlinx.android.synthetic.main.fragment_setting.view.greenColor
+import kotlinx.android.synthetic.main.fragment_setting.view.redColor
 
 
 class SettingFragment : Fragment(), SettingContract.View {
+    val myBorder = 5
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
+    lateinit var list: ArrayList<CircleImageView>
     var builderIn: Dialog? = null
     private var secretCount = 0
+    var index = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
@@ -44,7 +49,32 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     @SuppressLint("ApplySharedPref")
     override fun changeView() {
-        myView.notiSwitch.isChecked = Util.notifiSet
+        index = when (Util.theme) {
+            "red" -> 1
+            "green" -> 2
+            else -> 0
+        }
+        list = ArrayList()
+        with(list)
+        {
+            add(myView.defaultColor)
+            add(myView.redColor)
+            add(myView.greenColor)
+            this[index].borderWidth = myBorder
+            for (x in 0 until size) {
+                this[x].setOnClickListener {
+                    for (v in 0 until size) {
+                        if (x == v)
+                            this[v].borderWidth = myBorder
+                        else
+                            this[v].borderWidth = 0
+                    }
+                    index = x
+                    settingColor(x)
+                }
+            }
+        }
+        myView.notiSwitch.isChecked = Util.notificationSet
         themeChanger()
         myView.campustext.text =
             if (Util.campus) {
@@ -81,23 +111,10 @@ class SettingFragment : Fragment(), SettingContract.View {
             }
         }
         myView.detailSetting.setOnClickListener {
-            val builder = DetailDialog(context!!)
+            val builder = LoginlDialog(context!!)
             builder.show()
-            builder.setListener(
-                View.OnClickListener {
-                    builder.okListen()
-                    (activity as MainActivity).themeChange()
-                    (activity as MainActivity).mPresenter.changeThemes()
-                    builder.dismiss()
-                },
-                View.OnClickListener {
-                    builder.dismiss()
-                })
-
         }
         myView.bugReport.setOnClickListener {
-            //            val reporter = ReportDialog(context!!, this)
-//            reporter.show()
             val container = FrameLayout(context!!)
             val params =
                 FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -146,7 +163,11 @@ class SettingFragment : Fragment(), SettingContract.View {
                         "Library\n" +
                         "com.wang.avi:library:2.1.3\n\n" +
                         "Circleimageview\n" +
-                        "de.hdodenhof:circleimageview:3.0.0"
+                        "de.hdodenhof:circleimageview:3.0.0\n\n" +
+                        "Glide\n" +
+                        "com.github.bumptech.glide:glide:4.9.0\n\n" +
+                        "QRCode\n" +
+                        "com.journeyapps:zxing-android-embedded:3.5.0"
             )
             builder.setPositiveButton(
                 "OK"
@@ -155,14 +176,13 @@ class SettingFragment : Fragment(), SettingContract.View {
         }
         myView.secretText.setOnClickListener {
             if (secretCount == 4) {
-//                val builder = AlertDialog.Builder(activity)
-////                builder.setTitle("뭐야 왜 이걸..")
-////                builder.setMessage("너.. 심심하구나..?")
-////                builder.setPositiveButton(
-////                    "OK"
-////                ) { _, _ -> }
-////                builder.show()
-                val builder = MyInformationDialog(activity!!)
+                val builder = AlertDialog.Builder(activity)
+                builder.setTitle("Build Information")
+                builder.setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}")
+                builder.setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+                builder.show()
                 builder.show()
                 secretCount = 0
             } else {
@@ -205,7 +225,7 @@ class SettingFragment : Fragment(), SettingContract.View {
         myView.version.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setTitle(resources.getString(R.string.version))
-            builder.setMessage(resources.getString(R.string.whatVersion))
+            builder.setMessage(Util.version)
             builder.setPositiveButton(
                 "OK"
             ) { _, _ -> }
@@ -243,6 +263,29 @@ class SettingFragment : Fragment(), SettingContract.View {
             "Cancel"
         ) { _, _ -> }
         builder.create().show()
+    }
+
+    @SuppressLint("ApplySharedPref")
+    fun settingColor(int: Int) {
+        val color = when (int) {
+            2 -> R.color.green
+            1 -> R.color.red
+            else -> R.color.main2Blue
+        }
+        val style = when (color) {
+            R.color.green -> R.drawable.dialog_button_green
+            R.color.red -> R.drawable.dialog_button_red
+            else -> R.drawable.dialog_button_default
+        }
+        Util.theme = when (int) {
+            2 -> "green"
+            1 -> "red"
+            else -> "default"
+        }
+        Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
+        themeChanger()
+        (activity as MainActivity).themeChange()
+        (activity as MainActivity).mPresenter.changeThemes()
     }
 
     override fun executeTask(query: String) {
@@ -321,14 +364,14 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     @SuppressLint("ApplySharedPref")
     private fun setOn() {
-        Util.notifiSet = true
+        Util.notificationSet = true
         Util.sharedPreferences.edit().putBoolean("notiOn", true).commit()
         FirebaseMessaging.getInstance().subscribeToTopic("noti")
     }
 
     @SuppressLint("ApplySharedPref")
     private fun setOff() {
-        Util.notifiSet = false
+        Util.notificationSet = false
         Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }
