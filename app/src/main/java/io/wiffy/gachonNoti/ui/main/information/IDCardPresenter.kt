@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
-import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.model.data.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.information.idCard.ExampleFragment
 
@@ -31,14 +31,14 @@ class IDCardPresenter(val mView: IDCardContract.View) : IDCardContract.Presenter
         with(Util.sharedPreferences)
         {
             if (example != null) example?.loginInformationSetting(
-              StudentInformation(
-                  getString("name","null")?:"null",
-                  getString("number","null")?:"null",
-                  getString("id","null")?:"null",
-                  getString("password","null")?:"null",
-                  getString("department","null")?:"null",
-                  getString("image","null")?:"null"
-              )
+                StudentInformation(
+                    getString("name", "null") ?: "null",
+                    getString("number", "null") ?: "null",
+                    getString("id", "null") ?: "null",
+                    getString("password", "null") ?: "null",
+                    getString("department", "null") ?: "null",
+                    getString("image", "null") ?: "null"
+                )
             )
         }
     }

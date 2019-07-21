@@ -25,13 +25,7 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
-        로그인 기능 / 학생증 추가 \n
-        가천뉴스, 행사소식, 장학소식 업데이트\n
-        공지사항 이미지 크기 수정\n
-        (간혹 크기가 이상한게 있어요)\n
-        마시멜로우 이하버전 아이콘 수정\n
-        C, D, E 교시 시간 수정\n
-        강의실 검색버튼 롱클릭 -> 데이터 리셋\n
+없음
     </string>
 
 </resources>

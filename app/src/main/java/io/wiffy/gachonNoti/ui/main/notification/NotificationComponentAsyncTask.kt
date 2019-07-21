@@ -4,8 +4,8 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import io.wiffy.gachonNoti.model.Parse
-import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.data.Parse
+import io.wiffy.gachonNoti.model.data.ParseList
 import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
 import java.net.URL

@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.model
+package io.wiffy.gachonNoti.model.data
 
 import java.io.Serializable
 

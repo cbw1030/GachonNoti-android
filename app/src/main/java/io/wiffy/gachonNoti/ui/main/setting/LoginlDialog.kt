@@ -16,9 +16,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.model.data.StudentInformation
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
 
