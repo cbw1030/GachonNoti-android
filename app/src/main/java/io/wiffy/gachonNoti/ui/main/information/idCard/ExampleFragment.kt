@@ -13,6 +13,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.*
+import io.wiffy.gachonNoti.model.data.StudentInformation
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
 

@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification.scholarship
 
 import android.content.Context
-import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.data.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentAsyncTask
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract

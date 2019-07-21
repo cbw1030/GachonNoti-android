@@ -3,7 +3,6 @@ package io.wiffy.gachonNoti.model
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import java.util.*
 
 
