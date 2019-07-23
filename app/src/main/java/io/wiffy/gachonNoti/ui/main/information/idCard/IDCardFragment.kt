@@ -18,11 +18,11 @@ import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
 
 
-class ExampleFragment : Fragment(), ExampleContract.View {
+class IDCardFragment : Fragment(), IDCardContract.View {
     private val initiation = 300000
     private val initiationText = "05 분 00 초"
     var myView: View? = null
-    lateinit var mPresenter: ExamplePresenter
+    lateinit var mPresenter: IDCardPresenter
     private var mInfo: StudentInformation? = null
     lateinit var handler: Handler
     var count = initiation
@@ -31,7 +31,7 @@ class ExampleFragment : Fragment(), ExampleContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information_idcard, container, false)
         handler = Handler()
-        mPresenter = ExamplePresenter(this)
+        mPresenter = IDCardPresenter(this)
         mPresenter.initPresent()
         return myView
     }
@@ -69,7 +69,7 @@ class ExampleFragment : Fragment(), ExampleContract.View {
 
                 Glide.with(activity!!)
                     .load(imageURL)
-                    .override(myView?.imageonyou?.width!!, myView?.imageonyou?.height!!)
+//                    .override(myView?.imageonyou?.width!!, myView?.imageonyou?.height!!)
                     .into(myView?.imageonyou!!)
 
                 setTimerAndQRCode(number)
@@ -110,7 +110,11 @@ class ExampleFragment : Fragment(), ExampleContract.View {
         val qrCodeWriter = QRCodeWriter()
         val bitmap =
             Util.matrixToBitmap(qrCodeWriter.encode(output.toString(), BarcodeFormat.QR_CODE, 200, 200))
-        myView?.qrcode?.setImageBitmap(bitmap)
+
+        Glide.with(activity!!)
+            .load(bitmap)
+            .into(myView?.qrcode!!)
+//        myView?.qrcode?.setImageBitmap(bitmap)
     }
 
 }

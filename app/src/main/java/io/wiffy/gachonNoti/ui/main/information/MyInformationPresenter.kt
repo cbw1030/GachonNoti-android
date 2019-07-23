@@ -3,24 +3,24 @@ package io.wiffy.gachonNoti.ui.main.information
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.model.data.StudentInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.ui.main.information.idCard.ExampleFragment
+import io.wiffy.gachonNoti.ui.main.information.idCard.IDCardFragment
 
-class IDCardPresenter(val mView: IDCardContract.View) : IDCardContract.Presenter {
+class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformationContract.Presenter {
     override fun initPresent() {
         mView.initView()
     }
 
-    private var example: ExampleFragment? = null
+    private var idCard: IDCardFragment? = null
 
     override fun fragmentInflation(list: ArrayList<Fragment?>) {
         with(list) {
-            example = ExampleFragment()
-            add(example)
+            idCard = IDCardFragment()
+            add(idCard)
         }
     }
 
     override fun themeChange() {
-        if (example != null) example?.changeTheme()
+        if (idCard != null) idCard?.changeTheme()
     }
 
     override fun isNotLogin() {
@@ -30,7 +30,7 @@ class IDCardPresenter(val mView: IDCardContract.View) : IDCardContract.Presenter
     override fun loginSetting() {
         with(Util.sharedPreferences)
         {
-            if (example != null) example?.loginInformationSetting(
+            if (idCard != null) idCard?.loginInformationSetting(
                 StudentInformation(
                     getString("name", "null") ?: "null",
                     getString("number", "null") ?: "null",

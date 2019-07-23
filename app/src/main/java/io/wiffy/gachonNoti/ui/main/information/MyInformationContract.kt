@@ -2,7 +2,7 @@ package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
 
-interface IDCardContract {
+interface MyInformationContract {
     interface View{
         fun initView()
         fun showLoad()

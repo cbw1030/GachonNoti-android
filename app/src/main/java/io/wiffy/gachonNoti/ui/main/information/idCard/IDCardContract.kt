@@ -1,6 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.information.idCard
 
-interface ExampleContract {
+interface IDCardContract {
     interface View{
         fun initView()
     }

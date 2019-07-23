@@ -25,7 +25,9 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
-없음
+        후원목록 안보이던 버그 수정\n
+        학생증 QRCode 크기 조정\n
+        로딩오류가 나는 공지사항 수정
     </string>
 
 </resources>

@@ -3,7 +3,6 @@ package io.wiffy.gachonNoti.ui.webView
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
 import java.net.URL
@@ -34,8 +33,7 @@ class WebAsyncTask(
                 "http://www.gachon.ac.kr/community/opencampus/03.jsp?mode=view&boardType_seq=$newSeq&board_no=$newNo"
             }
         }
-
-        try{
+        try {
             val doc = Jsoup.parseBodyFragment(URL(address).readText())
             for (div in doc.select("div")) {
                 if (div.hasClass("boardview")) {
@@ -51,10 +49,14 @@ class WebAsyncTask(
                             if (javaS.contains("<script>document.location.href=\"")) {
                                 goHref = javaS.split("<script>document.location.href=\"")[1].split("\";</script>")[0]
                             } else {
-                                javaS = javaS.replace("src=\"/Files/",
-                                    "width='100%'src=\"/Files/")
-                                javaS = javaS.replace("src=\"http://www.gachon.ac.kr/Files/",
-                                    "width='100%'src=\"http://www.gachon.ac.kr/Files/")
+                                javaS = javaS.replace(
+                                    "src=\"/Files/",
+                                    "width='100%'src=\"/Files/"
+                                )
+                                javaS = javaS.replace(
+                                    "src=\"http://www.gachon.ac.kr/Files/",
+                                    "width='100%'src=\"http://www.gachon.ac.kr/Files/"
+                                )
                                 javaS = javaS.replace("src=\"/", "src=\"http://www.gachon.ac.kr/")
                                 javaS = javaS.replace("href=\"/", "href=\"http://www.gachon.ac.kr/")
                                 Handler(Looper.getMainLooper()).post {
@@ -67,7 +69,7 @@ class WebAsyncTask(
                     break
                 }
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             mPresenter.updateWeb("<p>인터넷 연결을 확인해주세요.</p>")
             mPresenter.builderDismiss()
         }
@@ -78,8 +80,7 @@ class WebAsyncTask(
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-            if (goHref.contains("http://")) {
-                Log.d("asdf", goHref)
+            if (goHref.isNotBlank()) {
                 WebAsyncTask(goHref, mPresenter, true).execute()
             }
         }

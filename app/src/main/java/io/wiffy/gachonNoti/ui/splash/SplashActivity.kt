@@ -28,13 +28,12 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
-
+        Glide.with(this).load(R.drawable.defaults).into(logo_splash)
         mPresenter = SplashPresenter(this, applicationContext)
         mPresenter.initPresent()
     }
 
     override fun changeUI() {
-        Glide.with(this).load(R.drawable.defaults).into(logo_splash)
         mPresenter.move()
     }
 

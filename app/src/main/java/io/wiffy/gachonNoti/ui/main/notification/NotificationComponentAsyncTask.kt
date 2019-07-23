@@ -29,10 +29,26 @@ class NotificationComponentAsyncTask(
 //        5 -> SCHOLARSHIP
 
     private val address = "http://m.gachon.ac.kr/gachon/notice.jsp?pageNum=${when (type) {
-        0, 1 -> "${Util.NotificationIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=358"
-        2 -> "${Util.NewsIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=359"
-        3 -> "${Util.EventIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=360"
-        else -> "${Util.ScholarshipIndex}&pageSize=${if(keyword.isNullOrBlank()){"20"}else{"100"}}&boardType_seq=361"
+        0, 1 -> "${Util.NotificationIndex}&pageSize=${if (keyword.isNullOrBlank()) {
+            "20"
+        } else {
+            "100"
+        }}&boardType_seq=358"
+        2 -> "${Util.NewsIndex}&pageSize=${if (keyword.isNullOrBlank()) {
+            "20"
+        } else {
+            "100"
+        }}&boardType_seq=359"
+        3 -> "${Util.EventIndex}&pageSize=${if (keyword.isNullOrBlank()) {
+            "20"
+        } else {
+            "100"
+        }}&boardType_seq=360"
+        else -> "${Util.ScholarshipIndex}&pageSize=${if (keyword.isNullOrBlank()) {
+            "20"
+        } else {
+            "100"
+        }}&boardType_seq=361"
     }}&approve=&secret=&answer=&branch=&searchopt=title&searchword=${if (type == 0 || type == 4) {
         ""
     } else {
@@ -78,7 +94,7 @@ class NotificationComponentAsyncTask(
         try {
             val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
             for (n in conn) {
-                if (n.html().contains("등록된 정보가 없습니다.")){
+                if (n.html().contains("등록된 정보가 없습니다.")) {
                     continue
                 }
                 if ((type == 0 || type == 4) && n.html().contains("alt=\"공지\"")) {
@@ -142,6 +158,10 @@ class NotificationComponentAsyncTask(
                 }
             }
 
+            try {
+                Util.helper= URL("http://wiffy.io/gachon/thanks.txt ").readText()
+            } catch (e: Exception) {
+            }
 
             return Util.ACTION_SUCCESS
         } catch (e: Exception) {
@@ -191,8 +211,7 @@ class NotificationComponentAsyncTask(
                             Util.ScholarshipIndex += 1
                         }
                     }
-                } else if(result == 33)
-                {
+                } else if (result == 33) {
                     dismiss()
                     list.clear()
                     update(list)
