@@ -3,15 +3,10 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -21,17 +16,17 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
-import kotlinx.android.synthetic.main.fragment_searcher.view.subFab1
 import kotlin.collections.ArrayList
 
 class SearcherFragment : Fragment(), SearchContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
-    lateinit var fabOpen: Animation
-    lateinit var fabClose: Animation
+//    lateinit var fabOpen: Animation
+//    lateinit var fabClose: Animation
 
     var builder: SearchDialog? = null
-    private var isFABOpen = false
+//    private var isFABOpen = false
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_searcher, container, false)
@@ -42,43 +37,46 @@ class SearcherFragment : Fragment(), SearchContract.View {
 
     override fun initUI() {
 
-        Glide.with(this).load(R.drawable.outline_autorenew_white_24dp).into(myView.subFab1)
+//        Glide.with(this).load(R.drawable.outline_autorenew_white_24dp).into(myView.subFab1)
         Glide.with(this).load(R.drawable.search).into(myView.fab)
 
-        fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
-        fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
+//        fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
+//        fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
-            floatingButtonControl()
+//            floatingButtonControl()
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
-
+/*
         myView.fab.setOnLongClickListener {
             anim()
             true
         }
+        */
+        /*
         myView.subFab1.setOnClickListener {
             resetDialog()
             anim()
         }
-        myView.superParentOfSearcher.setOnTouchListener { _, _ ->
-            if (isFABOpen) {
-                anim()
-                true
-            } else false
-        }
-        myView.card2.setOnTouchListener { _, _ ->
-            if (isFABOpen) {
-                anim()
-                true
-            } else false
-        }
+        */
+//        myView.superParentOfSearcher.setOnTouchListener { _, _ ->
+//            if (isFABOpen) {
+//                anim()
+//                true
+//            } else false
+//        }
+//        myView.card2.setOnTouchListener { _, _ ->
+//            if (isFABOpen) {
+//                anim()
+//                true
+//            } else false
+//        }
         themeChanger()
         setTimeTable(null, "")
     }
 
     @SuppressLint("ApplySharedPref")
-    private fun resetDialog() {
+    fun resetDialog() {
         val mBuilder = AlertDialog.Builder(context)
         mBuilder.setMessage("저장된 데이터를 재설정 할까요?")
         mBuilder.setPositiveButton(
@@ -101,27 +99,27 @@ class SearcherFragment : Fragment(), SearchContract.View {
         mBuilder.show()
     }
 
-    override fun floatingButtonControl() =
-        if (isFABOpen) {
-            Handler(Looper.getMainLooper()).post {
-                anim()
-            }
-            true
-        } else false
+//    override fun floatingButtonControl() =
+//        if (isFABOpen) {
+//            Handler(Looper.getMainLooper()).post {
+//                anim()
+//            }
+//            true
+//        } else false
 
 
-    private fun anim() {
-        isFABOpen = if (isFABOpen) {
-            myView.subFab1.startAnimation(fabClose)
-            myView.subFab1.visibility = View.GONE
-            false
-        } else {
-            myView.subFab1.startAnimation(fabOpen)
-            myView.subFab1.visibility = View.VISIBLE
-            true
-        }
-
-    }
+//    private fun anim() {
+//        isFABOpen = if (isFABOpen) {
+//            myView.subFab1.startAnimation(fabClose)
+//            myView.subFab1.visibility = View.GONE
+//            false
+//        } else {
+//            myView.subFab1.startAnimation(fabOpen)
+//            myView.subFab1.visibility = View.VISIBLE
+//            true
+//        }
+//
+//    }
 
     fun themeChanger() {
         myView.fab.backgroundTintList = resources.getColorStateList(
@@ -131,13 +129,13 @@ class SearcherFragment : Fragment(), SearchContract.View {
                 else -> R.color.main2Blue
             }
         )
-        myView.subFab1.backgroundTintList = resources.getColorStateList(
-            when (Util.theme) {
-                "red" -> R.color.deepRed
-                "green" -> R.color.deepGreen
-                else -> R.color.main2DeepBlue
-            }
-        )
+//        myView.subFab1.backgroundTintList = resources.getColorStateList(
+//            when (Util.theme) {
+//                "red" -> R.color.deepRed
+//                "green" -> R.color.deepGreen
+//                else -> R.color.main2DeepBlue
+//            }
+//        )
         myView.semester.setTextColor(
             resources.getColor(
                 when (Util.theme) {

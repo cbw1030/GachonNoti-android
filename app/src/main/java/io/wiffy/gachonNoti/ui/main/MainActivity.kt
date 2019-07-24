@@ -9,6 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -26,7 +28,7 @@ import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), MainContract.View {
-
+    var menuItem: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
     var backKeyPressedTime: Long = 0L
@@ -109,6 +111,19 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuItem = menu?.add(0, 201735829, 0, "시간표 데이터 삭제")
+        menuItem?.isVisible = false
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == 201735829) {
+            mPresenter.resetData()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun builderUp() {
         if (builder == null) {
@@ -194,7 +209,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (Util.state == Util.STATE_SEARCHER) mPresenter.floatingButtonControl()
+
+                if (menuItem != null)
+                    when (tab?.position) {
+                        Util.STATE_SEARCHER -> {
+                            menuItem?.isVisible = true
+                        }
+                        else -> {
+                            menuItem?.isVisible = false
+                        }
+                    }
                 Util.state = tab?.position ?: Util.STATE_NOTIFICATION
                 pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
 
@@ -243,15 +267,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                     finish()
                 }
             }
-            Util.STATE_INFORMATION->{
+            Util.STATE_INFORMATION -> {
                 pager.currentItem = Util.STATE_NOTIFICATION
                 Util.state = Util.STATE_NOTIFICATION
             }
             Util.STATE_SEARCHER -> {
-                if (!mPresenter.floatingButtonControl()) {
-                    pager.currentItem = Util.STATE_NOTIFICATION
-                    Util.state = Util.STATE_NOTIFICATION
-                }
+//                if (!mPresenter.floatingButtonControl()) {
+                pager.currentItem = Util.STATE_NOTIFICATION
+                Util.state = Util.STATE_NOTIFICATION
+//                }
             }
             Util.STATE_SETTING -> {
                 pager.currentItem = Util.STATE_NOTIFICATION
@@ -293,8 +317,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         invisible()
         super.onDetachedFromWindow()
     }
-    override fun changeTheme()
-    {
+
+    override fun changeTheme() {
         mPresenter.changeThemes()
     }
 
