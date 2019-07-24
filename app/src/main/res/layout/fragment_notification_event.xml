@@ -48,7 +48,6 @@
                         android:layout_height="match_parent"/>
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:visibility="gone"
-                        android:id="@+id/fab_event"
                         app:fabSize="normal"
                         app:elevation="0dp"
                         android:layout_width="58dp"

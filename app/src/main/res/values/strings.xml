@@ -9,14 +9,12 @@
     <string name="moneygive">도움이 필요합니다.</string>
     <string name="common">공통</string>
     <string name="info">정보</string>
-    <string name="ven">리스트 개수</string>
     <string name="details">계정 관리</string>
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
     <string name="calling">교내 연락처</string>
     <string name="searcher">강의실</string>
     <string name="load">오른쪽 하단 검색으로\n강의실 시간표를 불러오세요.</string>
-    <string name="theme">테마</string>
     <string name="helper">도움을 주신 분들</string>
     <string name="version">버전</string>
     <string name="ssss">설정을 확인해주세요.</string>
