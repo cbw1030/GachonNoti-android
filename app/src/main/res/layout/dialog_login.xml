@@ -36,7 +36,7 @@
             android:layout_gravity="center"
             android:textColor="#FF0000"
             android:textSize="10sp"
-            android:text="계정 정보는 기기내에 안전하게 암호화되어 저장됩니다."
+            android:text="계정 정보는 기기내에 안전하게 AES 암호화되어 저장됩니다."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
