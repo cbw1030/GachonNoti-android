@@ -178,7 +178,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             if (secretCount == 4) {
                 val builder = AlertDialog.Builder(activity)
                 builder.setTitle("Build Information")
-                builder.setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}")
+                builder.setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}\nMAC:${Util.getMACAddress()}")
 
                 builder.setPositiveButton(
                     "OK"
