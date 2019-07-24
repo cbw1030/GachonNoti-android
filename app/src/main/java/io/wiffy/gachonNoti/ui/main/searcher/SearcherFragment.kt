@@ -21,12 +21,8 @@ import kotlin.collections.ArrayList
 class SearcherFragment : Fragment(), SearchContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
-//    lateinit var fabOpen: Animation
-//    lateinit var fabClose: Animation
 
     var builder: SearchDialog? = null
-//    private var isFABOpen = false
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_searcher, container, false)
@@ -36,41 +32,13 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     override fun initUI() {
-
-//        Glide.with(this).load(R.drawable.outline_autorenew_white_24dp).into(myView.subFab1)
         Glide.with(this).load(R.drawable.search).into(myView.fab)
 
-//        fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
-//        fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
         myView.fab.setOnClickListener {
-//            floatingButtonControl()
             builder = SearchDialog(context!!, this, mPresenter)
             builder?.show()
         }
-/*
-        myView.fab.setOnLongClickListener {
-            anim()
-            true
-        }
-        */
-        /*
-        myView.subFab1.setOnClickListener {
-            resetDialog()
-            anim()
-        }
-        */
-//        myView.superParentOfSearcher.setOnTouchListener { _, _ ->
-//            if (isFABOpen) {
-//                anim()
-//                true
-//            } else false
-//        }
-//        myView.card2.setOnTouchListener { _, _ ->
-//            if (isFABOpen) {
-//                anim()
-//                true
-//            } else false
-//        }
+
         themeChanger()
         setTimeTable(null, "")
     }
@@ -99,27 +67,6 @@ class SearcherFragment : Fragment(), SearchContract.View {
         mBuilder.show()
     }
 
-//    override fun floatingButtonControl() =
-//        if (isFABOpen) {
-//            Handler(Looper.getMainLooper()).post {
-//                anim()
-//            }
-//            true
-//        } else false
-
-
-//    private fun anim() {
-//        isFABOpen = if (isFABOpen) {
-//            myView.subFab1.startAnimation(fabClose)
-//            myView.subFab1.visibility = View.GONE
-//            false
-//        } else {
-//            myView.subFab1.startAnimation(fabOpen)
-//            myView.subFab1.visibility = View.VISIBLE
-//            true
-//        }
-//
-//    }
 
     fun themeChanger() {
         myView.fab.backgroundTintList = resources.getColorStateList(
@@ -129,13 +76,6 @@ class SearcherFragment : Fragment(), SearchContract.View {
                 else -> R.color.main2Blue
             }
         )
-//        myView.subFab1.backgroundTintList = resources.getColorStateList(
-//            when (Util.theme) {
-//                "red" -> R.color.deepRed
-//                "green" -> R.color.deepGreen
-//                else -> R.color.main2DeepBlue
-//            }
-//        )
         myView.semester.setTextColor(
             resources.getColor(
                 when (Util.theme) {

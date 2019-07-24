@@ -44,5 +44,4 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         (mList[Util.STATE_SEARCHER] as SearcherFragment).resetDialog()
     }
 
-//    override fun floatingButtonControl() = (mList[Util.STATE_SEARCHER] as SearcherFragment).floatingButtonControl()
 }

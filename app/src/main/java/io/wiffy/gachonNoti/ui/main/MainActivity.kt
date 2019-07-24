@@ -166,7 +166,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     fun themeChange() {
-        //supportActionBar!!.elevation = 0.toFloat()
         supportActionBar!!.setBackgroundDrawable(
             ColorDrawable(
                 when (Util.theme) {
