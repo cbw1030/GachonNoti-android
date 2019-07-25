@@ -20,17 +20,26 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
         myView.builderUp()
     }
 
-    override fun doInBackground(vararg params: Void?): Int =
-        try {
-            Jsoup.connect("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})")
-                .method(Connection.Method.POST).execute()
-            Util.ACTION_SUCCESS
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Util.ACTION_FAILURE
-        } catch (e: NotImplementedError) {
-            Util.NOT_UPDATED_YET
+    override fun doInBackground(vararg params: Void?): Int {
+        val here =
+            "$url$query(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            try {
+                URL(here).readText()
+                Util.ACTION_SUCCESS
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Util.ACTION_FAILURE
+            } catch (e: NotImplementedError) {
+                Util.NOT_UPDATED_YET
+            }
+        } else {
+            val x =
+                Jsoup.connect(here).method(Connection.Method.POST).execute()
         }
+
+        return Util.ACTION_SUCCESS
+    }
 
     override fun onPostExecute(result: Int?) {
         myView.builderDismiss()
