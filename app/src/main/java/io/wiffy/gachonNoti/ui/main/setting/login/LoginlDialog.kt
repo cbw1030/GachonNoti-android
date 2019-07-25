@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.setting
+package io.wiffy.gachonNoti.ui.main.setting.login
 
 import android.annotation.SuppressLint
 import android.app.Dialog

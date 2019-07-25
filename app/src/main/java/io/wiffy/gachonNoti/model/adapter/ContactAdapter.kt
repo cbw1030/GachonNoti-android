@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.setting
+package io.wiffy.gachonNoti.model.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.data.ContactInformation
 import kotlinx.android.synthetic.main.adapter_contact.view.*
 
 class ContactAdapter(

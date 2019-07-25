@@ -1,5 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
+import io.wiffy.gachonNoti.model.data.ContactInformation
+
 interface SettingContract {
     interface View {
         fun changeView()

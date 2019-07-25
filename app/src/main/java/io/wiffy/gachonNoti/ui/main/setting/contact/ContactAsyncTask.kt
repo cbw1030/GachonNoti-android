@@ -1,10 +1,10 @@
-package io.wiffy.gachonNoti.ui.main.setting
+package io.wiffy.gachonNoti.ui.main.setting.contact
 
 import android.os.AsyncTask
-import android.util.Log
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.data.ContactInformation
+import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Jsoup
-import org.jsoup.select.Elements
 import java.lang.Exception
 import java.net.URL
 

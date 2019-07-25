@@ -23,6 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
+import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
+import io.wiffy.gachonNoti.model.data.ContactInformation
+import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
+import io.wiffy.gachonNoti.ui.main.setting.login.LoginlDialog
+import io.wiffy.gachonNoti.ui.main.setting.report.ReportAsyncTask
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
 import kotlinx.android.synthetic.main.fragment_setting.view.greenColor

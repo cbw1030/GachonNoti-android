@@ -9,6 +9,7 @@ import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.Util.Companion.classToTime
+import io.wiffy.gachonNoti.model.data.ClassDataInformation
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader

@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.model
+package io.wiffy.gachonNoti.model.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.notification.scholarship
+package io.wiffy.gachonNoti.model.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -24,16 +24,24 @@ import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
 
-class ScholarshipAdapter(
+//        TYPE
+//        0 -> NOTIFICATION_FOR_N
+//        1 -> NOTIFICATION
+//        2 -> NEWS
+//        3 -> EVENT
+//        4 -> SCHOLARSHIP_FOR_N
+//        5 -> SCHOLARSHIP
+
+class NotificationComponentAdapter(
     var items: ParseList,
     private val context: Context,
-    private val act: Activity
-) : RecyclerView.Adapter<ScholarshipAdapter.ScholarshipViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = ScholarshipViewHolder(parent)
+    private val act: Activity,
+    private val type: Int
+) : RecyclerView.Adapter<NotificationComponentAdapter.ComponentViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = ComponentViewHolder(parent)
     override fun getItemCount(): Int = items.size()
-
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: ScholarshipViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
 
         items.get(position).let { item ->
             with(holder) {
@@ -76,7 +84,7 @@ class ScholarshipAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        if(!Util.surfing) {
+                        if (!Util.surfing) {
                             Util.surfing = true
                             if (Util.isNetworkConnected(act)) {
                                 Util.novisible = true
@@ -95,10 +103,17 @@ class ScholarshipAdapter(
                         Toast.makeText(context, "주소를 복사했습니다.", Toast.LENGTH_SHORT).show()
                         true
                     }
+                    card.visibility =
+                        when (type) {
+                            2 -> View.GONE
+                            else -> View.VISIBLE
+                        }
                 }
             }
         }
+
     }
+
     fun update(list: ParseList) {
         items = list
         notificationUpdate()
@@ -112,7 +127,7 @@ class ScholarshipAdapter(
         }
     }
 
-    inner class ScholarshipViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    inner class ComponentViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter, parent, false)
     ) {
         val title: TextView = itemView.titleIn
@@ -122,4 +137,5 @@ class ScholarshipAdapter(
         val save: ImageView = itemView.save
         val card: CardView = itemView.contexts
     }
+
 }

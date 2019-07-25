@@ -13,6 +13,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.data.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
+import io.wiffy.gachonNoti.model.adapter.NotificationComponentAdapter
 import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -23,7 +24,7 @@ class NotificationFragment : Fragment(),
 
     lateinit var myView: View
     lateinit var mPresenter: NotificationPresenter
-    lateinit var adapter: NotificationAdapter
+    lateinit var adapter: NotificationComponentAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification_notification, container, false)
@@ -53,10 +54,11 @@ class NotificationFragment : Fragment(),
     }
 
     override fun changeUI(list: ParseList) {
-        adapter = NotificationAdapter(
+        adapter = NotificationComponentAdapter(
             list,
             activity?.applicationContext!!,
-            activity as MainActivity
+            activity as MainActivity,
+            0
         )
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)

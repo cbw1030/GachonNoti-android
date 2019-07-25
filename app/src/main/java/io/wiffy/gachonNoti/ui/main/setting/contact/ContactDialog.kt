@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.setting
+package io.wiffy.gachonNoti.ui.main.setting.contact
 
 import android.app.Dialog
 import android.content.Context
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.data.ContactInformation
+import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import kotlinx.android.synthetic.main.dialog_contact.*
 
 class ContactDialog(context: Context, private val mView: SettingContract.View) : Dialog(context) {
@@ -39,12 +41,12 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
                     if (text == "박상현" && spinnerSelected == 0) {
                         mView.builderUp()
                         val x=ArrayList<ContactInformation>()
-                        x.add(ContactInformation("천재","박상현","201735829"))
+                        x.add(ContactInformation("천재", "박상현", "201735829"))
                         mView.builderDismissAndContactUp(x)
                     } else if(text == "박정호" && spinnerSelected == 0){
                         mView.builderUp()
                         val x=ArrayList<ContactInformation>()
-                        x.add(ContactInformation("바보","박정호","201635812"))
+                        x.add(ContactInformation("바보", "박정호", "201635812"))
                         mView.builderDismissAndContactUp(x)
                     }
                     else {

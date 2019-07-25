@@ -1,5 +1,6 @@
-package io.wiffy.gachonNoti.ui.main.setting
+package io.wiffy.gachonNoti.ui.main.setting.login
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
@@ -14,11 +15,11 @@ import org.apache.http.util.EntityUtils
 import org.json.JSONObject
 import java.lang.Exception
 
-
+@SuppressLint("StaticFieldLeak")
 class LoginAsyncTask(
     private val ids: String,
     private val password: String,
-    val context: Context,
+   val context: Context,
     val mView: LoginlDialog
 ) : AsyncTask<Void, Void, Int>() {
 

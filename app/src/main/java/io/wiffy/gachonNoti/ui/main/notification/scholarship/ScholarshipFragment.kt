@@ -13,6 +13,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.data.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
+import io.wiffy.gachonNoti.model.adapter.NotificationComponentAdapter
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 import kotlinx.android.synthetic.main.fragment_notification_scholarship.view.*
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_notification_scholarship.view.*
 class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
     lateinit var myView: View
     lateinit var mPresenter: ScholarshipPresenter
-    lateinit var adapter: ScholarshipAdapter
+    lateinit var adapter: NotificationComponentAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification_scholarship, container, false)
@@ -42,9 +43,11 @@ class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
 
     override fun changeUI(list: ParseList) {
 
-        adapter = ScholarshipAdapter(
+        adapter = NotificationComponentAdapter(
             list,
-            activity?.applicationContext!!, activity as MainActivity
+            activity?.applicationContext!!,
+            activity as MainActivity,
+            4
         )
         myView.recylcer4.adapter = adapter
         myView.recylcer4.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
