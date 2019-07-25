@@ -5,6 +5,9 @@ import android.os.Build
 import android.util.Log
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
+import org.jsoup.Connection
+import org.jsoup.Jsoup
+import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -17,32 +20,17 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
         myView.builderUp()
     }
 
-    //    override fun doInBackground(vararg params: Void?): Int =
-//        try {
-//
-//            URL("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})").readText()
-//            Util.ACTION_SUCCESS
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            Util.ACTION_FAILURE
-//        } catch (e: NotImplementedError) {
-//            Util.NOT_UPDATED_YET
-//        }
-    override fun doInBackground(vararg params: Void?): Int {
-        val myUrl =
-            URL("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})")
-                .openConnection() as HttpURLConnection
-        myUrl.requestMethod = "GET"
-        myUrl.connect()
-
-        val response = myUrl.responseCode
-Log.d("asdf",response.toString())
-
-        myUrl.disconnect()
-
-        return Util.ACTION_SUCCESS
-
-    }
+    override fun doInBackground(vararg params: Void?): Int =
+        try {
+            Jsoup.connect("$url$query\n(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})")
+                .method(Connection.Method.POST).execute()
+            Util.ACTION_SUCCESS
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Util.ACTION_FAILURE
+        } catch (e: NotImplementedError) {
+            Util.NOT_UPDATED_YET
+        }
 
     override fun onPostExecute(result: Int?) {
         myView.builderDismiss()
