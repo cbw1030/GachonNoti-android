@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.WebSettings
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
@@ -26,8 +27,13 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-        webview.settings.builtInZoomControls = true
-        webview.settings.setSupportZoom(true)
+        with(webview.settings)
+        {
+            builtInZoomControls = true
+            setSupportZoom(true)
+            cacheMode = WebSettings.LOAD_NO_CACHE
+            setAppCacheEnabled(false)
+        }
         initBuild()
         bundle = (intent.getSerializableExtra("bundle") as Parse)
         title = "${bundle.value} ${bundle.data}"
