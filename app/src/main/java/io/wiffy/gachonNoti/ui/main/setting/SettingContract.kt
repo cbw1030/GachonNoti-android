@@ -16,6 +16,5 @@ interface SettingContract {
 
     interface Presenter {
         fun initPresent()
-
     }
 }

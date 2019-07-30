@@ -320,6 +320,4 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun changeTheme() {
         mPresenter.changeThemes()
     }
-
-
 }

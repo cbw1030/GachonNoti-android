@@ -9,7 +9,6 @@ interface SearchContract {
         fun showLoad()
         fun dismissLoad()
         fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String)
-//        fun floatingButtonControl():Boolean
     }
 
     interface Presenter {
