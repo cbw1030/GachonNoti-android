@@ -121,7 +121,6 @@ class SearchDialog(
     override fun setListDialog(arrayList: ArrayList<String>) {
         val builder = AlertDialog.Builder(context)
         val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
-        val lp = WindowManager.LayoutParams()
         for (x in arrayList) {
             adapter.add(x)
         }

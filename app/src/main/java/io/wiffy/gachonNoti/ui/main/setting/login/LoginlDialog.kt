@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.dialog_login.view.*
 class LoginlDialog(context: Context) : Dialog(context) {
     var tempLogin = false
 
-    @SuppressLint("ApplySharedPref")
+    @SuppressLint("ApplySharedPref", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_sign_in)

@@ -114,7 +114,7 @@ class IDCardFragment : Fragment(), IDCardContract.View {
         Glide.with(activity!!)
             .load(bitmap)
             .into(myView?.qrcode!!)
-//        myView?.qrcode?.setImageBitmap(bitmap)
+
     }
 
 }
