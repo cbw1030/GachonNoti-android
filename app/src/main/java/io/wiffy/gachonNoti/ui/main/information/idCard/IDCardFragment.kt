@@ -105,11 +105,10 @@ class IDCardFragment : Fragment(), IDCardContract.View {
         handler.post(handlerTask)
 
         val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
-        val output = StringBuilder("m$number$format")
-        output.append(Integer.parseInt("0A", 16))
+        val output = "m$number$format"
         val qrCodeWriter = QRCodeWriter()
         val bitmap =
-            Util.matrixToBitmap(qrCodeWriter.encode(output.toString(), BarcodeFormat.QR_CODE, 200, 200))
+            Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 200, 200))
 
         Glide.with(activity!!)
             .load(bitmap)
