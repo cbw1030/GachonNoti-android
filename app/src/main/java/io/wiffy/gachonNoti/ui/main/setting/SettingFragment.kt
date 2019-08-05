@@ -40,9 +40,9 @@ class SettingFragment : Fragment(), SettingContract.View {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
     lateinit var list: ArrayList<CircleImageView>
-    var builderIn: Dialog? = null
+    private var builderIn: Dialog? = null
     private var secretCount = 0
-    var index = 0
+    private var index = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
@@ -51,7 +51,6 @@ class SettingFragment : Fragment(), SettingContract.View {
 
         return myView
     }
-
 
     @SuppressLint("ApplySharedPref")
     override fun changeView() {
@@ -268,11 +267,6 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     @SuppressLint("ApplySharedPref")
     fun settingColor(int: Int) {
-        val color = when (int) {
-            2 -> R.color.green
-            1 -> R.color.red
-            else -> R.color.main2Blue
-        }
         Util.theme = when (int) {
             2 -> "green"
             1 -> "red"
@@ -353,11 +347,8 @@ class SettingFragment : Fragment(), SettingContract.View {
     }
 
     override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
-        builderIn?.let {
-            it.dismiss()
-        }
+        builderIn?.dismiss()
     }
-
 
     @SuppressLint("ApplySharedPref")
     private fun setOn() {
