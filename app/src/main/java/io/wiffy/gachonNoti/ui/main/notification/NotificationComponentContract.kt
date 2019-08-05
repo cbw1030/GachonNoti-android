@@ -7,21 +7,21 @@ interface NotificationComponentContract {
         fun changeUI(list: ParseList)
         fun updateUI(list: ParseList)
         fun showLoad()
-        fun dismissLoad()
-        fun internetUnusable()
-        fun internetUsable()
+        fun dismissLoad(): Boolean?
+        fun internetUnusable(): Boolean
+        fun internetUsable(): Boolean
     }
 
     interface Presenter {
-        fun internetInterrupted()
-        fun internetNotInterrupted()
+        fun internetInterrupted(): Boolean
+        fun internetNotInterrupted(): Boolean
         fun resetList()
         fun initPresent()
         fun load()
         fun update(data: ParseList)
         fun show()
-        fun dismiss()
+        fun dismiss(): Boolean?
         fun request()
-        fun search(src:String)
+        fun search(src: String)
     }
 }

@@ -12,26 +12,28 @@ import io.wiffy.gachonNoti.model.Util
 
 class SplashPresenter(private val mView: SplashContract.View, private val context: Context) : SplashContract.Presenter {
 
-    override fun initPresent() = when (Util.firstBoot) {
-        true -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channel = context.getString(R.string.channel)
-                val channelName = context.getString(R.string.app_name)
-                val notiChannel =
-                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                val channelMessage =
-                    NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
-                        description = ""
-                        enableLights(true)
-                        enableVibration(true)
-                        setShowBadge(false)
-                        vibrationPattern = addList()
-                    }
-                notiChannel.createNotificationChannel(channelMessage)
+    override fun initPresent() {
+        when (Util.firstBoot) {
+            true -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = context.getString(R.string.channel)
+                    val channelName = context.getString(R.string.app_name)
+                    val notiChannel =
+                        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    val channelMessage =
+                        NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                            description = ""
+                            enableLights(true)
+                            enableVibration(true)
+                            setShowBadge(false)
+                            vibrationPattern = addList()
+                        }
+                    notiChannel.createNotificationChannel(channelMessage)
+                }
+                mView.subscribe()
             }
-            mView.subscribe()
+            false -> mView.changeUI()
         }
-        false -> mView.changeUI()
     }
 
     private fun addList() = LongArray(4).apply {

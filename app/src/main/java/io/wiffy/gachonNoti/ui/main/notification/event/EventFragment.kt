@@ -60,19 +60,17 @@ class EventFragment : Fragment(), NotificationComponentContract.View {
         changeTheme()
     }
 
-    override fun internetUnusable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par3.visibility = View.GONE
-            myView.lottieXX3.visibility = View.VISIBLE
-        }
+    override fun internetUnusable() = Handler(Looper.getMainLooper()).post {
+        myView.par3.visibility = View.GONE
+        myView.lottieXX3.visibility = View.VISIBLE
     }
 
-    override fun internetUsable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par3.visibility = View.VISIBLE
-            myView.lottieXX3.visibility = View.GONE
-        }
+
+    override fun internetUsable() = Handler(Looper.getMainLooper()).post {
+        myView.par3.visibility = View.VISIBLE
+        myView.lottieXX3.visibility = View.GONE
     }
+
 
     fun changeTheme() {
         myView.swipe3.setColorSchemeColors(
@@ -85,19 +83,13 @@ class EventFragment : Fragment(), NotificationComponentContract.View {
 
     }
 
-    override fun updateUI(list: ParseList) {
-        adapter.update(list)
-    }
+    override fun updateUI(list: ParseList) = adapter.update(list)
 
-    override fun showLoad() {
-        MainActivity.mView.builderUp()
-    }
+    override fun showLoad() = MainActivity.mView.builderUp()
 
-    override fun dismissLoad() {
-        MainActivity.mView.builderDismiss()
-    }
+    override fun dismissLoad() = MainActivity.mView.builderDismiss()
 
-    fun search(str: String) {
-        mPresenter.search(str)
-    }
+
+    fun search(str: String) = mPresenter.search(str)
+
 }

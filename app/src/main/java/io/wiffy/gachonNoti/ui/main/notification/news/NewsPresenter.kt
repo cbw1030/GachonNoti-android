@@ -22,13 +22,10 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
         }
     }
 
-    override fun internetInterrupted() {
-        mView.internetUnusable()
-    }
+    override fun internetInterrupted() = mView.internetUnusable()
 
-    override fun internetNotInterrupted() {
-        mView.internetUsable()
-    }
+    override fun internetNotInterrupted() = mView.internetUsable()
+
 
     override fun update(data: ParseList) {
         isloading = false
@@ -36,14 +33,10 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
         mView.updateUI(list)
     }
 
-    override fun show() {
-        mView.showLoad()
-    }
+    override fun show() = mView.showLoad()
 
-    override fun dismiss() {
-        mView.dismissLoad()
-    }
 
+    override fun dismiss() = mView.dismissLoad()
 
     override fun request() {
         isloading = true
