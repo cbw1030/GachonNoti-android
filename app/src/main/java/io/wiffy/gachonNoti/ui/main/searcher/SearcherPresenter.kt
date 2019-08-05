@@ -73,7 +73,6 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun resetData() {
-
     }
 
     @SuppressLint("ApplySharedPref")
@@ -268,11 +267,9 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             findTable(load1, str)
             findTable(load2, str)
             findTable(load3, str)
-            Collections.sort(tablearr[0], TimeCompare())
-            Collections.sort(tablearr[1], TimeCompare())
-            Collections.sort(tablearr[2], TimeCompare())
-            Collections.sort(tablearr[3], TimeCompare())
-            Collections.sort(tablearr[4], TimeCompare())
+            for (num in 0..4) {
+                Collections.sort(tablearr[num], TimeCompare())
+            }
 
             val array2 = ArrayList<TimeTableData>().apply {
                 add(TimeTableData("월", tablearr[0]))
@@ -339,35 +336,35 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
                     }
 
                     val time = classInformation.time.split(",")
-                    val data = Array(5) { "" }
+                    val mData = Array(5) { "" }
                     for (t in time) {
                         if (t.contains("월")) {
-                            data[0] = "${data[0]},$t"
+                            mData[0] = "${mData[0]},$t"
                         }
                         if (t.contains("화")) {
-                            data[1] = "${data[1]},$t"
+                            mData[1] = "${mData[1]},$t"
                         }
                         if (t.contains("수")) {
-                            data[2] = "${data[2]},$t"
+                            mData[2] = "${mData[2]},$t"
                         }
                         if (t.contains("목")) {
-                            data[3] = "${data[3]},$t"
+                            mData[3] = "${mData[3]},$t"
                         }
                         if (t.contains("금")) {
-                            data[4] = "${data[4]},$t"
+                            mData[4] = "${mData[4]},$t"
                         }
                     }
                     for (i in 0..4) {
-                        if (data[i].contains(",")) {
-                            val scom = data[i].replace(" ", "").split(",")
+                        if (mData[i].contains(",")) {
+                            val sCom = mData[i].replace(" ", "").split(",")
                             if ((cntroom && tempRoom.contains(roomNMD)) ||
                                 (!cntroom && tempRoom2.contains(roomNMD))
                             ) {
                                 insertTime(
                                     classInformation,
                                     i,
-                                    classToTime(scom[1].replace(numToday(i), ""))[0],
-                                    classToTime(scom[scom.size - 1].replace(numToday(i), ""))[1]
+                                    classToTime(sCom[1].replace(numToday(i), ""))[0],
+                                    classToTime(sCom[sCom.size - 1].replace(numToday(i), ""))[1]
                                 )
                             }
                             if (cntroom) {

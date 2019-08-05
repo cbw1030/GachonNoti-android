@@ -12,7 +12,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import io.wiffy.gachonNoti.ui.main.setting.login.LoginlDialog
+import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
@@ -74,7 +74,7 @@ class MyInformationFragment : Fragment(), MyInformationContract.View {
         themeChanger(false)
 
         myView.login2.setOnClickListener {
-            val builder = LoginlDialog(context!!)
+            val builder = LoginDialog(context!!)
             builder.show()
 
         }

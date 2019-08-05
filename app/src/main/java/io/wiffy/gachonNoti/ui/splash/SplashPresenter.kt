@@ -34,7 +34,6 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         false -> mView.changeUI()
     }
 
-
     private fun addList() = LongArray(4).apply {
         this[0] = 100
         this[1] = 200
@@ -42,7 +41,6 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         this[3] = 200
     }
 
-    override fun move() {
-        Handler(Looper.getMainLooper()).post { mView.moveToMain() }
-    }
+    override fun move() = Handler(Looper.getMainLooper()).post { mView.moveToMain() }
+
 }

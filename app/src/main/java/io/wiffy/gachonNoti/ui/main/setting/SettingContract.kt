@@ -9,7 +9,7 @@ interface SettingContract {
         fun executeTask2(query:String)
         fun builderUp()
         fun builderDismissAndContactUp(list:ArrayList<ContactInformation>)
-        fun builderDismiss()
+        fun builderDismiss():Boolean
         fun makeToast(string:String)
         fun changeCampus(bool:Boolean)
     }

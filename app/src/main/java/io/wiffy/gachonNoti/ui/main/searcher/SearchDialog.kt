@@ -32,11 +32,15 @@ class SearchDialog(
         setContentView(R.layout.dialog_search)
 
         mPresenter.initPresentDialog(this)
-        year.text = "[${if(Util.campus){"글로벌"}else{"메디컬"}}] ${Util.YEAR}년도 ${when(Util.SEMESTER){
-            1->"1"
-            2->"2"
-            3->"여름"
-            else->"겨울"
+        year.text = "[${if (Util.campus) {
+            "글로벌"
+        } else {
+            "메디컬"
+        }}] ${Util.YEAR}년도 ${when (Util.SEMESTER) {
+            1 -> "1"
+            2 -> "2"
+            3 -> "여름"
+            else -> "겨울"
         }
         }학기"
 
@@ -74,26 +78,26 @@ class SearchDialog(
 
     override fun getDataDialog(yearSemester: String) {
         if (Util.isNetworkConnected(context)) {
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle("시간표 데이터를 가져옵니다.")
-            builder.setMessage("시간이 다소 걸릴 수 있으니 중간에 앱을 종료하지 마세요.\n(최초 한번만 다운로드 합니다.)")
-            builder.setPositiveButton("OK") { _, _ ->
-                mPresenter.getData(yearSemester)
-            }
-            builder.show()
+            AlertDialog.Builder(context).apply {
+                setTitle("시간표 데이터를 가져옵니다.")
+                setMessage("시간이 다소 걸릴 수 있으니 중간에 앱을 종료하지 마세요.\n(최초 한번만 다운로드 합니다.)")
+                setPositiveButton("OK") { _, _ ->
+                    mPresenter.getData(yearSemester)
+                }
+            }.show()
         } else {
             Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun errorDialog() {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("오류")
-        builder.setMessage("시간표 데이터가 없습니다.")
-        builder.setPositiveButton(
-            "OK"
-        ) { _, _ -> }
-        builder.show()
+        AlertDialog.Builder(context).apply {
+            setTitle("오류")
+            setMessage("시간표 데이터가 없습니다.")
+            setPositiveButton(
+                "OK"
+            ) { _, _ -> }
+        }.show()
     }
 
     override fun showBtn(c: Boolean) {
@@ -108,31 +112,26 @@ class SearchDialog(
         }
     }
 
-    override fun requestLoad() {
-        mPresenter.isDownloaded(Util.YEAR,Util.SEMESTER.toString())
-    }
+    override fun requestLoad() = mPresenter.isDownloaded(Util.YEAR, Util.SEMESTER.toString())
 
     override fun setSpinner(arrayList: ArrayList<String>) {
         cate.visibility = View.VISIBLE
-        val arrayAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
-        cate.adapter = arrayAdapter
+        cate.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
     }
 
     override fun setListDialog(arrayList: ArrayList<String>) {
-        val builder = AlertDialog.Builder(context)
-        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
-        for (x in arrayList) {
-            adapter.add(x)
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1).apply {
+            for (x in arrayList) {
+                add(x)
+            }
         }
-        builder.setTitle("강의실 목록")
-        builder.setAdapter(adapter) { _, which ->
-            val strName = adapter.getItem(which)!!
-            mPresenter.loadTable(strName.replace(" ", ""))
-            dismissSelf()
-        }
-        builder.setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
-        builder.show()
+        AlertDialog.Builder(context).apply {
+            setTitle("강의실 목록")
+            setAdapter(adapter) { _, which ->
+                mPresenter.loadTable(adapter.getItem(which)!!.replace(" ", ""))
+                dismissSelf()
+            }
+            setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
+        }.show()
     }
-
-
 }

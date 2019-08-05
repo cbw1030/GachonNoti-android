@@ -33,15 +33,15 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         }
     }
 
-    override fun changeThemes() {
-        (mList[Util.STATE_NOTIFICATION] as NotificationMainFragment).themeChanger(true)
-        (mList[Util.STATE_INFORMATION]as MyInformationFragment).themeChanger(true)
-        (mList[Util.STATE_SETTING] as SettingFragment).themeChanger()
-        (mList[Util.STATE_SEARCHER] as SearcherFragment).themeChanger()
+    override fun changeThemes() = mList.let {
+        (it[Util.STATE_NOTIFICATION] as NotificationMainFragment).themeChanger(true)
+        (it[Util.STATE_INFORMATION] as MyInformationFragment).themeChanger(true)
+        (it[Util.STATE_SETTING] as SettingFragment).themeChanger()
+        (it[Util.STATE_SEARCHER] as SearcherFragment).themeChanger()
     }
 
-    override fun resetData() {
-        (mList[Util.STATE_SEARCHER] as SearcherFragment).resetDialog()
-    }
+
+    override fun resetData() = (mList[Util.STATE_SEARCHER] as SearcherFragment).resetDialog()
+
 
 }

@@ -20,7 +20,7 @@ class LoginAsyncTask(
     private val ids: String,
     private val password: String,
    val context: Context,
-    val mView: LoginlDialog
+    val mView: LoginDialog
 ) : AsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
@@ -49,7 +49,6 @@ class LoginAsyncTask(
             httpPost.entity = StringEntity(sendObject.toString())
                 JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
                     number = getString("userUniqNo")
-
                     studentInformation = StudentInformation(
                         getString("userNm"),
                         number,

@@ -31,12 +31,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     var menuItem: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
-    var backKeyPressedTime: Long = 0L
+    private var backKeyPressedTime: Long = 0L
     lateinit var mPresenter: MainPresenter
 
     companion object {
         lateinit var mView: MainContract.View
-
     }
 
     override fun setTabText(str: String) {
@@ -78,18 +77,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     @SuppressLint("ApplySharedPref")
-    private fun notiCheck() {
+    private fun notificationCheck() {
         if ((!NotificationManagerCompat.from(applicationContext)
                 .areNotificationsEnabled()) and (Util.notificationSet)
-        ) {
-
-            val builders = AlertDialog.Builder(this)
-            builders.setTitle("알림 설정 확인")
-            builders.setMessage("가천 알림이의 알림을 허용하시겠습니까?")
-            builders.setPositiveButton("OK") { _, _ ->
-                val tent = Intent()
-                tent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
-
+        ) AlertDialog.Builder(this).apply {
+            setTitle("알림 설정 확인")
+            setMessage("가천 알림이의 알림을 허용하시겠습니까?")
+            setPositiveButton("OK") { _, _ ->
+                val tent = Intent().apply {
+                    action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     tent.putExtra("android.provider.extra.APP_PACKAGE", packageName)
 
@@ -101,14 +98,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 Util.sharedPreferences.edit().putBoolean("notiOn", true).commit()
                 FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
-            builders.setNegativeButton("Cancel") { _, _ ->
+            setNegativeButton("Cancel") { _, _ ->
                 Util.notificationSet = false
                 Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
             }
-            builders.setCancelable(false)
-            builders.show()
-        }
+            setCancelable(false)
+        }.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -117,13 +113,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == 201735829) {
-            mPresenter.resetData()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = if (item?.itemId == 201735829) {
+        mPresenter.resetData()
+        true
+    } else {
+        super.onOptionsItemSelected(item)
     }
+
 
     override fun builderUp() {
         if (builder == null) {
@@ -144,26 +140,23 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun makeToast(str: String) {
+    override fun makeToast(str: String) = Handler(Looper.getMainLooper()).post {
+        Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
+    }
+
+
+    override fun builderDismiss() = builder?.let {
         Handler(Looper.getMainLooper()).post {
-            Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
-        }
-    }
+            try {
+                if (builder?.isShowing == true)
+                    builder?.dismiss()
+            } catch (e: Exception) {
 
-    override fun builderDismiss() {
-        if (builder != null) {
-            Handler(Looper.getMainLooper()).post {
-                try {
-                    if (builder?.isShowing == true)
-                        builder?.dismiss()
-                } catch (e: Exception) {
-
-                }
-                notiCheck()
             }
+            notificationCheck()
         }
-
     }
+
 
     fun themeChange() {
         supportActionBar!!.setBackgroundDrawable(
@@ -208,19 +201,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                if (menuItem != null)
+                menuItem?.let {
                     when (tab?.position) {
                         Util.STATE_SEARCHER -> {
-                            menuItem?.isVisible = true
+                            it.isVisible = true
                         }
                         else -> {
-                            menuItem?.isVisible = false
+                            it.isVisible = false
                         }
                     }
-                Util.state = tab?.position ?: Util.STATE_NOTIFICATION
-                pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
-
+                    Util.state = tab?.position ?: Util.STATE_NOTIFICATION
+                    pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
+                }
             }
         })
 
@@ -246,13 +238,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 putString("$year-$semester-4-$x", "<nodata>")
             }
         }.commit()
-        val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("${Util.version} 버전 업데이트")
-        builder.setMessage(" ${resources.getString(R.string.update)}")
-        builder.setPositiveButton(
-            "OK"
-        ) { _, _ -> }
-        builder.show()
+        AlertDialog.Builder(this@MainActivity).apply {
+            setTitle("${Util.version} 버전 업데이트")
+            setMessage(" ${resources.getString(R.string.update)}")
+            setPositiveButton(
+                "OK"
+            ) { _, _ -> }
+        }.show()
     }
 
 
@@ -271,10 +263,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 Util.state = Util.STATE_NOTIFICATION
             }
             Util.STATE_SEARCHER -> {
-//                if (!mPresenter.floatingButtonControl()) {
+
                 pager.currentItem = Util.STATE_NOTIFICATION
                 Util.state = Util.STATE_NOTIFICATION
-//                }
+
             }
             Util.STATE_SETTING -> {
                 pager.currentItem = Util.STATE_NOTIFICATION
@@ -317,7 +309,5 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onDetachedFromWindow()
     }
 
-    override fun changeTheme() {
-        mPresenter.changeThemes()
-    }
+    override fun changeTheme() = mPresenter.changeThemes()
 }

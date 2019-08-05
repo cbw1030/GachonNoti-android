@@ -52,13 +52,11 @@ class WebAsyncTask(
                                 javaS = javaS.replace(
                                     "src=\"/Files/",
                                     "width='100%'src=\"/Files/"
-                                )
-                                javaS = javaS.replace(
+                                ).replace(
                                     "src=\"http://www.gachon.ac.kr/Files/",
                                     "width='100%'src=\"http://www.gachon.ac.kr/Files/"
-                                )
-                                javaS = javaS.replace("src=\"/", "src=\"http://www.gachon.ac.kr/")
-                                javaS = javaS.replace("href=\"/", "href=\"http://www.gachon.ac.kr/")
+                                ).replace("src=\"/", "src=\"http://www.gachon.ac.kr/")
+                                    .replace("href=\"/", "href=\"http://www.gachon.ac.kr/")
                                 Handler(Looper.getMainLooper()).post {
                                     mPresenter.updateWeb(javaS)
                                     mPresenter.builderDismiss()

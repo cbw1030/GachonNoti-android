@@ -55,23 +55,20 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
     }
 
-    override fun builderUp() {
-        builder.show()
-    }
+    override fun builderUp() = builder.show()
 
-    override fun builderDismiss() {
-        builder.dismiss()
-    }
+
+    override fun builderDismiss() = builder.dismiss()
+
 
     @SuppressLint("SetJavaScriptEnabled")
-    override fun changeUI(javaS: String) {
-        try {
-            webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
-            webview.settings?.javaScriptEnabled = true
-        } catch (e: Exception) {
+    override fun changeUI(javaS: String) = try {
+        webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
+        webview.settings?.javaScriptEnabled = true
+    } catch (e: Exception) {
 
-        }
     }
+
 
     override fun onUserLeaveHint() {
         invisible()
@@ -141,9 +138,8 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
         return true
     }
 
-    private fun goPage() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bundle.link)))
-    }
+    private fun goPage() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bundle.link)))
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
         R.id.actionmy -> {

@@ -27,7 +27,7 @@ import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.model.data.ContactInformation
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
-import io.wiffy.gachonNoti.ui.main.setting.login.LoginlDialog
+import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import io.wiffy.gachonNoti.ui.main.setting.report.ReportAsyncTask
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
@@ -60,9 +60,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             "green" -> 2
             else -> 0
         }
-        list = ArrayList()
-        with(list)
-        {
+        list = ArrayList<CircleImageView>().apply {
             add(myView.defaultColor)
             add(myView.redColor)
             add(myView.greenColor)
@@ -100,9 +98,9 @@ class SettingFragment : Fragment(), SettingContract.View {
                         switch.isChecked = false
                         setOff()
 
-                        val tent = Intent()
-                        tent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
-
+                        val tent = Intent().apply {
+                            action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                        }
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             tent.putExtra("android.provider.extra.APP_PACKAGE", activity?.packageName)
 
@@ -117,8 +115,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             }
         }
         myView.detailSetting.setOnClickListener {
-            val builder = LoginlDialog(context!!)
-            builder.show()
+            LoginDialog(context!!).show()
         }
         myView.bugReport.setOnClickListener {
             val container = FrameLayout(context!!)
@@ -130,16 +127,17 @@ class SettingFragment : Fragment(), SettingContract.View {
             editText.layoutParams = params
             container.addView(editText)
             editText.hint = "내용"
-            val reporter = AlertDialog.Builder(activity)
-            reporter.setTitle("버그리포트 / 개선사항")
-                .setView(container)
-                .setMessage("\n버그나 개선하고자 하는 사항을 입력해주세요.")
-                .setPositiveButton("OK") { _, _ ->
-                    val msg = editText.text.toString()
-                    if (msg.isNotBlank()) checkReport(msg)
+            AlertDialog.Builder(activity).apply {
+                setTitle("버그리포트 / 개선사항")
+                setView(container)
+                setMessage("\n버그나 개선하고자 하는 사항을 입력해주세요.")
+                setPositiveButton("OK") { _, _ ->
+                    editText.text.toString().apply {
+                        if (isNotBlank()) checkReport(this)
+                    }
                 }
-                .setNegativeButton("Cancel") { _, _ -> }
-            reporter.create().show()
+                setNegativeButton("Cancel") { _, _ -> }
+            }.create().show()
         }
         myView.money.setOnClickListener {
             Util.novisible = true
@@ -147,50 +145,48 @@ class SettingFragment : Fragment(), SettingContract.View {
         }
         myView.maker.setOnClickListener {
             Util.novisible = true
-            //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/wiffy-io")))
-            val builder = AlertDialog.Builder(activity)
-            builder.setTitle("만든이")
-            builder.setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")
-            builder.setPositiveButton(
-                "OK"
-            ) { _, _ -> }
-            builder.show()
+            AlertDialog.Builder(activity).apply {
+                setTitle("만든이")
+                setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")
+                setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+            }.show()
         }
         myView.source.setOnClickListener {
-            val builder = AlertDialog.Builder(activity)
-            builder.setTitle(resources.getString(R.string.source))
-            builder.setMessage(
-                "Lottie\n" +
-                        "com.airbnb.android:lottie:3.0.2\n\n" +
-                        "TimeTable\n" +
-                        "com.github.EunsilJo:TimeTable:1.0\n\n" +
-                        "Jsoup\n" +
-                        "org.jsoup:jsoup:1.11.3\n\n" +
-                        "Library\n" +
-                        "com.wang.avi:library:2.1.3\n\n" +
-                        "Circleimageview\n" +
-                        "de.hdodenhof:circleimageview:3.0.0\n\n" +
-                        "Glide\n" +
-                        "com.github.bumptech.glide:glide:4.9.0\n\n" +
-                        "QRCode\n" +
-                        "com.journeyapps:zxing-android-embedded:3.5.0"
-            )
-            builder.setPositiveButton(
-                "OK"
-            ) { _, _ -> }
-            builder.show()
+            AlertDialog.Builder(activity).apply {
+                setTitle(resources.getString(R.string.source))
+                setMessage(
+                    "Lottie\n" +
+                            "com.airbnb.android:lottie:3.0.2\n\n" +
+                            "TimeTable\n" +
+                            "com.github.EunsilJo:TimeTable:1.0\n\n" +
+                            "Jsoup\n" +
+                            "org.jsoup:jsoup:1.11.3\n\n" +
+                            "Library\n" +
+                            "com.wang.avi:library:2.1.3\n\n" +
+                            "Circleimageview\n" +
+                            "de.hdodenhof:circleimageview:3.0.0\n\n" +
+                            "Glide\n" +
+                            "com.github.bumptech.glide:glide:4.9.0\n\n" +
+                            "QRCode\n" +
+                            "com.journeyapps:zxing-android-embedded:3.5.0"
+                )
+                setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+            }.show()
         }
         myView.secretText.setOnClickListener {
             if (secretCount == 4) {
-                val builder = AlertDialog.Builder(activity)
-                builder.setTitle("Build Information")
-                builder.setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}\nMAC:${Util.getMACAddress()}")
+                AlertDialog.Builder(activity).apply {
+                    setTitle("Build Information")
+                    setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}\nMAC:${Util.getMACAddress()}")
 
-                builder.setPositiveButton(
-                    "OK"
-                ) { _, _ -> }
-                builder.show()
-                builder.show()
+                    setPositiveButton(
+                        "OK"
+                    ) { _, _ -> }
+                }.show()
                 secretCount = 0
             } else {
                 secretCount += 1
@@ -198,9 +194,9 @@ class SettingFragment : Fragment(), SettingContract.View {
         }
         myView.campusSetting.setOnClickListener {
             val item = arrayOf("글로벌", "메디컬")
-            val myBuilder = AlertDialog.Builder(activity)
-            myBuilder.setTitle("캠퍼스 설정")
-                .setSingleChoiceItems(
+            AlertDialog.Builder(activity).apply {
+                setTitle("캠퍼스 설정")
+                setSingleChoiceItems(
                     item, if (Util.campus) {
                         0
                     } else {
@@ -215,32 +211,31 @@ class SettingFragment : Fragment(), SettingContract.View {
                     )
                     dialog.dismiss()
                 }
-                .setNegativeButton("Cancel") { dialog, _ ->
+                setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
                 }
-            myBuilder.create().show()
+            }.create().show()
         }
         myView.helper.setOnClickListener {
-            val builder = AlertDialog.Builder(activity)
-            builder.setTitle("후원 목록")
-            builder.setMessage(Util.helper)
-            builder.setPositiveButton(
-                "OK"
-            ) { _, _ -> }
-            builder.show()
+            AlertDialog.Builder(activity).apply {
+                setTitle("후원 목록")
+                setMessage(Util.helper)
+                setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+            }.show()
         }
         myView.version.setOnClickListener {
-            val builder = AlertDialog.Builder(activity)
-            builder.setTitle(resources.getString(R.string.version))
-            builder.setMessage(Util.version)
-            builder.setPositiveButton(
-                "OK"
-            ) { _, _ -> }
-            builder.show()
+            AlertDialog.Builder(activity).apply {
+                setTitle(resources.getString(R.string.version))
+                setMessage(Util.version)
+                setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+            }.show()
         }
         myView.calling.setOnClickListener {
-            val builder = ContactDialog(context!!, this)
-            builder.show()
+            ContactDialog(context!!, this).show()
         }
 
     }
@@ -257,20 +252,19 @@ class SettingFragment : Fragment(), SettingContract.View {
         Util.campus = bool
     }
 
-    private fun checkReport(str: String) {
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle("다음과 같은 내용으로 보내시겠습니까?")
-        builder.setMessage(str)
-        builder.setPositiveButton(
+    private fun checkReport(str: String) = AlertDialog.Builder(activity).apply {
+        setTitle("다음과 같은 내용으로 보내시겠습니까?")
+        setMessage(str)
+        setPositiveButton(
             "OK"
         ) { _, _ ->
             executeTask2(str)
         }
-        builder.setNegativeButton(
+        setNegativeButton(
             "Cancel"
         ) { _, _ -> }
-        builder.create().show()
-    }
+    }.create().show()
+
 
     @SuppressLint("ApplySharedPref")
     fun settingColor(int: Int) {
@@ -278,11 +272,6 @@ class SettingFragment : Fragment(), SettingContract.View {
             2 -> R.color.green
             1 -> R.color.red
             else -> R.color.main2Blue
-        }
-        val style = when (color) {
-            R.color.green -> R.drawable.dialog_button_green
-            R.color.red -> R.drawable.dialog_button_red
-            else -> R.drawable.dialog_button_default
         }
         Util.theme = when (int) {
             2 -> "green"
@@ -334,40 +323,41 @@ class SettingFragment : Fragment(), SettingContract.View {
     override fun builderUp() {
         Handler(Looper.getMainLooper()).post {
             builderIn = null
-            builderIn = Dialog(activity!!)
-            builderIn?.setContentView(R.layout.builder)
-            builderIn?.setCancelable(false)
-            builderIn?.setCanceledOnTouchOutside(false)
-            builderIn?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            builderIn = Dialog(activity!!).apply {
+                setContentView(R.layout.builder)
+                setCancelable(false)
+                setCanceledOnTouchOutside(false)
+                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            }
             builderIn?.show()
         }
     }
 
     override fun builderDismissAndContactUp(list: ArrayList<ContactInformation>) {
         Handler(Looper.getMainLooper()).post {
-            if (builderIn != null) {
-                builderIn?.dismiss()
+            builderIn?.let {
+                it.dismiss()
                 if (list.isNotEmpty()) {
-                    val myBuilder = ContactListDialog(activity!!, list)
-                    myBuilder.show()
+                    ContactListDialog(activity!!, list).show()
                 } else {
-                    val builder = AlertDialog.Builder(activity)
-                    builder.setTitle("")
-                    builder.setMessage("목록이 없습니다.")
-                    builder.setPositiveButton(
-                        "OK"
-                    ) { _, _ -> }
-                    builder.show()
+                    AlertDialog.Builder(activity).apply {
+                        setTitle("")
+                        setMessage("목록이 없습니다.")
+                        setPositiveButton(
+                            "OK"
+                        ) { _, _ -> }
+                    }.show()
                 }
             }
         }
     }
 
-    override fun builderDismiss() {
-        Handler(Looper.getMainLooper()).post {
-            if (builderIn != null) builderIn?.dismiss()
+    override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
+        builderIn?.let {
+            it.dismiss()
         }
     }
+
 
     @SuppressLint("ApplySharedPref")
     private fun setOn() {
@@ -382,5 +372,4 @@ class SettingFragment : Fragment(), SettingContract.View {
         Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }
-
 }

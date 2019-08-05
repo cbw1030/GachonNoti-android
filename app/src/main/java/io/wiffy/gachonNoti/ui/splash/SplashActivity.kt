@@ -33,16 +33,13 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         mPresenter.initPresent()
     }
 
-    override fun changeUI() {
-        mPresenter.move()
-    }
-
+    override fun changeUI() = mPresenter.move()
 
     @SuppressLint("ApplySharedPref")
     override fun subscribe() {
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
             Util.sharedPreferences.edit().putBoolean("firstBooting", false).commit()
-            Log.d("asdf","noti success")
+            Log.d("asdf", "noti success")
         }
         changeUI()
     }
@@ -53,9 +50,8 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         finish()
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
+    override fun onBackPressed() = finish()
+
 
     override fun setRequestedOrientation(requestedOrientation: Int) {
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {

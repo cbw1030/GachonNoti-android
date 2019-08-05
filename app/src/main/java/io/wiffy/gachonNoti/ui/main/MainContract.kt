@@ -7,10 +7,10 @@ interface MainContract {
     interface View {
         fun changeUI(mList: ArrayList<Fragment?>)
         fun builderUp()
-        fun builderDismiss()
-        fun makeToast(str: String)
+        fun builderDismiss():Boolean?
+        fun makeToast(str: String): Boolean
         fun updatedContents()
-        fun setTabText(str:String)
+        fun setTabText(str: String)
         fun changeTheme()
     }
 

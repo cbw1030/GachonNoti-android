@@ -20,9 +20,11 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_contact)
 
-        myList = ArrayList()
-        myList.add("이름")
-        myList.add("소속")
+        myList = ArrayList<String>().apply {
+            add("이름")
+            add("소속")
+        }
+
         cate2.setPadding(0, 0, 5, 0)
         cate2.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, myList)
         cate2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -36,20 +38,20 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
         search2.setOnClickListener {
             if (Util.isNetworkConnected(context)) {
                 val text = editor1.text.toString()
-
                 if (text.isNotBlank()) {
                     if (text == "박상현" && spinnerSelected == 0) {
                         mView.builderUp()
-                        val x=ArrayList<ContactInformation>()
-                        x.add(ContactInformation("천재", "박상현", "201735829"))
-                        mView.builderDismissAndContactUp(x)
-                    } else if(text == "박정호" && spinnerSelected == 0){
+                        ArrayList<ContactInformation>().apply {
+                            add(ContactInformation("천재", "박상현", "201735829"))
+                            mView.builderDismissAndContactUp(this)
+                        }
+                    } else if (text == "박정호" && spinnerSelected == 0) {
                         mView.builderUp()
-                        val x=ArrayList<ContactInformation>()
-                        x.add(ContactInformation("바보", "박정호", "201635812"))
-                        mView.builderDismissAndContactUp(x)
-                    }
-                    else {
+                        ArrayList<ContactInformation>().apply {
+                            add(ContactInformation("바보", "박정호", "201635812"))
+                            mView.builderDismissAndContactUp(this)
+                        }
+                    } else {
                         val query =
                             when (spinnerSelected) {
                                 1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"

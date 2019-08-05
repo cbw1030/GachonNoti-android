@@ -21,7 +21,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
-class LoginlDialog(context: Context) : Dialog(context) {
+class LoginDialog(context: Context) : Dialog(context) {
     var tempLogin = false
 
     @SuppressLint("ApplySharedPref", "SetTextI18n")
@@ -138,7 +138,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
         with(information) {
             Util.sharedPreferences.edit().apply {
                 putString("id", id)
-                putString("password", Util.encrypt(password,Util.getMACAddress()))
+                putString("password", Util.encrypt(password, Util.getMACAddress()))
                 putString("name", name)
                 putString("number", number)
                 putString("department", department)
@@ -154,8 +154,7 @@ class LoginlDialog(context: Context) : Dialog(context) {
         dismiss()
     }
 
-    fun loginFailed() {
-        Toast.makeText(context, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
-    }
+    fun loginFailed() = Toast.makeText(context, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+
 
 }

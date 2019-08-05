@@ -34,8 +34,7 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
                 Util.NOT_UPDATED_YET
             }
         } else {
-            val x =
-                Jsoup.connect(here).method(Connection.Method.POST).execute()
+            Jsoup.connect(here).method(Connection.Method.POST).execute()
         }
 
         return Util.ACTION_SUCCESS

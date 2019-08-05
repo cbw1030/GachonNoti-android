@@ -6,16 +6,11 @@ class WebViewPresenter(private val mView: WebViewContract.View) : WebViewContrac
         WebAsyncTask(url, this, false).execute()
     }
 
-    override fun updateWeb(javaS: String) {
-        mView.changeUI(javaS)
-    }
+    override fun updateWeb(javaS: String) = mView.changeUI(javaS)
 
-    override fun builderUp() {
-        mView.builderUp()
-    }
 
-    override fun builderDismiss() {
-        mView.builderDismiss()
-    }
+    override fun builderUp() = mView.builderUp()
 
+
+    override fun builderDismiss() = mView.builderDismiss()
 }

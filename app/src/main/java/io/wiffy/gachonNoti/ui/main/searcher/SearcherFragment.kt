@@ -44,10 +44,9 @@ class SearcherFragment : Fragment(), SearchContract.View {
     }
 
     @SuppressLint("ApplySharedPref")
-    fun resetDialog() {
-        val mBuilder = AlertDialog.Builder(context)
-        mBuilder.setMessage("저장된 데이터를 재설정 할까요?")
-        mBuilder.setPositiveButton(
+    fun resetDialog(): AlertDialog = AlertDialog.Builder(context).apply {
+        setMessage("저장된 데이터를 재설정 할까요?")
+        setPositiveButton(
             "OK"
         ) { _, _ ->
             val year = Util.YEAR
@@ -59,13 +58,11 @@ class SearcherFragment : Fragment(), SearchContract.View {
                     putString("$year-$semester-3-$x", "<nodata>")
                     putString("$year-$semester-4-$x", "<nodata>")
                 }.commit()
-
             }
-            builder = SearchDialog(context!!, this, mPresenter)
+            builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
             builder?.show()
         }
-        mBuilder.show()
-    }
+    }.show()
 
 
     fun themeChanger() {
@@ -93,9 +90,7 @@ class SearcherFragment : Fragment(), SearchContract.View {
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
 
-        if (arr == null) {
-            myView.showtu.visibility = View.VISIBLE
-        } else {
+        arr?.let {
             myView.timetable.setOnTimeItemClickListener { _, _, data ->
                 Toast.makeText(activity, data.time.title, Toast.LENGTH_SHORT).show()
             }
@@ -114,18 +109,15 @@ class SearcherFragment : Fragment(), SearchContract.View {
             themeChanger()
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE
+        }.let {
+            myView.showtu.visibility = View.VISIBLE
         }
-
     }
 
 
-    override fun showLoad() {
-        (activity as MainActivity).builderUp()
-    }
+    override fun showLoad() = (activity as MainActivity).builderUp()
 
-    override fun dismissLoad() {
-        (activity as MainActivity).builderDismiss()
-    }
 
+    override fun dismissLoad() = (activity as MainActivity).builderDismiss()
 
 }

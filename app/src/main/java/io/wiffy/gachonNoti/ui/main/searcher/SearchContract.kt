@@ -7,7 +7,7 @@ interface SearchContract {
     interface View {
         fun initUI()
         fun showLoad()
-        fun dismissLoad()
+        fun dismissLoad():Boolean?
         fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String)
     }
 
