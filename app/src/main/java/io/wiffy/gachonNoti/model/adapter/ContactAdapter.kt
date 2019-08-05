@@ -23,27 +23,26 @@ class ContactAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        items[position].let { item ->
-            with(holder) {
-                t1.text = item.dept
-                t2.text = item.name
-                t3.text = Html.fromHtml(
-                    "<u>${item.tel}</u>")
-                t3.setTextColor(
-                    context.resources.getColorStateList(
-                        when (Util.theme) {
-                            "red" -> R.color.red
-                            "green" -> R.color.green
-                            else -> R.color.main2Blue
-                        }
-                    )
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) = items[position].let { item ->
+        with(holder) {
+            t1.text = item.dept
+            t2.text = item.name
+            t3.text = Html.fromHtml(
+                "<u>${item.tel}</u>"
+            )
+            t3.setTextColor(
+                context.resources.getColorStateList(
+                    when (Util.theme) {
+                        "red" -> R.color.red
+                        "green" -> R.color.green
+                        else -> R.color.main2Blue
+                    }
                 )
+            )
 
-                t3.setOnClickListener {
-                    val code = item.tel.replace("-", "")
-                    context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$code")))
-                }
+            t3.setOnClickListener {
+                val code = item.tel.replace("-", "")
+                context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$code")))
             }
         }
     }

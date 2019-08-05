@@ -159,7 +159,7 @@ class NotificationComponentAsyncTask(
             }
 
             try {
-                Util.helper= URL("http://wiffy.io/gachon/thanks.txt ").readText()
+                Util.helper = URL("http://wiffy.io/gachon/thanks.txt ").readText()
             } catch (e: Exception) {
             }
 

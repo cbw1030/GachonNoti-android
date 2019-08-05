@@ -12,34 +12,30 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
 
     private var idCard: IDCardFragment? = null
 
-    override fun fragmentInflation(list: ArrayList<Fragment?>) {
-        with(list) {
-            idCard = IDCardFragment()
-            add(idCard)
-        }
+    override fun fragmentInflation(list: ArrayList<Fragment?>) = with(list) {
+        idCard = IDCardFragment()
+        add(idCard)
     }
 
-    override fun themeChange() {
-        if (idCard != null) idCard?.changeTheme()
-    }
+
+    override fun themeChange() = idCard?.changeTheme()
+
 
     override fun isNotLogin() {
-
     }
 
-    override fun loginSetting() {
-        with(Util.sharedPreferences)
-        {
-            if (idCard != null) idCard?.loginInformationSetting(
-                StudentInformation(
-                    getString("name", "null") ?: "null",
-                    getString("number", "null") ?: "null",
-                    getString("id", "null") ?: "null",
-                    getString("password", "null") ?: "null",
-                    getString("department", "null") ?: "null",
-                    getString("image", "null") ?: "null"
-                )
+    override fun loginSetting() = with(Util.sharedPreferences)
+    {
+        idCard?.loginInformationSetting(
+            StudentInformation(
+                getString("name", "null") ?: "null",
+                getString("number", "null") ?: "null",
+                getString("id", "null") ?: "null",
+                getString("password", "null") ?: "null",
+                getString("department", "null") ?: "null",
+                getString("image", "null") ?: "null"
             )
-        }
+        )
     }
+
 }

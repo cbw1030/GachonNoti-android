@@ -35,18 +35,18 @@ class NotificationMainPresenter(private val mView: NotificationMainContract.View
 
     override fun search(state: Int, str: String) {
         when (state) {
-            0 -> if (notifications != null) notifications?.search(str)
-            1 -> if (news != null) news?.search(str)
-            2 -> if (event != null) event?.search(str)
-            3 -> if (scholarship != null) scholarship?.search(str)
+            0 -> notifications?.search(str)
+            1 -> news?.search(str)
+            2 -> event?.search(str)
+            3 -> scholarship?.search(str)
         }
     }
 
     override fun themeChange() {
-        if (notifications != null) notifications?.changeTheme()
-        if (news != null) news?.changeTheme()
-        if (event != null) event?.changeTheme()
-        if (scholarship != null) scholarship?.changeTheme()
+        notifications?.changeTheme()
+        news?.changeTheme()
+        event?.changeTheme()
+        scholarship?.changeTheme()
     }
 
 }

@@ -39,19 +39,17 @@ class NotificationFragment : Fragment(),
         return myView
     }
 
-    override fun internetUnusable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par1.visibility = View.GONE
-            myView.lottieXX.visibility = View.VISIBLE
-        }
+    override fun internetUnusable() = Handler(Looper.getMainLooper()).post {
+        myView.par1.visibility = View.GONE
+        myView.lottieXX.visibility = View.VISIBLE
     }
 
-    override fun internetUsable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par1.visibility = View.VISIBLE
-            myView.lottieXX.visibility = View.GONE
-        }
+
+    override fun internetUsable() = Handler(Looper.getMainLooper()).post {
+        myView.par1.visibility = View.VISIBLE
+        myView.lottieXX.visibility = View.GONE
     }
+
 
     override fun changeUI(list: ParseList) {
         adapter = NotificationComponentAdapter(
@@ -90,21 +88,14 @@ class NotificationFragment : Fragment(),
         )
     }
 
-    override fun updateUI(list: ParseList) {
-        adapter.update(list)
-    }
+    override fun updateUI(list: ParseList) = adapter.update(list)
 
-    override fun showLoad() {
-        MainActivity.mView.builderUp()
-    }
+    override fun showLoad() = MainActivity.mView.builderUp()
 
-    override fun dismissLoad() {
-        MainActivity.mView.builderDismiss()
-    }
-    fun search(str:String)
-    {
-        mPresenter.search(str)
-    }
+    override fun dismissLoad() = MainActivity.mView.builderDismiss()
+
+    fun search(str: String) = mPresenter.search(str)
+
 }
 
 

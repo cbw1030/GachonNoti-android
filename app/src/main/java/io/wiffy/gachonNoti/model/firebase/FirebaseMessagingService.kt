@@ -19,14 +19,11 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
 
     override fun onMessageReceived(p0: RemoteMessage?) {
-        if (p0?.notification != null) {
-            sendNotification(p0)
-        }
+        if (p0?.notification != null) sendNotification(p0)
     }
 
     override fun onNewToken(p0: String?) {
         super.onNewToken(p0)
-        Log.e("Firebase", "FirebaseMessagingService : $p0")
     }
 
 
@@ -36,7 +33,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
                 val notificationBuilder = NotificationCompat.Builder(this, getString(R.string.channel))
-                    .setLargeIcon(BitmapFactory.decodeResource( resources, R.drawable.defaults))
+                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.defaults))
                     .setSmallIcon(R.drawable.defaults)
                     .setContentTitle(title)
                     .setContentText(message)
@@ -48,7 +45,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             }
             else -> {
                 val notificationBuilder = NotificationCompat.Builder(this, "")
-                    .setLargeIcon(BitmapFactory.decodeResource( resources, R.drawable.defaults))
+                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.defaults))
                     .setSmallIcon(R.drawable.defaults)
                     .setContentTitle(title)
                     .setContentText(message)

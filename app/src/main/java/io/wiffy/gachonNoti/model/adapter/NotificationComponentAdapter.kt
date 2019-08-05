@@ -120,12 +120,11 @@ class NotificationComponentAdapter(
     }
 
 
-    private fun notificationUpdate() {
-        try {
-            notifyDataSetChanged()
-        } catch (e: Exception) {
-        }
+    private fun notificationUpdate() = try {
+        notifyDataSetChanged()
+    } catch (e: Exception) {
     }
+
 
     inner class ComponentViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter, parent, false)

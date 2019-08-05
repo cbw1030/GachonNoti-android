@@ -33,13 +33,12 @@ class MyInformationFragment : Fragment(), MyInformationContract.View {
         return myView
     }
 
-    private fun loginExecute() {
-        if (Util.isLogin) {
-            isLogin()
-        } else {
-            isNotLogin()
-        }
+    private fun loginExecute() = if (Util.isLogin) {
+        isLogin()
+    } else {
+        isNotLogin()
     }
+
 
     override fun isLogin() {
         myView.information_true.visibility = View.VISIBLE
@@ -81,13 +80,11 @@ class MyInformationFragment : Fragment(), MyInformationContract.View {
         loginExecute()
     }
 
-    override fun showLoad() {
-        (activity as MainActivity).builderUp()
-    }
+    override fun showLoad() = (activity as MainActivity).builderUp()
 
-    override fun dismissLoad() {
-        (activity as MainActivity).builderDismiss()
-    }
+
+    override fun dismissLoad() = (activity as MainActivity).builderDismiss()
+
 
     fun themeChanger(bool: Boolean) {
         loginExecute()
@@ -116,11 +113,10 @@ class MyInformationFragment : Fragment(), MyInformationContract.View {
             mPresenter.themeChange()
 
         myView.login2.setBackgroundResource(
-            when(Util.theme)
-            {
-                "red"->R.drawable.dialog_button_red
-                "green"->R.drawable.dialog_button_green
-                else ->R.drawable.dialog_button_default
+            when (Util.theme) {
+                "red" -> R.drawable.dialog_button_red
+                "green" -> R.drawable.dialog_button_green
+                else -> R.drawable.dialog_button_default
             }
         )
         myView.navigation3.tabTextColors = ColorStateList(themeColorArray, color)

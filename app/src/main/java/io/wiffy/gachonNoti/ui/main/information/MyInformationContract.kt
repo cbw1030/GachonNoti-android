@@ -3,18 +3,19 @@ package io.wiffy.gachonNoti.ui.main.information
 import androidx.fragment.app.Fragment
 
 interface MyInformationContract {
-    interface View{
+    interface View {
         fun initView()
         fun showLoad()
-        fun dismissLoad()
+        fun dismissLoad(): Boolean?
         fun isLogin()
         fun isNotLogin()
     }
-    interface Presenter{
+
+    interface Presenter {
         fun initPresent()
-        fun fragmentInflation(list:ArrayList<Fragment?>)
-        fun themeChange()
+        fun fragmentInflation(list: ArrayList<Fragment?>): Boolean
+        fun themeChange(): Unit?
         fun isNotLogin()
-        fun loginSetting()
+        fun loginSetting(): Unit?
     }
 }

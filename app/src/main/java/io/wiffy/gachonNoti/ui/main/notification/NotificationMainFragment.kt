@@ -84,25 +84,26 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
             editText.layoutParams = params
             container.addView(editText)
             editText.hint = "내용"
-            val msd = AlertDialog.Builder(activity)
-            msd.setTitle(
-                "검색 [${when (Util.checkStateInNotification) {
-                    0 -> "공지사항"
-                    1 -> "가천뉴스"
-                    2 -> "행사소식"
-                    3 -> "장학소식"
-                    else -> ""
-                }}]"
-            )
-                .setView(container)
-                .setMessage("\n검색어를 입력해주세요.")
-                .setPositiveButton("검색") { _, _ ->
-                    val msg = editText.text.toString()
-                    if (msg.isNotBlank())
-                        mPresenter.search(Util.checkStateInNotification, msg)
+            AlertDialog.Builder(activity).apply {
+                setTitle(
+                    "검색 [${when (Util.checkStateInNotification) {
+                        0 -> "공지사항"
+                        1 -> "가천뉴스"
+                        2 -> "행사소식"
+                        3 -> "장학소식"
+                        else -> ""
+                    }}]"
+                )
+                setView(container)
+                setMessage("\n검색어를 입력해주세요.")
+                setPositiveButton("검색") { _, _ ->
+                    editText.text.toString().apply {
+                        if (isNotBlank())
+                            mPresenter.search(Util.checkStateInNotification, this)
+                    }
                 }
-                .setNegativeButton("취소") { _, _ -> }
-            msd.create().show()
+                setNegativeButton("취소") { _, _ -> }
+            }.create().show()
         }
         fragmentList = ArrayList()
         mPresenter.fragmentInflation(fragmentList)
@@ -138,13 +139,9 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
     }
 
 
-    override fun showLoad() {
-        (activity as MainActivity).builderUp()
-    }
+    override fun showLoad() = (activity as MainActivity).builderUp()
 
-    override fun dismissLoad() {
-        (activity as MainActivity).builderDismiss()
-    }
 
+    override fun dismissLoad() = (activity as MainActivity).builderDismiss()
 
 }

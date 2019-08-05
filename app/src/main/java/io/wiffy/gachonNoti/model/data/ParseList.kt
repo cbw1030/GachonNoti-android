@@ -14,7 +14,5 @@ class ParseList : Serializable {
 
     fun isEmpty():Boolean=list.isEmpty()
 
-    fun clear() {
-        list.clear()
-    }
+    fun clear() = list.clear()
 }

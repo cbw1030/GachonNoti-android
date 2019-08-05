@@ -42,24 +42,19 @@ class ScholarshipPresenter(private val mView: NotificationComponentContract.View
     override fun update(data: ParseList) {
         isloading = false
         list = data
-//        if(list.empty())
         mView.updateUI(list)
     }
 
-    override fun show() {
-        mView.showLoad()
-    }
-
-    override fun dismiss() {
-        mView.dismissLoad()
-    }
+    override fun show() = mView.showLoad()
 
 
-    override fun internetInterrupted() {
-        mView.internetUnusable()
-    }
+    override fun dismiss() = mView.dismissLoad()
 
-    override fun internetNotInterrupted() {
-        mView.internetUsable()
-    }
+
+
+    override fun internetInterrupted() = mView.internetUnusable()
+
+
+    override fun internetNotInterrupted() = mView.internetUsable()
+
 }

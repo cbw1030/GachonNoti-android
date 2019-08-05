@@ -60,7 +60,7 @@ class IDCardFragment : Fragment(), IDCardContract.View {
 
     fun loginInformationSetting(info: StudentInformation) {
         mInfo = info
-        if (myView != null)
+        myView?.let {
             with(info)
             {
                 myView?.yourname?.text = name
@@ -69,7 +69,6 @@ class IDCardFragment : Fragment(), IDCardContract.View {
 
                 Glide.with(activity!!)
                     .load(imageURL)
-//                    .override(myView?.imageonyou?.width!!, myView?.imageonyou?.height!!)
                     .into(myView?.imageonyou!!)
 
                 setTimerAndQRCode(number)
@@ -77,6 +76,7 @@ class IDCardFragment : Fragment(), IDCardContract.View {
                     setTimerAndQRCode(number)
                 }
             }
+        }
     }
 
     @SuppressLint("SimpleDateFormat")

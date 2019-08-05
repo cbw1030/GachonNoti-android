@@ -15,7 +15,7 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
 
     override fun initPresent() {
         mView.changeUI(list)
-        NotificationComponentAsyncTask(list,this,context,0,null).execute()
+        NotificationComponentAsyncTask(list, this, context, 0, null).execute()
     }
 
     override fun load() {
@@ -26,7 +26,7 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
 
     override fun resetList() {
         list.clear()
-        NotificationComponentAsyncTask(list,this,context,0,null).execute()
+        NotificationComponentAsyncTask(list, this, context, 0, null).execute()
     }
 
 
@@ -39,26 +39,22 @@ class NotificationPresenter(private val mView: NotificationComponentContract.Vie
     override fun search(src: String) {
         Util.NotificationIndex = 0
         list.clear()
-        NotificationComponentAsyncTask(list,this,context,1,src).execute()
-    }
-    override fun show() {
-        mView.showLoad()
+        NotificationComponentAsyncTask(list, this, context, 1, src).execute()
     }
 
-    override fun dismiss() {
-        mView.dismissLoad()
-    }
+    override fun show() = mView.showLoad()
+
+    override fun dismiss() = mView.dismissLoad()
+
 
     override fun request() {
         isloading = true
-        NotificationComponentAsyncTask(list,this,context,1,null).execute()
+        NotificationComponentAsyncTask(list, this, context, 1, null).execute()
     }
 
-    override fun internetInterrupted() {
-        mView.internetUnusable()
-    }
+    override fun internetInterrupted() = mView.internetUnusable()
 
-    override fun internetNotInterrupted() {
-        mView.internetUsable()
-    }
+
+    override fun internetNotInterrupted() = mView.internetUsable()
+
 }

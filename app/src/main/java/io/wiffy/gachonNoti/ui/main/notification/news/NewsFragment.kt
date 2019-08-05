@@ -61,23 +61,19 @@ class NewsFragment : Fragment(), NotificationComponentContract.View {
         changeTheme()
     }
 
-    override fun internetUnusable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par2.visibility = View.GONE
-            myView.lottieXX2.visibility = View.VISIBLE
-        }
+    override fun internetUnusable() = Handler(Looper.getMainLooper()).post {
+        myView.par2.visibility = View.GONE
+        myView.lottieXX2.visibility = View.VISIBLE
     }
 
-    override fun internetUsable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par2.visibility = View.VISIBLE
-            myView.lottieXX2.visibility = View.GONE
-        }
+
+    override fun internetUsable() = Handler(Looper.getMainLooper()).post {
+        myView.par2.visibility = View.VISIBLE
+        myView.lottieXX2.visibility = View.GONE
     }
 
 
     fun changeTheme() {
-
         myView.swipe2?.setColorSchemeColors(
             when (Util.theme) {
                 "red" -> resources.getColor(R.color.red)
@@ -86,20 +82,15 @@ class NewsFragment : Fragment(), NotificationComponentContract.View {
             }
         )
     }
-    override fun updateUI(list: ParseList) {
-        adapter.update(list)
-    }
 
-    override fun showLoad() {
-        MainActivity.mView.builderUp()
-    }
+    override fun updateUI(list: ParseList) = adapter.update(list)
 
-    override fun dismissLoad() {
-        MainActivity.mView.builderDismiss()
-    }
+    override fun showLoad() = MainActivity.mView.builderUp()
 
-    fun search(str:String)
-    {
-        mPresenter.search(str)
-    }
+
+    override fun dismissLoad() = MainActivity.mView.builderDismiss()
+
+
+    fun search(str: String) = mPresenter.search(str)
+
 }

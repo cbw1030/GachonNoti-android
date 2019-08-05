@@ -34,15 +34,13 @@ class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
         return myView
     }
 
-    override fun internetUnusable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par4.visibility = View.GONE
-            myView.lottieXX4.visibility = View.VISIBLE
-        }
+    override fun internetUnusable() = Handler(Looper.getMainLooper()).post {
+        myView.par4.visibility = View.GONE
+        myView.lottieXX4.visibility = View.VISIBLE
     }
 
-    override fun changeUI(list: ParseList) {
 
+    override fun changeUI(list: ParseList) {
         adapter = NotificationComponentAdapter(
             list,
             activity?.applicationContext!!,
@@ -63,37 +61,28 @@ class ScholarshipFragment : Fragment(), NotificationComponentContract.View {
         changeTheme()
     }
 
-    override fun updateUI(list: ParseList) {
-        adapter.update(list)
+    override fun updateUI(list: ParseList) = adapter.update(list)
+
+
+    override fun showLoad() = MainActivity.mView.builderUp()
+
+
+    override fun dismissLoad() = MainActivity.mView.builderDismiss()
+
+
+    override fun internetUsable() = Handler(Looper.getMainLooper()).post {
+        myView.par4.visibility = View.VISIBLE
+        myView.lottieXX4.visibility = View.GONE
     }
 
-    override fun showLoad() {
-        MainActivity.mView.builderUp()
-    }
 
-    override fun dismissLoad() {
-        MainActivity.mView.builderDismiss()
-    }
-
-    override fun internetUsable() {
-        Handler(Looper.getMainLooper()).post {
-            myView.par4.visibility = View.VISIBLE
-            myView.lottieXX4.visibility = View.GONE
+    fun changeTheme() = myView.swipe4?.setColorSchemeColors(
+        when (Util.theme) {
+            "red" -> resources.getColor(R.color.red)
+            "green" -> resources.getColor(R.color.green)
+            else -> resources.getColor(R.color.main2Blue)
         }
-    }
+    )
 
-    fun changeTheme() {
-
-        myView.swipe4?.setColorSchemeColors(
-            when (Util.theme) {
-                "red" -> resources.getColor(R.color.red)
-                "green" -> resources.getColor(R.color.green)
-                else -> resources.getColor(R.color.main2Blue)
-            }
-        )
-    }
-
-    fun search(str: String) {
-        mPresenter.search(str)
-    }
+    fun search(str: String) = mPresenter.search(str)
 }
