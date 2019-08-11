@@ -1,6 +1,6 @@
 # GachonNoti-android
 
-<pre><a href="https://play.google.com/store/apps/details?id=io.wiffy.gachonNoti">https://play.google.com/store/apps/details?id=io.wiffy.gachonNoti</a></pre>
+<pre><a href="https://play.google.com/store/apps/details?id=io.wiffy.gachonNoti">https://play.google.com/store/apps/details?id=io.wiffy.gachonNoti/</a></pre>
 
 Screenshot
 <br>
