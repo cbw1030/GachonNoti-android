@@ -14,7 +14,6 @@ import java.net.URL
 
 
 class SearchAsyncTask(
-    private val data: String,
     private val cate: String,
     private val yearSemester: String,
     private val mPresenter: SearchContract.Presenter
@@ -22,6 +21,7 @@ class SearchAsyncTask(
     AsyncTask<Void, Void, Int>() {
 
     private var done = ""
+    private var data = "searchIsuCD=00$cate"
     private val mySemester = when (Util.SEMESTER) {
         1 -> 10
         3 -> 11

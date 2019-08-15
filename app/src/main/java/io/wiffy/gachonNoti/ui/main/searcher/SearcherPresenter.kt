@@ -45,10 +45,10 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         loadcnt = 0
         errorCnt = 0
         mView.showLoad()
-        SearchAsyncTask("searchIsuCD=001", "1", yearSemester, this).execute()
-        SearchAsyncTask("searchIsuCD=002", "2", yearSemester, this).execute()
-        SearchAsyncTask("searchIsuCD=003", "3", yearSemester, this).execute()
-        SearchAsyncTask("searchIsuCD=004", "4", yearSemester, this).execute()
+        SearchAsyncTask("1", yearSemester, this).execute()
+        SearchAsyncTask("2", yearSemester, this).execute()
+        SearchAsyncTask("3", yearSemester, this).execute()
+        SearchAsyncTask("4", yearSemester, this).execute()
     }
 
     override fun showLoad() {

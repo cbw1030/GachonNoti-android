@@ -222,24 +222,22 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
-        val year = Util.YEAR
+        val years = Util.YEAR.toInt()
         val semester = Util.SEMESTER.toString()
 
         setSharedItem(Util.version, true)
-        setSharedItems(
-            Pair("2019-3-1", "<nodata>"),
-            Pair("2019-3-2", "<nodata>"),
-            Pair("2019-3-3", "<nodata>"),
-            Pair("2019-3-4", "<nodata>"),
-            Pair("$year-$semester-1-global", "<nodata>"),
-            Pair("$year-$semester-2-global", "<nodata>"),
-            Pair("$year-$semester-3-global", "<nodata>"),
-            Pair("$year-$semester-4-global", "<nodata>"),
-            Pair("$year-$semester-1-medical", "<nodata>"),
-            Pair("$year-$semester-2-medical", "<nodata>"),
-            Pair("$year-$semester-3-medical", "<nodata>"),
-            Pair("$year-$semester-4-medical", "<nodata>")
-        )
+
+        for (year in years - 5..years)
+            setSharedItems(
+                Pair("$year-$semester-1-global", "<nodata>"),
+                Pair("$year-$semester-2-global", "<nodata>"),
+                Pair("$year-$semester-3-global", "<nodata>"),
+                Pair("$year-$semester-4-global", "<nodata>"),
+                Pair("$year-$semester-1-medical", "<nodata>"),
+                Pair("$year-$semester-2-medical", "<nodata>"),
+                Pair("$year-$semester-3-medical", "<nodata>"),
+                Pair("$year-$semester-4-medical", "<nodata>")
+            )
         AlertDialog.Builder(this@MainActivity).apply {
             setTitle("${Util.version} 버전 업데이트")
             setMessage(" ${resources.getString(R.string.update)}")
