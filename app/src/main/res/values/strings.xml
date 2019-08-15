@@ -27,5 +27,7 @@
         버그리포트 버그수정\n
         QR코드 버그 수정
     </string>
+    <string name="appwidget_text">가천 알림이</string>
+    <string name="add_widget">위젯 추가</string>
 
 </resources>
