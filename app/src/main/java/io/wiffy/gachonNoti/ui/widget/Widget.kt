@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.AppWidgetTarget
@@ -70,7 +71,7 @@ class Widget : AppWidgetProvider() {
                         pref.getString("password", null),
                         pref.getString("department", null),
                         pref.getString("image", null)
-                    ), context, appWidgetId
+                    ), context, appWidgetId, pref.getString("theme", null)
                 )
 
             }
@@ -79,7 +80,29 @@ class Widget : AppWidgetProvider() {
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
 
-        private fun changeView(views: RemoteViews, info: StudentInformation, context: Context?, widgetId: Int) {
+        private fun changeView(
+            views: RemoteViews,
+            info: StudentInformation,
+            context: Context?,
+            widgetId: Int,
+            theme: String?
+        ) {
+            val color = context?.resources?.getColor(
+                when (theme) {
+                    "red" -> {
+                        R.color.red
+                    }
+                    "green" -> {
+                        R.color.green
+                    }
+                    else -> {
+                        R.color.main2Blue
+                    }
+                }
+            ) ?: 0
+
+            views.setInt(R.id.gachonback_widget, "setBackgroundColor", color)
+            views.setInt(R.id.rebalgup_widget, "setBackgroundColor", color)
             views.setTextViewText(R.id.yourname_widget, info.name)
             views.setTextViewText(R.id.number_widget, info.number)
             views.setTextViewText(R.id.depart_widget, info.department)
@@ -100,7 +123,7 @@ class Widget : AppWidgetProvider() {
             val output = "m$num$format"
             val qrCodeWriter = QRCodeWriter()
             val bitmap =
-                Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 200, 200))
+                Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
             Glide.with(context).asBitmap().load(bitmap)
                 .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
         }
