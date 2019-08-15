@@ -16,6 +16,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlin.collections.ArrayList
 
 class SearcherFragment : Fragment(), SearchContract.View {
@@ -49,16 +50,17 @@ class SearcherFragment : Fragment(), SearchContract.View {
         setPositiveButton(
             "OK"
         ) { _, _ ->
-            val year = Util.YEAR
+            val yearToInt = Util.YEAR.toInt()
             val semester = Util.SEMESTER.toString()
-            for (x in arrayOf("global", "medical")) {
-                Util.sharedPreferences.edit().apply {
-                    putString("$year-$semester-1-$x", "<nodata>")
-                    putString("$year-$semester-2-$x", "<nodata>")
-                    putString("$year-$semester-3-$x", "<nodata>")
-                    putString("$year-$semester-4-$x", "<nodata>")
-                }.commit()
-            }
+            for (y in yearToInt - 5..yearToInt)
+                for (x in arrayOf("global", "medical")) {
+                    setSharedItems(
+                        Pair("$y-$semester-1-$x", "<nodata>"),
+                        Pair("$y-$semester-2-$x", "<nodata>"),
+                        Pair("$y-$semester-3-$x", "<nodata>"),
+                        Pair("$y-$semester-4-$x", "<nodata>")
+                    )
+                }
             builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
             builder?.show()
         }

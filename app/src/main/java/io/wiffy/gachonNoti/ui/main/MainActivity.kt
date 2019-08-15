@@ -23,6 +23,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
@@ -95,12 +97,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                     tent.putExtra("app_uid", applicationInfo.uid)
                 }
                 startActivity(tent)
-                Util.sharedPreferences.edit().putBoolean("notiOn", true).commit()
+                setSharedItem("notiOn", true)
                 FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
             setNegativeButton("Cancel") { _, _ ->
                 Util.notificationSet = false
-                Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
+                setSharedItem("notiOn", false)
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
             }
             setCancelable(false)
@@ -220,24 +222,22 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
-        val year = Util.YEAR
+        val years = Util.YEAR.toInt()
         val semester = Util.SEMESTER.toString()
-        Util.sharedPreferences.edit().apply {
-            putBoolean(Util.version, true)
 
-            // 다음 업데이트시 삭제
-            putString("2019-3-1", "<nodata>")
-            putString("2019-3-2", "<nodata>")
-            putString("2019-3-3", "<nodata>")
-            putString("2019-3-4", "<nodata>")
-            //
-            for (x in arrayOf("global", "medical")) {
-                putString("$year-$semester-1-$x", "<nodata>")
-                putString("$year-$semester-2-$x", "<nodata>")
-                putString("$year-$semester-3-$x", "<nodata>")
-                putString("$year-$semester-4-$x", "<nodata>")
-            }
-        }.commit()
+        setSharedItem(Util.version, true)
+
+        for (year in years - 5..years)
+            setSharedItems(
+                Pair("$year-$semester-1-global", "<nodata>"),
+                Pair("$year-$semester-2-global", "<nodata>"),
+                Pair("$year-$semester-3-global", "<nodata>"),
+                Pair("$year-$semester-4-global", "<nodata>"),
+                Pair("$year-$semester-1-medical", "<nodata>"),
+                Pair("$year-$semester-2-medical", "<nodata>"),
+                Pair("$year-$semester-3-medical", "<nodata>"),
+                Pair("$year-$semester-4-medical", "<nodata>")
+            )
         AlertDialog.Builder(this@MainActivity).apply {
             setTitle("${Util.version} 버전 업데이트")
             setMessage(" ${resources.getString(R.string.update)}")

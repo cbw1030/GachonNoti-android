@@ -71,7 +71,7 @@ class IDCardFragment : Fragment(), IDCardContract.View {
                     .load(imageURL)
                     .into(myView?.imageonyou!!)
 
-                setTimerAndQRCode(number)
+                setTimerAndQRCode(number!!)
                 myView?.rebalgup?.setOnClickListener {
                     setTimerAndQRCode(number)
                 }
@@ -108,7 +108,7 @@ class IDCardFragment : Fragment(), IDCardContract.View {
         val output = "m$number$format"
         val qrCodeWriter = QRCodeWriter()
         val bitmap =
-            Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 200, 200))
+            Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
 
         Glide.with(activity!!)
             .load(bitmap)
