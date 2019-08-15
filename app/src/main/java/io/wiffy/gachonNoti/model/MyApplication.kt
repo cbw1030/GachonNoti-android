@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.model
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
 import java.util.*
 
 
@@ -12,14 +13,14 @@ class MyApplication : Application() {
     @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
         super.onCreate()
-        Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE).apply {
-            Util.firstBoot = getBoolean("firstBooting", true)
-            Util.notificationSet = getBoolean("notiOn", true)
-            Util.theme = getString("theme", "default") ?: "default"
-            Util.initCount = booleanArrayOf(false, false, false, false)
-            Util.isLogin = getBoolean("login", false)
-            Util.campus = getBoolean("campus", true)
-        }
+        Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE)
+        Util.firstBoot = getSharedItem("firstBooting", true)
+        Util.notificationSet = getSharedItem("notiOn", true)
+        Util.theme = getSharedItem("theme", "default")
+        Util.initCount = booleanArrayOf(false, false, false, false)
+        Util.isLogin = getSharedItem("login", false)
+        Util.campus = getSharedItem("campus", true)
+
         Util.version = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
         Util.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
         Util.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {

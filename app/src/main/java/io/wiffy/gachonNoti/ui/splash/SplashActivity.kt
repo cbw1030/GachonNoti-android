@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -38,7 +39,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     @SuppressLint("ApplySharedPref")
     override fun subscribe() {
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
-            Util.sharedPreferences.edit().putBoolean("firstBooting", false).commit()
+            setSharedItem("firstBooting",false)
             Log.d("asdf", "noti success")
         }
         changeUI()
