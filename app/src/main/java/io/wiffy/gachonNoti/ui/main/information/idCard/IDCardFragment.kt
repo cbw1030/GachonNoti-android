@@ -71,7 +71,7 @@ class IDCardFragment : Fragment(), IDCardContract.View {
                     .load(imageURL)
                     .into(myView?.imageonyou!!)
 
-                setTimerAndQRCode(number)
+                setTimerAndQRCode(number!!)
                 myView?.rebalgup?.setOnClickListener {
                     setTimerAndQRCode(number)
                 }

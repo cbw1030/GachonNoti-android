@@ -8,6 +8,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.widget.Button
 import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.AppWidgetTarget
@@ -33,11 +34,9 @@ class Widget : AppWidgetProvider() {
     }
 
     override fun onEnabled(context: Context) {
-        // Enter relevant functionality for when the first widget_main is created
     }
 
     override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget_main is disabled
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -62,19 +61,18 @@ class Widget : AppWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.widget_main)
 
             val pref = context.getSharedPreferences("GACHONNOTICE", Context.MODE_PRIVATE)
-            if (pref.getString("name", null) != null) {
-                changeView(
-                    views, StudentInformation(
-                        pref.getString("name", null),
-                        pref.getString("number", null),
-                        pref.getString("id", null),
-                        pref.getString("password", null),
-                        pref.getString("department", null),
-                        pref.getString("image", null)
-                    ), context, appWidgetId, pref.getString("theme", null)
-                )
 
-            }
+            changeView(
+                views, StudentInformation(
+                    pref.getString("name", null),
+                    pref.getString("number", null),
+                    pref.getString("id", null),
+                    pref.getString("password", null),
+                    pref.getString("department", null),
+                    pref.getString("image", null)
+                ), context, appWidgetId, pref.getString("theme", null),
+                pref.getString("name", null)
+            )
 
             // Instruct the widget_main manager to update the widget_main
             appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -85,7 +83,8 @@ class Widget : AppWidgetProvider() {
             info: StudentInformation,
             context: Context?,
             widgetId: Int,
-            theme: String?
+            theme: String?,
+            name: String?
         ) {
             val color = context?.resources?.getColor(
                 when (theme) {
@@ -101,15 +100,41 @@ class Widget : AppWidgetProvider() {
                 }
             ) ?: 0
 
+            val buttonColor =
+                when (theme) {
+                    "red" -> {
+                        R.drawable.dialog_button_red
+                    }
+                    "green" -> {
+                        R.drawable.dialog_button_green
+                    }
+                    else -> {
+                        R.drawable.dialog_button_default
+                    }
+                }
+
             views.setInt(R.id.gachonback_widget, "setBackgroundColor", color)
-            views.setInt(R.id.rebalgup_widget, "setBackgroundColor", color)
-            views.setTextViewText(R.id.yourname_widget, info.name)
-            views.setTextViewText(R.id.number_widget, info.number)
-            views.setTextViewText(R.id.depart_widget, info.department)
-            Glide.with(context!!).asBitmap().load(info.imageURL)
-                .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
-            qrCode(views, info.number, context, widgetId)
-            val myIntent = Intent(action)
+            views.setInt(R.id.rebalgup_widget, "setBackgroundResource", buttonColor)
+            if (name != null) {
+                views.setTextViewText(R.id.yourname_widget, info.name)
+                views.setTextViewText(R.id.number_widget, info.number)
+                views.setTextViewText(R.id.depart_widget, info.department)
+                Glide.with(context!!).asBitmap().load(info.imageURL)
+                    .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
+                qrCode(views, info.number!!, context, widgetId)
+            } else {
+                views.setTextViewText(R.id.yourname_widget, "박가천")
+                views.setTextViewText(R.id.number_widget, "201735829")
+                views.setTextViewText(R.id.depart_widget, "어쩌구학과")
+                Glide.with(context!!).asBitmap().load(R.drawable.defaultimage)
+                    .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
+                Glide.with(context).asBitmap().load(R.color.white)
+                    .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
+            }
+
+            val myIntent = Intent(context, Widget::class.java)
+            myIntent.action = action
+
             val pendingIntent = PendingIntent.getBroadcast(
                 context, 0, myIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT

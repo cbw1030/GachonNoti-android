@@ -138,7 +138,7 @@ class LoginDialog(context: Context) : Dialog(context) {
         with(information) {
             Util.sharedPreferences.edit().apply {
                 putString("id", id)
-                putString("password", Util.encrypt(password, Util.getMACAddress()))
+                putString("password", Util.encrypt(password!!, Util.getMACAddress()))
                 putString("name", name)
                 putString("number", number)
                 putString("department", department)
