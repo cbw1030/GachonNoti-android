@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.widget.Button
 import android.widget.RemoteViews
@@ -128,8 +129,7 @@ class Widget : AppWidgetProvider() {
                 views.setTextViewText(R.id.depart_widget, "어쩌구학과")
                 Glide.with(context!!).asBitmap().load(R.drawable.defaultimage)
                     .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
-                Glide.with(context).asBitmap().load(R.color.white)
-                    .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
+                qrCode(views, "hello", context, widgetId)
             }
 
             val myIntent = Intent(context, Widget::class.java)
@@ -144,13 +144,27 @@ class Widget : AppWidgetProvider() {
 
         @SuppressLint("SimpleDateFormat")
         fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) {
+
             val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
             val output = "m$num$format"
             val qrCodeWriter = QRCodeWriter()
-            val bitmap =
-                Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
-            Glide.with(context).asBitmap().load(bitmap)
-                .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
+            if (num != "hello") {
+                val bitmap =
+                    Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
+                Glide.with(context).asBitmap().load(bitmap)
+                    .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
+            } else {
+                Glide.with(context).asBitmap().load(darkBitmap())
+                    .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
+            }
+        }
+
+        private fun darkBitmap(): Bitmap {
+            val bmp = Bitmap.createBitmap(100, 100, Bitmap.Config.RGB_565)
+            for (x in 0 until 100)
+                for (y in 0 until 100)
+                    bmp.setPixel(x, y, Color.WHITE)
+            return bmp
         }
     }
 }
