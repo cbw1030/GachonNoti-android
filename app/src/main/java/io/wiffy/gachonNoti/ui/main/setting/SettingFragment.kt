@@ -22,6 +22,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
@@ -247,7 +248,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             } else {
                 "메디컬"
             }
-        Util.sharedPreferences.edit().putBoolean("campus", bool).commit()
+        setSharedItem("campus", bool)
         Util.campus = bool
     }
 
@@ -272,7 +273,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             1 -> "red"
             else -> "default"
         }
-        Util.sharedPreferences.edit().putString("theme", Util.theme).commit()
+        setSharedItem("theme", Util.theme)
         themeChanger()
         (activity as MainActivity).themeChange()
         (activity as MainActivity).mPresenter.changeThemes()
@@ -353,14 +354,14 @@ class SettingFragment : Fragment(), SettingContract.View {
     @SuppressLint("ApplySharedPref")
     private fun setOn() {
         Util.notificationSet = true
-        Util.sharedPreferences.edit().putBoolean("notiOn", true).commit()
+        setSharedItem("notiOn", true)
         FirebaseMessaging.getInstance().subscribeToTopic("noti")
     }
 
     @SuppressLint("ApplySharedPref")
     private fun setOff() {
         Util.notificationSet = false
-        Util.sharedPreferences.edit().putBoolean("notiOn", false).commit()
+        setSharedItem("notiOn", false)
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }
 }

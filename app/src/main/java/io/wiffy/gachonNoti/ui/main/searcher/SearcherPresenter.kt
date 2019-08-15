@@ -9,6 +9,8 @@ import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.Util.Companion.classToTime
+import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import io.wiffy.gachonNoti.model.data.ClassDataInformation
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
@@ -95,13 +97,12 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
         try {
             for (x in arrayOf("global", "medical")) {
-                Util.sharedPreferences.edit().apply {
-                    putString("$underYear-$underSemester-1-$x", "<nodata>")
-                    putString("$underYear-$underSemester-2-$x", "<nodata>")
-                    putString("$underYear-$underSemester-3-$x", "<nodata>")
-                    putString("$underYear-$underSemester-4-$x", "<nodata>")
-                }.commit()
-
+                setSharedItems(
+                    Pair("$underYear-$underSemester-1-$x", "<nodata>"),
+                    Pair("$underYear-$underSemester-2-$x", "<nodata>"),
+                    Pair("$underYear-$underSemester-3-$x", "<nodata>"),
+                    Pair("$underYear-$underSemester-4-$x", "<nodata>")
+                )
             }
         } catch (e: Exception) {
         }
@@ -110,21 +111,18 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         } else {
             "medical"
         }
-        with(Util.sharedPreferences)
-        {
-            load1 = getString(
-                "$year-$semester-1-$temp", "<nodata>"
-            ) ?: "<nodata>"
-            load2 = getString(
-                "$year-$semester-2-$temp", "<nodata>"
-            ) ?: "<nodata>"
-            load3 = getString(
-                "$year-$semester-3-$temp", "<nodata>"
-            ) ?: "<nodata>"
-            load4 = getString(
-                "$year-$semester-4-$temp", "<nodata>"
-            ) ?: "<nodata>"
-        }
+        load1 = getSharedItem(
+            "$year-$semester-1-$temp", "<nodata>"
+        )
+        load2 = getSharedItem(
+            "$year-$semester-2-$temp", "<nodata>"
+        )
+        load3 = getSharedItem(
+            "$year-$semester-3-$temp", "<nodata>"
+        )
+        load4 = getSharedItem(
+            "$year-$semester-4-$temp", "<nodata>"
+        )
 
         if (!load1.contains("<nodata>") &&
             !load2.contains("<nodata>") &&

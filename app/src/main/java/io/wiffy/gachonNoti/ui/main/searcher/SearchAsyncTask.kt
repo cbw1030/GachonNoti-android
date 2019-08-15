@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
@@ -85,13 +86,13 @@ class SearchAsyncTask(
             }
             if (mySemester == 10 || mySemester == 20) {
                 if (done.contains("<haksuNo>")) {
-                    Util.sharedPreferences.edit().putString("$yearSemester-$cate-$campus", done).commit()
+                    setSharedItem("$yearSemester-$cate-$campus", done)
                     mPresenter.dismissLoad()
                 } else {
                     mPresenter.error()
                 }
             } else {
-                Util.sharedPreferences.edit().putString("$yearSemester-$cate-$campus", done).commit()
+                setSharedItem("$yearSemester-$cate-$campus", done)
                 mPresenter.dismissLoad()
             }
         }

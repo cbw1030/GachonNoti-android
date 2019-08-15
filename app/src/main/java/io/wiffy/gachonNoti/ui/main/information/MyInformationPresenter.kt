@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.information
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.model.data.StudentInformation
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
 import io.wiffy.gachonNoti.ui.main.information.idCard.IDCardFragment
 
 class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformationContract.Presenter {
@@ -24,18 +25,16 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
     override fun isNotLogin() {
     }
 
-    override fun loginSetting() = with(Util.sharedPreferences)
-    {
-        idCard?.loginInformationSetting(
-            StudentInformation(
-                getString("name", "null") ?: "null",
-                getString("number", "null") ?: "null",
-                getString("id", "null") ?: "null",
-                getString("password", "null") ?: "null",
-                getString("department", "null") ?: "null",
-                getString("image", "null") ?: "null"
-            )
+    override fun loginSetting() = idCard?.loginInformationSetting(
+        StudentInformation(
+            getSharedItem("name", "null"),
+            getSharedItem("number", "null"),
+            getSharedItem("id", "null"),
+            getSharedItem("password", "null"),
+            getSharedItem("department", "null"),
+            getSharedItem("image", "null")
         )
-    }
+    )
+
 
 }
