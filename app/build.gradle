@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.0.1'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.wang.avi:library:2.1.3'

@@ -15,7 +15,9 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.*
 import io.wiffy.gachonNoti.model.data.StudentInformation
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
+import kotlinx.coroutines.CoroutineScope
 import java.text.SimpleDateFormat
+import kotlin.coroutines.CoroutineContext
 
 
 class IDCardFragment : Fragment(), IDCardContract.View {
