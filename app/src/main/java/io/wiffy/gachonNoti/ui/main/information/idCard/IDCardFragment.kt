@@ -7,20 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.*
-import io.wiffy.gachonNoti.model.data.StudentInformation
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeButtonResource
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
-import kotlinx.coroutines.CoroutineScope
 import java.text.SimpleDateFormat
-import kotlin.coroutines.CoroutineContext
 
-
-class IDCardFragment : Fragment(), IDCardContract.View {
+class IDCardFragment : IDCardContract.View() {
     private val initiation = 300000
     private val initiationText = "05 분 00 초"
     var myView: View? = null
@@ -44,20 +41,8 @@ class IDCardFragment : Fragment(), IDCardContract.View {
     }
 
     fun changeTheme() {
-        myView?.gachonback?.setBackgroundColor(
-            when (Util.theme) {
-                "red" -> ContextCompat.getColor(context!!, R.color.red)
-                "green" -> ContextCompat.getColor(context!!, R.color.green)
-                else -> ContextCompat.getColor(context!!, R.color.main2Blue)
-            }
-        )
-        myView?.rebalgup?.setBackgroundResource(
-            when (Util.theme) {
-                "red" -> R.drawable.dialog_button_red
-                "green" -> R.drawable.dialog_button_green
-                else -> R.drawable.dialog_button_default
-            }
-        )
+        myView?.gachonback?.setBackgroundColor(ContextCompat.getColor(context!!, getThemeColor()))
+        myView?.rebalgup?.setBackgroundResource(getThemeButtonResource())
     }
 
     fun loginInformationSetting(info: StudentInformation) {

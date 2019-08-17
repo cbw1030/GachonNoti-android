@@ -221,24 +221,89 @@ class Util {
             false
         }
 
-
-        fun matrixToBitmap(matrix: BitMatrix): Bitmap {
-            val bmp = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565)
-            for (x in 0 until matrix.width)
-                for (y in 0 until matrix.height)
-                    bmp.setPixel(
-                        x, y, if (matrix.get(x, y)) {
-                            Color.BLACK
-                        } else {
-                            Color.WHITE
-                        }
-                    )
-            return bmp
+        fun getThemeColor(mTheme: String?) = when (mTheme) {
+            "red" -> {
+                R.color.red
+            }
+            "green" -> {
+                R.color.green
+            }
+            else -> {
+                R.color.main2Blue
+            }
         }
+
+        fun getThemeColor() = when (theme) {
+            "red" -> {
+                R.color.red
+            }
+            "green" -> {
+                R.color.green
+            }
+            else -> {
+                R.color.main2Blue
+            }
+        }
+
+        fun getThemeButtonResource(mTheme: String?) = when (mTheme) {
+            "red" -> {
+                R.drawable.dialog_button_red
+            }
+            "green" -> {
+                R.drawable.dialog_button_green
+            }
+            else -> {
+                R.drawable.dialog_button_default
+            }
+        }
+
+        fun getThemeButtonResource() = when (theme) {
+            "red" -> {
+                R.drawable.dialog_button_red
+            }
+            "green" -> {
+                R.drawable.dialog_button_green
+            }
+            else -> {
+                R.drawable.dialog_button_default
+            }
+        }
+
+        fun getThemeDeepColor() = when (theme) {
+            "red" -> {
+                R.color.deepRed
+            }
+            "green" -> {
+                R.color.deepGreen
+            }
+            else -> {
+                R.color.main2DeepBlue
+            }
+        }
+
+        fun getThemeLightColor() = when (theme) {
+            "red" -> R.color.lightRed
+            "green" -> R.color.lightGreen
+            else -> R.color.main2LightBlue
+        }
+
+        fun matrixToBitmap(matrix: BitMatrix): Bitmap =
+            Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565).apply {
+                for (x in 0 until matrix.width)
+                    for (y in 0 until matrix.height)
+                        setPixel(
+                            x, y, if (matrix.get(x, y)) {
+                                Color.BLACK
+                            } else {
+                                Color.WHITE
+                            }
+                        )
+            }
+
 
         @SuppressLint("SimpleDateFormat")
         fun classToTime(time: String): LongArray {
-            val dt = SimpleDateFormat("HH:mm:ss")
+            val format = SimpleDateFormat("HH:mm:ss")
             var start: String
             var end: String
             try {
@@ -306,7 +371,7 @@ class Util {
                 end = "00:00:00"
             }
 
-            return longArrayOf(dt.parse(start).time, dt.parse(end).time)
+            return longArrayOf(format.parse(start).time, format.parse(end).time)
         }
 
         const val appConstantPreferences = "GACHONNOTICE"
@@ -314,7 +379,7 @@ class Util {
         const val STATE_INFORMATION = 1
         const val STATE_SEARCHER = 2
         const val STATE_SETTING = 3
-        const val STATE_WEBVIEW = 4
+        const val STATE_WEB_VIEW = 4
         const val NOT_UPDATED_YET = -99
         const val ACTION_SUCCESS = 0
         const val ACTION_FAILURE = -1

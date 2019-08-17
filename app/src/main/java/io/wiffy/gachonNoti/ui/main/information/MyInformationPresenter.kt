@@ -1,8 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
-import io.wiffy.gachonNoti.model.data.StudentInformation
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
 import io.wiffy.gachonNoti.ui.main.information.idCard.IDCardFragment
 
@@ -18,9 +17,7 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
         add(idCard)
     }
 
-
     override fun themeChange() = idCard?.changeTheme()
-
 
     override fun isNotLogin() {
     }
@@ -35,6 +32,4 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
             getSharedItem("image", "null")
         )
     )
-
-
 }

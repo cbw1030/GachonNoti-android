@@ -1,14 +1,28 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
+import android.app.Dialog
+import android.content.Context
+import androidx.fragment.app.Fragment
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 
 interface SearchContract {
 
-    interface View {
-        fun initUI()
-        fun showLoad()
-        fun dismissLoad():Boolean?
-        fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String)
+    abstract class View : Fragment() {
+        abstract fun initUI()
+        abstract fun showLoad()
+        abstract fun dismissLoad(): Boolean?
+        abstract fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String)
+    }
+
+    abstract class DialogPresenter(context: Context) : Dialog(context) {
+        abstract fun categoryInvisible()
+        abstract fun getDataDialog(yearSemester: String)
+        abstract fun showBtn(c: Boolean)
+        abstract fun errorDialog()
+        abstract fun setSpinner(arrayList: ArrayList<String>)
+        abstract fun setListDialog(arrayList: ArrayList<String>)
+        abstract fun requestLoad()
+        abstract fun dismissSelf()
     }
 
     interface Presenter {
@@ -23,17 +37,5 @@ interface SearchContract {
         fun loadTable(str: String)
         fun resetData()
     }
-
-    interface DialogPresenter {
-        fun categoryInvisible()
-        fun getDataDialog(yearSemester: String)
-        fun showBtn(c: Boolean)
-        fun errorDialog()
-        fun setSpinner(arrayList: ArrayList<String>)
-        fun setListDialog(arrayList: ArrayList<String>)
-        fun requestLoad()
-        fun dismissSelf()
-    }
-
 
 }

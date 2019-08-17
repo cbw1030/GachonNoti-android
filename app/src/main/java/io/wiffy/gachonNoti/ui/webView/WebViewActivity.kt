@@ -10,15 +10,16 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.webkit.WebSettings
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.data.Parse
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeDeepColor
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
-class WebViewActivity : AppCompatActivity(), WebViewContract.View {
+class WebViewActivity : WebViewContract.View() {
 
     lateinit var mPresenter: WebViewPresenter
     lateinit var builder: Dialog
@@ -52,7 +53,6 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
             setCanceledOnTouchOutside(false)
             this.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
-
     }
 
     override fun builderUp() = builder.show()
@@ -151,26 +151,8 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
 
 
     private fun themeChange() {
-        supportActionBar!!.setBackgroundDrawable(
-            ColorDrawable(
-                when (Util.theme) {
-                    "red" -> {
-                        webview_layout.setBackgroundColor(resources.getColor(R.color.deepRed))
-                        window.statusBarColor = resources.getColor(R.color.red)
-                        resources.getColor(R.color.red)
-                    }
-                    "green" -> {
-                        webview_layout.setBackgroundColor(resources.getColor(R.color.deepGreen))
-                        window.statusBarColor = resources.getColor(R.color.green)
-                        resources.getColor(R.color.green)
-                    }
-                    else -> {
-                        webview_layout.setBackgroundColor(resources.getColor(R.color.main2DeepBlue))
-                        window.statusBarColor = resources.getColor(R.color.main2Blue)
-                        resources.getColor(R.color.main2Blue)
-                    }
-                }
-            )
-        )
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
+        webview_layout.setBackgroundColor(resources.getColor(getThemeDeepColor()))
+        window.statusBarColor = resources.getColor(getThemeColor())
     }
 }

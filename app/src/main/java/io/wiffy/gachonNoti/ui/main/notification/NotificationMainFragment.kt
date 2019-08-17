@@ -15,11 +15,12 @@ import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.navigation2
 
-class NotificationMainFragment : Fragment(), NotificationMainContract.View {
+class NotificationMainFragment : NotificationMainContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: NotificationMainPresenter
     lateinit var adapter: PagerAdapter
@@ -36,40 +37,23 @@ class NotificationMainFragment : Fragment(), NotificationMainContract.View {
         return myView
     }
 
-    fun themeChanger(bool: Boolean) {
-        val themeColorArray = arrayOf(
-            intArrayOf(-android.R.attr.state_checked),
-            intArrayOf(android.R.attr.state_checked)
-        )
-        val color = when (Util.theme) {
-            "red" -> intArrayOf(
-                Color.parseColor("#8A8989"),
-                resources.getColor(R.color.red)
-
-            )
-            "green" -> intArrayOf(
-                Color.parseColor("#8A8989"),
-                resources.getColor(R.color.green)
-
-            )
-            else -> intArrayOf(
-                Color.parseColor("#8A8989"),
-                resources.getColor(R.color.main2Blue)
-
-            )
-        }
-        myView.fab_main.backgroundTintList = resources.getColorStateList(
-            when (Util.theme) {
-                "red" -> R.color.red
-                "green" -> R.color.green
-                else -> R.color.main2Blue
-            }
-        )
+    override fun themeChanger(bool: Boolean) {
+        myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
         if (bool)
             mPresenter.themeChange()
-        myView.navigation2.tabTextColors = ColorStateList(themeColorArray, color)
-        myView.navigation2.setSelectedTabIndicatorColor(color[1])
+        intArrayOf(
+            Color.parseColor("#8A8989"),
+            resources.getColor(getThemeColor())
 
+        ).let {
+            myView.navigation2.tabTextColors = ColorStateList(
+                arrayOf(
+                    intArrayOf(-android.R.attr.state_checked),
+                    intArrayOf(android.R.attr.state_checked)
+                ), it
+            )
+            myView.navigation2.setSelectedTabIndicatorColor(it[1])
+        }
     }
 
     override fun initView() {

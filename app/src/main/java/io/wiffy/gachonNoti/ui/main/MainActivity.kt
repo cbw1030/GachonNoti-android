@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -23,13 +22,15 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : MainContract.View() {
     var menuItem: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
@@ -161,27 +162,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     fun themeChange() {
-        supportActionBar!!.setBackgroundDrawable(
-            ColorDrawable(
-                when (Util.theme) {
-                    "red" -> {
-                        window.statusBarColor = resources.getColor(R.color.red)
-                        navigation.setBackgroundColor(resources.getColor(R.color.deepRed))
-                        resources.getColor(R.color.red)
-                    }
-                    "green" -> {
-                        window.statusBarColor = resources.getColor(R.color.green)
-                        navigation.setBackgroundColor(resources.getColor(R.color.deepGreen))
-                        resources.getColor(R.color.green)
-                    }
-                    else -> {
-                        window.statusBarColor = resources.getColor(R.color.main2Blue)
-                        navigation.setBackgroundColor(resources.getColor(R.color.main2DeepBlue))
-                        resources.getColor(R.color.main2Blue)
-                    }
-                }
-            )
-        )
+        window.statusBarColor = resources.getColor(getThemeColor())
+        navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
     }
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
@@ -272,7 +255,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 pager.currentItem = Util.STATE_NOTIFICATION
                 Util.state = Util.STATE_NOTIFICATION
             }
-            Util.STATE_WEBVIEW -> {
+            Util.STATE_WEB_VIEW -> {
 
             }
         }

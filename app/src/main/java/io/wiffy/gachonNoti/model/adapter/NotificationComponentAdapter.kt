@@ -19,7 +19,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.data.ParseList
+import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
@@ -39,11 +39,11 @@ class NotificationComponentAdapter(
     private val type: Int
 ) : RecyclerView.Adapter<NotificationComponentAdapter.ComponentViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = ComponentViewHolder(parent)
-    override fun getItemCount(): Int = items.size()
+    override fun getItemCount(): Int = items.size
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
 
-        items.get(position).let { item ->
+        items[position].let { item ->
             with(holder) {
                 Handler(Looper.getMainLooper()).post {
                     itemView.setBackgroundResource(

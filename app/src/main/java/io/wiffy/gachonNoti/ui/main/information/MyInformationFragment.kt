@@ -11,13 +11,15 @@ import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeButtonResource
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 
-class MyInformationFragment : Fragment(), MyInformationContract.View {
+class MyInformationFragment : MyInformationContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: MyInformationPresenter
     lateinit var adapter: PagerAdapter
@@ -88,39 +90,23 @@ class MyInformationFragment : Fragment(), MyInformationContract.View {
 
     fun themeChanger(bool: Boolean) {
         loginExecute()
-        val themeColorArray = arrayOf(
-            intArrayOf(-android.R.attr.state_checked),
-            intArrayOf(android.R.attr.state_checked)
-        )
-        val color = when (Util.theme) {
-            "red" -> intArrayOf(
-                Color.parseColor("#8A8989"),
-                resources.getColor(R.color.red)
 
-            )
-            "green" -> intArrayOf(
-                Color.parseColor("#8A8989"),
-                resources.getColor(R.color.green)
-
-            )
-            else -> intArrayOf(
-                Color.parseColor("#8A8989"),
-                resources.getColor(R.color.main2Blue)
-
-            )
-        }
         if (bool)
             mPresenter.themeChange()
 
-        myView.login2.setBackgroundResource(
-            when (Util.theme) {
-                "red" -> R.drawable.dialog_button_red
-                "green" -> R.drawable.dialog_button_green
-                else -> R.drawable.dialog_button_default
-            }
-        )
-        myView.navigation3.tabTextColors = ColorStateList(themeColorArray, color)
-        myView.navigation3.setSelectedTabIndicatorColor(color[1])
+        myView.login2.setBackgroundResource(getThemeButtonResource())
 
+        intArrayOf(
+            Color.parseColor("#8A8989"),
+            resources.getColor(getThemeColor())
+        ).let {
+            myView.navigation3.tabTextColors = ColorStateList(
+                arrayOf(
+                    intArrayOf(-android.R.attr.state_checked),
+                    intArrayOf(android.R.attr.state_checked)
+                ), it
+            )
+            myView.navigation3.setSelectedTabIndicatorColor(it[1])
+        }
     }
 }

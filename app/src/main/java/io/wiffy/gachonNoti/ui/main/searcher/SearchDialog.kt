@@ -2,13 +2,11 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -22,7 +20,7 @@ class SearchDialog(
     context: Context,
     private val mView: SearchContract.View,
     private val mPresenter: SearcherPresenter
-) : Dialog(context), SearchContract.DialogPresenter {
+) : SearchContract.DialogPresenter(context) {
 
     var spinnerSelected = 0
 

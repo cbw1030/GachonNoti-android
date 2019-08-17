@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification.news
 
 import android.content.Context
-import io.wiffy.gachonNoti.model.data.ParseList
+import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentAsyncTask
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
@@ -9,7 +9,7 @@ import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 class NewsPresenter(val mView: NotificationComponentContract.View, private val context: Context?) : NotificationComponentContract.Presenter {
 
     private var list = ParseList()
-    private var isloading = true
+    private var isLoading = true
 
     override fun initPresent() {
         mView.changeUI(list)
@@ -17,7 +17,7 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
     }
 
     override fun load() {
-        if (!isloading) {
+        if (!isLoading) {
             request()
         }
     }
@@ -28,7 +28,7 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
 
 
     override fun update(data: ParseList) {
-        isloading = false
+        isLoading = false
         list = data
         mView.updateUI(list)
     }
@@ -39,7 +39,7 @@ class NewsPresenter(val mView: NotificationComponentContract.View, private val c
     override fun dismiss() = mView.dismissLoad()
 
     override fun request() {
-        isloading = true
+        isLoading = true
         NotificationComponentAsyncTask(list,this,context,2,null).execute()
     }
     override fun search(src: String) {

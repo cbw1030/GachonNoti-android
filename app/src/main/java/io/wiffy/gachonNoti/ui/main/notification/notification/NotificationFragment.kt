@@ -6,12 +6,11 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.data.ParseList
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
 import io.wiffy.gachonNoti.model.adapter.NotificationComponentAdapter
 import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
@@ -19,8 +18,7 @@ import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 
-class NotificationFragment : Fragment(),
-    NotificationComponentContract.View {
+class NotificationFragment : NotificationComponentContract.View() {
 
     lateinit var myView: View
     lateinit var mPresenter: NotificationPresenter
@@ -77,16 +75,7 @@ class NotificationFragment : Fragment(),
 
     }
 
-    fun changeTheme() {
-
-        myView.swipe.setColorSchemeColors(
-            when (Util.theme) {
-                "red" -> resources.getColor(R.color.red)
-                "green" -> resources.getColor(R.color.green)
-                else -> resources.getColor(R.color.main2Blue)
-            }
-        )
-    }
+    override fun changeTheme() = myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
 
     override fun updateUI(list: ParseList) = adapter.update(list)
 
@@ -94,7 +83,7 @@ class NotificationFragment : Fragment(),
 
     override fun dismissLoad() = MainActivity.mView.builderDismiss()
 
-    fun search(str: String) = mPresenter.search(str)
+    override fun search(str: String) = mPresenter.search(str)
 
 }
 
