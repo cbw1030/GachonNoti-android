@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : MainContract.View() {
     var menuItem: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null

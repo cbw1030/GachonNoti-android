@@ -20,7 +20,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.navigation2
 
-class NotificationMainFragment : Fragment(), NotificationMainContract.View {
+class NotificationMainFragment : NotificationMainContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: NotificationMainPresenter
     lateinit var adapter: PagerAdapter

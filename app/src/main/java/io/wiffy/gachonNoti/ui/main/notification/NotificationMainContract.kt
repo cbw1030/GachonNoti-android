@@ -3,10 +3,11 @@ package io.wiffy.gachonNoti.ui.main.notification
 import androidx.fragment.app.Fragment
 
 interface NotificationMainContract {
-    interface View {
-        fun initView()
-        fun showLoad()
-        fun dismissLoad(): Boolean?
+
+    abstract class View : Fragment() {
+        abstract fun initView()
+        abstract fun showLoad()
+        abstract fun dismissLoad(): Boolean?
     }
 
     interface Presenter {
@@ -16,3 +17,4 @@ interface NotificationMainContract {
         fun themeChange()
     }
 }
+

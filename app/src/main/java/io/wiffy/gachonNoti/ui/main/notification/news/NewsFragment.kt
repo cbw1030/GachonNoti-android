@@ -6,7 +6,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
@@ -18,7 +17,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.notification.NotificationComponentContract
 import kotlinx.android.synthetic.main.fragment_notification_news.view.*
 
-class NewsFragment : Fragment(), NotificationComponentContract.View {
+class NewsFragment : NotificationComponentContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: NewsPresenter
     lateinit var adapter: NotificationComponentAdapter

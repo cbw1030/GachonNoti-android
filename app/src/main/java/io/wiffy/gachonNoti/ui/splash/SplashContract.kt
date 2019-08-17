@@ -1,14 +1,17 @@
 package io.wiffy.gachonNoti.ui.splash
 
+import androidx.appcompat.app.AppCompatActivity
+
 interface SplashContract {
-    interface View {
-        fun changeUI():Boolean
-        fun moveToMain()
-        fun subscribe()
+
+    abstract class View : AppCompatActivity() {
+        abstract fun changeUI(): Boolean
+        abstract fun moveToMain()
+        abstract fun subscribe()
     }
 
     interface Presenter {
         fun initPresent()
-        fun move():Boolean
+        fun move(): Boolean
     }
 }

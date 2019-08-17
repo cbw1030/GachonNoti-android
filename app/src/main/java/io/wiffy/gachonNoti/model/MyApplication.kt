@@ -9,7 +9,6 @@ import java.util.*
 
 class MyApplication : Application() {
 
-
     @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
         super.onCreate()

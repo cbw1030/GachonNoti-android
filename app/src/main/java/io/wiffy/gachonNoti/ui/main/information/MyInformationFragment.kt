@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 
-class MyInformationFragment : Fragment(), MyInformationContract.View {
+class MyInformationFragment : MyInformationContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: MyInformationPresenter
     lateinit var adapter: PagerAdapter

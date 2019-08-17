@@ -17,7 +17,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
-import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
@@ -38,7 +37,7 @@ import kotlinx.android.synthetic.main.fragment_setting.view.greenColor
 import kotlinx.android.synthetic.main.fragment_setting.view.redColor
 
 
-class SettingFragment : Fragment(), SettingContract.View {
+class SettingFragment : SettingContract.View() {
     private val myBorder = 5
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter

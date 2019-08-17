@@ -20,7 +20,7 @@ import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlin.collections.ArrayList
 
-class SearcherFragment : Fragment(), SearchContract.View {
+class SearcherFragment : SearchContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
 

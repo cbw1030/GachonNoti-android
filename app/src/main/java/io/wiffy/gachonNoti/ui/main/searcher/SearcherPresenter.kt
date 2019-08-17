@@ -184,7 +184,6 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
                 }
             }
         } catch (ex: Exception) {
-            Log.d("asdf", "nononon")
         }
 
     }

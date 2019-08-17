@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
@@ -16,7 +15,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 
-class SplashActivity : AppCompatActivity(), SplashContract.View {
+class SplashActivity : SplashContract.View() {
 
     lateinit var mPresenter: SplashPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +35,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     @SuppressLint("ApplySharedPref")
     override fun subscribe() {
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
-            setSharedItem("firstBooting",false)
+            setSharedItem("firstBooting", false)
             Log.d("asdf", "noti success")
         }
         changeUI()

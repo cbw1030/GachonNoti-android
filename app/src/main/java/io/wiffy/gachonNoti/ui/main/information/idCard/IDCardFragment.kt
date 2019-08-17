@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
@@ -18,7 +17,7 @@ import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
 
-class IDCardFragment : Fragment(), IDCardContract.View {
+class IDCardFragment : IDCardContract.View() {
     private val initiation = 300000
     private val initiationText = "05 분 00 초"
     var myView: View? = null

@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.webkit.WebSettings
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Parse
@@ -20,7 +19,7 @@ import io.wiffy.gachonNoti.model.Util.Companion.getThemeDeepColor
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
-class WebViewActivity : AppCompatActivity(), WebViewContract.View {
+class WebViewActivity : WebViewContract.View() {
 
     lateinit var mPresenter: WebViewPresenter
     lateinit var builder: Dialog
