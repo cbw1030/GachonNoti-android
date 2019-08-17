@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
-import io.wiffy.gachonNoti.model.data.ContactInformation
+import io.wiffy.gachonNoti.model.ContactInformation
+
 
 interface SettingContract {
     interface View {

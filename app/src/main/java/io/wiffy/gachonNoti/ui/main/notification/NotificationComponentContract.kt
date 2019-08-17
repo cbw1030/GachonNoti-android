@@ -1,6 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-import io.wiffy.gachonNoti.model.data.ParseList
+import io.wiffy.gachonNoti.model.ParseList
 
 interface NotificationComponentContract {
     interface View {

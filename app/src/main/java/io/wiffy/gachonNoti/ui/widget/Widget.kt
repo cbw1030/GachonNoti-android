@@ -15,10 +15,10 @@ import com.bumptech.glide.request.target.AppWidgetTarget
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.Util.Companion.getThemeButtonResource
 import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
-import io.wiffy.gachonNoti.model.data.StudentInformation
 import java.text.SimpleDateFormat
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -39,8 +39,7 @@ class Widget : AppWidgetProvider() {
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
 
-        val mAction = intent?.action
-        if (mAction == action) {
+        if (intent?.action == mAction) {
             val appWidgetManager = AppWidgetManager.getInstance(context)
             val thisAppWidget = ComponentName(context?.packageName, Widget::class.java.name)
             val appWidgets = appWidgetManager.getAppWidgetIds(thisAppWidget)
@@ -49,7 +48,7 @@ class Widget : AppWidgetProvider() {
     }
 
     companion object {
-        const val action = "io.wiffy.gachonNoti.rebalgup_widget"
+        const val mAction = "io.wiffy.gachonNoti.rebalgup_widget"
 
         internal fun updateAppWidget(
             context: Context, appWidgetManager: AppWidgetManager,
@@ -70,7 +69,6 @@ class Widget : AppWidgetProvider() {
                     getString("name", null)
                 )
             }
-
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
 
@@ -107,7 +105,7 @@ class Widget : AppWidgetProvider() {
             views.setOnClickPendingIntent(
                 R.id.rebalgup_widget, PendingIntent.getBroadcast(
                     context, 0, Intent(context, Widget::class.java).apply {
-                        this.action = action
+                        action = mAction
                     },
                     PendingIntent.FLAG_UPDATE_CURRENT
                 )
@@ -135,7 +133,6 @@ class Widget : AppWidgetProvider() {
                 }
             )
                 .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
-
     }
 }
 

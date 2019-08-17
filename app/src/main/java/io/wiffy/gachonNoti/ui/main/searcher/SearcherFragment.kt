@@ -16,6 +16,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlin.collections.ArrayList
 
@@ -68,22 +69,8 @@ class SearcherFragment : Fragment(), SearchContract.View {
 
 
     fun themeChanger() {
-        myView.fab.backgroundTintList = resources.getColorStateList(
-            when (Util.theme) {
-                "red" -> R.color.red
-                "green" -> R.color.green
-                else -> R.color.main2Blue
-            }
-        )
-        myView.semester.setTextColor(
-            resources.getColor(
-                when (Util.theme) {
-                    "red" -> R.color.red
-                    "green" -> R.color.green
-                    else -> R.color.main2Blue
-                }
-            )
-        )
+        myView.fab.backgroundTintList = resources.getColorStateList(getThemeColor())
+        myView.semester.setTextColor(resources.getColor(getThemeColor()))
     }
 
     @SuppressLint("SetTextI18n")

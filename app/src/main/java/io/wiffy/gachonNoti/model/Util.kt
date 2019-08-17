@@ -281,6 +281,12 @@ class Util {
             }
         }
 
+        fun getThemeLightColor() = when (theme) {
+            "red" -> R.color.lightRed
+            "green" -> R.color.lightGreen
+            else -> R.color.main2LightBlue
+        }
+
         fun matrixToBitmap(matrix: BitMatrix): Bitmap =
             Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.RGB_565).apply {
                 for (x in 0 until matrix.width)

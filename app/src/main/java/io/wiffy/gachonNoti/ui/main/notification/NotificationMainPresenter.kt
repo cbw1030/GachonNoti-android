@@ -14,10 +14,10 @@ class NotificationMainPresenter(private val mView: NotificationMainContract.View
         mView.initView()
     }
 
-    var notifications: NotificationFragment? = null
-    var news: NewsFragment? = null
-    var event: EventFragment? = null
-    var scholarship: ScholarshipFragment? = null
+    private var notifications: NotificationFragment? = null
+    private var news: NewsFragment? = null
+    private var event: EventFragment? = null
+    private var scholarship: ScholarshipFragment? = null
 
     override fun fragmentInflation(list: ArrayList<Fragment?>) {
         with(list) {

@@ -1,8 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.setting.contact
 
 import android.os.AsyncTask
+import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.data.ContactInformation
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Jsoup
 import java.lang.Exception

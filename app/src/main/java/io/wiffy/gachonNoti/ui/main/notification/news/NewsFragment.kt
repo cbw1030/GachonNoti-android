@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.data.ParseList
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.model.VerticalSpaceItemDecoration
 import io.wiffy.gachonNoti.model.adapter.NotificationComponentAdapter
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -73,15 +73,7 @@ class NewsFragment : Fragment(), NotificationComponentContract.View {
     }
 
 
-    fun changeTheme() {
-        myView.swipe2?.setColorSchemeColors(
-            when (Util.theme) {
-                "red" -> resources.getColor(R.color.red)
-                "green" -> resources.getColor(R.color.green)
-                else -> resources.getColor(R.color.main2Blue)
-            }
-        )
-    }
+    fun changeTheme() = myView.swipe2?.setColorSchemeColors(resources.getColor(getThemeColor()))
 
     override fun updateUI(list: ParseList) = adapter.update(list)
 

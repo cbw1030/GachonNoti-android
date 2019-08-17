@@ -23,6 +23,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlinx.android.synthetic.main.activity_main.*
@@ -161,27 +163,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     fun themeChange() {
-        supportActionBar!!.setBackgroundDrawable(
-            ColorDrawable(
-                when (Util.theme) {
-                    "red" -> {
-                        window.statusBarColor = resources.getColor(R.color.red)
-                        navigation.setBackgroundColor(resources.getColor(R.color.deepRed))
-                        resources.getColor(R.color.red)
-                    }
-                    "green" -> {
-                        window.statusBarColor = resources.getColor(R.color.green)
-                        navigation.setBackgroundColor(resources.getColor(R.color.deepGreen))
-                        resources.getColor(R.color.green)
-                    }
-                    else -> {
-                        window.statusBarColor = resources.getColor(R.color.main2Blue)
-                        navigation.setBackgroundColor(resources.getColor(R.color.main2DeepBlue))
-                        resources.getColor(R.color.main2Blue)
-                    }
-                }
-            )
-        )
+        window.statusBarColor = resources.getColor(getThemeColor())
+        navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
     }
 
     override fun changeUI(mList: ArrayList<Fragment?>) {

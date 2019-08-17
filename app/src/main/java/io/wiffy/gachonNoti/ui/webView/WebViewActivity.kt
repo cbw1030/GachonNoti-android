@@ -13,10 +13,10 @@ import android.webkit.WebSettings
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.model.Util.Companion.getThemeDeepColor
-import io.wiffy.gachonNoti.model.data.Parse
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
@@ -54,7 +54,6 @@ class WebViewActivity : AppCompatActivity(), WebViewContract.View {
             setCanceledOnTouchOutside(false)
             this.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
-
     }
 
     override fun builderUp() = builder.show()

@@ -21,12 +21,14 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeLightColor
 import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
-import io.wiffy.gachonNoti.model.data.ContactInformation
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import io.wiffy.gachonNoti.ui.main.setting.report.ReportAsyncTask
@@ -287,27 +289,23 @@ class SettingFragment : Fragment(), SettingContract.View {
         ReportAsyncTask(this, query).execute()
     }
 
-    fun themeChanger() {
-        val themeColorArray = arrayOf(
-            intArrayOf(
-                android.R.attr.state_checked
-            ),
-            intArrayOf(-android.R.attr.state_checked)
+    fun themeChanger() = arrayOf(
+        intArrayOf(
+            android.R.attr.state_checked
+        ),
+        intArrayOf(-android.R.attr.state_checked)
+    ).let {
+        myView.notiSwitch.thumbTintList =
+            ColorStateList(it, intArrayOf(resources.getColor(getThemeColor()), resources.getColor(R.color.gray2)))
+        myView.notiSwitch.trackTintList = ColorStateList(
+            it, intArrayOf(
+                resources.getColor(
+                    getThemeLightColor()
+                ), resources.getColor(R.color.lightGray)
+            )
         )
-        val color = when (Util.theme) {
-            "red" -> intArrayOf(resources.getColor(R.color.red), resources.getColor(R.color.gray2))
-            "green" -> intArrayOf(resources.getColor(R.color.green), resources.getColor(R.color.gray2))
-            else -> intArrayOf(resources.getColor(R.color.main2Blue), resources.getColor(R.color.gray2))
-        }
-        val lightColor = when (Util.theme) {
-            "red" -> intArrayOf(resources.getColor(R.color.lightRed), resources.getColor(R.color.lightGray))
-            "green" -> intArrayOf(resources.getColor(R.color.lightGreen), resources.getColor(R.color.lightGray))
-            else -> intArrayOf(resources.getColor(R.color.main2LightBlue), resources.getColor(R.color.lightGray))
-        }
-
-        myView.notiSwitch.thumbTintList = ColorStateList(themeColorArray, color)
-        myView.notiSwitch.trackTintList = ColorStateList(themeColorArray, lightColor)
     }
+
 
     override fun makeToast(string: String) {
         Handler(Looper.getMainLooper()).post {

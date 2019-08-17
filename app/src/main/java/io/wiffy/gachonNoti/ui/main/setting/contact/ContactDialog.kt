@@ -8,8 +8,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.data.ContactInformation
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import kotlinx.android.synthetic.main.dialog_contact.*
 
