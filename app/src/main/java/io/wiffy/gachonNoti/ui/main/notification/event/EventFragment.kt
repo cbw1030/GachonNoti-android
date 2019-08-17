@@ -70,7 +70,7 @@ class EventFragment : NotificationComponentContract.View() {
         myView.lottieXX3.visibility = View.GONE
     }
 
-    fun changeTheme() = myView.swipe3.setColorSchemeColors(resources.getColor(getThemeColor()))
+    override fun changeTheme() = myView.swipe3.setColorSchemeColors(resources.getColor(getThemeColor()))
 
     override fun updateUI(list: ParseList) = adapter.update(list)
 
@@ -78,7 +78,6 @@ class EventFragment : NotificationComponentContract.View() {
 
     override fun dismissLoad() = MainActivity.mView.builderDismiss()
 
-
-    fun search(str: String) = mPresenter.search(str)
+    override fun search(str: String) = mPresenter.search(str)
 
 }

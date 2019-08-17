@@ -37,7 +37,7 @@ class NotificationMainFragment : NotificationMainContract.View() {
         return myView
     }
 
-    fun themeChanger(bool: Boolean) {
+    override fun themeChanger(bool: Boolean) {
         myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
         if (bool)
             mPresenter.themeChange()

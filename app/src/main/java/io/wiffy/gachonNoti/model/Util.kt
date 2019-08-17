@@ -303,7 +303,7 @@ class Util {
 
         @SuppressLint("SimpleDateFormat")
         fun classToTime(time: String): LongArray {
-            val dt = SimpleDateFormat("HH:mm:ss")
+            val format = SimpleDateFormat("HH:mm:ss")
             var start: String
             var end: String
             try {
@@ -371,7 +371,7 @@ class Util {
                 end = "00:00:00"
             }
 
-            return longArrayOf(dt.parse(start).time, dt.parse(end).time)
+            return longArrayOf(format.parse(start).time, format.parse(end).time)
         }
 
         const val appConstantPreferences = "GACHONNOTICE"
@@ -379,7 +379,7 @@ class Util {
         const val STATE_INFORMATION = 1
         const val STATE_SEARCHER = 2
         const val STATE_SETTING = 3
-        const val STATE_WEBVIEW = 4
+        const val STATE_WEB_VIEW = 4
         const val NOT_UPDATED_YET = -99
         const val ACTION_SUCCESS = 0
         const val ACTION_FAILURE = -1

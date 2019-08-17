@@ -17,9 +17,7 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
         add(idCard)
     }
 
-
     override fun themeChange() = idCard?.changeTheme()
-
 
     override fun isNotLogin() {
     }
@@ -34,6 +32,4 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
             getSharedItem("image", "null")
         )
     )
-
-
 }

@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -256,7 +255,7 @@ class MainActivity : MainContract.View() {
                 pager.currentItem = Util.STATE_NOTIFICATION
                 Util.state = Util.STATE_NOTIFICATION
             }
-            Util.STATE_WEBVIEW -> {
+            Util.STATE_WEB_VIEW -> {
 
             }
         }

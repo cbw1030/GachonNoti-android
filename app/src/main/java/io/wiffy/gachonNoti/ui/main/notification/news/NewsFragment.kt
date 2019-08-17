@@ -72,7 +72,7 @@ class NewsFragment : NotificationComponentContract.View() {
     }
 
 
-    fun changeTheme() = myView.swipe2?.setColorSchemeColors(resources.getColor(getThemeColor()))
+    override fun changeTheme() = myView.swipe2.setColorSchemeColors(resources.getColor(getThemeColor()))
 
     override fun updateUI(list: ParseList) = adapter.update(list)
 
@@ -82,6 +82,6 @@ class NewsFragment : NotificationComponentContract.View() {
     override fun dismissLoad() = MainActivity.mView.builderDismiss()
 
 
-    fun search(str: String) = mPresenter.search(str)
+    override fun search(str: String) = mPresenter.search(str)
 
 }

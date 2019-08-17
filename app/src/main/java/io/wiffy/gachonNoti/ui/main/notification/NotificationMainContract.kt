@@ -8,6 +8,7 @@ interface NotificationMainContract {
         abstract fun initView()
         abstract fun showLoad()
         abstract fun dismissLoad(): Boolean?
+        abstract fun themeChanger(bool: Boolean)
     }
 
     interface Presenter {

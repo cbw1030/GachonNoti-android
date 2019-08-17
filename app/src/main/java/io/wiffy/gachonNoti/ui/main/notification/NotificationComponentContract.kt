@@ -11,6 +11,8 @@ interface NotificationComponentContract {
         abstract fun dismissLoad(): Boolean?
         abstract fun internetUnusable(): Boolean
         abstract fun internetUsable(): Boolean
+        abstract fun changeTheme()
+        abstract fun search(str: String)
     }
 
     interface Presenter {

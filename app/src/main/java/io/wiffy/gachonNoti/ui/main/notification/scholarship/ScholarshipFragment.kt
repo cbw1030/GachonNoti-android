@@ -75,7 +75,7 @@ class ScholarshipFragment : NotificationComponentContract.View() {
     }
 
 
-    fun changeTheme() = myView.swipe4?.setColorSchemeColors(resources.getColor(getThemeColor()))
+    override fun changeTheme() = myView.swipe4.setColorSchemeColors(resources.getColor(getThemeColor()))
 
-    fun search(str: String) = mPresenter.search(str)
+    override fun search(str: String) = mPresenter.search(str)
 }
