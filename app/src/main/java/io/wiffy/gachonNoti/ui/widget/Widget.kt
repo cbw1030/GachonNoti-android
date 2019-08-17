@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.widget.Button
 import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.AppWidgetTarget
@@ -17,18 +16,15 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeButtonResource
+import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import io.wiffy.gachonNoti.model.data.StudentInformation
 import java.text.SimpleDateFormat
 
-/**
- * Implementation of App Widget functionality.
- */
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Widget : AppWidgetProvider() {
 
-
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -61,21 +57,20 @@ class Widget : AppWidgetProvider() {
         ) {
             val views = RemoteViews(context.packageName, R.layout.widget_main)
 
-            val pref = context.getSharedPreferences("GACHONNOTICE", Context.MODE_PRIVATE)
+            context.getSharedPreferences("GACHONNOTICE", Context.MODE_PRIVATE).run {
+                changeView(
+                    views, StudentInformation(
+                        getString("name", null),
+                        getString("number", null),
+                        getString("id", null),
+                        getString("password", null),
+                        getString("department", null),
+                        getString("image", null)
+                    ), context, appWidgetId, getString("theme", null),
+                    getString("name", null)
+                )
+            }
 
-            changeView(
-                views, StudentInformation(
-                    pref.getString("name", null),
-                    pref.getString("number", null),
-                    pref.getString("id", null),
-                    pref.getString("password", null),
-                    pref.getString("department", null),
-                    pref.getString("image", null)
-                ), context, appWidgetId, pref.getString("theme", null),
-                pref.getString("name", null)
-            )
-
-            // Instruct the widget_main manager to update the widget_main
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
 
@@ -87,35 +82,12 @@ class Widget : AppWidgetProvider() {
             theme: String?,
             name: String?
         ) {
-            val color = context?.resources?.getColor(
-                when (theme) {
-                    "red" -> {
-                        R.color.red
-                    }
-                    "green" -> {
-                        R.color.green
-                    }
-                    else -> {
-                        R.color.main2Blue
-                    }
-                }
-            ) ?: 0
-
-            val buttonColor =
-                when (theme) {
-                    "red" -> {
-                        R.drawable.dialog_button_red
-                    }
-                    "green" -> {
-                        R.drawable.dialog_button_green
-                    }
-                    else -> {
-                        R.drawable.dialog_button_default
-                    }
-                }
-
-            views.setInt(R.id.gachonback_widget, "setBackgroundColor", color)
-            views.setInt(R.id.rebalgup_widget, "setBackgroundResource", buttonColor)
+            views.setInt(
+                R.id.gachonback_widget,
+                "setBackgroundColor",
+                context?.resources?.getColor(getThemeColor(theme)) ?: 0
+            )
+            views.setInt(R.id.rebalgup_widget, "setBackgroundResource", getThemeButtonResource(theme))
             if (name != null) {
                 views.setTextViewText(R.id.yourname_widget, info.name)
                 views.setTextViewText(R.id.number_widget, info.number)
@@ -132,40 +104,38 @@ class Widget : AppWidgetProvider() {
                 qrCode(views, "hello", context, widgetId)
             }
 
-            val myIntent = Intent(context, Widget::class.java)
-            myIntent.action = action
-
-            val pendingIntent = PendingIntent.getBroadcast(
-                context, 0, myIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+            views.setOnClickPendingIntent(
+                R.id.rebalgup_widget, PendingIntent.getBroadcast(
+                    context, 0, Intent(context, Widget::class.java).apply {
+                        this.action = action
+                    },
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
             )
-            views.setOnClickPendingIntent(R.id.rebalgup_widget, pendingIntent)
         }
 
         @SuppressLint("SimpleDateFormat")
-        fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) {
+        fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) =
+            Glide.with(context).asBitmap().load(
+                if (num != "hello") {
+                    Util.matrixToBitmap(
+                        QRCodeWriter().encode(
+                            "m$num${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
+                            BarcodeFormat.QR_CODE,
+                            400,
+                            400
+                        )
+                    )
+                } else {
+                    Bitmap.createBitmap(100, 100, Bitmap.Config.RGB_565).apply {
+                        for (x in 0 until 100)
+                            for (y in 0 until 100)
+                                setPixel(x, y, Color.WHITE)
+                    }
+                }
+            )
+                .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
 
-            val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
-            val output = "m$num$format"
-            val qrCodeWriter = QRCodeWriter()
-            if (num != "hello") {
-                val bitmap =
-                    Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
-                Glide.with(context).asBitmap().load(bitmap)
-                    .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
-            } else {
-                Glide.with(context).asBitmap().load(darkBitmap())
-                    .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
-            }
-        }
-
-        private fun darkBitmap(): Bitmap {
-            val bmp = Bitmap.createBitmap(100, 100, Bitmap.Config.RGB_565)
-            for (x in 0 until 100)
-                for (y in 0 until 100)
-                    bmp.setPixel(x, y, Color.WHITE)
-            return bmp
-        }
     }
 }
 

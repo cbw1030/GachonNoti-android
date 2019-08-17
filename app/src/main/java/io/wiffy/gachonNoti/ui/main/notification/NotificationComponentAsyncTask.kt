@@ -159,7 +159,7 @@ class NotificationComponentAsyncTask(
             }
 
             try {
-                Util.helper = URL("http://wiffy.io/gachon/thanks.txt ").readText()
+                Util.helper = URL("http://wiffy.io/gachon/thanks.txt").readText()
             } catch (e: Exception) {
             }
 
@@ -172,8 +172,8 @@ class NotificationComponentAsyncTask(
     override fun onPostExecute(result: Int?) {
         with(mPresenter) {
             Handler(Looper.getMainLooper()).post {
-                if (result == Util.ACTION_SUCCESS) {
-                    when (type) {
+                when (result) {
+                    Util.ACTION_SUCCESS -> when (type) {
                         0 -> {
                             internetNotInterrupted()
                             Util.NotificationIndex = 0
@@ -211,13 +211,15 @@ class NotificationComponentAsyncTask(
                             Util.ScholarshipIndex += 1
                         }
                     }
-                } else if (result == 33) {
-                    dismiss()
-                    list.clear()
-                    update(list)
-                } else {
-                    dismiss()
-                    internetInterrupted()
+                    33 -> {
+                        dismiss()
+                        list.clear()
+                        update(list)
+                    }
+                    else -> {
+                        dismiss()
+                        internetInterrupted()
+                    }
                 }
             }
         }
