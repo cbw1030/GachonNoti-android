@@ -50,7 +50,7 @@
                         android:id="@+id/segmented"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:orientation="horizontal"
                         segmentedgroup:sc_border_width="1dp"
                         segmentedgroup:sc_corner_radius="10dp">

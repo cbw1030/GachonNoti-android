@@ -51,6 +51,7 @@ class LoginAsyncTask(
             val httpPost = HttpPost("http://smart.gachon.ac.kr:8080//WebJSON")
             httpPost.entity = StringEntity(sendObject.toString())
             JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
+                console(toString())
                 number = getString("userUniqNo")
                 studentInformation = StudentInformation(
                     getString("userNm"),
