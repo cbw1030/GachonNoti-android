@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.setSharedItem
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
@@ -24,7 +24,7 @@ class SearchAsyncTask(
 
     private var done = ""
     private var data = "searchIsuCD=00$cate"
-    private val mySemester = when (Util.SEMESTER) {
+    private val mySemester = when (Component.SEMESTER) {
         1 -> 10
         3 -> 11
         4 -> 21
@@ -39,7 +39,7 @@ class SearchAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
 
-        val type = if (Util.campus) {
+        val type = if (Component.campus) {
             20
         } else {
             21
@@ -80,7 +80,7 @@ class SearchAsyncTask(
     @SuppressLint("ApplySharedPref")
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-            val campus = if (Util.campus) {
+            val campus = if (Component.campus) {
                 "global"
             } else {
                 "medical"

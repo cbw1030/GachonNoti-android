@@ -2,16 +2,13 @@ package io.wiffy.gachonNoti.ui.main.setting.report
 
 import android.os.AsyncTask
 import android.os.Build
-import android.util.Log
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.NOT_UPDATED_YET
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Connection
 import org.jsoup.Jsoup
-import java.io.DataOutputStream
-import java.net.HttpURLConnection
 import java.net.URL
 
 class ReportAsyncTask(private val myView: SettingContract.View, private val query: String) :
@@ -25,7 +22,7 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
 
     override fun doInBackground(vararg params: Void?): Int {
         val here =
-            "$url$query(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Util.version})"
+            "$url$query(BRAND:${Build.BRAND}/MODEL:${Build.MODEL}/VERSION:${Build.VERSION.RELEASE}/SDK:${Build.VERSION.SDK_INT}/RELEASE:${Component.version})"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
                 URL(here).readText()

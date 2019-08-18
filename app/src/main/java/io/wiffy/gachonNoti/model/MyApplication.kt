@@ -16,15 +16,15 @@ class MyApplication : Application() {
         super.onCreate()
         sharedPreferences = getSharedPreferences(appConstantPreferences, Context.MODE_PRIVATE)
 
-        Util.firstBoot = getSharedItem("firstBooting", true)
-        Util.notificationSet = getSharedItem("notiOn", true)
-        Util.theme = getSharedItem("theme", "default")
-        Util.isLogin = getSharedItem("login", false)
-        Util.campus = getSharedItem("campus", true)
+        Component.firstBoot = getSharedItem("firstBooting", true)
+        Component.notificationSet = getSharedItem("notiOn", true)
+        Component.theme = getSharedItem("theme", "default")
+        Component.isLogin = getSharedItem("login", false)
+        Component.campus = getSharedItem("campus", true)
 
-        Util.version = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
-        Util.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
-        Util.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {
+        Component.version = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
+        Component.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
+        Component.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {
             in 2..5 -> 1
             in 6..7 -> 3
             in 8..11 -> 2

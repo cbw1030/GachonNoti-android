@@ -25,7 +25,7 @@ import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.getThemeLightColor
 import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.ContactInformation
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
@@ -57,7 +57,7 @@ class SettingFragment : SettingContract.View() {
 
     @SuppressLint("ApplySharedPref")
     override fun changeView() {
-        index = when (Util.theme) {
+        index = when (Component.theme) {
             "red" -> 1
             "green" -> 2
             else -> 0
@@ -80,10 +80,10 @@ class SettingFragment : SettingContract.View() {
                 }
             }
         }
-        myView.notiSwitch.isChecked = Util.notificationSet
+        myView.notiSwitch.isChecked = Component.notificationSet
         themeChanger()
         myView.campustext.text =
-            if (Util.campus) {
+            if (Component.campus) {
                 "글로벌"
             } else {
                 "메디컬"
@@ -142,11 +142,11 @@ class SettingFragment : SettingContract.View() {
             }.create().show()
         }
         myView.money.setOnClickListener {
-            Util.novisible = true
+            Component.novisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
         myView.maker.setOnClickListener {
-            Util.novisible = true
+            Component.novisible = true
             AlertDialog.Builder(activity).apply {
                 setTitle("만든이")
                 setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")
@@ -183,7 +183,7 @@ class SettingFragment : SettingContract.View() {
             if (secretCount == 4) {
                 AlertDialog.Builder(activity).apply {
                     setTitle("Build Information")
-                    setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}\nMAC:${getMACAddress()}")
+                    setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Component.version}\nMAC:${getMACAddress()}")
 
                     setPositiveButton(
                         "OK"
@@ -199,7 +199,7 @@ class SettingFragment : SettingContract.View() {
             AlertDialog.Builder(activity).apply {
                 setTitle("캠퍼스 설정")
                 setSingleChoiceItems(
-                    item, if (Util.campus) {
+                    item, if (Component.campus) {
                         0
                     } else {
                         1
@@ -221,7 +221,7 @@ class SettingFragment : SettingContract.View() {
         myView.helper.setOnClickListener {
             AlertDialog.Builder(activity).apply {
                 setTitle("후원 목록")
-                setMessage(Util.helper)
+                setMessage(Component.helper)
                 setPositiveButton(
                     "OK"
                 ) { _, _ -> }
@@ -230,7 +230,7 @@ class SettingFragment : SettingContract.View() {
         myView.version.setOnClickListener {
             AlertDialog.Builder(activity).apply {
                 setTitle(resources.getString(R.string.version))
-                setMessage(Util.version)
+                setMessage(Component.version)
                 setPositiveButton(
                     "OK"
                 ) { _, _ -> }
@@ -251,7 +251,7 @@ class SettingFragment : SettingContract.View() {
                 "메디컬"
             }
         setSharedItem("campus", bool)
-        Util.campus = bool
+        Component.campus = bool
     }
 
     private fun checkReport(str: String) = AlertDialog.Builder(activity).apply {
@@ -270,12 +270,12 @@ class SettingFragment : SettingContract.View() {
 
     @SuppressLint("ApplySharedPref")
     fun settingColor(int: Int) {
-        Util.theme = when (int) {
+        Component.theme = when (int) {
             2 -> "green"
             1 -> "red"
             else -> "default"
         }
-        setSharedItem("theme", Util.theme)
+        setSharedItem("theme", Component.theme)
         themeChanger()
         (activity as MainActivity).themeChange()
         (activity as MainActivity).mPresenter.changeThemes()
@@ -351,14 +351,14 @@ class SettingFragment : SettingContract.View() {
 
     @SuppressLint("ApplySharedPref")
     private fun setOn() {
-        Util.notificationSet = true
+        Component.notificationSet = true
         setSharedItem("notiOn", true)
         FirebaseMessaging.getInstance().subscribeToTopic("noti")
     }
 
     @SuppressLint("ApplySharedPref")
     private fun setOff() {
-        Util.notificationSet = false
+        Component.notificationSet = false
         setSharedItem("notiOn", false)
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }

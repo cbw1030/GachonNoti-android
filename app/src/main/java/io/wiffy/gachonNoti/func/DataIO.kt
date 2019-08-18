@@ -1,3 +1,5 @@
+@file:Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
+
 package io.wiffy.gachonNoti.func
 
 

@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
 import io.wiffy.gachonNoti.func.encrypt
@@ -33,18 +33,18 @@ class LoginDialog(context: Context) : Dialog(context) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_sign_in)
 
-        settingColor(Util.theme)
+        settingColor(Component.theme)
 
         logout.setOnClickListener {
             logout()
         }
-        isLogin(Util.isLogin)
+        isLogin(Component.isLogin)
         gachon.text = Html.fromHtml(
             "<u>가천대학교 홈페이지</u>"
         )
         gachonname.text = "${sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
         gachon.setOnClickListener {
-            Util.novisible = true
+            Component.novisible = true
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://gachon.ac.kr/")))
         }
     }
@@ -129,7 +129,7 @@ class LoginDialog(context: Context) : Dialog(context) {
             remove("image")
             putBoolean("login", false)
         }.commit()
-        Util.isLogin = false
+        Component.isLogin = false
         isLogin(false)
         (MainActivity.mView).allThemeChange()
         Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
@@ -151,7 +151,7 @@ class LoginDialog(context: Context) : Dialog(context) {
             }.commit()
         }
         gachonname.text = "${sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
-        Util.isLogin = true
+        Component.isLogin = true
         isLogin(true)
         (MainActivity.mView).allThemeChange()
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()

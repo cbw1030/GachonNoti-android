@@ -15,7 +15,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Parse
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
@@ -83,7 +83,7 @@ class WebViewActivity : WebViewContract.View() {
     }
 
     private fun invisible() {
-        if (!Util.novisible) {
+        if (!Component.novisible) {
             webview_layout.visibility = View.GONE
             web_splash.visibility = View.VISIBLE
             webview_layout.invalidate()
@@ -98,12 +98,12 @@ class WebViewActivity : WebViewContract.View() {
 
     override fun onStart() {
         visible()
-        Util.surfing = true
+        Component.surfing = true
         super.onStart()
     }
 
     override fun onResume() {
-        Util.novisible = false
+        Component.novisible = false
         visible()
         super.onResume()
     }
@@ -116,8 +116,8 @@ class WebViewActivity : WebViewContract.View() {
 
     override fun onStop() {
         invisible()
-        Util.surfing = false
-        Util.novisible = false
+        Component.surfing = false
+        Component.novisible = false
         super.onStop()
     }
 
@@ -128,8 +128,8 @@ class WebViewActivity : WebViewContract.View() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Util.surfing = false
-        Util.novisible = true
+        Component.surfing = false
+        Component.novisible = true
         finish()
     }
 

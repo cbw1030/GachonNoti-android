@@ -4,13 +4,12 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.ParseList
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import org.jsoup.Jsoup
 import java.net.URL
 
@@ -57,7 +56,7 @@ class NotificationAsyncTask(
             request(false)
 
             try {
-                Util.helper = URL("http://wiffy.io/gachon/thanks.txt").readText()
+                Component.helper = URL("http://wiffy.io/gachon/thanks.txt").readText()
             } catch (e: Exception) {
             }
 

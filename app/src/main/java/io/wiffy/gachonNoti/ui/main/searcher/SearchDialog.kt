@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.isNetworkConnected
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import kotlinx.android.synthetic.main.dialog_search.*
 import kotlin.collections.ArrayList
 
@@ -31,11 +31,11 @@ class SearchDialog(
         setContentView(R.layout.dialog_search)
 
         mPresenter.initPresentDialog(this)
-        year.text = "[${if (Util.campus) {
+        year.text = "[${if (Component.campus) {
             "글로벌"
         } else {
             "메디컬"
-        }}] ${Util.YEAR}년도 ${when (Util.SEMESTER) {
+        }}] ${Component.YEAR}년도 ${when (Component.SEMESTER) {
             1 -> "1"
             2 -> "2"
             3 -> "여름"
@@ -45,7 +45,7 @@ class SearchDialog(
 
 
         getdata.setOnClickListener {
-            getDataDialog("${Util.YEAR}-${Util.SEMESTER}")
+            getDataDialog("${Component.YEAR}-${Component.SEMESTER}")
         }
 
         search.setOnClickListener {
@@ -64,7 +64,7 @@ class SearchDialog(
             }
         }
 
-        mPresenter.isDownloaded(Util.YEAR, Util.SEMESTER.toString())
+        mPresenter.isDownloaded(Component.YEAR, Component.SEMESTER.toString())
     }
 
     override fun categoryInvisible() {
@@ -111,7 +111,7 @@ class SearchDialog(
         }
     }
 
-    override fun requestLoad() = mPresenter.isDownloaded(Util.YEAR, Util.SEMESTER.toString())
+    override fun requestLoad() = mPresenter.isDownloaded(Component.YEAR, Component.SEMESTER.toString())
 
     override fun setSpinner(arrayList: ArrayList<String>) {
         cate.visibility = View.VISIBLE

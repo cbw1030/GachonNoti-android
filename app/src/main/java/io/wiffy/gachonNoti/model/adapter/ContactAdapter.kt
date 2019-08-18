@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.ContactInformation
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import kotlinx.android.synthetic.main.adapter_contact.view.*
 
 class ContactAdapter(
@@ -32,7 +32,7 @@ class ContactAdapter(
             )
             t3.setTextColor(
                 context.resources.getColorStateList(
-                    when (Util.theme) {
+                    when (Component.theme) {
                         "red" -> R.color.red
                         "green" -> R.color.green
                         else -> R.color.main2Blue

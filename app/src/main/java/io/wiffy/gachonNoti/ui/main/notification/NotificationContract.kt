@@ -12,6 +12,7 @@ interface NotificationContract {
         abstract fun internetUnusable(): Boolean
         abstract fun internetUsable(): Boolean
         abstract fun search(str: String)
+        abstract fun themeChanger(bool:Boolean)
     }
 
     interface Presenter {
@@ -24,7 +25,7 @@ interface NotificationContract {
         fun dismiss(): Boolean?
         fun request()
         fun search(src: String)
-        fun setType(typee:Int)
-        fun pageup()
+        fun setType(mType: Int)
+        fun pageUp()
     }
 }

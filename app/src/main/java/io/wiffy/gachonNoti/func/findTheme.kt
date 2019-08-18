@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.func
 
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 
 fun getThemeColor(mTheme: String?) = when (mTheme) {
     "red" -> {
@@ -15,7 +15,7 @@ fun getThemeColor(mTheme: String?) = when (mTheme) {
     }
 }
 
-fun getThemeColor() = when (Util.theme) {
+fun getThemeColor() = when (Component.theme) {
     "red" -> {
         R.color.red
     }
@@ -39,7 +39,7 @@ fun getThemeButtonResource(mTheme: String?) = when (mTheme) {
     }
 }
 
-fun getThemeButtonResource() = when (Util.theme) {
+fun getThemeButtonResource() = when (Component.theme) {
     "red" -> {
         R.drawable.dialog_button_red
     }
@@ -51,7 +51,7 @@ fun getThemeButtonResource() = when (Util.theme) {
     }
 }
 
-fun getThemeDeepColor() = when (Util.theme) {
+fun getThemeDeepColor() = when (Component.theme) {
     "red" -> {
         R.color.deepRed
     }
@@ -63,7 +63,7 @@ fun getThemeDeepColor() = when (Util.theme) {
     }
 }
 
-fun getThemeLightColor() = when (Util.theme) {
+fun getThemeLightColor() = when (Component.theme) {
     "red" -> R.color.lightRed
     "green" -> R.color.lightGreen
     else -> R.color.main2LightBlue

@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.STATE_NOTIFICATION
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
@@ -35,7 +34,7 @@ class MyInformationFragment : MyInformationContract.View() {
         return myView
     }
 
-    private fun loginExecute() = if (Util.isLogin) {
+    private fun loginExecute() = if (Component.isLogin) {
         isLogin()
     } else {
         isNotLogin()

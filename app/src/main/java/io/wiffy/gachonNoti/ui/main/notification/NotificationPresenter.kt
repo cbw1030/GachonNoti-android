@@ -3,7 +3,7 @@ package io.wiffy.gachonNoti.ui.main.notification
 import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 
-class NotificationPresenterM(private val mView: NotificationContract.View, private val context: Context?) :
+class NotificationPresenter(private val mView: NotificationContract.View, private val context: Context?) :
     NotificationContract.Presenter {
 
     private var list = ParseList()
@@ -17,7 +17,7 @@ class NotificationPresenterM(private val mView: NotificationContract.View, priva
         resetList()
     }
 
-    override fun pageup(){
+    override fun pageUp(){
         page += 1
         request()
     }
@@ -29,8 +29,8 @@ class NotificationPresenterM(private val mView: NotificationContract.View, priva
         request()
     }
 
-    override fun setType(typee:Int){
-        type = typee
+    override fun setType(mType:Int){
+        type = mType
         resetList()
     }
 

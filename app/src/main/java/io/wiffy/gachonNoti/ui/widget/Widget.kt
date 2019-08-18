@@ -19,7 +19,6 @@ import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.matrixToBitmap
 import io.wiffy.gachonNoti.model.StudentInformation
-import io.wiffy.gachonNoti.model.Util
 import java.text.SimpleDateFormat
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")

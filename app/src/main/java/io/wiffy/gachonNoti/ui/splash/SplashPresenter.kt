@@ -4,16 +4,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 
 
 class SplashPresenter(private val mView: SplashContract.View, private val context: Context) : SplashContract.Presenter {
 
     override fun initPresent() {
-        when (Util.firstBoot) {
+        when (Component.firstBoot) {
             true -> channelSet()
             false -> mView.moveToMain()
         }

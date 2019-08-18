@@ -22,7 +22,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
@@ -57,7 +57,7 @@ class MainActivity : MainContract.View() {
     @SuppressLint("ApplySharedPref")
     private fun notificationCheck() {
         if ((!NotificationManagerCompat.from(applicationContext)
-                .areNotificationsEnabled()) and (Util.notificationSet)
+                .areNotificationsEnabled()) and (Component.notificationSet)
         ) AlertDialog.Builder(this).apply {
             setTitle("알림 설정 확인")
             setMessage("가천 알림이의 알림을 허용하시겠습니까?")
@@ -77,7 +77,7 @@ class MainActivity : MainContract.View() {
                 FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
             setNegativeButton("Cancel") { _, _ ->
-                Util.notificationSet = false
+                Component.notificationSet = false
                 setSharedItem("notiOn", false)
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
             }
@@ -157,7 +157,7 @@ class MainActivity : MainContract.View() {
                             it.isVisible = false
                         }
                     }
-                    Util.state = tab?.position ?: STATE_NOTIFICATION
+                    Component.state = tab?.position ?: STATE_NOTIFICATION
                     pager.currentItem = tab?.position ?: STATE_NOTIFICATION
                 }
             }
@@ -166,9 +166,9 @@ class MainActivity : MainContract.View() {
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
-        val years = Util.YEAR.toInt()
-        val semester = Util.SEMESTER.toString()
-        setSharedItem(Util.version, true)
+        val years = Component.YEAR.toInt()
+        val semester = Component.SEMESTER.toString()
+        setSharedItem(Component.version, true)
         for (year in years - 5..years)
             setSharedItems(
                 Pair("$year-$semester-1-global", "<nodata>"),
@@ -181,7 +181,7 @@ class MainActivity : MainContract.View() {
                 Pair("$year-$semester-4-medical", "<nodata>")
             )
         AlertDialog.Builder(this@MainActivity).apply {
-            setTitle("${Util.version} 버전 업데이트")
+            setTitle("${Component.version} 버전 업데이트")
             setMessage(" ${resources.getString(R.string.update)}")
             setPositiveButton(
                 "OK"
@@ -190,7 +190,7 @@ class MainActivity : MainContract.View() {
     }
 
     override fun onBackPressed() {
-        when (Util.state) {
+        when (Component.state) {
             STATE_NOTIFICATION -> {
                 if (System.currentTimeMillis() > backKeyPressedTime + 2000L) {
                     backKeyPressedTime = System.currentTimeMillis()
@@ -202,7 +202,7 @@ class MainActivity : MainContract.View() {
             STATE_WEB_VIEW -> { }
             else -> {
                 pager.currentItem = STATE_NOTIFICATION
-                Util.state = STATE_NOTIFICATION
+                Component.state = STATE_NOTIFICATION
             }
         }
     }
@@ -227,13 +227,13 @@ class MainActivity : MainContract.View() {
     }
 
     override fun onResume() {
-        Util.novisible = false
+        Component.novisible = false
         visible()
         super.onResume()
     }
 
     override fun onPause() {
-        Util.looper = false
+        Component.looper = false
         invisible()
         super.onPause()
     }
@@ -261,7 +261,7 @@ class MainActivity : MainContract.View() {
     }
 
     private fun invisible() {
-        if (!Util.novisible) {
+        if (!Component.novisible) {
             main_main.visibility = View.GONE
             main_splash.visibility = View.VISIBLE
             main_splash.invalidate()

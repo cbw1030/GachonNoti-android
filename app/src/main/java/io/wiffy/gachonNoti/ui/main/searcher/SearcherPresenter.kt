@@ -9,7 +9,7 @@ import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.ClassDataInformation
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader
@@ -104,7 +104,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             }
         } catch (e: Exception) {
         }
-        val temp = if (Util.campus) {
+        val temp = if (Component.campus) {
             "global"
         } else {
             "medical"

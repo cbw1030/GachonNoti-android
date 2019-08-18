@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.setSharedItems
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import kotlin.collections.ArrayList
 
 class SearcherFragment : SearchContract.View() {
@@ -51,8 +50,8 @@ class SearcherFragment : SearchContract.View() {
         setPositiveButton(
             "OK"
         ) { _, _ ->
-            val yearToInt = Util.YEAR.toInt()
-            val semester = Util.SEMESTER.toString()
+            val yearToInt = Component.YEAR.toInt()
+            val semester = Component.SEMESTER.toString()
             for (y in yearToInt - 5..yearToInt)
                 for (x in arrayOf("global", "medical")) {
                     setSharedItems(
@@ -85,12 +84,12 @@ class SearcherFragment : SearchContract.View() {
             }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name
-            myView.semester.text = "${Util.YEAR}년도 ${when (Util.SEMESTER) {
+            myView.semester.text = "${Component.YEAR}년도 ${when (Component.SEMESTER) {
                 1 -> "1"
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
-            }}학기 [${if (Util.campus) {
+            }}학기 [${if (Component.campus) {
                 "G"
             } else {
                 "M"

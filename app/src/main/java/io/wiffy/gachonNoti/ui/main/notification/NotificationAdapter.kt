@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.ParseList
-import io.wiffy.gachonNoti.model.Util
+import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
 
@@ -85,15 +85,15 @@ class NotificationAdapter(
                     date.text = item.data
 
                     itemView.setOnClickListener {
-                        if (!Util.surfing) {
-                            Util.surfing = true
+                        if (!Component.surfing) {
+                            Component.surfing = true
                             if (isNetworkConnected(act)) {
-                                Util.novisible = true
+                                Component.novisible = true
                                 val myIntent = Intent(act, WebViewActivity::class.java)
                                 myIntent.putExtra("bundle", item)
                                 act.startActivity(myIntent)
                             } else {
-                                Util.surfing = false
+                                Component.surfing = false
                                 Toast.makeText(act, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
                             }
                         }

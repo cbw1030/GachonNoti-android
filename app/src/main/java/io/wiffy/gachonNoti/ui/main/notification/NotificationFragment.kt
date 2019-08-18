@@ -12,42 +12,43 @@ import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.adapter.VerticalSpaceItemDecoration
-import kotlinx.android.synthetic.main.fragment_notification_notification.view.*
+import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import android.widget.*
 import io.wiffy.gachonNoti.R
 
-class NotificationFragmentM : NotificationContract.View() {
+class NotificationFragment : NotificationContract.View() {
 
     lateinit var myView: View
-    lateinit var mPresenter: NotificationPresenterM
+    lateinit var mPresenter: NotificationPresenter
     lateinit var adapter: NotificationAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        myView = inflater.inflate(R.layout.fragment_notification_notification, container, false)
+        myView = inflater.inflate(R.layout.fragment_notification, container, false)
 
-        mPresenter = NotificationPresenterM(this, context)
+        mPresenter = NotificationPresenter(this, context)
         mPresenter.initPresent()
 
         setRefresh()
-        setfab()
+        setFab()
         setTypeView()
 
         return myView
     }
 
-    private fun setRefresh(){
+    private fun setRefresh() {
         myView.swipe.setOnRefreshListener {
             mPresenter.resetList()
             myView.swipe.isRefreshing = false
         }
     }
 
-    private fun setfab(){
+    private fun setFab() {
         myView.fab_main.setOnClickListener {
             val container = FrameLayout(context!!)
-            val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            val params =
+                FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             params.marginStart = 40
             params.marginEnd = 40
             params.topMargin = 20
@@ -71,15 +72,15 @@ class NotificationFragmentM : NotificationContract.View() {
         }
     }
 
-    private fun setTypeView(){
-            myView.segmented.setOnCheckedChangeListener { group, checkedId ->
-                when (checkedId) {
-                    R.id.button1 -> mPresenter.setType(0)
-                    R.id.button2 -> mPresenter.setType(1)
-                    R.id.button3 -> mPresenter.setType(2)
-                    R.id.button4 -> mPresenter.setType(3)
-                }
+    private fun setTypeView() {
+        myView.segmented.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.button1 -> mPresenter.setType(0)
+                R.id.button2 -> mPresenter.setType(1)
+                R.id.button3 -> mPresenter.setType(2)
+                R.id.button4 -> mPresenter.setType(3)
             }
+        }
     }
 
     override fun internetUnusable() = Handler(Looper.getMainLooper()).post {
@@ -93,6 +94,7 @@ class NotificationFragmentM : NotificationContract.View() {
     }
 
     override fun changeUI(list: ParseList) {
+        myView.button1.isChecked = true
         adapter = NotificationAdapter(
             list,
             activity?.applicationContext!!,
@@ -110,14 +112,19 @@ class NotificationFragmentM : NotificationContract.View() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    mPresenter.pageup()
+                    mPresenter.pageUp()
                 }
             }
         })
-        changeTheme()
+        themeChanger(true)
     }
 
-    private fun changeTheme() { myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor())) }
+    override fun themeChanger(bool: Boolean) {
+        if (bool) {
+            myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
+            myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
+        }
+    }
 
     override fun updateUI(list: ParseList) = adapter.update(list)
 
