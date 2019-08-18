@@ -25,8 +25,8 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         with(mList)
         {
             add(notificationFragment)
-            add(informationFragment)
             add(searcherFragment)
+            add(informationFragment)
             add(settingFragment)
         }
 

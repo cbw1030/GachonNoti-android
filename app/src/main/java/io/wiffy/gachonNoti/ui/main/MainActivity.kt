@@ -133,10 +133,14 @@ class MainActivity : MainContract.View() {
         themeChange()
         Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
         adapter = PagerAdapter(supportFragmentManager, mList)
-        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
-        navigation.addTab(navigation.newTab().setText("내 정보"))
-        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
-        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Setting)))
+//        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
+//        navigation.addTab(navigation.newTab().setText("내 정보"))
+//        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
+//        navigation.addTab(navigation.newTab().setText("설정"))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_1home))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_3table))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_2id))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_4setting))
         pager.adapter = adapter
         pager.offscreenPageLimit = mList.size
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
