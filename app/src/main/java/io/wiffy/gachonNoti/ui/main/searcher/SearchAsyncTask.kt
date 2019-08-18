@@ -1,12 +1,12 @@
 package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.annotation.SuppressLint
-import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.model.SuperContract
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
@@ -19,8 +19,7 @@ class SearchAsyncTask(
     private val cate: String,
     private val yearSemester: String,
     private val mPresenter: SearchContract.Presenter
-) :
-    AsyncTask<Void, Void, Int>() {
+) : SuperContract.SuperAsyncTask() {
 
     private var done = ""
     private var data = "searchIsuCD=00$cate"

@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.model
 
 import android.app.Dialog
 import android.content.Context
+import android.os.AsyncTask
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -37,4 +38,7 @@ interface SuperContract {
         fun toastLong(str: String) = Toast.makeText(context, str, Toast.LENGTH_LONG).show()
         fun toastLong(id: Int) = Toast.makeText(context, id, Toast.LENGTH_LONG).show()
     }
+
+    abstract class SuperAsyncTask : AsyncTask<Void, Void, Int>(), SuperObject
+
 }

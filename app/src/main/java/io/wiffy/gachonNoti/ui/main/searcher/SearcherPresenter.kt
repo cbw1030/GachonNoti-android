@@ -3,7 +3,6 @@ package io.wiffy.gachonNoti.ui.main.searcher
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
@@ -232,7 +231,6 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
                 }
             }
         } catch (ex: Exception) {
-            Log.d("asdf", "nononon")
         }
     }
 

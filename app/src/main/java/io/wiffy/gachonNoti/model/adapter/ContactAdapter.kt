@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.adapter_contact.view.*
 
 class ContactAdapter(
     var items: ArrayList<ContactInformation>,
     val context: Context
 ) :
-    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(), SuperContract.SuperObject {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = ContactViewHolder(parent)
 

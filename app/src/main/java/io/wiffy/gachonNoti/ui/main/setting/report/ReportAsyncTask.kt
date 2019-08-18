@@ -1,18 +1,18 @@
 package io.wiffy.gachonNoti.ui.main.setting.report
 
-import android.os.AsyncTask
 import android.os.Build
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.NOT_UPDATED_YET
 import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import java.net.URL
 
 class ReportAsyncTask(private val myView: SettingContract.View, private val query: String) :
-    AsyncTask<Void, Void, Int>() {
+    SuperContract.SuperAsyncTask() {
 
     private val url = "http://wiffy.io/gachon/report.php?content="
 

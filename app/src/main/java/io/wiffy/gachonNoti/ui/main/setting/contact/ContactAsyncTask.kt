@@ -1,15 +1,15 @@
 package io.wiffy.gachonNoti.ui.main.setting.contact
 
-import android.os.AsyncTask
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.model.ContactInformation
+import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Jsoup
 import java.lang.Exception
 import java.net.URL
 
 class ContactAsyncTask(private val myView: SettingContract.View, private val query: String) :
-    AsyncTask<Void, Void, Int>() {
+    SuperContract.SuperAsyncTask() {
     private val myList = ArrayList<ContactInformation>()
 
     override fun onPreExecute() {

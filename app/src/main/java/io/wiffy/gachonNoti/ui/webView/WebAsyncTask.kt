@@ -1,9 +1,9 @@
 package io.wiffy.gachonNoti.ui.webView
 
-import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL
 
@@ -12,8 +12,7 @@ class WebAsyncTask(
     private val url: String,
     private val mPresenter: WebViewContract.Presenter,
     private var redirect: Boolean
-) :
-    AsyncTask<Void, Void, Int>() {
+) : SuperContract.SuperAsyncTask() {
 
     private var javaS = ""
     private var goHref = ""

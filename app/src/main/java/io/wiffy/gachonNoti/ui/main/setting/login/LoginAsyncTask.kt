@@ -2,13 +2,13 @@ package io.wiffy.gachonNoti.ui.main.setting.login
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
@@ -22,9 +22,9 @@ import java.lang.Exception
 class LoginAsyncTask(
     private val ids: String,
     private val password: String,
-   val context: Context,
+    val context: Context,
     val mView: LoginDialog
-) : AsyncTask<Void, Void, Int>() {
+) : SuperContract.SuperAsyncTask() {
 
     lateinit var studentInformation: StudentInformation
 
@@ -50,17 +50,17 @@ class LoginAsyncTask(
             val httpClient = DefaultHttpClient()
             val httpPost = HttpPost("http://smart.gachon.ac.kr:8080//WebJSON")
             httpPost.entity = StringEntity(sendObject.toString())
-                JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
-                    number = getString("userUniqNo")
-                    studentInformation = StudentInformation(
-                        getString("userNm"),
-                        number,
-                        ids,
-                        password,
-                        getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
-                        "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
-                    )
-                }
+            JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
+                number = getString("userUniqNo")
+                studentInformation = StudentInformation(
+                    getString("userNm"),
+                    number,
+                    ids,
+                    password,
+                    getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
+                    "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
+                )
+            }
 
 
         } catch (e: Exception) {

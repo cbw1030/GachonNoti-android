@@ -1,7 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
@@ -10,6 +9,7 @@ import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL
 
@@ -19,10 +19,9 @@ class NotificationAsyncTask(
     private val mPresenter: NotificationContract.Presenter,
     private val context: Context?,
     private val type: Int,
-    val keyword: String,
-    val pageNum: Int
-) :
-    AsyncTask<Void, Void, Int>() {
+    private val keyword: String,
+    private val pageNum: Int
+) : SuperContract.SuperAsyncTask() {
 
 //        TYPE
 //        0 -> NOTIFICATION
@@ -30,15 +29,15 @@ class NotificationAsyncTask(
 //        2 -> EVENT
 //        3 -> SCHOLARSHIP
 
-    val address = setAddress(type)
+    private val address = setAddress(type)
 
-    private fun setAddress(type:Int) = "http://m.gachon.ac.kr/gachon/notice.jsp?${when (type) {
+    private fun setAddress(type: Int) = "http://m.gachon.ac.kr/gachon/notice.jsp?${when (type) {
         0 -> "&pageSize=&boardType_seq=358"
         1 -> "&pageSize=&boardType_seq=359"
         2 -> "&pageSize=&boardType_seq=360"
         3 -> "&pageSize=&boardType_seq=361"
         else -> "&pageSize=&boardType_seq=358"
-    }}&pageNum=${pageNum}&searchword=${keyword}&searchopt=title"
+    }}&pageNum=$pageNum&searchword=$keyword&searchopt=title"
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -47,10 +46,9 @@ class NotificationAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        //Log.d("aa",address)
         if (!isNetworkConnected(context!!)) return ACTION_FAILURE
-        try {
-            if (keyword == "" && list.isEmpty()){
+        return try {
+            if (keyword == "" && list.isEmpty()) {
                 request(true)
             }
             request(false)
@@ -60,19 +58,19 @@ class NotificationAsyncTask(
             } catch (e: Exception) {
             }
 
-            return ACTION_SUCCESS
+            ACTION_SUCCESS
         } catch (e: Exception) {
-            return 33
+            33
         }
     }
 
-    private fun request(noti:Boolean){
+    private fun request(bool: Boolean) {
         val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
         for (n in conn) {
             if (n.html().contains("등록된 정보가 없습니다.")) {
                 continue
             }
-            if (noti && n.html().contains("alt=\"공지\"")) {
+            if (bool && n.html().contains("alt=\"공지\"")) {
                 val x = n.select("a").text()
                 val v = x.split("]")[0]
                 list.add(
@@ -88,7 +86,7 @@ class NotificationAsyncTask(
                 )
             } else if (!n.html().contains("alt=\"공지\"")) {
                 val x = n.select("a").text()
-                if (type == 1){
+                if (type == 1) {
                     list.add(
                         Parse(
                             "",
@@ -100,7 +98,7 @@ class NotificationAsyncTask(
                             "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                         )
                     )
-                }else{
+                } else {
                     val v = x.split("]")[0]
                     list.add(
                         Parse(

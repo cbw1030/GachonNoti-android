@@ -38,7 +38,6 @@ class SplashActivity : SplashContract.View() {
     override fun subscribe() {
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
             setSharedItem("firstBooting", false)
-            //Log.d("asdf", "noti success")
         }
         moveToMain()
     }
