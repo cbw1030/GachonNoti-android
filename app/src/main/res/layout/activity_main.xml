@@ -30,7 +30,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/navigation"
                 app:tabMode="fixed"
-                android:elevation="0dp"
+                android:elevation="6dp"
                 app:tabIndicatorGravity="bottom"
                 app:tabIndicatorColor="@color/WHITE"
                 android:layout_width="match_parent"

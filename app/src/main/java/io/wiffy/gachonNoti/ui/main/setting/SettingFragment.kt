@@ -171,7 +171,9 @@ class SettingFragment : SettingContract.View() {
                             "Glide\n" +
                             "com.github.bumptech.glide:glide:4.9.0\n\n" +
                             "QRCode\n" +
-                            "com.journeyapps:zxing-android-embedded:3.5.0"
+                            "com.journeyapps:zxing-android-embedded:3.5.0\n\n" +
+                            "android-segmented-control\n" +
+                            "info.hoang8f:android-segmented:1.0.6"
                 )
                 setPositiveButton(
                     "OK"

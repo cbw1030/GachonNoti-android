@@ -83,20 +83,27 @@ class SearcherFragment : SearchContract.View() {
                 toast(data.time.title)
             }
             myView.timetable.setTimeTable(0, arr)
-            myView.tableName.text = name
-            myView.semester.text = "${Component.YEAR}년도 ${when (Component.SEMESTER) {
+//            myView.tableName.text = name
+//            myView.semester.text = "${Component.YEAR}년도 ${when (Component.SEMESTER) {
+//                1 -> "1"
+//                2 -> "2"
+//                3 -> "여름"
+//                else -> "겨울"
+//            }}학기 [${if (Component.campus) {
+//                "G"
+//            } else {
+//                "M"
+//            }}]"
+            MainActivity.mView.setTitle("(${when (Component.SEMESTER) {
                 1 -> "1"
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
-            }}학기 [${if (Component.campus) {
-                "G"
-            } else {
-                "M"
-            }}]"
+            }}학기) ${name} ")
             themeChanger()
-            myView.tables.visibility = View.VISIBLE
+            //myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE
+
         },
             { myView.showtu.visibility = View.VISIBLE })
 

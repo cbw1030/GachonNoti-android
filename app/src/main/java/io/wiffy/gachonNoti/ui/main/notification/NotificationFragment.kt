@@ -123,6 +123,7 @@ class NotificationFragment : NotificationContract.View() {
         if (bool) {
             myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
             myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
+            myView.segmented.setTintColor(resources.getColor(getThemeColor()))
         }
     }
 

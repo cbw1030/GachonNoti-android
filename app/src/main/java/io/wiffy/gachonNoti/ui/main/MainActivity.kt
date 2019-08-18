@@ -45,6 +45,7 @@ class MainActivity : MainContract.View() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setTitle("공지사항")
 
         mView = this
         invisible()
@@ -136,10 +137,10 @@ class MainActivity : MainContract.View() {
 //        navigation.addTab(navigation.newTab().setText("내 정보"))
 //        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
 //        navigation.addTab(navigation.newTab().setText("설정"))
-        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_1home))
-        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_3table))
-        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_2id))
-        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab_4setting))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab1_home))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab2_id))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab3_table))
+        navigation.addTab(navigation.newTab().setIcon(R.drawable.tab4_setting))
         pager.adapter = adapter
         pager.offscreenPageLimit = mList.size
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
@@ -149,10 +150,24 @@ class MainActivity : MainContract.View() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 menuItem?.let {
                     when (tab?.position) {
+                        STATE_NOTIFICATION -> {
+                            setTitle("공지사항")
+                            it.isVisible = false
+                        }
+                        STATE_INFORMATION -> {
+                            setTitle("내 정보")
+                            it.isVisible = false
+                        }
                         STATE_SEARCHER -> {
+                            setTitle("강의실")
                             it.isVisible = true
                         }
+                        STATE_SETTING -> {
+                            setTitle("설정")
+                            it.isVisible = false
+                        }
                         else -> {
+                            setTitle("가천알림이")
                             it.isVisible = false
                         }
                     }
@@ -212,8 +227,10 @@ class MainActivity : MainContract.View() {
     override fun themeChange() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         window.statusBarColor = resources.getColor(getThemeColor())
-        navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
+        navigation.setBackgroundColor(resources.getColor(getThemeColor()))
+        //navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
+        supportActionBar!!.setElevation(0f);
     }
 
     override fun onUserLeaveHint() {
