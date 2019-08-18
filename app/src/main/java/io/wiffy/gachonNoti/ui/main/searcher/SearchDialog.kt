@@ -9,7 +9,6 @@ import android.os.Looper
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.Component
@@ -85,7 +84,7 @@ class SearchDialog(
                 }
             }.show()
         } else {
-            Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            toast("인터넷 연결을 확인해주세요.")
         }
     }
 

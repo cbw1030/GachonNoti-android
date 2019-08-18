@@ -68,15 +68,12 @@ class MyInformationFragment : MyInformationContract.View() {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                //myView.pager2.currentItem = tab?.position ?: STATE_NOTIFICATION
             }
         })
         themeChanger(false)
 
         myView.login2.setOnClickListener {
-            val builder = LoginDialog(context!!)
-            builder.show()
-
+            LoginDialog(context!!).show()
         }
         loginExecute()
     }

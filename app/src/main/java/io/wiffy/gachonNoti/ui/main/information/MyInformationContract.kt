@@ -1,10 +1,11 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.model.SuperContract
 
 interface MyInformationContract {
 
-    abstract class View : Fragment() {
+    abstract class View : SuperContract.SuperFragment() {
         abstract fun initView()
         abstract fun showLoad()
         abstract fun dismissLoad(): Boolean?
@@ -12,7 +13,7 @@ interface MyInformationContract {
         abstract fun isNotLogin()
     }
 
-    interface Presenter {
+    interface Presenter : SuperContract.SuperObject {
         fun initPresent()
         fun fragmentInflation(list: ArrayList<Fragment?>): Boolean
         fun themeChange(): Unit?

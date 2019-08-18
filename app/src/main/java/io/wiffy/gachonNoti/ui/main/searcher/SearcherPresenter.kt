@@ -22,11 +22,11 @@ import kotlin.Comparator
 
 class SearcherPresenter(private val mView: SearchContract.View) : SearchContract.Presenter {
 
-    private var loadcnt = 0
+    private var loadCount = 0
     private var errorCnt = 0
     lateinit var findBuilding: ArrayList<String>
     lateinit var findRoom: ArrayList<String>
-    lateinit var tablearr: ArrayList<ArrayList<TimeData<Any?>>>
+    lateinit var tableArr: ArrayList<ArrayList<TimeData<Any?>>>
     lateinit var load1: String
     lateinit var load2: String
     lateinit var load3: String
@@ -42,7 +42,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun getData(yearSemester: String) {
-        loadcnt = 0
+        loadCount = 0
         errorCnt = 0
         mView.showLoad()
         SearchAsyncTask("1", yearSemester, this).execute()
@@ -56,8 +56,8 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun dismissLoad() {
-        loadcnt += 1
-        if (loadcnt >= 4) {
+        loadCount += 1
+        if (loadCount >= 4) {
             mView2.showBtn(false)
             mView2.requestLoad()
             mView.dismissLoad()
@@ -248,8 +248,8 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             mView.showLoad()
         }
         Thread(Runnable {
-            tablearr = ArrayList(6)
-            with(tablearr)
+            tableArr = ArrayList(6)
+            with(tableArr)
             {
                 add(ArrayList())
                 add(ArrayList())
@@ -263,15 +263,15 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             findTable(load2, str)
             findTable(load3, str)
             for (num in 0..4) {
-                Collections.sort(tablearr[num], TimeCompare())
+                Collections.sort(tableArr[num], TimeCompare())
             }
 
             val array2 = ArrayList<TimeTableData>().apply {
-                add(TimeTableData("월", tablearr[0]))
-                add(TimeTableData("화", tablearr[1]))
-                add(TimeTableData("수", tablearr[2]))
-                add(TimeTableData("목", tablearr[3]))
-                add(TimeTableData("금", tablearr[4]))
+                add(TimeTableData("월", tableArr[0]))
+                add(TimeTableData("화", tableArr[1]))
+                add(TimeTableData("수", tableArr[2]))
+                add(TimeTableData("목", tableArr[3]))
+                add(TimeTableData("금", tableArr[4]))
             }
 
             Handler(Looper.getMainLooper()).post {
@@ -283,7 +283,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
 
     private fun insertTime(str1: ClassDataInformation, cnt: Int, start: Long, end: Long) {
-        tablearr[cnt].add(
+        tableArr[cnt].add(
             TimeData(
                 2,
                 str1.name,

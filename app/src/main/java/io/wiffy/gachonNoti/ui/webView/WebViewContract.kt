@@ -1,16 +1,16 @@
 package io.wiffy.gachonNoti.ui.webView
 
-import androidx.appcompat.app.AppCompatActivity
+import io.wiffy.gachonNoti.model.SuperContract
 
 interface WebViewContract {
 
-    abstract class View : AppCompatActivity() {
+    abstract class View : SuperContract.SuperActivity() {
         abstract fun changeUI(javaS: String)
         abstract fun builderDismiss()
         abstract fun builderUp()
     }
 
-    interface Presenter {
+    interface Presenter : SuperContract.SuperObject {
         fun initPresent(url: String)
         fun updateWeb(javaS: String)
         fun builderDismiss()

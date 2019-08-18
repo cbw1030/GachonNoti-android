@@ -1,14 +1,14 @@
 package io.wiffy.gachonNoti.ui.main.information.idCard
 
-import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.model.SuperContract
 
 interface IDCardContract {
 
-    abstract class View : Fragment() {
+    abstract class View : SuperContract.SuperFragment() {
         abstract fun initView()
     }
 
-    interface Presenter {
+    interface Presenter : SuperContract.SuperObject {
         fun initPresent()
     }
 }

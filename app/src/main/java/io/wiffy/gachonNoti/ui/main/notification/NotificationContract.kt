@@ -1,10 +1,10 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.model.SuperContract
 
 interface NotificationContract {
-    abstract class View : Fragment() {
+    abstract class View : SuperContract.SuperFragment() {
         abstract fun changeUI(list: ParseList)
         abstract fun updateUI(list: ParseList)
         abstract fun showLoad()
@@ -12,10 +12,10 @@ interface NotificationContract {
         abstract fun internetUnusable(): Boolean
         abstract fun internetUsable(): Boolean
         abstract fun search(str: String)
-        abstract fun themeChanger(bool:Boolean)
+        abstract fun themeChanger(bool: Boolean)
     }
 
-    interface Presenter {
+    interface Presenter : SuperContract.SuperObject {
         fun internetInterrupted(): Boolean
         fun internetNotInterrupted(): Boolean
         fun resetList()

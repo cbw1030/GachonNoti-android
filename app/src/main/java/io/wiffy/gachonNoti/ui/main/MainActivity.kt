@@ -12,7 +12,6 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
@@ -194,12 +193,13 @@ class MainActivity : MainContract.View() {
             STATE_NOTIFICATION -> {
                 if (System.currentTimeMillis() > backKeyPressedTime + 2000L) {
                     backKeyPressedTime = System.currentTimeMillis()
-                    Toast.makeText(applicationContext, "종료하시려면 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
+                    toast("종료하시려면 한번 더 눌러주세요.")
                 } else {
                     finish()
                 }
             }
-            STATE_WEB_VIEW -> { }
+            STATE_WEB_VIEW -> {
+            }
             else -> {
                 pager.currentItem = STATE_NOTIFICATION
                 Component.state = STATE_NOTIFICATION

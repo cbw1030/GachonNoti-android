@@ -1,7 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.setting.login
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +9,6 @@ import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Component
@@ -21,11 +19,12 @@ import io.wiffy.gachonNoti.func.getMACAddress
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.func.sharedPreferences
 import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
-class LoginDialog(context: Context) : Dialog(context) {
+class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     var tempLogin = false
 
     @SuppressLint("ApplySharedPref", "SetTextI18n")
@@ -98,10 +97,9 @@ class LoginDialog(context: Context) : Dialog(context) {
             setCancelable(false)
             setPositiveButton("로그인") { dialog, _ ->
                 if (prompt.login_name.text.toString().isBlank() || prompt.login_password.text.toString().isBlank()) {
-                    Toast.makeText(context, "계정을 확인해주세요.", Toast.LENGTH_SHORT).show()
-
+                    toast("계정을 확인해주세요.")
                 } else if (!isNetworkConnected(context)) {
-                    Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                    toast("인터넷 연결을 확인해주세요.")
                     dialog.cancel()
                 } else {
                     executeLogin(prompt.login_name.text.toString(), prompt.login_password.text.toString())
@@ -132,7 +130,7 @@ class LoginDialog(context: Context) : Dialog(context) {
         Component.isLogin = false
         isLogin(false)
         (MainActivity.mView).allThemeChange()
-        Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+        toast("로그아웃 되었습니다.")
         dismiss()
     }
 
@@ -154,11 +152,11 @@ class LoginDialog(context: Context) : Dialog(context) {
         Component.isLogin = true
         isLogin(true)
         (MainActivity.mView).allThemeChange()
-        Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+        toast("로그인에 성공하였습니다.")
         dismiss()
     }
 
-    fun loginFailed() = Toast.makeText(context, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+    fun loginFailed() = toast("로그인에 실패하였습니다.")
 
 
 }

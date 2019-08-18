@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
@@ -80,7 +79,7 @@ class SearcherFragment : SearchContract.View() {
 
         arr?.let {
             myView.timetable.setOnTimeItemClickListener { _, _, data ->
-                Toast.makeText(activity, data.time.title, Toast.LENGTH_SHORT).show()
+                toast(data.time.title)
             }
             myView.timetable.setTimeTable(0, arr)
             myView.tableName.text = name

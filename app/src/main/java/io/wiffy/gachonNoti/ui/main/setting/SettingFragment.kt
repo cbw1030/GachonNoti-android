@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
@@ -111,7 +110,7 @@ class SettingFragment : SettingContract.View() {
                             tent.putExtra("app_uid", activity?.applicationInfo?.uid)
                         }
                         startActivity(tent)
-                        Toast.makeText(activity?.applicationContext, R.string.ssss, Toast.LENGTH_SHORT).show()
+                        toast(R.string.ssss)
                     }
                 }
             }
@@ -306,12 +305,6 @@ class SettingFragment : SettingContract.View() {
         )
     }
 
-
-    override fun makeToast(string: String) {
-        Handler(Looper.getMainLooper()).post {
-            Toast.makeText(context!!, string, Toast.LENGTH_SHORT).show()
-        }
-    }
 
     override fun builderUp() {
         Handler(Looper.getMainLooper()).post {

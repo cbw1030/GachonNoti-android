@@ -1,19 +1,18 @@
 package io.wiffy.gachonNoti.ui.main.setting.contact
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.ContactInformation
+import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import kotlinx.android.synthetic.main.dialog_contact.*
 
-class ContactDialog(context: Context, private val mView: SettingContract.View) : Dialog(context) {
+class ContactDialog(context: Context, private val mView: SettingContract.View) : SuperContract.SuperDialog(context) {
     lateinit var myList: ArrayList<String>
     var spinnerSelected = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +62,7 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
                     }
                 }
             } else {
-                Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                toast("인터넷 연결을 확인해주세요.")
             }
         }
     }

@@ -43,9 +43,9 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
     override fun onPostExecute(result: Int?) {
         myView.builderDismiss()
         when (result) {
-            ACTION_SUCCESS -> myView.makeToast("소중한 의견 감사드립니다!")
-            ACTION_FAILURE -> myView.makeToast("전송에 실패하였습니다.")
-            NOT_UPDATED_YET -> myView.makeToast("업데이트 예정입니다.")
+            ACTION_SUCCESS -> myView.toast("소중한 의견 감사드립니다!")
+            ACTION_FAILURE -> myView.toast("전송에 실패하였습니다.")
+            NOT_UPDATED_YET -> myView.toast("업데이트 예정입니다.")
         }
     }
 }

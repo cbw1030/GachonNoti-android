@@ -2,11 +2,11 @@ package io.wiffy.gachonNoti.ui.main
 
 
 import android.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.model.SuperContract
 
 interface MainContract {
-    abstract class View : AppCompatActivity() {
+    abstract class View : SuperContract.SuperActivity() {
         abstract fun changeUI(mList: ArrayList<Fragment?>)
         abstract fun builderUp()
         abstract fun builderDismiss(): Boolean?
@@ -16,7 +16,7 @@ interface MainContract {
         abstract fun themeChange()
     }
 
-    interface Presenter {
+    interface Presenter : SuperContract.SuperObject {
         fun initPresent()
         fun changeThemes()
         fun resetData(): AlertDialog
