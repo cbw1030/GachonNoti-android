@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
@@ -36,7 +37,7 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
             }
         }
         search2.setOnClickListener {
-            if (Util.isNetworkConnected(context)) {
+            if (isNetworkConnected(context)) {
                 val text = editor1.text.toString()
                 if (text.isNotBlank()) {
                     if (text == "박상현" && spinnerSelected == 0) {

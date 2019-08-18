@@ -1,8 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.setting.contact
 
 import android.os.AsyncTask
+import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.model.ContactInformation
-import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Jsoup
 import java.lang.Exception
@@ -41,7 +41,7 @@ class ContactAsyncTask(private val myView: SettingContract.View, private val que
                 }
         } catch (e: Exception) {
         }
-        return Util.ACTION_SUCCESS
+        return ACTION_SUCCESS
     }
 
     override fun onPostExecute(result: Int?) {

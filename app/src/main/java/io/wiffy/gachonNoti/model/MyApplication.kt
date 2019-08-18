@@ -3,7 +3,9 @@ package io.wiffy.gachonNoti.model
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
+import io.wiffy.gachonNoti.func.appConstantPreferences
+import io.wiffy.gachonNoti.func.getSharedItem
+import io.wiffy.gachonNoti.func.sharedPreferences
 import java.util.*
 
 
@@ -12,11 +14,11 @@ class MyApplication : Application() {
     @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
         super.onCreate()
-        Util.sharedPreferences = getSharedPreferences(Util.appConstantPreferences, Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences(appConstantPreferences, Context.MODE_PRIVATE)
+
         Util.firstBoot = getSharedItem("firstBooting", true)
         Util.notificationSet = getSharedItem("notiOn", true)
         Util.theme = getSharedItem("theme", "default")
-        Util.initCount = booleanArrayOf(false, false, false, false)
         Util.isLogin = getSharedItem("login", false)
         Util.campus = getSharedItem("campus", true)
 

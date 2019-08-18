@@ -11,9 +11,11 @@ import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.getThemeButtonResource
+import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.func.matrixToBitmap
+import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.*
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeButtonResource
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
 
@@ -95,7 +97,7 @@ class IDCardFragment : IDCardContract.View() {
         val output = "m$number$format"
         val qrCodeWriter = QRCodeWriter()
         val bitmap =
-            Util.matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
+            matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
 
         Glide.with(activity!!)
             .load(bitmap)

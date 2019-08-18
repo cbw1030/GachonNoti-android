@@ -5,6 +5,9 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.gachonNoti.func.ACTION_FAILURE
+import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -14,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
 import java.lang.Exception
+
 
 @SuppressLint("StaticFieldLeak")
 class LoginAsyncTask(
@@ -32,7 +36,7 @@ class LoginAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!Util.isNetworkConnected(context)) return Util.ACTION_FAILURE
+        if (!isNetworkConnected(context)) return ACTION_FAILURE
         val number: String
         try {
             val sendObject = JSONObject().apply {
@@ -61,17 +65,17 @@ class LoginAsyncTask(
 
 
         } catch (e: Exception) {
-            return Util.ACTION_FAILURE
+            return ACTION_FAILURE
         }
-        return Util.ACTION_SUCCESS
+        return ACTION_SUCCESS
     }
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
             MainActivity.mView.builderDismiss()
         }
-        when (result ?: Util.ACTION_FAILURE) {
-            Util.ACTION_SUCCESS -> {
+        when (result ?: ACTION_FAILURE) {
+            ACTION_SUCCESS -> {
                 mView.saveInformation(studentInformation)
             }
             else -> {

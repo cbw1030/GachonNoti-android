@@ -3,6 +3,9 @@ package io.wiffy.gachonNoti.ui.main.setting.report
 import android.os.AsyncTask
 import android.os.Build
 import android.util.Log
+import io.wiffy.gachonNoti.func.ACTION_FAILURE
+import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.func.NOT_UPDATED_YET
 import io.wiffy.gachonNoti.model.Util
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Connection
@@ -26,26 +29,26 @@ class ReportAsyncTask(private val myView: SettingContract.View, private val quer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
                 URL(here).readText()
-                Util.ACTION_SUCCESS
+                ACTION_SUCCESS
             } catch (e: Exception) {
                 e.printStackTrace()
-                Util.ACTION_FAILURE
+                ACTION_FAILURE
             } catch (e: NotImplementedError) {
-                Util.NOT_UPDATED_YET
+                NOT_UPDATED_YET
             }
         } else {
             Jsoup.connect(here).method(Connection.Method.POST).execute()
         }
 
-        return Util.ACTION_SUCCESS
+        return ACTION_SUCCESS
     }
 
     override fun onPostExecute(result: Int?) {
         myView.builderDismiss()
         when (result) {
-            Util.ACTION_SUCCESS -> myView.makeToast("소중한 의견 감사드립니다!")
-            Util.ACTION_FAILURE -> myView.makeToast("전송에 실패하였습니다.")
-            Util.NOT_UPDATED_YET -> myView.makeToast("업데이트 예정입니다.")
+            ACTION_SUCCESS -> myView.makeToast("소중한 의견 감사드립니다!")
+            ACTION_FAILURE -> myView.makeToast("전송에 실패하였습니다.")
+            NOT_UPDATED_YET -> myView.makeToast("업데이트 예정입니다.")
         }
     }
 }

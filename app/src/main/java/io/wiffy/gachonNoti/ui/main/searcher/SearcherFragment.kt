@@ -15,9 +15,9 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
+import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.func.setSharedItems
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
-import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlin.collections.ArrayList
 
 class SearcherFragment : SearchContract.View() {

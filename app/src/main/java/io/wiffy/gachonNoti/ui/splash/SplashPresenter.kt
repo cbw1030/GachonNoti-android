@@ -14,25 +14,8 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
     override fun initPresent() {
         when (Util.firstBoot) {
-            true -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val channel = context.getString(R.string.channel)
-                    val channelName = context.getString(R.string.app_name)
-                    val notiChannel =
-                        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                    val channelMessage =
-                        NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
-                            description = ""
-                            enableLights(true)
-                            enableVibration(true)
-                            setShowBadge(false)
-                            vibrationPattern = addList()
-                        }
-                    notiChannel.createNotificationChannel(channelMessage)
-                }
-                mView.subscribe()
-            }
-            false -> mView.changeUI()
+            true -> channelSet()
+            false -> mView.moveToMain()
         }
     }
 
@@ -43,6 +26,23 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         this[3] = 200
     }
 
-    override fun move() = Handler(Looper.getMainLooper()).post { mView.moveToMain() }
+    private fun channelSet(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = context.getString(R.string.channel)
+            val channelName = context.getString(R.string.app_name)
+            val notiChannel =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val channelMessage =
+                NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                    description = ""
+                    enableLights(true)
+                    enableVibration(true)
+                    setShowBadge(false)
+                    vibrationPattern = addList()
+                }
+            notiChannel.createNotificationChannel(channelMessage)
+        }
+        mView.subscribe()
+    }
 
 }

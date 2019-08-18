@@ -10,10 +10,10 @@ interface MainContract {
         abstract fun changeUI(mList: ArrayList<Fragment?>)
         abstract fun builderUp()
         abstract fun builderDismiss(): Boolean?
-        abstract fun makeToast(str: String): Boolean
         abstract fun updatedContents()
         abstract fun setTabText(str: String)
-        abstract fun changeTheme()
+        abstract fun allThemeChange()
+        abstract fun themeChange()
     }
 
     interface Presenter {

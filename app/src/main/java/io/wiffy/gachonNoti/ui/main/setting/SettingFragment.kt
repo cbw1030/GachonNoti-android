@@ -20,11 +20,12 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.getMACAddress
+import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.func.getThemeLightColor
+import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeLightColor
-import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
@@ -182,7 +183,7 @@ class SettingFragment : SettingContract.View() {
             if (secretCount == 4) {
                 AlertDialog.Builder(activity).apply {
                     setTitle("Build Information")
-                    setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}\nMAC:${Util.getMACAddress()}")
+                    setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Util.version}\nMAC:${getMACAddress()}")
 
                     setPositiveButton(
                         "OK"

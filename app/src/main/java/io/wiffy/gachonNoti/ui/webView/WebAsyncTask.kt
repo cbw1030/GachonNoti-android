@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.webView
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.model.Util
 import org.jsoup.Jsoup
 import java.net.URL
@@ -72,7 +73,7 @@ class WebAsyncTask(
             mPresenter.builderDismiss()
         }
 
-        return Util.ACTION_SUCCESS
+        return ACTION_SUCCESS
     }
 
 

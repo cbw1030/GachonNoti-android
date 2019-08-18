@@ -1,8 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
+import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.model.StudentInformation
-import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
 import io.wiffy.gachonNoti.ui.main.information.idCard.IDCardFragment
 
 class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformationContract.Presenter {

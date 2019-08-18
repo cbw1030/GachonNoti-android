@@ -15,10 +15,11 @@ import com.bumptech.glide.request.target.AppWidgetTarget
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.getThemeButtonResource
+import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.func.matrixToBitmap
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeButtonResource
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
 import java.text.SimpleDateFormat
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -116,7 +117,7 @@ class Widget : AppWidgetProvider() {
         fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) =
             Glide.with(context).asBitmap().load(
                 if (num != "hello") {
-                    Util.matrixToBitmap(
+                    matrixToBitmap(
                         QRCodeWriter().encode(
                             "m$num${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
                             BarcodeFormat.QR_CODE,

@@ -20,17 +20,15 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeColor
-import io.wiffy.gachonNoti.model.Util.Companion.getThemeDeepColor
-import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
-import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
 
 class MainActivity : MainContract.View() {
+
     var menuItem: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
@@ -47,36 +45,13 @@ class MainActivity : MainContract.View() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        mView = this
         setContentView(R.layout.activity_main)
-        Util.state = Util.STATE_NOTIFICATION
+
+        mView = this
         invisible()
+
         mPresenter = MainPresenter(this, this@MainActivity)
         mPresenter.initPresent()
-    }
-
-    override fun onStart() {
-        visible()
-        super.onStart()
-    }
-
-    override fun onResume() {
-        Util.novisible = false
-        visible()
-        super.onResume()
-    }
-
-
-    override fun onPause() {
-        Util.looper = false
-        invisible()
-        super.onPause()
-    }
-
-    override fun onStop() {
-        invisible()
-        super.onStop()
     }
 
     @SuppressLint("ApplySharedPref")
@@ -123,7 +98,6 @@ class MainActivity : MainContract.View() {
         super.onOptionsItemSelected(item)
     }
 
-
     override fun builderUp() {
         if (builder == null) {
             builder = Dialog(this@MainActivity).apply {
@@ -143,11 +117,6 @@ class MainActivity : MainContract.View() {
         }
     }
 
-    override fun makeToast(str: String) = Handler(Looper.getMainLooper()).post {
-        Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
-    }
-
-
     override fun builderDismiss() = builder?.let {
         Handler(Looper.getMainLooper()).post {
             try {
@@ -158,13 +127,6 @@ class MainActivity : MainContract.View() {
             }
             notificationCheck()
         }
-    }
-
-
-    fun themeChange() {
-        window.statusBarColor = resources.getColor(getThemeColor())
-        navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
-        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
     }
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
@@ -179,37 +141,30 @@ class MainActivity : MainContract.View() {
         pager.offscreenPageLimit = mList.size
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
         navigation.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 menuItem?.let {
                     when (tab?.position) {
-                        Util.STATE_SEARCHER -> {
+                        STATE_SEARCHER -> {
                             it.isVisible = true
                         }
                         else -> {
                             it.isVisible = false
                         }
                     }
-                    Util.state = tab?.position ?: Util.STATE_NOTIFICATION
-                    pager.currentItem = tab?.position ?: Util.STATE_NOTIFICATION
+                    Util.state = tab?.position ?: STATE_NOTIFICATION
+                    pager.currentItem = tab?.position ?: STATE_NOTIFICATION
                 }
             }
         })
-
     }
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
         val years = Util.YEAR.toInt()
         val semester = Util.SEMESTER.toString()
-
         setSharedItem(Util.version, true)
-
         for (year in years - 5..years)
             setSharedItems(
                 Pair("$year-$semester-1-global", "<nodata>"),
@@ -230,10 +185,9 @@ class MainActivity : MainContract.View() {
         }.show()
     }
 
-
     override fun onBackPressed() {
         when (Util.state) {
-            Util.STATE_NOTIFICATION -> {
+            STATE_NOTIFICATION -> {
                 if (System.currentTimeMillis() > backKeyPressedTime + 2000L) {
                     backKeyPressedTime = System.currentTimeMillis()
                     Toast.makeText(applicationContext, "종료하시려면 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
@@ -241,29 +195,58 @@ class MainActivity : MainContract.View() {
                     finish()
                 }
             }
-            Util.STATE_INFORMATION -> {
-                pager.currentItem = Util.STATE_NOTIFICATION
-                Util.state = Util.STATE_NOTIFICATION
-            }
-            Util.STATE_SEARCHER -> {
-
-                pager.currentItem = Util.STATE_NOTIFICATION
-                Util.state = Util.STATE_NOTIFICATION
-
-            }
-            Util.STATE_SETTING -> {
-                pager.currentItem = Util.STATE_NOTIFICATION
-                Util.state = Util.STATE_NOTIFICATION
-            }
-            Util.STATE_WEB_VIEW -> {
-
+            STATE_WEB_VIEW -> { }
+            else -> {
+                pager.currentItem = STATE_NOTIFICATION
+                Util.state = STATE_NOTIFICATION
             }
         }
+    }
+
+    override fun allThemeChange() = mPresenter.changeThemes()
+
+    override fun themeChange() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        window.statusBarColor = resources.getColor(getThemeColor())
+        navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
     }
 
     override fun onUserLeaveHint() {
         invisible()
         super.onUserLeaveHint()
+    }
+
+    override fun onStart() {
+        visible()
+        super.onStart()
+    }
+
+    override fun onResume() {
+        Util.novisible = false
+        visible()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Util.looper = false
+        invisible()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        invisible()
+        super.onStop()
+    }
+
+    override fun onAttachedToWindow() {
+        visible()
+        super.onAttachedToWindow()
+    }
+
+    override fun onDetachedFromWindow() {
+        invisible()
+        super.onDetachedFromWindow()
     }
 
     private fun visible() {
@@ -282,15 +265,4 @@ class MainActivity : MainContract.View() {
         }
     }
 
-    override fun onAttachedToWindow() {
-        visible()
-        super.onAttachedToWindow()
-    }
-
-    override fun onDetachedFromWindow() {
-        invisible()
-        super.onDetachedFromWindow()
-    }
-
-    override fun changeTheme() = mPresenter.changeThemes()
 }

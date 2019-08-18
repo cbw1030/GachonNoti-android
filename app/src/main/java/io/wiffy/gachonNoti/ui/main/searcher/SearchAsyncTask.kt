@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.Util.Companion.setSharedItem
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
@@ -73,7 +74,7 @@ class SearchAsyncTask(
             }
         } catch (e: Exception) {
         }
-        return Util.ACTION_SUCCESS
+        return ACTION_SUCCESS
     }
 
     @SuppressLint("ApplySharedPref")

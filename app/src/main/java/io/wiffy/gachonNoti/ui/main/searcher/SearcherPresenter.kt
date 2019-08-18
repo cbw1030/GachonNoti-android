@@ -7,11 +7,9 @@ import android.util.Log
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.ClassDataInformation
 import io.wiffy.gachonNoti.model.Util
-import io.wiffy.gachonNoti.model.Util.Companion.classToTime
-import io.wiffy.gachonNoti.model.Util.Companion.getSharedItem
-import io.wiffy.gachonNoti.model.Util.Companion.setSharedItems
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader
@@ -289,7 +287,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             TimeData(
                 2,
                 str1.name,
-                Util.getRandomColorId(),
+                getRandomColorId(),
                 R.color.white,
                 start,
                 end

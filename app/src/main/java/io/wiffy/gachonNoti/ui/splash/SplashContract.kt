@@ -5,13 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 interface SplashContract {
 
     abstract class View : AppCompatActivity() {
-        abstract fun changeUI(): Boolean
         abstract fun moveToMain()
         abstract fun subscribe()
     }
 
     interface Presenter {
         fun initPresent()
-        fun move(): Boolean
     }
 }

@@ -16,6 +16,10 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
+import io.wiffy.gachonNoti.func.encrypt
+import io.wiffy.gachonNoti.func.getMACAddress
+import io.wiffy.gachonNoti.func.isNetworkConnected
+import io.wiffy.gachonNoti.func.sharedPreferences
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
@@ -38,7 +42,7 @@ class LoginDialog(context: Context) : Dialog(context) {
         gachon.text = Html.fromHtml(
             "<u>가천대학교 홈페이지</u>"
         )
-        gachonname.text = "${Util.sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
+        gachonname.text = "${sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
         gachon.setOnClickListener {
             Util.novisible = true
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://gachon.ac.kr/")))
@@ -96,7 +100,7 @@ class LoginDialog(context: Context) : Dialog(context) {
                 if (prompt.login_name.text.toString().isBlank() || prompt.login_password.text.toString().isBlank()) {
                     Toast.makeText(context, "계정을 확인해주세요.", Toast.LENGTH_SHORT).show()
 
-                } else if (!Util.isNetworkConnected(context)) {
+                } else if (!isNetworkConnected(context)) {
                     Toast.makeText(context, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
                     dialog.cancel()
                 } else {
@@ -116,7 +120,7 @@ class LoginDialog(context: Context) : Dialog(context) {
 
     @SuppressLint("ApplySharedPref")
     private fun logout() {
-        Util.sharedPreferences.edit().apply {
+        sharedPreferences.edit().apply {
             remove("id")
             remove("password")
             remove("name")
@@ -127,7 +131,7 @@ class LoginDialog(context: Context) : Dialog(context) {
         }.commit()
         Util.isLogin = false
         isLogin(false)
-        (MainActivity.mView).changeTheme()
+        (MainActivity.mView).allThemeChange()
         Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
         dismiss()
     }
@@ -136,9 +140,9 @@ class LoginDialog(context: Context) : Dialog(context) {
     fun saveInformation(information: StudentInformation) {
 
         with(information) {
-            Util.sharedPreferences.edit().apply {
+            sharedPreferences.edit().apply {
                 putString("id", id)
-                putString("password", Util.encrypt(password!!, Util.getMACAddress()))
+                putString("password", encrypt(password!!, getMACAddress()))
                 putString("name", name)
                 putString("number", number)
                 putString("department", department)
@@ -146,10 +150,10 @@ class LoginDialog(context: Context) : Dialog(context) {
                 putBoolean("login", true)
             }.commit()
         }
-        gachonname.text = "${Util.sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
+        gachonname.text = "${sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
         Util.isLogin = true
         isLogin(true)
-        (MainActivity.mView).changeTheme()
+        (MainActivity.mView).allThemeChange()
         Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
         dismiss()
     }

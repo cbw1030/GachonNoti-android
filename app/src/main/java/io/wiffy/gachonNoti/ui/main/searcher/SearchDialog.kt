@@ -11,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.Util
 import kotlinx.android.synthetic.main.dialog_search.*
 import kotlin.collections.ArrayList
@@ -75,7 +76,7 @@ class SearchDialog(
     }
 
     override fun getDataDialog(yearSemester: String) {
-        if (Util.isNetworkConnected(context)) {
+        if (isNetworkConnected(context)) {
             AlertDialog.Builder(context).apply {
                 setTitle("시간표 데이터를 가져옵니다.")
                 setMessage("시간이 다소 걸릴 수 있으니 중간에 앱을 종료하지 마세요.\n(최초 한번만 다운로드 합니다.)")
