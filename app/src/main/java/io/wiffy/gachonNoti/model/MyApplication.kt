@@ -9,7 +9,7 @@ import io.wiffy.gachonNoti.func.sharedPreferences
 import java.util.*
 
 
-class MyApplication : Application() {
+class MyApplication : Application(), SuperContract.WiffyObject {
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
@@ -22,7 +22,8 @@ class MyApplication : Application() {
         Component.isLogin = getSharedItem("login", false)
         Component.campus = getSharedItem("campus", true)
 
-        Component.version = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
+        Component.version =
+            applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
         Component.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
         Component.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {
             in 2..5 -> 1

@@ -17,7 +17,7 @@ interface SettingContract {
         abstract fun changeCampus(bool: Boolean)
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
     }
 }

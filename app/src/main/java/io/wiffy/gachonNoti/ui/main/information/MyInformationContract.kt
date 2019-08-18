@@ -13,7 +13,7 @@ interface MyInformationContract {
         abstract fun isNotLogin()
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
         fun fragmentInflation(list: ArrayList<Fragment?>): Boolean
         fun themeChange(): Unit?

@@ -25,13 +25,9 @@
             android:background="@color/table_out"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <include
-                layout="@layout/appbar"
-                android:id="@+id/toolbar_main"
-                android:visibility="gone"/>
 
         <com.google.android.material.tabs.TabLayout
-                android:layout_below="@+id/toolbar_main"
+                android:layout_alignParentTop="true"
                 android:id="@+id/navigation"
                 app:tabMode="fixed"
                 android:elevation="0dp"
@@ -52,7 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"/>
-
 
     </RelativeLayout>
 </FrameLayout>

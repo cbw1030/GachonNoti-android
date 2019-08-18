@@ -18,7 +18,7 @@ class ContactAdapter(
     var items: ArrayList<ContactInformation>,
     val context: Context
 ) :
-    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(), SuperContract.SuperObject {
+    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(), SuperContract.WiffyObject {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = ContactViewHolder(parent)
 

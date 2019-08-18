@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.ui.splash
 
-import androidx.appcompat.app.AppCompatActivity
 import io.wiffy.gachonNoti.model.SuperContract
 
 interface SplashContract {
@@ -10,7 +9,7 @@ interface SplashContract {
         abstract fun subscribe()
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
     }
 }

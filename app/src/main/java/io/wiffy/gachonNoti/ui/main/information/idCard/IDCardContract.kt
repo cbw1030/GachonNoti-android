@@ -8,7 +8,7 @@ interface IDCardContract {
         abstract fun initView()
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
     }
 }

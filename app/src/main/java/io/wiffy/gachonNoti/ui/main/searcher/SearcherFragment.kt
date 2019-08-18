@@ -14,6 +14,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.func.ifNotNullOrElse
 import io.wiffy.gachonNoti.func.setSharedItems
 import io.wiffy.gachonNoti.model.Component
 import kotlin.collections.ArrayList
@@ -77,7 +78,7 @@ class SearcherFragment : SearchContract.View() {
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
 
-        arr?.let {
+        arr.ifNotNullOrElse({
             myView.timetable.setOnTimeItemClickListener { _, _, data ->
                 toast(data.time.title)
             }
@@ -96,9 +97,10 @@ class SearcherFragment : SearchContract.View() {
             themeChanger()
             myView.tables.visibility = View.VISIBLE
             myView.showtu.visibility = View.GONE
-        }.let {
-            myView.showtu.visibility = View.VISIBLE
-        }
+        },
+            { myView.showtu.visibility = View.VISIBLE })
+
+
     }
 
 

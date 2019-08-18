@@ -15,7 +15,7 @@ interface NotificationContract {
         abstract fun themeChanger(bool: Boolean)
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun internetInterrupted(): Boolean
         fun internetNotInterrupted(): Boolean
         fun resetList()

@@ -16,7 +16,7 @@ interface MainContract {
         abstract fun themeChange()
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
         fun changeThemes()
         fun resetData(): AlertDialog

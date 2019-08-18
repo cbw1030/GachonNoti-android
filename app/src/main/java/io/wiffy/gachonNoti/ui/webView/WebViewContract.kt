@@ -10,7 +10,7 @@ interface WebViewContract {
         abstract fun builderUp()
     }
 
-    interface Presenter : SuperContract.SuperObject {
+    interface Presenter : SuperContract.WiffyObject {
         fun initPresent(url: String)
         fun updateWeb(javaS: String)
         fun builderDismiss()
