@@ -27,6 +27,8 @@ class Component {
 
         var theme = "default"
 
+        var myRoom = "강의실"
+
         var noneVisible = false
 
         var campus = true

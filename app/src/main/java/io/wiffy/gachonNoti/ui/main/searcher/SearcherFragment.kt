@@ -54,7 +54,9 @@ class SearcherFragment : SearchContract.View() {
             Component.timeTableSet.clear()
             setSharedItem("tableItems", Component.timeTableSet)
 
-            this@SearcherFragment.isVisible = true
+            this@SearcherFragment.searcherVisible(true)
+            Component.myRoom = "강의실"
+            MainActivity.mView.title = Component.myRoom
 
             builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
             builder?.show()
@@ -79,33 +81,34 @@ class SearcherFragment : SearchContract.View() {
             }
             myView.timetable.setTimeTable(0, arr)
 
-            MainActivity.mView.title = "(${when (Component.SEMESTER) {
+
+            Component.myRoom = "(${when (Component.SEMESTER) {
                 1 -> "1"
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
             }}학기) $name "
+            MainActivity.mView.title = Component.myRoom
+
             themeChanger()
-            this@SearcherFragment.isVisible = false
+            this@SearcherFragment.searcherVisible(false)
 
         },
-            { this@SearcherFragment.isVisible = true })
+            { this@SearcherFragment.searcherVisible(true) })
 
 
     }
 
-    override fun setVisible(bool: Boolean) = if (bool) {
+    override fun searcherVisible(bool: Boolean) = if (bool) {
         myView.showtu.visibility = View.VISIBLE
         myView.timetable.visibility = View.GONE
-        MainActivity.mView.title = "강의실"
     } else {
         myView.showtu.visibility = View.GONE
         myView.timetable.visibility = View.VISIBLE
     }
 
     override fun showLoad() = (activity as MainActivity).builderUp()
-
-
+    
     override fun dismissLoad() = (activity as MainActivity).builderDismiss()
 
 }

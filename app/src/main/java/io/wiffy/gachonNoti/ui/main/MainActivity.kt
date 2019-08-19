@@ -155,7 +155,7 @@ class MainActivity : MainContract.View() {
                             it.isVisible = false
                         }
                         STATE_SEARCHER -> {
-                            title = "강의실"
+                            title = Component.myRoom
                             it.isVisible = true
                         }
                         STATE_SETTING -> {
