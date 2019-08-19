@@ -47,15 +47,19 @@ class NotificationFragment : NotificationContract.View() {
     private fun setFab() {
         myView.fab_main.setOnClickListener {
             val container = FrameLayout(context!!)
-            val params =
-                FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            params.marginStart = 40
-            params.marginEnd = 40
-            params.topMargin = 20
-            val editText = EditText(activity)
-            editText.layoutParams = params
+
+            val editText = EditText(activity).apply {
+                layoutParams =
+                    FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                        .apply {
+                            marginStart = 40
+                            marginEnd = 40
+                            topMargin = 20
+                        }
+                hint = "내용"
+            }
+
             container.addView(editText)
-            editText.hint = "내용"
             AlertDialog.Builder(activity).apply {
                 setTitle(
                     "검색어를 입력해주세요."

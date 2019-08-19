@@ -141,11 +141,11 @@ class SettingFragment : SettingContract.View() {
             }.create().show()
         }
         myView.money.setOnClickListener {
-            Component.novisible = true
+            Component.noneVisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
         myView.maker.setOnClickListener {
-            Component.novisible = true
+            Component.noneVisible = true
             AlertDialog.Builder(activity).apply {
                 setTitle("만든이")
                 setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")

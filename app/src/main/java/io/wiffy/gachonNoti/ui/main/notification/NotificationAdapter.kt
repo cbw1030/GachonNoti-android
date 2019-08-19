@@ -26,12 +26,10 @@ import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter.view.*
 
 //        TYPE
-//        0 -> NOTIFICATION_FOR_N
-//        1 -> NOTIFICATION
-//        2 -> NEWS
-//        3 -> EVENT
-//        4 -> SCHOLARSHIP_FOR_N
-//        5 -> SCHOLARSHIP
+//        0 -> NOTIFICATION
+//        1 -> NEWS
+//        2 -> EVENT
+//        3 -> SCHOLARSHIP
 
 class NotificationAdapter(
     var items: ParseList,
@@ -88,7 +86,7 @@ class NotificationAdapter(
                         if (!Component.surfing) {
                             Component.surfing = true
                             if (isNetworkConnected(act)) {
-                                Component.novisible = true
+                                Component.noneVisible = true
                                 val myIntent = Intent(act, WebViewActivity::class.java)
                                 myIntent.putExtra("bundle", item)
                                 act.startActivity(myIntent)

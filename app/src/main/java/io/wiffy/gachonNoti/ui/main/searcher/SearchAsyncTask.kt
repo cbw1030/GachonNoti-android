@@ -87,12 +87,16 @@ class SearchAsyncTask(
             if (mySemester == 10 || mySemester == 20) {
                 if (done.contains("<haksuNo>")) {
                     setSharedItem("$yearSemester-$cate-$campus", done)
+                    Component.timeTableSet.add("$yearSemester-$cate-$campus")
+                    setSharedItem("tableItems", Component.timeTableSet)
                     mPresenter.dismissLoad()
                 } else {
                     mPresenter.error()
                 }
             } else {
                 setSharedItem("$yearSemester-$cate-$campus", done)
+                Component.timeTableSet.add("$yearSemester-$cate-$campus")
+                setSharedItem("tableItems", Component.timeTableSet)
                 mPresenter.dismissLoad()
             }
         }

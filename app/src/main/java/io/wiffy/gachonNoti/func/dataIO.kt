@@ -70,3 +70,5 @@ fun removeSharedItems(vararg keys: String) = sharedPreferences.edit().apply {
         }
     }
 }.commit()
+
+fun resetSharedPreference() = sharedPreferences.edit().clear().commit()

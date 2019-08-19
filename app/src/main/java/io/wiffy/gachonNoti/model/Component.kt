@@ -27,9 +27,10 @@ class Component {
 
         var theme = "default"
 
-        var novisible = false
+        var noneVisible = false
 
         var campus = true
 
+        lateinit var timeTableSet: HashSet<String>
     }
 }

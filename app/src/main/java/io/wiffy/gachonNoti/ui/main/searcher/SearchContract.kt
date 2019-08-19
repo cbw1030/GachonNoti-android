@@ -11,6 +11,7 @@ interface SearchContract {
         abstract fun showLoad()
         abstract fun dismissLoad(): Boolean?
         abstract fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String)
+        abstract fun setVisible(bool: Boolean)
     }
 
     abstract class DialogPresenter(context: Context) : SuperContract.SuperDialog(context) {

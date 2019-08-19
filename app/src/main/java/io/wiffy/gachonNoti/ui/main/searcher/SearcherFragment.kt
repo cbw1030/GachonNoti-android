@@ -13,9 +13,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
-import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.ifNotNullOrElse
-import io.wiffy.gachonNoti.func.setSharedItems
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.Component
 import kotlin.collections.ArrayList
 
@@ -50,17 +48,14 @@ class SearcherFragment : SearchContract.View() {
         setPositiveButton(
             "OK"
         ) { _, _ ->
-            val yearToInt = Component.YEAR.toInt()
-            val semester = Component.SEMESTER.toString()
-            for (y in yearToInt - 5..yearToInt)
-                for (x in arrayOf("global", "medical")) {
-                    setSharedItems(
-                        Pair("$y-$semester-1-$x", "<nodata>"),
-                        Pair("$y-$semester-2-$x", "<nodata>"),
-                        Pair("$y-$semester-3-$x", "<nodata>"),
-                        Pair("$y-$semester-4-$x", "<nodata>")
-                    )
-                }
+            for (V in Component.timeTableSet.iterator()) {
+                removeSharedItem(V)
+            }
+            Component.timeTableSet.clear()
+            setSharedItem("tableItems", Component.timeTableSet)
+
+            this@SearcherFragment.isVisible = true
+
             builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
             builder?.show()
         }
@@ -83,33 +78,30 @@ class SearcherFragment : SearchContract.View() {
                 toast(data.time.title)
             }
             myView.timetable.setTimeTable(0, arr)
-//            myView.tableName.text = name
-//            myView.semester.text = "${Component.YEAR}년도 ${when (Component.SEMESTER) {
-//                1 -> "1"
-//                2 -> "2"
-//                3 -> "여름"
-//                else -> "겨울"
-//            }}학기 [${if (Component.campus) {
-//                "G"
-//            } else {
-//                "M"
-//            }}]"
-            MainActivity.mView.setTitle("(${when (Component.SEMESTER) {
+
+            MainActivity.mView.title = "(${when (Component.SEMESTER) {
                 1 -> "1"
                 2 -> "2"
                 3 -> "여름"
                 else -> "겨울"
-            }}학기) ${name} ")
+            }}학기) $name "
             themeChanger()
-            //myView.tables.visibility = View.VISIBLE
-            myView.showtu.visibility = View.GONE
+            this@SearcherFragment.isVisible = false
 
         },
-            { myView.showtu.visibility = View.VISIBLE })
+            { this@SearcherFragment.isVisible = true })
 
 
     }
 
+    override fun setVisible(bool: Boolean) = if (bool) {
+        myView.showtu.visibility = View.VISIBLE
+        myView.timetable.visibility = View.GONE
+        MainActivity.mView.title = "강의실"
+    } else {
+        myView.showtu.visibility = View.GONE
+        myView.timetable.visibility = View.VISIBLE
+    }
 
     override fun showLoad() = (activity as MainActivity).builderUp()
 

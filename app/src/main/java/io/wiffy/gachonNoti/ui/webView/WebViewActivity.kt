@@ -83,7 +83,7 @@ class WebViewActivity : WebViewContract.View() {
     }
 
     private fun invisible() {
-        if (!Component.novisible) {
+        if (!Component.noneVisible) {
             webview_layout.visibility = View.GONE
             web_splash.visibility = View.VISIBLE
             webview_layout.invalidate()
@@ -103,7 +103,7 @@ class WebViewActivity : WebViewContract.View() {
     }
 
     override fun onResume() {
-        Component.novisible = false
+        Component.noneVisible = false
         visible()
         super.onResume()
     }
@@ -117,7 +117,7 @@ class WebViewActivity : WebViewContract.View() {
     override fun onStop() {
         invisible()
         Component.surfing = false
-        Component.novisible = false
+        Component.noneVisible = false
         super.onStop()
     }
 
@@ -129,7 +129,7 @@ class WebViewActivity : WebViewContract.View() {
     override fun onBackPressed() {
         super.onBackPressed()
         Component.surfing = false
-        Component.novisible = true
+        Component.noneVisible = true
         finish()
     }
 

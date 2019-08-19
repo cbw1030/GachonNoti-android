@@ -76,38 +76,13 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
     @SuppressLint("ApplySharedPref")
     override fun isDownloaded(year: String, semester: String) {
-        val underYear: String
-        val underSemester: String
-        when (semester) {
-            "1" -> {
-                underYear = try {
-                    (year.toInt() - 1).toString()
-                } catch (e: Exception) {
-                    "2018"
-                }
-                underSemester = "4"
-            }
-            else -> {
-                underYear = year
-                underSemester = (semester.toInt() - 1).toString()
-            }
-        }
-        try {
-            for (x in arrayOf("global", "medical")) {
-                setSharedItems(
-                    Pair("$underYear-$underSemester-1-$x", "<nodata>"),
-                    Pair("$underYear-$underSemester-2-$x", "<nodata>"),
-                    Pair("$underYear-$underSemester-3-$x", "<nodata>"),
-                    Pair("$underYear-$underSemester-4-$x", "<nodata>")
-                )
-            }
-        } catch (e: Exception) {
-        }
+
         val temp = if (Component.campus) {
             "global"
         } else {
             "medical"
         }
+
         load1 = getSharedItem(
             "$year-$semester-1-$temp", "<nodata>"
         )

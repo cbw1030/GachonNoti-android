@@ -45,7 +45,7 @@ class MainActivity : MainContract.View() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setTitle("공지사항")
+        title = "공지사항"
 
         mView = this
         invisible()
@@ -133,10 +133,6 @@ class MainActivity : MainContract.View() {
         themeChange()
         Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
         adapter = PagerAdapter(supportFragmentManager, mList)
-//        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.Notification)))
-//        navigation.addTab(navigation.newTab().setText("내 정보"))
-//        navigation.addTab(navigation.newTab().setText(resources.getString(R.string.searcher)))
-//        navigation.addTab(navigation.newTab().setText("설정"))
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab1_home))
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab2_id))
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab3_table))
@@ -151,23 +147,23 @@ class MainActivity : MainContract.View() {
                 menuItem?.let {
                     when (tab?.position) {
                         STATE_NOTIFICATION -> {
-                            setTitle("공지사항")
+                            title = "공지사항"
                             it.isVisible = false
                         }
                         STATE_INFORMATION -> {
-                            setTitle("내 정보")
+                            title = "내 정보"
                             it.isVisible = false
                         }
                         STATE_SEARCHER -> {
-                            setTitle("강의실")
+                            title = "강의실"
                             it.isVisible = true
                         }
                         STATE_SETTING -> {
-                            setTitle("설정")
+                            title = "설정"
                             it.isVisible = false
                         }
                         else -> {
-                            setTitle("가천알림이")
+                            title = "가천알림이"
                             it.isVisible = false
                         }
                     }
@@ -180,20 +176,8 @@ class MainActivity : MainContract.View() {
 
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
-        val years = Component.YEAR.toInt()
-        val semester = Component.SEMESTER.toString()
         setSharedItem(Component.version, true)
-        for (year in years - 5..years)
-            setSharedItems(
-                Pair("$year-$semester-1-global", "<nodata>"),
-                Pair("$year-$semester-2-global", "<nodata>"),
-                Pair("$year-$semester-3-global", "<nodata>"),
-                Pair("$year-$semester-4-global", "<nodata>"),
-                Pair("$year-$semester-1-medical", "<nodata>"),
-                Pair("$year-$semester-2-medical", "<nodata>"),
-                Pair("$year-$semester-3-medical", "<nodata>"),
-                Pair("$year-$semester-4-medical", "<nodata>")
-            )
+
         AlertDialog.Builder(this@MainActivity).apply {
             setTitle("${Component.version} 버전 업데이트")
             setMessage(" ${resources.getString(R.string.update)}")
@@ -228,9 +212,8 @@ class MainActivity : MainContract.View() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         window.statusBarColor = resources.getColor(getThemeColor())
         navigation.setBackgroundColor(resources.getColor(getThemeColor()))
-        //navigation.setBackgroundColor(resources.getColor(getThemeDeepColor()))
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
-        supportActionBar!!.setElevation(0f);
+        supportActionBar!!.elevation = 0f
     }
 
     override fun onUserLeaveHint() {
@@ -244,7 +227,7 @@ class MainActivity : MainContract.View() {
     }
 
     override fun onResume() {
-        Component.novisible = false
+        Component.noneVisible = false
         visible()
         super.onResume()
     }
@@ -278,7 +261,7 @@ class MainActivity : MainContract.View() {
     }
 
     private fun invisible() {
-        if (!Component.novisible) {
+        if (!Component.noneVisible) {
             main_main.visibility = View.GONE
             main_splash.visibility = View.VISIBLE
             main_splash.invalidate()
