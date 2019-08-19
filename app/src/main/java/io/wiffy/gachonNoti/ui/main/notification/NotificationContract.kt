@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.model.SuperContract
 
@@ -13,6 +14,7 @@ interface NotificationContract {
         abstract fun internetUsable(): Boolean
         abstract fun search(str: String)
         abstract fun themeChanger(bool: Boolean)
+        abstract fun sendContext(): Context?
     }
 
     interface Presenter : SuperContract.WiffyObject {
@@ -27,5 +29,6 @@ interface NotificationContract {
         fun search(src: String)
         fun setType(mType: Int)
         fun pageUp()
+        fun getContext(): Context?
     }
 }

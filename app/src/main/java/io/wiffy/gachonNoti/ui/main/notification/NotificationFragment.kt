@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -27,7 +28,7 @@ class NotificationFragment : NotificationContract.View() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_notification, container, false)
 
-        mPresenter = NotificationPresenter(this, context)
+        mPresenter = NotificationPresenter(this)
         mPresenter.initPresent()
 
         setRefresh()
@@ -138,6 +139,8 @@ class NotificationFragment : NotificationContract.View() {
     override fun dismissLoad() = MainActivity.mView.builderDismiss()
 
     override fun search(str: String) = mPresenter.search(str)
+
+    override fun sendContext() = context
 
 }
 

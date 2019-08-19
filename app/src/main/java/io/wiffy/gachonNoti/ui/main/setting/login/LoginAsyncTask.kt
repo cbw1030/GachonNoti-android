@@ -1,7 +1,5 @@
 package io.wiffy.gachonNoti.ui.main.setting.login
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
@@ -18,11 +16,9 @@ import org.json.JSONObject
 import java.lang.Exception
 
 
-@SuppressLint("StaticFieldLeak")
 class LoginAsyncTask(
     private val ids: String,
     private val password: String,
-    val context: Context,
     val mView: LoginDialog
 ) : SuperContract.SuperAsyncTask() {
 
@@ -35,7 +31,7 @@ class LoginAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(context)) return ACTION_FAILURE
+        if (!isNetworkConnected(mView.sendContext())) return ACTION_FAILURE
         val number: String
         try {
             val sendObject = JSONObject().apply {

@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.model
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import io.wiffy.gachonNoti.func.*
@@ -9,7 +8,6 @@ import java.util.*
 
 class MyApplication : Application(), SuperContract.WiffyObject {
 
-    @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
         super.onCreate()
         sharedPreferences = getSharedPreferences(appConstantPreferences, Context.MODE_PRIVATE)

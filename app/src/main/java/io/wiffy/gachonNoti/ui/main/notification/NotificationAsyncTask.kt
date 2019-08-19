@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
@@ -17,7 +16,6 @@ import java.net.URL
 class NotificationAsyncTask(
     private val list: ParseList,
     private val mPresenter: NotificationContract.Presenter,
-    private val context: Context?,
     private val type: Int,
     private val keyword: String,
     private val pageNum: Int
@@ -46,7 +44,7 @@ class NotificationAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(context!!)) return ACTION_FAILURE
+        if (!isNetworkConnected(mPresenter.getContext()!!)) return ACTION_FAILURE
         return try {
             if (keyword == "" && list.isEmpty()) {
                 request(true)

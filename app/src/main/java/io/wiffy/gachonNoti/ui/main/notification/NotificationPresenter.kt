@@ -1,9 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-import android.content.Context
 import io.wiffy.gachonNoti.model.ParseList
 
-class NotificationPresenter(private val mView: NotificationContract.View, private val context: Context?) :
+class NotificationPresenter(private val mView: NotificationContract.View) :
     NotificationContract.Presenter {
 
     private var list = ParseList()
@@ -17,19 +16,19 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
         resetList()
     }
 
-    override fun pageUp(){
+    override fun pageUp() {
         page += 1
         request()
     }
 
-    override fun search(str:String){
+    override fun search(str: String) {
         searchkey = str
         page = 0
         list.clear()
         request()
     }
 
-    override fun setType(mType:Int){
+    override fun setType(mType: Int) {
         type = mType
         resetList()
     }
@@ -50,9 +49,11 @@ class NotificationPresenter(private val mView: NotificationContract.View, privat
     override fun request() {
         if (!isloading) {
             isloading = true
-            NotificationAsyncTask(list, this, context, type, searchkey, page).execute()
+            NotificationAsyncTask(list, this, type, searchkey, page).execute()
         }
     }
+
+    override fun getContext() = mView.sendContext()
 
     override fun show() = mView.showLoad()
 

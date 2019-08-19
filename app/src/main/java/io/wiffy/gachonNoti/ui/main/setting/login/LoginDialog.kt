@@ -113,8 +113,10 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     }
 
     private fun executeLogin(id: String, password: String) {
-        LoginAsyncTask(id, password, context, this).execute()
+        LoginAsyncTask(id, password, this).execute()
     }
+
+    fun sendContext(): Context = context
 
     @SuppressLint("ApplySharedPref")
     private fun logout() {
