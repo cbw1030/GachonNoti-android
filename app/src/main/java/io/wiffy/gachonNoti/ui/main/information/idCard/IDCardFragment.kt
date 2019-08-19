@@ -15,7 +15,6 @@ import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.matrixToBitmap
 import io.wiffy.gachonNoti.model.StudentInformation
-import io.wiffy.gachonNoti.model.*
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
 

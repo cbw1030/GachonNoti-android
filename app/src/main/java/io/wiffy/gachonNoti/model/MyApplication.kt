@@ -34,6 +34,7 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         //Reset Component on Update
         Component.isLogin = getSharedItem("login", false)
         Component.timeTableSet = getSharedItem("tableItems", HashSet())
+        Component.adminMode = getSharedItem("ADMIN", false)
         Component.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
         Component.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {
             in 2..5 -> 1

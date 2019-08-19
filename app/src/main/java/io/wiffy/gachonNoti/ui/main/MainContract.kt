@@ -14,12 +14,14 @@ interface MainContract {
         abstract fun setTabText(str: String)
         abstract fun allThemeChange()
         abstract fun themeChange()
+        abstract fun logout()
     }
 
     interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
         fun changeThemes()
         fun resetData(): AlertDialog
+        fun logout()
     }
 
 }

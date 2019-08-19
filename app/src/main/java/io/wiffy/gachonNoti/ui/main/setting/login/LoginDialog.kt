@@ -124,6 +124,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         Component.isLogin = false
         isLogin(false)
         (MainActivity.mView).allThemeChange()
+        (MainActivity.mView).logout()
         toast("로그아웃 되었습니다.")
         dismiss()
     }

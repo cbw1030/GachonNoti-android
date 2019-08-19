@@ -253,6 +253,8 @@ class MainActivity : MainContract.View() {
         super.onDetachedFromWindow()
     }
 
+    override fun logout() = mPresenter.logout()
+
     private fun visible() {
         main_main.visibility = View.VISIBLE
         main_splash.visibility = View.GONE

@@ -5,6 +5,8 @@ package io.wiffy.gachonNoti.model
 class Component {
     companion object {
 
+        var adminMode = false
+
         var YEAR = "2019"
 
         var isLogin = false

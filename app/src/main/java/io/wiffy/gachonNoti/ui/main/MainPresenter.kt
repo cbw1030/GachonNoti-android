@@ -36,6 +36,10 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         }
     }
 
+    override fun logout() {
+        (mList[STATE_SETTING] as SettingFragment).adminLogout()
+    }
+
     override fun changeThemes() = mList.let {
         (it[STATE_NOTIFICATION] as NotificationFragment).themeChanger(true)
         (it[STATE_INFORMATION] as MyInformationFragment).themeChanger(true)

@@ -19,10 +19,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getMACAddress
-import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.getThemeLightColor
-import io.wiffy.gachonNoti.func.setSharedItem
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -45,6 +42,7 @@ class SettingFragment : SettingContract.View() {
     private var builderIn: Dialog? = null
     private var secretCount = 0
     private var index = 0
+    private var adminCode = StringBuilder()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
@@ -61,6 +59,7 @@ class SettingFragment : SettingContract.View() {
             "green" -> 2
             else -> 0
         }
+        adminView()
         list = ArrayList<CircleImageView>().apply {
             add(myView.defaultColor)
             add(myView.redColor)
@@ -76,6 +75,7 @@ class SettingFragment : SettingContract.View() {
                     }
                     index = x
                     settingColor(x)
+                    adminCode(x)
                 }
             }
         }
@@ -143,6 +143,15 @@ class SettingFragment : SettingContract.View() {
         myView.money.setOnClickListener {
             Component.noneVisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
+        }
+        myView.adminOption.setOnClickListener {
+            AlertDialog.Builder(activity).apply {
+                setTitle("관리자 옵션")
+                setMessage("관리자 옵션을 추가해주십시요.")
+                setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+            }.show()
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true
@@ -342,6 +351,71 @@ class SettingFragment : SettingContract.View() {
 
     override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
         builderIn?.dismiss()
+    }
+
+    private fun adminCode(id: Int) {
+
+        when (id) {
+            0 -> {
+                adminCode.append("0")
+                if (adminCode.toString() == "01210") {
+                    adminMode(Component.adminMode.xor(true))
+                } else {
+                    adminCode.clear()
+                    adminCode.append("0")
+                }
+            }
+            1 -> {
+                adminCode.append("1")
+            }
+            2 -> {
+                adminCode.append("2")
+            }
+        }
+    }
+
+    private fun adminMode(bool: Boolean) {
+        val myNumber = getSharedItem<String>("number")
+        if (myNumber == "201735829" || myNumber == "201635812")
+            if (bool) {
+                FirebaseMessaging.getInstance().subscribeToTopic("admin").addOnSuccessListener {
+                    setSharedItem("ADMIN", true)
+                    Component.adminMode = true
+                    adminView()
+                    toast("ADMIN MODE ON")
+                }.addOnFailureListener {
+                    toast("fail T.T")
+                }
+            } else {
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("admin").addOnSuccessListener {
+                    setSharedItem("ADMIN", false)
+                    Component.adminMode = false
+                    adminView()
+                    toast("ADMIN MODE OFF")
+                }.addOnFailureListener {
+                    toast("fail T.T")
+                }
+            }
+        adminCode.clear()
+
+    }
+
+    private fun adminView() {
+        if (Component.adminMode) {
+            myView.adminOption.visibility = View.VISIBLE
+            myView.adminBar.visibility = View.VISIBLE
+        } else {
+            myView.adminOption.visibility = View.GONE
+            myView.adminBar.visibility = View.GONE
+        }
+    }
+
+    override fun adminLogout() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("admin").addOnSuccessListener {
+            setSharedItem("ADMIN", false)
+            Component.adminMode = false
+            adminView()
+        }
     }
 
     @SuppressLint("ApplySharedPref")
