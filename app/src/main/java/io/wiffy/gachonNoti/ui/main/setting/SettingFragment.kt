@@ -354,12 +354,11 @@ class SettingFragment : SettingContract.View() {
     }
 
     private fun adminCode(id: Int) {
-
         when (id) {
             0 -> {
                 adminCode.append("0")
                 if (adminCode.toString() == "01210") {
-                    console("add action")
+                    toast("add action")
                     adminCode.clear()
                 } else {
                     adminCode.clear()
