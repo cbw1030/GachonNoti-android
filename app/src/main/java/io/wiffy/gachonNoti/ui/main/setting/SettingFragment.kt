@@ -359,7 +359,8 @@ class SettingFragment : SettingContract.View() {
             0 -> {
                 adminCode.append("0")
                 if (adminCode.toString() == "01210") {
-                    adminMode(Component.adminMode.xor(true))
+                    console("add action")
+                    adminCode.clear()
                 } else {
                     adminCode.clear()
                     adminCode.append("0")
@@ -372,32 +373,6 @@ class SettingFragment : SettingContract.View() {
                 adminCode.append("2")
             }
         }
-    }
-
-    private fun adminMode(bool: Boolean) {
-        val myNumber = getSharedItem<String>("number")
-        if (myNumber == "201735829" || myNumber == "201635812")
-            if (bool) {
-                FirebaseMessaging.getInstance().subscribeToTopic("admin").addOnSuccessListener {
-                    setSharedItem("ADMIN", true)
-                    Component.adminMode = true
-                    adminView()
-                    toast("ADMIN MODE ON")
-                }.addOnFailureListener {
-                    toast("fail T.T")
-                }
-            } else {
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("admin").addOnSuccessListener {
-                    setSharedItem("ADMIN", false)
-                    Component.adminMode = false
-                    adminView()
-                    toast("ADMIN MODE OFF")
-                }.addOnFailureListener {
-                    toast("fail T.T")
-                }
-            }
-        adminCode.clear()
-
     }
 
     private fun adminView() {
@@ -415,6 +390,16 @@ class SettingFragment : SettingContract.View() {
             setSharedItem("ADMIN", false)
             Component.adminMode = false
             adminView()
+            toast("ADMIN MODE OFF")
+        }
+    }
+
+    override fun adminLogin() {
+        FirebaseMessaging.getInstance().subscribeToTopic("admin").addOnSuccessListener {
+            setSharedItem("ADMIN", true)
+            Component.adminMode = true
+            adminView()
+            toast("ADMIN MODE ON")
         }
     }
 

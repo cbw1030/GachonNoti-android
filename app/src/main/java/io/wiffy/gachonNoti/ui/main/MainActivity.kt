@@ -254,6 +254,7 @@ class MainActivity : MainContract.View() {
     }
 
     override fun logout() = mPresenter.logout()
+    override fun login() = mPresenter.login()
 
     private fun visible() {
         main_main.visibility = View.VISIBLE

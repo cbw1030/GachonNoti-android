@@ -14,6 +14,7 @@ interface MainContract {
         abstract fun setTabText(str: String)
         abstract fun allThemeChange()
         abstract fun themeChange()
+        abstract fun login()
         abstract fun logout()
     }
 
@@ -22,6 +23,7 @@ interface MainContract {
         fun changeThemes()
         fun resetData(): AlertDialog
         fun logout()
+        fun login()
     }
 
 }
