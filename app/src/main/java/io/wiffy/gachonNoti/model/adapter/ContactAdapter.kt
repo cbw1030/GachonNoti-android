@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.model.SuperContract
@@ -32,18 +33,11 @@ class ContactAdapter(
                 "<u>${item.tel}</u>"
             )
             t3.setTextColor(
-                context.resources.getColorStateList(
-                    when (Component.theme) {
-                        "red" -> R.color.red
-                        "green" -> R.color.green
-                        else -> R.color.main2Blue
-                    }
-                )
+                context.resources.getColorStateList(getThemeColor())
             )
 
             t3.setOnClickListener {
-                val code = item.tel.replace("-", "")
-                context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$code")))
+                context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:${item.tel.replace("-", "")}")))
             }
         }
     }

@@ -130,7 +130,6 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
 
     @SuppressLint("ApplySharedPref", "SetTextI18n")
     fun saveInformation(information: StudentInformation) {
-
         with(information) {
             sharedPreferences.edit().apply {
                 putString("id", id)
@@ -146,7 +145,8 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         Component.isLogin = true
         isLogin(true)
         (MainActivity.mView).allThemeChange()
-        toast("로그인에 성공하였습니다.")
+        if (information.department == "소프트웨어학과") toast("우리과 학생이시군요?")
+        else toast("로그인에 성공하였습니다.")
         dismiss()
     }
 

@@ -38,13 +38,13 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
             if (isNetworkConnected(context)) {
                 val text = editor1.text.toString()
                 if (text.isNotBlank()) {
-                    if (text == "박상현" && spinnerSelected == 0) {
+                    if ("박상현".contains(text) && spinnerSelected == 0) {
                         mView.builderUp()
                         ArrayList<ContactInformation>().apply {
                             add(ContactInformation("천재", "박상현", "201735829"))
                             mView.builderDismissAndContactUp(this)
                         }
-                    } else if (text == "박정호" && spinnerSelected == 0) {
+                    } else if ("박정호".contains(text) && spinnerSelected == 0) {
                         mView.builderUp()
                         ArrayList<ContactInformation>().apply {
                             add(ContactInformation("바보", "박정호", "201635812"))

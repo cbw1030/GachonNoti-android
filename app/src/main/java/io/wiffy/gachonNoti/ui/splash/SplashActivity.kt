@@ -99,5 +99,7 @@ class SplashActivity : SplashContract.View() {
     } else {
         gachonAlimi.setTextColor(resources.getColor(R.color.red))
         arrayOf("예쁜", "귀여운", "핵 인싸", "머리가 좋은", "인기 많은", "사랑스러운")
-    }[Random().nextInt(6)]
+    }.let {
+        it[Random().nextInt(it.size)]
+    }
 }

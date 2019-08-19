@@ -23,11 +23,11 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
-        웹뷰 캐시 삭제\n
+        디자인 수정\n
         버그리포트 버그수정\n
         QR코드 버그 수정\n
         학생증 위젯 업데이트 (한 번 써보세요)\n
-        (TMI)저희는 어떠한 단체에도 속해있지 않습니다.
+        (TMI)저희는 특정 단체에 속해있지 않습니다.
     </string>
 
 </resources>
