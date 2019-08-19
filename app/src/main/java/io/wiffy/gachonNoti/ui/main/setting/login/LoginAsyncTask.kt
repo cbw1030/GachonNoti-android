@@ -5,6 +5,7 @@ import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.isNetworkConnected
+import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -13,7 +14,11 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
+import org.w3c.dom.Element
+import org.xml.sax.InputSource
+import java.io.StringReader
 import java.lang.Exception
+import javax.xml.parsers.DocumentBuilderFactory
 
 
 class LoginAsyncTask(
@@ -43,11 +48,10 @@ class LoginAsyncTask(
                 put("PWD", password)
                 put("APPS_ID", "com.sz.Atwee.gachon")
             }
-            val httpClient = DefaultHttpClient()
-            val httpPost = HttpPost("http://smart.gachon.ac.kr:8080//WebJSON")
-            httpPost.entity = StringEntity(sendObject.toString())
-            JSONObject(EntityUtils.toString(httpClient.execute(httpPost).entity)).getJSONObject("ds_output").apply {
-                console(toString())
+
+            JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
+                entity = StringEntity(sendObject.toString())
+            }).entity)).getJSONObject("ds_output").apply {
                 number = getString("userUniqNo")
                 studentInformation = StudentInformation(
                     getString("userNm"),
@@ -59,6 +63,27 @@ class LoginAsyncTask(
                 )
             }
 
+            try {
+                val data =
+                    (DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+                        InputSource(
+                            StringReader(
+                                EntityUtils.toString(
+                                    DefaultHttpClient().execute(
+                                        HttpPost("http://gcis.gachon.ac.kr/common/src/jsp/comComponent/componentList.jsp?comType=STU%5FCOM%5FINFO&comViewValue=N&comResultTarget=cbGroupCD&condition1=$number")
+                                    ).entity
+                                ).replace(
+                                    "<?xml version='1.0' encoding='EUC-KR'?>",
+                                    ""
+                                )
+                            )
+                        )
+                    ).getElementsByTagName("rsCommonInfo").item(0) as Element).getElementsByTagName("jumin").item(0)
+                        .childNodes.item(0).nodeValue.split("-")
+                setSharedItem("birthday", data[0])
+                setSharedItem("gender", data[1][0].toInt() % 2 == 1)
+            } catch (e: Exception) {
+            }
 
         } catch (e: Exception) {
             return ACTION_FAILURE

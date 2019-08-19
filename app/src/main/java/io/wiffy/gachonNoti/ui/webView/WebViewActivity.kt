@@ -148,8 +148,7 @@ class WebViewActivity : WebViewContract.View() {
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-
+    
     private fun themeChange() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
         webview_layout.setBackgroundColor(resources.getColor(getThemeDeepColor()))

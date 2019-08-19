@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+        android:id="@+id/bububu"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <RelativeLayout
+            android:id="@+id/bababa"
             android:background="@color/mainBackground"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         <ImageView
+                android:layout_centerHorizontal="true"
                 android:id="@+id/logo_splash"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
                 android:contentDescription="noti"/>
         <TextView
+                android:id="@+id/gachonAlimi"
                 android:layout_below="@id/logo_splash"
                 android:layout_marginTop="-5dp"
                 android:textSize="17sp"

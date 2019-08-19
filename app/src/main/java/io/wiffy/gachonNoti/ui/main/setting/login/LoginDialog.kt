@@ -14,10 +14,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.Component
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
-import io.wiffy.gachonNoti.func.encrypt
-import io.wiffy.gachonNoti.func.getMACAddress
-import io.wiffy.gachonNoti.func.isNetworkConnected
-import io.wiffy.gachonNoti.func.sharedPreferences
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -32,7 +29,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_sign_in)
 
-        settingColor(Component.theme)
+        settingColor()
 
         logout.setOnClickListener {
             logout()
@@ -64,17 +61,10 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     }
 
 
-    private fun settingColor(str: String) {
-        val color = when (str) {
-            "green" -> R.color.green
-            "red" -> R.color.red
-            else -> R.color.main2Blue
-        }
-        val style = when (color) {
-            R.color.green -> R.drawable.dialog_button_green
-            R.color.red -> R.drawable.dialog_button_red
-            else -> R.drawable.dialog_button_default
-        }
+    private fun settingColor() {
+        val color = getThemeColor()
+        val style = getThemeButtonResource()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             login.setBackgroundResource(style)
             logout.setBackgroundResource(style)
@@ -127,6 +117,8 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
             remove("number")
             remove("department")
             remove("image")
+            remove("birthday")
+            remove("gender")
             putBoolean("login", false)
         }.commit()
         Component.isLogin = false
@@ -159,6 +151,4 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     }
 
     fun loginFailed() = toast("로그인에 실패하였습니다.")
-
-
 }

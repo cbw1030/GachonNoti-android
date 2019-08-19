@@ -21,6 +21,8 @@ class Component {
 
         var notificationSet = true
 
+        var delay = 100L
+
         var state = 0
 
         var helper = "인터넷 연결을 확인해주세요."
