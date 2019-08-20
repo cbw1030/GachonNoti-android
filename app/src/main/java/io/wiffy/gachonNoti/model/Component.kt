@@ -2,41 +2,40 @@ package io.wiffy.gachonNoti.model
 
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
-class Component {
-    companion object {
+object Component {
 
-        var adminMode = false
+    var adminMode = false
 
-        var YEAR = "2019"
+    var YEAR = "2019"
 
-        var isLogin = false
+    var isLogin = false
 
-        var surfing = false
+    var surfing = false
 
-        var SEMESTER = 1
+    var SEMESTER = 1
 
-        var firstBoot = true
+    var firstBoot = true
 
-        var looper = true
+    var looper = true
 
-        var version = "1.0.0"
+    var version = "1.0.0"
 
-        var notificationSet = true
+    var notificationSet = true
 
-        var delay = 100L
+    var delay = 100L
 
-        var state = 0
+    var state = 0
 
-        var helper = "인터넷 연결을 확인해주세요."
+    var helper = "인터넷 연결을 확인해주세요."
 
-        var theme = "default"
+    var theme = "default"
 
-        var myRoom = "강의실"
+    var myRoom = "강의실"
 
-        var noneVisible = false
+    var noneVisible = false
 
-        var campus = true
+    var campus = true
 
-        lateinit var timeTableSet: HashSet<String>
-    }
+    lateinit var timeTableSet: HashSet<String>
+
 }

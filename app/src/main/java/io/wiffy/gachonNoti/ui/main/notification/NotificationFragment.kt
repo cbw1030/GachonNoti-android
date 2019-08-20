@@ -21,7 +21,7 @@ import io.wiffy.gachonNoti.func.getThemeTransColor
 
 class NotificationFragment : NotificationContract.View() {
 
-    lateinit var myView: View
+    private lateinit var myView: View
     lateinit var mPresenter: NotificationPresenter
     lateinit var adapter: NotificationAdapter
 
@@ -111,10 +111,7 @@ class NotificationFragment : NotificationContract.View() {
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
         myView.recylcer.addItemDecoration(
-            VerticalSpaceItemDecoration(
-                2
-            )
-        )
+            VerticalSpaceItemDecoration)
         myView.recylcer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
