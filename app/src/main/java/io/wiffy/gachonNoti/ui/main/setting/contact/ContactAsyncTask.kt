@@ -9,7 +9,7 @@ import java.lang.Exception
 import java.net.URL
 
 class ContactAsyncTask(private val myView: SettingContract.View, private val query: String) :
-    SuperContract.SuperAsyncTask() {
+    SuperContract.SuperAsyncTask<Void, Void, Int>() {
     private val myList = ArrayList<ContactInformation>()
 
     override fun onPreExecute() {

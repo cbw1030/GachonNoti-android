@@ -12,7 +12,7 @@ class WebAsyncTask(
     private val url: String,
     private val mPresenter: WebViewContract.Presenter,
     private var redirect: Boolean
-) : SuperContract.SuperAsyncTask() {
+) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     private var javaS = ""
     private var goHref = ""

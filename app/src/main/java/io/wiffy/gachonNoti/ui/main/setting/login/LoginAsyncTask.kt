@@ -25,7 +25,7 @@ class LoginAsyncTask(
     private val ids: String,
     private val password: String,
     val mView: LoginDialog
-) : SuperContract.SuperAsyncTask() {
+) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
 

@@ -19,7 +19,7 @@ class SearchAsyncTask(
     private val cate: String,
     private val yearSemester: String,
     private val mPresenter: SearchContract.Presenter
-) : SuperContract.SuperAsyncTask() {
+) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     private var done = ""
     private var data = "searchIsuCD=00$cate"

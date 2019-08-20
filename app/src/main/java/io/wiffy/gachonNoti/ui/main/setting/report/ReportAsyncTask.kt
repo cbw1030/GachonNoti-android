@@ -12,7 +12,7 @@ import org.jsoup.Jsoup
 import java.net.URL
 
 class ReportAsyncTask(private val myView: SettingContract.View, private val query: String) :
-    SuperContract.SuperAsyncTask() {
+    SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     private val url = "http://wiffy.io/gachon/report.php?content="
 

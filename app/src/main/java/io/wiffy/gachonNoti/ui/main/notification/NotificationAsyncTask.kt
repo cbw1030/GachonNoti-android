@@ -19,7 +19,7 @@ class NotificationAsyncTask(
     private val type: Int,
     private val keyword: String,
     private val pageNum: Int
-) : SuperContract.SuperAsyncTask() {
+) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
 //        TYPE
 //        0 -> NOTIFICATION
