@@ -32,7 +32,7 @@
 
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/defaults"/>
+                android:resource="@drawable/notiicon"/>
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="@string/channel"/>

@@ -38,7 +38,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         gachon.text = Html.fromHtml(
             "<u>가천대학교 홈페이지</u>"
         )
-        gachonname.text = "${sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
+        gachonname.text = "${getSharedItem("name", "")}님 안녕하세요!"
         gachon.setOnClickListener {
             Component.noneVisible = true
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://gachon.ac.kr/")))
