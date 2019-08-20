@@ -23,14 +23,14 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
     private var loadCount = 0
     private var errorCnt = 0
-    lateinit var findBuilding: ArrayList<String>
-    lateinit var findRoom: ArrayList<String>
-    lateinit var tableArr: ArrayList<ArrayList<TimeData<Any?>>>
-    lateinit var load1: String
-    lateinit var load2: String
-    lateinit var load3: String
-    lateinit var load4: String
-    lateinit var mView2: SearchContract.DialogPresenter
+    private lateinit var findBuilding: ArrayList<String>
+    private lateinit var findRoom: ArrayList<String>
+    private lateinit var tableArr: ArrayList<ArrayList<TimeData<Any?>>>
+    private lateinit var load1: String
+    private lateinit var load2: String
+    private lateinit var load3: String
+    private lateinit var load4: String
+    private lateinit var mView2: SearchContract.DialogPresenter
 
     override fun initPresent() {
         mView.initUI()

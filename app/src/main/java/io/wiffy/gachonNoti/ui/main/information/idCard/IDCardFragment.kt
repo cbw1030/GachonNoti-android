@@ -38,7 +38,9 @@ class IDCardFragment : IDCardContract.View() {
 
     override fun initView() {
         changeTheme()
-        if (mInfo != null) loginInformationSetting(mInfo!!)
+        mInfo?.let {
+            loginInformationSetting(it)
+        }
     }
 
     fun changeTheme() {
@@ -92,16 +94,18 @@ class IDCardFragment : IDCardContract.View() {
 
         handler.post(handlerTask)
 
-        val format = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
-        val output = "m$number$format"
-        val qrCodeWriter = QRCodeWriter()
-        val bitmap =
-            matrixToBitmap(qrCodeWriter.encode(output, BarcodeFormat.QR_CODE, 400, 400))
-
         Glide.with(activity!!)
-            .load(bitmap)
+            .load(
+                matrixToBitmap(
+                    QRCodeWriter().encode(
+                        "m$number${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
+                        BarcodeFormat.QR_CODE,
+                        400,
+                        400
+                    )
+                )
+            )
             .into(myView?.qrcode!!)
-
     }
 
 }

@@ -13,19 +13,9 @@ import io.wiffy.gachonNoti.R
 
 class FirebaseMessagingService : FirebaseMessagingService() {
 
-    companion object {
-        const val TAG = "FirebaseIDService"
-    }
-
-
     override fun onMessageReceived(p0: RemoteMessage?) {
         if (p0?.notification != null) sendNotification(p0)
     }
-
-    override fun onNewToken(p0: String?) {
-        super.onNewToken(p0)
-    }
-
 
     private fun sendNotification(p0: RemoteMessage) {
         val title = p0.notification?.title ?: getString(R.string.app_name)

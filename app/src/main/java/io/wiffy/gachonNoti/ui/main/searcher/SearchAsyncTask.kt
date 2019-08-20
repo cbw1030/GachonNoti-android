@@ -43,36 +43,32 @@ class SearchAsyncTask(
         } else {
             21
         }
-        val url = "http://gcis.gachon.ac.kr/haksa/src/jsp/ssu/ssu1000q.jsp?"
-        val url2 =
-            "groupType=$type&searchYear=2019&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
+        val url =
+            "http://gcis.gachon.ac.kr/haksa/src/jsp/ssu/ssu1000q.jsp?groupType=$type&searchYear=2019&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
+
         try {
-            try {
-                val myUrl = URL(url + url2)
-                val conn = (myUrl.openConnection() as HttpURLConnection).apply {
-                    requestMethod = "GET"
-                    instanceFollowRedirects = true
-                    HttpURLConnection.setFollowRedirects(true)
-                    doOutput = true
-                    doInput = true
-                    useCaches = false
-                    defaultUseCaches = false
-                }
-                val `is` = conn.inputStream
+            (URL(url).openConnection() as HttpURLConnection).apply {
+                requestMethod = "GET"
+                instanceFollowRedirects = true
+                HttpURLConnection.setFollowRedirects(true)
+                doOutput = true
+                doInput = true
+                useCaches = false
+                defaultUseCaches = false
+            }.inputStream.run {
                 val builder = StringBuilder()
-                val reader = BufferedReader(InputStreamReader(`is`, "euc-kr"))
+                val reader = BufferedReader(InputStreamReader(this, "euc-kr"))
 
                 var line = reader.readLine()
                 while (line != null) {
                     builder.append(line.replace("(M)", "") + "\n")
                     line = reader.readLine()
                 }
-
                 done = builder.toString()
-            } catch (e: Exception) {
             }
         } catch (e: Exception) {
         }
+
         return ACTION_SUCCESS
     }
 

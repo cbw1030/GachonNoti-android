@@ -29,13 +29,14 @@ class NotificationAsyncTask(
 
     private val address = setAddress(type)
 
-    private fun setAddress(type: Int) = "http://m.gachon.ac.kr/gachon/notice.jsp?${when (type) {
-        0 -> "&pageSize=&boardType_seq=358"
-        1 -> "&pageSize=&boardType_seq=359"
-        2 -> "&pageSize=&boardType_seq=360"
-        3 -> "&pageSize=&boardType_seq=361"
-        else -> "&pageSize=&boardType_seq=358"
-    }}&pageNum=$pageNum&searchword=$keyword&searchopt=title"
+    private fun setAddress(type: Int) =
+        "http://m.gachon.ac.kr/gachon/notice.jsp?&pageSize=&boardType_seq=${when (type) {
+            0 -> "358"
+            1 -> "359"
+            2 -> "360"
+            3 -> "361"
+            else -> "358"
+        }}&pageNum=$pageNum&searchword=$keyword&searchopt=title"
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
@@ -63,8 +64,7 @@ class NotificationAsyncTask(
     }
 
     private fun request(bool: Boolean) {
-        val conn = Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")
-        for (n in conn) {
+        for (n in Jsoup.parseBodyFragment(URL(address).readText()).select("div.list li")) {
             if (n.html().contains("등록된 정보가 없습니다.")) {
                 continue
             }
