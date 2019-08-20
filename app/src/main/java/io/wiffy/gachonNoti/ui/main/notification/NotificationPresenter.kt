@@ -6,10 +6,10 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
     NotificationContract.Presenter {
 
     private var list = ParseList()
-    private var isloading = false
+    private var isLoading = false
     private var type = 0
     private var page = 0
-    private var searchkey = ""
+    private var searchKey = ""
 
     override fun initPresent() {
         mView.changeUI(list)
@@ -22,7 +22,7 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
     }
 
     override fun search(str: String) {
-        searchkey = str
+        searchKey = str
         page = 0
         list.clear()
         request()
@@ -34,22 +34,23 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
     }
 
     override fun resetList() {
-        searchkey = ""
+        mView.recyclerViewClear()
+        searchKey = ""
         page = 0
         list.clear()
         request()
     }
 
     override fun update(data: ParseList) {
-        isloading = false
+        isLoading = false
         list = data
         mView.updateUI(list)
     }
 
     override fun request() {
-        if (!isloading) {
-            isloading = true
-            NotificationAsyncTask(list, this, type, searchkey, page).execute()
+        if (!isLoading) {
+            isLoading = true
+            NotificationAsyncTask(list, this, type, searchKey, page).execute()
         }
     }
 

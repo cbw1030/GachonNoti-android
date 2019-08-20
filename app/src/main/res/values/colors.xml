@@ -19,11 +19,14 @@
     <color name="red">#E6C84646</color>
     <color name="deepRed">#E68F3636</color>
     <color name="lightRed">#E6F18181</color>
+    <color name="transRed">#4DF18181</color>
     <color name="green">#E646AA46</color>
     <color name="deepGreen">#E6347434</color>
     <color name="lightGreen">#E6B2F0B2</color>
+    <color name="transGreen">#4DB2F0B2</color>
     <color name="main2Blue">#3C75DC</color>
     <color name="main2LightBlue">#A9C1EC</color>
+    <color name="main2TransBlue">#4DA9C1EC</color>
     <color name="main2DeepBlue">#2F5AA8</color>
     <color name="notiBackground">#FEF6E3</color>
     <color name="ran1">#EF8676</color>

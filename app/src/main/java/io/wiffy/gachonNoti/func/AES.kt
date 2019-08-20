@@ -21,7 +21,6 @@ fun decrypt(text: String, key: String): String {
     return String(results, Charsets.UTF_8)
 }
 
-
 @Throws(Exception::class)
 fun encrypt(text: String, key: String): String {
     val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")

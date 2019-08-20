@@ -15,6 +15,7 @@ interface NotificationContract {
         abstract fun search(str: String)
         abstract fun themeChanger(bool: Boolean)
         abstract fun sendContext(): Context?
+        abstract fun recyclerViewClear()
     }
 
     interface Presenter : SuperContract.WiffyObject {

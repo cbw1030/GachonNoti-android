@@ -1,7 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import android.widget.*
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.getThemeTransColor
 
 class NotificationFragment : NotificationContract.View() {
 
@@ -44,6 +44,8 @@ class NotificationFragment : NotificationContract.View() {
             myView.swipe.isRefreshing = false
         }
     }
+
+    override fun recyclerViewClear() = myView.recylcer.recycledViewPool.clear()
 
     private fun setFab() {
         myView.fab_main.setOnClickListener {
@@ -129,6 +131,7 @@ class NotificationFragment : NotificationContract.View() {
             myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
             myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
             myView.segmented.setTintColor(resources.getColor(getThemeColor()))
+            myView.backbackback.setBackgroundColor(resources.getColor(getThemeTransColor()))
         }
     }
 
