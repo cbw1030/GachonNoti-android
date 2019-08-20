@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
 class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
-    var tempLogin = false
+    private var tempLogin = false
 
     @SuppressLint("ApplySharedPref", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,17 +112,8 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     private fun logout() {
         val number = getSharedItem<String>("number")
 
-        sharedPreferences.edit().apply {
-            remove("id")
-            remove("password")
-            remove("name")
-            remove("number")
-            remove("department")
-            remove("image")
-            remove("birthday")
-            remove("gender")
-            putBoolean("login", false)
-        }.commit()
+        removeSharedItems("id", "password", "name", "number", "department", "image", "birthday", "gender")
+        setSharedItem("login", false)
         Component.isLogin = false
         isLogin(false)
         (MainActivity.mView).allThemeChange()
@@ -134,17 +125,17 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     @SuppressLint("ApplySharedPref", "SetTextI18n")
     fun saveInformation(information: StudentInformation) {
         with(information) {
-            sharedPreferences.edit().apply {
-                putString("id", id)
-                putString("password", encrypt(password!!, getMACAddress()))
-                putString("name", name)
-                putString("number", number)
-                putString("department", department)
-                putString("image", imageURL)
-                putBoolean("login", true)
-            }.commit()
+            setSharedItems(
+                Pair("id", id),
+                Pair("password", encrypt(password!!, getMACAddress())),
+                Pair("name", name),
+                Pair("number", number),
+                Pair("department", department),
+                Pair("image", imageURL)
+            )
+            setSharedItem("login", true)
         }
-        gachonname.text = "${sharedPreferences.getString("name", "") ?: ""}님 안녕하세요!"
+        gachonname.text = "${getSharedItem("name", "")}님 안녕하세요!"
         Component.isLogin = true
         isLogin(true)
         (MainActivity.mView).allThemeChange()

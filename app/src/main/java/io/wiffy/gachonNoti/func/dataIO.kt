@@ -2,12 +2,11 @@
 
 package io.wiffy.gachonNoti.func
 
-
-import android.content.SharedPreferences
+import io.wiffy.gachonNoti.model.Component.sharedPreferences
 import java.lang.Exception
 import java.util.HashMap
 
-lateinit var sharedPreferences: SharedPreferences
+
 const val appConstantPreferences = "GACHONNOTICE"
 
 inline fun <reified T> setSharedItem(key: String, data: T) = sharedPreferences.edit().apply {

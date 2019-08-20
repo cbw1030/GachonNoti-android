@@ -1,8 +1,12 @@
 package io.wiffy.gachonNoti.model
 
+import android.content.SharedPreferences
+
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
 object Component {
+
+    lateinit var sharedPreferences: SharedPreferences
 
     var adminMode = false
 
