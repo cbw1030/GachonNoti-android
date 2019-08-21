@@ -14,35 +14,25 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
 
     private val mList = ArrayList<Fragment?>()
 
-    override fun initPresent() {
+    override fun initPresent() = with(mList)
+    {
         Component.state = STATE_NOTIFICATION
-
-        val notificationFragment = NotificationFragment()
-        val informationFragment = MyInformationFragment()
-        val searcherFragment = SearcherFragment()
-        val settingFragment = SettingFragment()
-
-        with(mList)
-        {
-            add(notificationFragment)
-            add(informationFragment)
-            add(searcherFragment)
-            add(settingFragment)
-        }
-
-        mView.changeUI(mList)
+        add(NotificationFragment())
+        add(MyInformationFragment())
+        add(SearcherFragment())
+        add(SettingFragment())
+        mView.changeUI(this)
         if (!getSharedItem(Component.version, false)) {
             mView.updatedContents()
         }
     }
 
-    override fun logout() {
-        (mList[STATE_SETTING] as SettingFragment).adminLogout()
-    }
 
-    override fun login() {
-        (mList[STATE_SETTING] as SettingFragment).adminLogin()
-    }
+    override fun logout() = (mList[STATE_SETTING] as SettingFragment).adminLogout()
+
+
+    override fun login() = (mList[STATE_SETTING] as SettingFragment).adminLogin()
+
 
     override fun changeThemes() = mList.let {
         (it[STATE_NOTIFICATION] as NotificationFragment).themeChanger(true)

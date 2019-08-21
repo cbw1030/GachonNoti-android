@@ -16,6 +16,7 @@ interface MainContract {
         abstract fun themeChange()
         abstract fun login()
         abstract fun logout()
+        abstract fun setTitle(pair: Pair<String, Boolean>)
     }
 
     interface Presenter : SuperContract.WiffyObject {

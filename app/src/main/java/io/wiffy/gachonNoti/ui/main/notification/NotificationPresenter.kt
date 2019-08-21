@@ -1,6 +1,9 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import io.wiffy.gachonNoti.func.STATE_NOTIFICATION
+import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.model.ParseList
+import io.wiffy.gachonNoti.ui.main.MainActivity
 
 class NotificationPresenter(private val mView: NotificationContract.View) :
     NotificationContract.Presenter {
@@ -30,6 +33,20 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
 
     override fun setType(mType: Int) {
         type = mType
+        Component.titles[STATE_NOTIFICATION] = Pair(
+            when (type) {
+                1 -> "가천뉴스"
+                2 -> "행사소식"
+                3 -> "장학소식"
+                else -> "공지사항"
+            }, false
+        )
+        MainActivity.mView.setTitle(
+            Pair(
+                Component.titles[STATE_NOTIFICATION].first,
+                Component.titles[STATE_NOTIFICATION].second
+            )
+        )
         resetList()
     }
 

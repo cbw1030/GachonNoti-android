@@ -45,7 +45,7 @@ class MainActivity : MainContract.View() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        title = "공지사항"
+        title = Component.titles[STATE_NOTIFICATION].first
 
         mView = this
         invisible()
@@ -62,17 +62,18 @@ class MainActivity : MainContract.View() {
             setTitle("알림 설정 확인")
             setMessage("가천 알림이의 알림을 허용하시겠습니까?")
             setPositiveButton("OK") { _, _ ->
-                val tent = Intent().apply {
-                    action = "android.settings.APP_NOTIFICATION_SETTINGS"
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    tent.putExtra("android.provider.extra.APP_PACKAGE", packageName)
 
-                } else {
-                    tent.putExtra("app_package", packageName)
-                    tent.putExtra("app_uid", applicationInfo.uid)
-                }
-                startActivity(tent)
+                startActivity(Intent().apply {
+                    action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                }.apply {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        putExtra("android.provider.extra.APP_PACKAGE", packageName)
+
+                    } else {
+                        putExtra("app_package", packageName)
+                        putExtra("app_uid", applicationInfo.uid)
+                    }
+                })
                 setSharedItem("notiOn", true)
                 FirebaseMessaging.getInstance().subscribeToTopic("noti")
             }
@@ -144,34 +145,23 @@ class MainActivity : MainContract.View() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                menuItem?.let {
-                    when (tab?.position) {
-                        STATE_NOTIFICATION -> {
-                            title = "공지사항"
-                            it.isVisible = false
-                        }
-                        STATE_INFORMATION -> {
-                            title = "내 정보"
-                            it.isVisible = false
-                        }
-                        STATE_SEARCHER -> {
-                            title = Component.myRoom
-                            it.isVisible = true
-                        }
-                        STATE_SETTING -> {
-                            title = "설정"
-                            it.isVisible = false
-                        }
-                        else -> {
-                            title = "가천알림이"
-                            it.isVisible = false
-                        }
-                    }
-                    Component.state = tab?.position ?: STATE_NOTIFICATION
-                    pager.currentItem = tab?.position ?: STATE_NOTIFICATION
-                }
+                setTitle(
+                    Pair(
+                        Component.titles[tab?.position ?: 4].first,
+                        Component.titles[tab?.position ?: 4].second
+                    )
+                )
+                Component.state = tab?.position ?: STATE_NOTIFICATION
+                pager.currentItem = tab?.position ?: STATE_NOTIFICATION
             }
         })
+    }
+
+    override fun setTitle(pair: Pair<String, Boolean>) {
+        menuItem?.let {
+            title = pair.first
+            it.isVisible = pair.second
+        }
     }
 
     @SuppressLint("ApplySharedPref")

@@ -34,12 +34,18 @@ object Component {
 
     var theme = "default"
 
-    var myRoom = "강의실"
-
     var noneVisible = false
 
     var campus = true
 
     lateinit var timeTableSet: HashSet<String>
+
+    var titles = arrayListOf(
+        Pair("공지사항", false),
+        Pair("내 정보", false),
+        Pair("강의실", true),
+        Pair("설정", false),
+        Pair("가천알림이", false)
+    )
 
 }

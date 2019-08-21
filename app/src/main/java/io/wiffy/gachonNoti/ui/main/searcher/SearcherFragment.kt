@@ -55,8 +55,9 @@ class SearcherFragment : SearchContract.View() {
             setSharedItem("tableItems", Component.timeTableSet)
 
             this@SearcherFragment.searcherVisible(true)
-            Component.myRoom = "강의실"
-            MainActivity.mView.title = Component.myRoom
+
+            Component.titles[STATE_SEARCHER] = Pair("강의실", true)
+            MainActivity.mView.title = Component.titles[STATE_SEARCHER].first
 
             builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
             builder?.show()
@@ -81,15 +82,15 @@ class SearcherFragment : SearchContract.View() {
             }
             myView.timetable.setTimeTable(0, arr)
 
-
-            Component.myRoom = "(${when (Component.SEMESTER) {
-                1 -> "1"
-                2 -> "2"
-                3 -> "여름"
-                else -> "겨울"
-            }}학기) $name "
-            MainActivity.mView.title = Component.myRoom
-
+            Component.titles[STATE_SEARCHER] = Pair(
+                "(${when (Component.SEMESTER) {
+                    1 -> "1"
+                    2 -> "2"
+                    3 -> "여름"
+                    else -> "겨울"
+                }}학기) $name ", true
+            )
+            MainActivity.mView.title = Component.titles[STATE_SEARCHER].first
             themeChanger()
             this@SearcherFragment.searcherVisible(false)
 
@@ -108,7 +109,7 @@ class SearcherFragment : SearchContract.View() {
     }
 
     override fun showLoad() = (activity as MainActivity).builderUp()
-    
+
     override fun dismissLoad() = (activity as MainActivity).builderDismiss()
 
 }

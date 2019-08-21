@@ -8,12 +8,19 @@ import org.jsoup.Jsoup
 import java.lang.Exception
 import java.net.URL
 
-class ContactAsyncTask(private val myView: SettingContract.View, private val query: String) :
+class ContactAsyncTask(
+    private val myView: SettingContract.View,
+    private val query: String,
+    private val query2: Boolean,
+    private val query3: Boolean
+) :
     SuperContract.SuperAsyncTask<Void, Void, Int>() {
     private val myList = ArrayList<ContactInformation>()
 
     override fun onPreExecute() {
         myView.builderUp()
+        if (query2) myList.add(ContactInformation("Wiffy", "박상현", "201735829"))
+        if (query3) myList.add(ContactInformation("Wiffy", "박정호", "201635812"))
     }
 
     override fun doInBackground(vararg params: Void?): Int {

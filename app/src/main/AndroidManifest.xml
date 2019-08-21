@@ -44,15 +44,18 @@
                 android:name="org.apache.http.legacy"
                 android:required="false"/>
 
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name=".ui.splash.SplashActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.webView.WebViewActivity"/>
-        <activity android:name=".ui.main.MainActivity"/>
+        <activity android:name=".ui.webView.WebViewActivity"
+        />
+        <activity android:name=".ui.main.MainActivity"
+                  android:screenOrientation="portrait"/>
 
         <service
                 android:name=".model.firebase.FirebaseMessagingService"

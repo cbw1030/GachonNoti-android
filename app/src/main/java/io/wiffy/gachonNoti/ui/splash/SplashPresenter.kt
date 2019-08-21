@@ -17,14 +17,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         }
     }
 
-    private fun addList() = LongArray(4).apply {
-        this[0] = 100
-        this[1] = 200
-        this[2] = 100
-        this[3] = 200
-    }
-
-    private fun channelSet(){
+    private fun channelSet() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = context.getString(R.string.channel)
             val channelName = context.getString(R.string.app_name)
@@ -36,7 +29,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                     enableLights(true)
                     enableVibration(true)
                     setShowBadge(false)
-                    vibrationPattern = addList()
+                    vibrationPattern = longArrayOf(100, 200, 100, 200)
                 }
             notiChannel.createNotificationChannel(channelMessage)
         }

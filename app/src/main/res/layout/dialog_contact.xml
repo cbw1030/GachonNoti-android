@@ -20,7 +20,7 @@
             <TextView
                     android:layout_marginTop="3dp"
                     android:gravity="center"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/year2"
                     android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginStart="10dp"
                     android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/cate2"
                     android:visibility="visible"
@@ -41,7 +41,7 @@
                     android:layout_below="@+id/year2"
                     android:spinnerMode="dropdown"/>
             <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_marginStart="-5dp"
+                    android:layout_marginStart="-10dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginEnd="10dp"
                     android:layout_below="@+id/year2"

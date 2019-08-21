@@ -11,7 +11,7 @@ interface SettingContract {
         abstract fun changeView()
         abstract fun adminLogout()
         abstract fun adminLogin()
-        abstract fun executeTask(query: String)
+        abstract fun executeTask(query: String, query2: Boolean, query3: Boolean)
         abstract fun executeTask2(query: String)
         abstract fun builderUp()
         abstract fun builderDismissAndContactUp(list: ArrayList<ContactInformation>)

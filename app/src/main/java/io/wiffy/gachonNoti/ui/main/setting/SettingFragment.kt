@@ -291,8 +291,8 @@ class SettingFragment : SettingContract.View() {
         (activity as MainActivity).mPresenter.changeThemes()
     }
 
-    override fun executeTask(query: String) {
-        ContactAsyncTask(this, query).execute()
+    override fun executeTask(query: String, query2: Boolean, query3: Boolean) {
+        ContactAsyncTask(this, query, query2, query3).execute()
     }
 
     override fun executeTask2(query: String) {
