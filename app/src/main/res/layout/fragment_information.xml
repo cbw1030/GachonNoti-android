@@ -11,7 +11,7 @@
             android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-                android:visibility="gone"
+
                 android:id="@+id/navigation3"
                 app:tabMode="fixed"
                 android:elevation="0dp"
@@ -45,7 +45,7 @@
                 android:textStyle="bold"
                 android:text="로그인하셔야 이용이 가능합니다."
                 android:layout_centerHorizontal="true"
-              android:layout_above="@+id/login2"
+                android:layout_above="@+id/login2"
                 android:gravity="center"
                 android:textColor="@color/gray2"
                 android:layout_width="wrap_content"
