@@ -89,3 +89,21 @@ fun getRandomColorId(): Int = intArrayOf(
     R.color.ran7,
     R.color.ran8
 )[Random().nextInt(8)]
+
+fun dayToInt(day: String): Int = when (day) {
+    "월" -> 0
+    "화" -> 1
+    "수" -> 2
+    "목" -> 3
+    "금" -> 4
+    else -> 5
+}
+
+fun intToDay(int: Int): String = when (int) {
+    0 -> "월"
+    1 -> "화"
+    2 -> "수"
+    3 -> "목"
+    4 -> "금"
+    else -> "토"
+}

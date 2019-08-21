@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
+import com.github.eunsiljo.timetablelib.view.TimeTableView
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.`object`.Component
 import kotlin.collections.ArrayList

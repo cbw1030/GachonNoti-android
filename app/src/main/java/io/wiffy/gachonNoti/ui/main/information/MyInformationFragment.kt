@@ -16,7 +16,6 @@ import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.STATE_NOTIFICATION
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_information.view.*
 
 

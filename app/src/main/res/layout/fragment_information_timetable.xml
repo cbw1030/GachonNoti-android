@@ -18,7 +18,7 @@
                     android:layout_marginTop="-1dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/mytimetable"/>
+                    android:id="@+id/mTable"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

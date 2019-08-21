@@ -29,10 +29,10 @@ data class TimeTableInformation(
     val subject: String,
     val professor: String,
     val place: String,
-    val start: String,
-    val end: String
+    val start: Long,
+    val end: Long
 ) {
-    val information = "$day:$subject:$professor:$place:$start:$end"
+    val information = "$day%^$subject%^$professor%^$place%^$start%^$end"
 
     override fun toString() =
         "\nday : $day \n" +

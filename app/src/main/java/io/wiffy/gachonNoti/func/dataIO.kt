@@ -2,6 +2,7 @@
 
 package io.wiffy.gachonNoti.func
 
+import android.util.Log
 import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
 import java.lang.Exception
 import java.util.HashMap
@@ -16,7 +17,8 @@ inline fun <reified T> setSharedItem(key: String, data: T) = sharedPreferences.e
         Float::class -> putFloat(key, data as Float)
         Int::class -> putInt(key, data as Int)
         Long::class -> putLong(key, data as Long)
-        HashSet::class -> putStringSet(key, data as HashSet<String>)
+        HashSet::class -> {putStringSet(key, data as HashSet<String>)
+        Log.d("asdf","나니")}
     }
 }.commit()
 

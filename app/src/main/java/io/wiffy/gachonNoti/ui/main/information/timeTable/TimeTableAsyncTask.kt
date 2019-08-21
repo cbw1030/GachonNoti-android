@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.information.timeTable
 
+import android.annotation.SuppressLint
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
@@ -11,11 +12,14 @@ import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.jsoup.Jsoup
 import java.lang.Exception
+import java.text.SimpleDateFormat
 
 class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) :
     SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
-    private val set = HashSet<String>()
+    val set = HashSet<String>()
+    @SuppressLint("SimpleDateFormat")
+    private val format = SimpleDateFormat("HH:mm:ss")
     private val sem = 20
     //        when (Component.SEMESTER) {
 //            1 -> "10"
@@ -23,6 +27,7 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
 //            3 -> "11"
 //            else -> "21"
 //        }
+
 
     override fun doInBackground(vararg params: Void?) =
 
@@ -38,7 +43,7 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
 
             for (element in page) {
                 if (element.text().contains("요일")) {
-                    val day = element.select("a").text().split(" ")[1].replace("DAY", "")
+                    val day = element.select("a").text().split("요일")[0]
 
                     for (data in element.select("ul.schedule_gray li")) {
                         val information = data.text().split("/")
@@ -48,26 +53,25 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
                             data.html().split("<p>")[1].split("/")[0].trim(),
                             information[2].trim(),
                             information[1].trim(),
-                            preInformation[1].let {
+                            format.parse(preInformation[1].let {
                                 "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
-                            }.trim(),
-                            preInformation[3].let {
+                            }.trim()).time,
+                            format.parse(preInformation[3].let {
                                 "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
-                            }.trim()
+                            }.trim()).time
                         )
                         set.add(table.information)
                     }
                 }
             }
-
+            setSharedItem("tableSet", set)
+            mView.initTable(set)
+            console("success")
             ACTION_SUCCESS
 
         } catch (e: Exception) {
+            console("fail")
             ACTION_FAILURE
         }
 
-    override fun onPreExecute() {
-        setSharedItem("tableSet", set)
-        mView.initTable(set)
-    }
 }
