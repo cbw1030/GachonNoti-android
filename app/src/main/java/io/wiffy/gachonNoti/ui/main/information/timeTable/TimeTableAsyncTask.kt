@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.information.timeTable
 
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
+import io.wiffy.gachonNoti.model.TimeTableInformation
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
@@ -28,13 +29,26 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
                 )
             ).select("li")
 
-//            console(page.html())
-
             for (element in page) {
-                if (element.text().contains("요일")){
-                    console(element.select("a").text().split("요일")[0])
+                if (element.text().contains("요일")) {
+                    val day = element.select("a").text().split(" ")[1].replace("DAY", "")
+
                     for (data in element.select("ul.schedule_gray li")) {
-//                        console(data.html())
+                        val information = data.text().split("/")
+                        val preInformation = information[0].split(" ")
+                        val table = TimeTableInformation(
+                            day.trim(),
+                            data.html().split("<p>")[1].split("/")[0].trim(),
+                            information[2].trim(),
+                            information[1].trim(),
+                            preInformation[1].let {
+                                "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
+                            }.trim(),
+                            preInformation[3].let {
+                                "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
+                            }.trim()
+                        )
+                        console(table.toString())
                     }
                 }
             }

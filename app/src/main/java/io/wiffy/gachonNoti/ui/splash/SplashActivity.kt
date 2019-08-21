@@ -72,7 +72,6 @@ class SplashActivity : SplashContract.View() {
             val name: String? = getSharedItem<String>("name")
 
             // birthday == date && name != null
-            console("birthday = $birthday / today = $date")
 
             if (birthday == date && name != null) {
                 Component.delay = 1500
