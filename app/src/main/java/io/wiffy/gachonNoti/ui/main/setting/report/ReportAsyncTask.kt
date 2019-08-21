@@ -4,7 +4,7 @@ import android.os.Build
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.NOT_UPDATED_YET
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import org.jsoup.Connection

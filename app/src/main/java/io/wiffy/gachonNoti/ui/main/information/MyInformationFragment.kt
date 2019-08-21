@@ -12,9 +12,11 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.func.STATE_NOTIFICATION
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_information.view.*
 
 
@@ -57,6 +59,7 @@ class MyInformationFragment : MyInformationContract.View() {
         mPresenter.fragmentInflation(fragmentList)
         adapter = PagerAdapter(activity?.supportFragmentManager, fragmentList)
         myView.navigation3.addTab(myView.navigation3.newTab().setText("학생증"))
+        myView.navigation3.addTab(myView.navigation3.newTab().setText("시간표"))
         myView.pager3.adapter = adapter
         myView.pager3.offscreenPageLimit = fragmentList.size
         myView.pager3.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(myView.navigation3))
@@ -68,6 +71,7 @@ class MyInformationFragment : MyInformationContract.View() {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                myView.pager3.currentItem = tab?.position ?: STATE_NOTIFICATION
             }
         })
         themeChanger(false)
@@ -105,4 +109,6 @@ class MyInformationFragment : MyInformationContract.View() {
             myView.navigation3.setSelectedTabIndicatorColor(it[1])
         }
     }
+
+
 }

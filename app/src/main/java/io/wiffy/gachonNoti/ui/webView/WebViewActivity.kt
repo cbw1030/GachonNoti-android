@@ -15,7 +15,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Parse
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 

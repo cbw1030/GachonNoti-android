@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.ParseList
-import io.wiffy.gachonNoti.model.adapter.VerticalSpaceItemDecoration
+import io.wiffy.gachonNoti.`object`.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -111,7 +111,8 @@ class NotificationFragment : NotificationContract.View() {
         myView.recylcer.adapter = adapter
         myView.recylcer.layoutManager = LinearLayoutManager(activity?.applicationContext!!)
         myView.recylcer.addItemDecoration(
-            VerticalSpaceItemDecoration)
+            VerticalSpaceItemDecoration
+        )
         myView.recylcer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)

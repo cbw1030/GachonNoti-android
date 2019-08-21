@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
 import io.wiffy.gachonNoti.func.*

@@ -3,7 +3,7 @@ package io.wiffy.gachonNoti.ui.main
 import android.app.Activity
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.func.*
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.main.information.MyInformationFragment
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.searcher.SearcherFragment

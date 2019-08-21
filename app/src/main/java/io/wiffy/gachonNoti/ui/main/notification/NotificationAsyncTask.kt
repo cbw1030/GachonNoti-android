@@ -7,7 +7,7 @@ import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.ParseList
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL

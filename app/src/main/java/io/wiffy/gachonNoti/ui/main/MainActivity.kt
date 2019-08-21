@@ -21,7 +21,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 

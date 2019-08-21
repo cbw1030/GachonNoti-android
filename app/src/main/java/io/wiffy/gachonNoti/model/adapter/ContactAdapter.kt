@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.ContactInformation
-import io.wiffy.gachonNoti.model.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.adapter_contact.view.*
 

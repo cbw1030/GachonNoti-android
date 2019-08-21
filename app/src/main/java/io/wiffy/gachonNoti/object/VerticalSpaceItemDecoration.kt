@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.model.adapter
+package io.wiffy.gachonNoti.`object`
 
 import android.graphics.Rect
 import android.view.View

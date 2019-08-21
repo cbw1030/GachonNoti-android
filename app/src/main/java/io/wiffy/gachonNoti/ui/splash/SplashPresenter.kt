@@ -5,7 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 
 
 class SplashPresenter(private val mView: SplashContract.View, private val context: Context) : SplashContract.Presenter {

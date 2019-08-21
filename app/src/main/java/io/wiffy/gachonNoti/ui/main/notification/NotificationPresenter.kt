@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import io.wiffy.gachonNoti.func.STATE_NOTIFICATION
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.ui.main.MainActivity
 

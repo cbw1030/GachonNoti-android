@@ -11,7 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.isNetworkConnected
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.dialog_search.*
 import kotlin.collections.ArrayList
 

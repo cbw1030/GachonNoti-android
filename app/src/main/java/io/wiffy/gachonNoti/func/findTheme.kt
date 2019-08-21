@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.func
 
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 
 fun getThemeColor(mTheme: String?) = when (mTheme) {
     "red" -> {

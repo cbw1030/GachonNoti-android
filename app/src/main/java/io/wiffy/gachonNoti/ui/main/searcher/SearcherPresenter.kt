@@ -8,7 +8,8 @@ import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.ClassDataInformation
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.`object`.TimeCompare
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader
@@ -209,13 +210,6 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         }
     }
 
-
-    class TimeCompare : Comparator<TimeData<Any?>> {
-        override fun compare(o1: TimeData<Any?>?, o2: TimeData<Any?>?): Int {
-            return o1!!.startMills.compareTo(o2!!.startMills);
-        }
-    }
-
     override fun loadTable(str: String) {
         Handler(Looper.getMainLooper()).post {
             mView.showLoad()
@@ -236,7 +230,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             findTable(load2, str)
             findTable(load3, str)
             for (num in 0..4) {
-                Collections.sort(tableArr[num], TimeCompare())
+                Collections.sort(tableArr[num], TimeCompare)
             }
 
             val array2 = ArrayList<TimeTableData>().apply {

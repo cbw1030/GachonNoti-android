@@ -2,8 +2,9 @@ package io.wiffy.gachonNoti.model
 
 import android.app.Application
 import android.content.Context
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
-import io.wiffy.gachonNoti.model.Component.sharedPreferences
+import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
 import java.util.*
 
 

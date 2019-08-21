@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.setSharedItem
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import java.io.BufferedReader
 import java.io.InputStreamReader

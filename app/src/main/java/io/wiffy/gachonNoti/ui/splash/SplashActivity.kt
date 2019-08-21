@@ -14,7 +14,7 @@ import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.func.getWordByKorean
 import io.wiffy.gachonNoti.func.setSharedItem
-import io.wiffy.gachonNoti.model.Component
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.text.SimpleDateFormat

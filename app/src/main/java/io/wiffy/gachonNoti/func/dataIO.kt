@@ -2,7 +2,7 @@
 
 package io.wiffy.gachonNoti.func
 
-import io.wiffy.gachonNoti.model.Component.sharedPreferences
+import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
 import java.lang.Exception
 import java.util.HashMap
 
