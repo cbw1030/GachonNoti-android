@@ -32,6 +32,8 @@ data class TimeTableInformation(
     val start: String,
     val end: String
 ) {
+    val information = "$day:$subject:$professor:$place:$start:$end"
+
     override fun toString() =
         "\nday : $day \n" +
                 "subject : $subject \n" +

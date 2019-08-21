@@ -19,7 +19,7 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning">
-        <receiver android:name=".ui.widget.Widget">
+        <receiver android:name=".ui.widget.IDCardWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
                 <action android:name="io.wiffy.gachonNoti.rebalgup_widget"/>

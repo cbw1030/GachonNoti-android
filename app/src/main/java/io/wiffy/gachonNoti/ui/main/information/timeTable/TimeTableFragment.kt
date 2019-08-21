@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.getSharedItem
 
 class TimeTableFragment : TimeTableContract.View() {
     var myView: View? = null
@@ -34,10 +35,18 @@ class TimeTableFragment : TimeTableContract.View() {
     fun loginInformationSetting(info: String) {
         mInfo = info
         myView?.let {
-            with(info)
-            {
-                if (info.length > 6) TimeTableAsyncTask(this@TimeTableFragment, info).execute()
+            if (info.length > 6) {
+                val mTable = getSharedItem<HashSet<String>>("tableSet")
+                if (mTable.size <= 0) {
+                    TimeTableAsyncTask(this@TimeTableFragment, info).execute()
+                } else {
+                    initTable(mTable)
+                }
             }
         }
+    }
+
+    override fun initTable(set: HashSet<String>) {
+    
     }
 }

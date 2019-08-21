@@ -23,7 +23,7 @@ import io.wiffy.gachonNoti.model.StudentInformation
 import java.text.SimpleDateFormat
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class Widget : AppWidgetProvider() {
+class IDCardWidget : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
@@ -42,7 +42,7 @@ class Widget : AppWidgetProvider() {
 
         if (intent?.action == mAction) {
             val appWidgetManager = AppWidgetManager.getInstance(context)
-            val thisAppWidget = ComponentName(context?.packageName, Widget::class.java.name)
+            val thisAppWidget = ComponentName(context?.packageName, IDCardWidget::class.java.name)
             val appWidgets = appWidgetManager.getAppWidgetIds(thisAppWidget)
             onUpdate(context!!, appWidgetManager, appWidgets)
         }
@@ -55,7 +55,7 @@ class Widget : AppWidgetProvider() {
             context: Context, appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            val views = RemoteViews(context.packageName, R.layout.widget_main)
+            val views = RemoteViews(context.packageName, R.layout.widget_idcard)
 
             context.getSharedPreferences("GACHONNOTICE", Context.MODE_PRIVATE).run {
                 changeView(
@@ -106,7 +106,7 @@ class Widget : AppWidgetProvider() {
 
             views.setOnClickPendingIntent(
                 R.id.rebalgup_widget, PendingIntent.getBroadcast(
-                    context, 0, Intent(context, Widget::class.java).apply {
+                    context, 0, Intent(context, IDCardWidget::class.java).apply {
                         action = mAction
                     },
                     PendingIntent.FLAG_UPDATE_CURRENT

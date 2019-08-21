@@ -23,7 +23,7 @@ import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
-import kotlinx.android.synthetic.main.adapter.view.*
+import kotlinx.android.synthetic.main.adapter_notification.view.*
 
 //        TYPE
 //        0 -> NOTIFICATION
@@ -125,7 +125,7 @@ class NotificationAdapter(
 
 
     inner class ComponentViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.adapter, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.adapter_notification, parent, false)
     ) {
         val title: TextView = itemView.titleIn
         val contexts: TextView = itemView.contextsIn

@@ -1,6 +1,9 @@
 package io.wiffy.gachonNoti.ui.main.information.timeTable
 
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.func.ACTION_FAILURE
+import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.TimeTableInformation
 import org.apache.http.client.methods.HttpPost
@@ -11,16 +14,20 @@ import java.lang.Exception
 
 class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) :
     SuperContract.SuperAsyncTask<Void, Void, Int>() {
-    override fun doInBackground(vararg params: Void?): Int {
-        val sem = 20
 
-//        when (Component.SEMESTER) {
+    private val set = HashSet<String>()
+    private val sem = 20
+    //        when (Component.SEMESTER) {
 //            1 -> "10"
 //            2 -> "20"
 //            3 -> "11"
 //            else -> "21"
 //        }
+
+    override fun doInBackground(vararg params: Void?) =
+
         try {
+
             val page = Jsoup.parseBodyFragment(
                 EntityUtils.toString(
                     DefaultHttpClient().execute(
@@ -48,14 +55,19 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
                                 "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
                             }.trim()
                         )
-                        console(table.toString())
+                        set.add(table.information)
                     }
                 }
             }
 
+            ACTION_SUCCESS
+
         } catch (e: Exception) {
-            console("ERROR")
+            ACTION_FAILURE
         }
-        return 0
+
+    override fun onPreExecute() {
+        setSharedItem("tableSet", set)
+        mView.initTable(set)
     }
 }
