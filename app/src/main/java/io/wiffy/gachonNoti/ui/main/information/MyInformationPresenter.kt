@@ -26,6 +26,8 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
         timeTable?.changeTheme()
     }
 
+    override fun resetTable() = timeTable?.resetTable()
+
     override fun isNotLogin() {
     }
 

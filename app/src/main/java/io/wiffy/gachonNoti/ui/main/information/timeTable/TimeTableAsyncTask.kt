@@ -7,6 +7,7 @@ import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.TimeTableInformation
+import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
@@ -20,19 +21,20 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
     val set = HashSet<String>()
     @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("HH:mm:ss")
-    private val sem = 20
-    //        when (Component.SEMESTER) {
-//            1 -> "10"
-//            2 -> "20"
-//            3 -> "11"
-//            else -> "21"
-//        }
+    private val sem = when (Component.SEMESTER) {
+        1 -> "10"
+        2 -> "20"
+        3 -> "11"
+        else -> "21"
+    }
 
+    override fun onPreExecute() {
+        MainActivity.mView.builderUp()
+    }
 
     override fun doInBackground(vararg params: Void?) =
 
         try {
-
             val page = Jsoup.parseBodyFragment(
                 EntityUtils.toString(
                     DefaultHttpClient().execute(
@@ -44,8 +46,8 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
             for (element in page) {
                 if (element.text().contains("요일")) {
                     val day = element.select("a").text().split("요일")[0]
-
                     for (data in element.select("ul.schedule_gray li")) {
+                        console(data.html())
                         val information = data.text().split("/")
                         val preInformation = information[0].split(" ")
                         val table = TimeTableInformation(
@@ -74,4 +76,7 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
             ACTION_FAILURE
         }
 
+    override fun onPostExecute(result: Int?) {
+        MainActivity.mView.builderDismiss()
+    }
 }

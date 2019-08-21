@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.ui.main.information.timeTable
 
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -60,6 +59,10 @@ class TimeTableFragment : TimeTableContract.View() {
         }
     }
 
+    fun resetTable() {
+        val info = getSharedItem<String>("number")
+        if (info.length > 6) TimeTableAsyncTask(this@TimeTableFragment, info).execute()
+    }
 
     override fun initTable(set: HashSet<String>) {
 
@@ -77,7 +80,12 @@ class TimeTableFragment : TimeTableContract.View() {
                     superList[dayToInt(it[0])].add(
                         TimeData(
                             0,
-                            "${it[1]} - ${it[3].replace("-", "")}",
+                            if (it[3].isBlank()) {
+                                it[1]
+                            } else {
+                                "${it[1]}\n${it[3]}"
+                            }
+                            ,
                             getRandomColorId(),
                             R.color.white,
                             it[4].toLong(),
@@ -85,7 +93,6 @@ class TimeTableFragment : TimeTableContract.View() {
                         )
                     )
                 }
-                console(value)
             }
 
             for (v in 0..4) Collections.sort(superList[v], TimeCompare)
@@ -146,11 +153,8 @@ class TimeTableFragment : TimeTableContract.View() {
                 it.setShowHeader(true)
                 it.setTableMode(TimeTableView.TableMode.SHORT)
                 it.setTimeTable(0, list)
-                console("view")
             }
         }
 
     }
-
-
 }

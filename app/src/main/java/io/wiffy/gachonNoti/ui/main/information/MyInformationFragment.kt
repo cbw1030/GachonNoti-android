@@ -41,6 +41,7 @@ class MyInformationFragment : MyInformationContract.View() {
         isNotLogin()
     }
 
+    fun resetTable() = mPresenter.resetTable()
 
     override fun isLogin() {
         myView.information_true.visibility = View.VISIBLE

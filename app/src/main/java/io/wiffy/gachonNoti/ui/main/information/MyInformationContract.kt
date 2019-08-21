@@ -19,5 +19,6 @@ interface MyInformationContract {
         fun themeChange(): Unit?
         fun isNotLogin()
         fun loginSetting(): Unit?
+        fun resetTable():Unit?
     }
 }

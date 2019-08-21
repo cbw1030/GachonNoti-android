@@ -28,7 +28,8 @@ import java.lang.Exception
 
 class MainActivity : MainContract.View() {
 
-    var menuItem: MenuItem? = null
+    var menuItem1: MenuItem? = null
+    var menuItem2: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
     private var backKeyPressedTime: Long = 0L
@@ -87,16 +88,23 @@ class MainActivity : MainContract.View() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuItem = menu?.add(0, 201735829, 0, "시간표 데이터 삭제")
-        menuItem?.isVisible = false
+        menuItem1 = menu?.add(0, 201735829, 0, "강의실 데이터 삭제")
+        menuItem1?.isVisible = false
+        menuItem2 = menu?.add(0, 201735831, 0, "시간표 리셋")
+        menuItem2?.isVisible = false
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean = if (item?.itemId == 201735829) {
-        mPresenter.resetData()
-        true
-    } else {
-        super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        201735829 -> {
+            mPresenter.deleteRoomData()
+            true
+        }
+        201735831 -> {
+            mPresenter.resetTimeTable()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun builderUp() {
@@ -145,23 +153,24 @@ class MainActivity : MainContract.View() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                Component.state = tab?.position ?: STATE_NOTIFICATION
+                pager.currentItem = tab?.position ?: STATE_NOTIFICATION
                 setTitle(
                     Pair(
                         Component.titles[tab?.position ?: 4].first,
                         Component.titles[tab?.position ?: 4].second
                     )
                 )
-                Component.state = tab?.position ?: STATE_NOTIFICATION
-                pager.currentItem = tab?.position ?: STATE_NOTIFICATION
             }
         })
     }
 
     override fun setTitle(pair: Pair<String, Boolean>) {
-        menuItem?.let {
-            title = pair.first
+        title = pair.first
+        menuItem1?.let {
             it.isVisible = pair.second
         }
+        menuItem2?.isVisible = (Component.isLogin && Component.state == STATE_INFORMATION)
     }
 
     @SuppressLint("ApplySharedPref")
