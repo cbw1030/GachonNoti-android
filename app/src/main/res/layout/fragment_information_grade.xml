@@ -51,7 +51,7 @@
                             android:textColor="@color/black"
                             android:textAlignment="center"
                             android:gravity="center"
-                            android:text="Practical English C1"
+                            android:text="교과목명"
                             android:layout_weight="5"
                             android:id="@+id/creditName"
                             android:layout_width="0dp"
