@@ -112,7 +112,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     private fun logout() {
         val number = getSharedItem<String>("number")
 
-        removeSharedItems("id", "password", "name", "number", "department", "image", "birthday", "gender", "tableSet")
+        removeSharedItems("id", "password", "name", "number","pattern" ,"department", "image", "birthday", "gender", "tableSet")
         setSharedItem("login", false)
         Component.isLogin = false
         isLogin(false)

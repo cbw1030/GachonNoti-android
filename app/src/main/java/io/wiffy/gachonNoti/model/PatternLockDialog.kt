@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.model
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.listener.PatternLockViewListener
@@ -17,6 +18,9 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.dialog_pattern_lock)
+
+        window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+
         gogobebe.setCardBackgroundColor(context.resources.getColor(getThemeTransColor()))
 
         pattern_lock_view.run {
@@ -37,12 +41,12 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
                             } else {
                                 bulabula.text = "패턴이 너무 짧습니다."
                             }
-
                         }
                         SET_PATTERN2 -> {
                             if (mPattern == prePattern) {
                                 setSharedItem("pattern", mPattern)
                                 bulabula.text = "설정 완료"
+                                toast("패턴을 설정했습니다.")
                                 dismiss()
                             } else {
                                 bulabula.text = "패턴이 틀립니다. 다시 설정해주세요."
@@ -50,7 +54,12 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
                             }
                         }
                         CHECK_PATTERN -> {
-                            val mP = getSharedItem<String>("pattern")
+                            if(getSharedItem<String>("pattern")==mPattern)
+                            {
+
+                            }else{
+
+                            }
                         }
                     }
                 }
