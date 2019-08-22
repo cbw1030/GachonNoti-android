@@ -425,10 +425,10 @@ class SettingFragment : SettingContract.View() {
             setSharedItem("notiOn", true)
             true
         } else {
+            setSharedItem("notiOn", false)
             console("알 수 없는 오류")
             false
         }
-
     }
 
 
@@ -440,6 +440,7 @@ class SettingFragment : SettingContract.View() {
             false
         } else {
             console("알 수 없는 오류")
+            setSharedItem("notiOn", true)
             true
         }
     }

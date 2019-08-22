@@ -49,7 +49,6 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
                 if (element.text().contains("요일")) {
                     val day = element.select("a").text().split("요일")[0]
                     for (data in element.select("ul.schedule_gray li")) {
-                        console(data.html())
                         val information = data.text().split("/")
                         val preInformation = information[0].split(" ")
                         val table = TimeTableInformation(
@@ -70,10 +69,8 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
             }
             setSharedItem("tableSet", set)
             mView.initTable(set)
-            console("success")
             ACTION_SUCCESS
         } catch (e: Exception) {
-            console("fail")
             ACTION_FAILURE
         }
     }
