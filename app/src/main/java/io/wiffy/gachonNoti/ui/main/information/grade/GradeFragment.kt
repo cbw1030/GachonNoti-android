@@ -24,6 +24,9 @@ class GradeFragment : GradeContract.View() {
 
     override fun initView() {
         changeTheme()
+        myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
+
+        }
     }
 
     fun changeTheme() {

@@ -112,7 +112,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     private fun logout() {
         val number = getSharedItem<String>("number")
 
-        removeSharedItems("id", "password", "name", "number", "department", "image", "birthday", "gender","tableSet")
+        removeSharedItems("id", "password", "name", "number", "department", "image", "birthday", "gender", "tableSet")
         setSharedItem("login", false)
         Component.isLogin = false
         isLogin(false)
@@ -142,6 +142,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         if (information.number == "201735829" || information.number == "201635812") (MainActivity.mView).login()
         else if (information.department == "소프트웨어학과") toast("우리과 학생이시군요?")
         else toast("로그인에 성공하였습니다.")
+        (MainActivity.mView).askSetPattern()
         dismiss()
     }
 

@@ -165,6 +165,20 @@ class MainActivity : MainContract.View() {
         })
     }
 
+    override fun askSetPattern() {
+        AlertDialog.Builder(this@MainActivity).apply {
+            setMessage("패턴을 설정하시겠습니까?")
+            setPositiveButton("네") { _, _ ->
+                setPattern()
+            }
+            setNegativeButton("아니요") { _, _ -> }
+        }.create().show()
+    }
+
+    private fun setPattern() {
+
+    }
+
     override fun setTitle(pair: Pair<String, Boolean>) {
         title = pair.first
         menuItem1?.let {
