@@ -18,6 +18,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import android.widget.*
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeTransColor
+import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
 class NotificationFragment : NotificationContract.View() {
 

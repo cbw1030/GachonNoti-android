@@ -17,6 +17,7 @@ import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.PatternLockDialog
+import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 
 class GradeFragment : GradeContract.View() {
     var myView: View? = null
@@ -53,7 +54,7 @@ class GradeFragment : GradeContract.View() {
     override fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>) {
         //set View plz
         myView?.findViewById<TextView>(R.id.creditAverage)?.text =
-            Html.fromHtml("*이수학점:<font color=\"#5F00FF\">${avg?.credit}</font>/평점:<font color=\"#5F00FF\">${avg?.mark}</font>/백분률 점수:<font color=\"#5F00FF\">${avg?.score}</font>")
+            Html.fromHtml(avg.toString())
         adapter = GradeAdapter(list)
         myView?.findViewById<RecyclerView>(R.id.creditRecycler)?.run {
             this.adapter = this@GradeFragment.adapter

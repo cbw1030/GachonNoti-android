@@ -43,7 +43,8 @@ data class TimeTableInformation(
 }
 
 data class CreditAverage(val credit: Double, val score: Double, val mark: Double) {
-    override fun toString() = "CREDIT : $credit, SCORE : $score, MARK : $mark"
+    override fun toString() =
+        "*이수학점:<font color=\"#EC6746\">${credit.toInt()}</font>/평점:<font color=\"#EC6746\">$mark</font>/백분률 점수:<font color=\"#EC6746\">$score</font>"
 }
 
 data class CreditFormal(

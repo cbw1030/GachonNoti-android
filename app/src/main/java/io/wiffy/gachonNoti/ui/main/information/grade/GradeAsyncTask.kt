@@ -18,7 +18,7 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     var creditAverage: CreditAverage? = null
-    val creditList = ArrayList<CreditFormal>()
+    private val creditList = ArrayList<CreditFormal>()
 
     //getJson("AVG_SQL")
     //getJson("SQL")
@@ -54,7 +54,6 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
                         getDouble("MARK")
                     )
                 }
-                console(creditAverage.toString())
             }
             JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
                 entity = StringEntity(getJson("SQL").toString())
@@ -67,9 +66,7 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
                             getString("SUBJECT_NM"),
                             getInt("GRADE"),
                             getInt("CREDIT"),
-                            getString("MARK").also {
-                                console(it.toString())
-                            }
+                            getString("MARK")
                         )
                     })
                 }
@@ -83,7 +80,7 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     override fun onPostExecute(result: Int?) {
         MainActivity.mView.builderDismiss()
         if (result == ACTION_SUCCESS) {
-            mView.setView(creditAverage,creditList)
+            mView.setView(creditAverage, creditList)
         } else mView.toast("인터넷 연결을 확인해주세요.")
     }
 }

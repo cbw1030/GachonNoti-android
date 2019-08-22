@@ -1,7 +1,6 @@
-package io.wiffy.gachonNoti.ui.main.information.grade
+package io.wiffy.gachonNoti.model.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView

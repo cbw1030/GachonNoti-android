@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.ui.main.notification
+package io.wiffy.gachonNoti.model.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity

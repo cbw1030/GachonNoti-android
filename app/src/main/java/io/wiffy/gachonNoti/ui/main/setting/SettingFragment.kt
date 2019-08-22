@@ -59,6 +59,7 @@ class SettingFragment : SettingContract.View() {
             "green" -> 2
             else -> 0
         }
+        patternVisibility()
         adminView()
         list = ArrayList<CircleImageView>().apply {
             add(myView.defaultColor)

@@ -14,13 +14,12 @@
                 android:layout_height="match_parent">
             <RelativeLayout
                     android:id="@+id/gradeLayoutOn"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <TextView
                         android:textColor="@color/black"
                         android:layout_margin="5dp"
-                        android:text="*이수학점 : 140 / 평점 : 4.50 / 백분율 점수 : 99.99"
                         android:layout_alignParentStart="true"
                         android:id="@+id/creditAverage"
                         android:layout_width="wrap_content"
@@ -90,6 +89,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_below="@+id/bububaba"
                         android:id="@+id/creditRecycler"
                         android:layout_width="match_parent"
@@ -97,7 +97,7 @@
 
             </RelativeLayout>
             <RelativeLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/gradeLayoutOff"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -112,6 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 <View
+                        android:layout_margin="5dp"
                         android:id="@+id/vnvnvnvn"
                         android:layout_centerVertical="true"
                         android:layout_width="match_parent"

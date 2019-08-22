@@ -36,7 +36,7 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
 
             bulabula.text = when (state) {
                 CHANGE_PATTERN -> "현재 패턴을 확인합니다."
-                SET_PATTERN -> "패턴을 입력해주세요."
+                SET_PATTERN -> "패턴을 설정합니다.."
                 CHECK_PATTERN -> "패턴을 확인합니다."
                 else -> "알 수 없음"
             }
@@ -56,9 +56,13 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
                         }
                         SET_PATTERN -> {
                             if (mPattern.length >= 4) {
-                                prePattern = mPattern
-                                bulabula.text = "패턴을 재확인합니다."
-                                state = SET_PATTERN2
+                                if (getSharedItem<String>("pattern") == mPattern) {
+                                    bulabula.text = "이전 패턴과 같습니다."
+                                } else {
+                                    prePattern = mPattern
+                                    bulabula.text = "패턴을 재확인합니다."
+                                    state = SET_PATTERN2
+                                }
                             } else {
                                 bulabula.text = "패턴이 너무 짧습니다."
                             }
@@ -86,15 +90,12 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
                 }
 
                 override fun onCleared() {
-                    console("onCleared")
                 }
 
                 override fun onStarted() {
-                    console("Pattern Drawing Started")
                 }
 
                 override fun onProgress(progressPattern: MutableList<PatternLockView.Dot>?) {
-                    console("Pattern Progress: ${PatternLockUtils.patternToString(this@run, progressPattern)}")
                 }
             })
             invalidate()
