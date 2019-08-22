@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_below="@+id/creditAverage"
-        android:id="@+id/bububaba"
         android:weightSum="10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_height="wrap_content">
 
     <TextView
             android:background="@drawable/textborder_adapter"
@@ -15,7 +14,7 @@
             android:textAlignment="center"
             android:text="2017년\n1학기"
             android:gravity="center"
-            android:id="@+id/creditYear"
+            android:id="@+id/creditYear2"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
@@ -26,7 +25,7 @@
             android:gravity="center"
             android:text="Practical English C1"
             android:layout_weight="5"
-            android:id="@+id/creditName"
+            android:id="@+id/creditName2"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     <TextView
@@ -36,7 +35,7 @@
             android:gravity="center"
             android:text="1"
             android:layout_weight="1"
-            android:id="@+id/creditGrade"
+            android:id="@+id/creditGrade2"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     <TextView
@@ -46,7 +45,7 @@
             android:gravity="center"
             android:text="1"
             android:layout_weight="1"
-            android:id="@+id/creditCredit"
+            android:id="@+id/creditCredit2"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     <TextView
@@ -56,7 +55,7 @@
             android:gravity="center"
             android:text="A+"
             android:layout_weight="1"
-            android:id="@+id/creditMark"
+            android:id="@+id/creditMark2"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
 </LinearLayout>

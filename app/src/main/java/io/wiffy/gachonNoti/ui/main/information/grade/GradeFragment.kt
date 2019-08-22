@@ -1,12 +1,15 @@
 package io.wiffy.gachonNoti.ui.main.information.grade
 
-import android.content.Context
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.CHECK_PATTERN
 import io.wiffy.gachonNoti.func.getSharedItem
@@ -18,6 +21,7 @@ import io.wiffy.gachonNoti.model.PatternLockDialog
 class GradeFragment : GradeContract.View() {
     var myView: View? = null
     lateinit var mPresenter: GradePresenter
+    lateinit var adapter: GradeAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information_grade, container, false)
@@ -48,6 +52,13 @@ class GradeFragment : GradeContract.View() {
 
     override fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>) {
         //set View plz
+        myView?.findViewById<TextView>(R.id.creditAverage)?.text =
+            Html.fromHtml("*이수학점:<font color=\"#5F00FF\">${avg?.credit}</font>/평점:<font color=\"#5F00FF\">${avg?.mark}</font>/백분률 점수:<font color=\"#5F00FF\">${avg?.score}</font>")
+        adapter = GradeAdapter(list, context!!)
+        myView?.findViewById<RecyclerView>(R.id.creditRecycler)?.run {
+            this.adapter = this@GradeFragment.adapter
+            layoutManager = LinearLayoutManager(activity)
+        }
         setViewVisibility(true)
     }
 

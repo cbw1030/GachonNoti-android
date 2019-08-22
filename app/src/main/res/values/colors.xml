@@ -13,7 +13,7 @@
     <color name="mainBackground">#f8f8f8</color>
     <color name="table_in">#ffffffff</color>
     <color name="table_in_click">#1A121F30</color>
-
+<color name="orangeKun">#EC6746</color>
     <color name="table_out">#efeff3</color>
     <color name="title2">#ff646464</color>
     <color name="red">#E6C84646</color>
