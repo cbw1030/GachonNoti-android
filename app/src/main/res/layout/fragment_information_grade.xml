@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent" android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <RelativeLayout
+                    android:id="@+id/gradeLayoutOn"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                    android:id="@+id/gradeLayoutOff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <Button
+                        android:textColor="@color/white"
+                        android:id="@+id/gradeButton"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:text="인증하기"
+                        android:layout_centerHorizontal="true"
+                        android:layout_above="@+id/vnvnvnvn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <View
+                        android:id="@+id/vnvnvnvn"
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+                <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/vnvnvnvn"
+                        android:text="성적을 열람하기 위해선 인증이 필요합니다."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

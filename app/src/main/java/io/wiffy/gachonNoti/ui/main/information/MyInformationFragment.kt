@@ -60,6 +60,7 @@ class MyInformationFragment : MyInformationContract.View() {
         adapter = PagerAdapter(activity?.supportFragmentManager, fragmentList)
         myView.navigation3.addTab(myView.navigation3.newTab().setText("학생증"))
         myView.navigation3.addTab(myView.navigation3.newTab().setText("시간표"))
+        myView.navigation3.addTab(myView.navigation3.newTab().setText("성적확인"))
         myView.pager3.adapter = adapter
         myView.pager3.offscreenPageLimit = fragmentList.size
         myView.pager3.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(myView.navigation3))
