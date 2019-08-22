@@ -177,7 +177,7 @@ class MainActivity : MainContract.View() {
     }
 
     private fun setPattern() {
-        PatternLockDialog(this@MainActivity, 0).apply {
+        PatternLockDialog(this@MainActivity, SET_PATTERN).apply {
             setCancelable(false)
         }.show()
     }
