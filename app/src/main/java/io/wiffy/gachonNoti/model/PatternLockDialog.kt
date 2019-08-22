@@ -9,6 +9,7 @@ import com.andrognito.patternlockview.utils.PatternLockUtils
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_pattern_lock.*
 
 class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDialog(context) {
@@ -28,11 +29,31 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
                 height = Component.deviceWidth
                 width = Component.deviceWidth
             }
+
+            if (getSharedItem<String>("pattern").length < 4) {
+                state = SET_PATTERN
+            }
+
+            bulabula.text = when (state) {
+                CHANGE_PATTERN -> "현재 패턴을 확인합니다."
+                SET_PATTERN -> "패턴을 입력해주세요."
+                CHECK_PATTERN -> "패턴을 확인합니다."
+                else -> "알 수 없음"
+            }
+
             addPatternLockListener(object : PatternLockViewListener {
                 override fun onComplete(pattern: MutableList<PatternLockView.Dot>?) {
                     val mPattern = PatternLockUtils.patternToString(this@run, pattern)
                     clearPattern()
                     when (state) {
+                        CHANGE_PATTERN -> {
+                            if (getSharedItem<String>("pattern") == mPattern) {
+                                bulabula.text = "새로운 패턴을 입력해주세요."
+                                state = SET_PATTERN
+                            } else {
+                                bulabula.text = "패턴을 확인해주세요."
+                            }
+                        }
                         SET_PATTERN -> {
                             if (mPattern.length >= 4) {
                                 prePattern = mPattern
@@ -54,11 +75,11 @@ class PatternLockDialog(context: Context, mState: Int) : SuperContract.SuperDial
                             }
                         }
                         CHECK_PATTERN -> {
-                            if(getSharedItem<String>("pattern")==mPattern)
-                            {
-
-                            }else{
-
+                            if (getSharedItem<String>("pattern") == mPattern) {
+                                MainActivity.mView.checkPattern()
+                                dismiss()
+                            } else {
+                                bulabula.text = "패턴이 틀립니다. 다시 입력해주세요."
                             }
                         }
                     }

@@ -11,6 +11,8 @@ interface MyInformationContract {
         abstract fun dismissLoad(): Boolean?
         abstract fun isLogin()
         abstract fun isNotLogin()
+        abstract fun patternCheck(): Unit?
+        abstract fun setPatternVisibility(): Unit?
     }
 
     interface Presenter : SuperContract.WiffyObject {
@@ -19,6 +21,8 @@ interface MyInformationContract {
         fun themeChange(): Unit?
         fun isNotLogin()
         fun loginSetting(): Unit?
-        fun resetTable():Unit?
+        fun resetTable(): Unit?
+        fun patternCheck(): Unit?
+        fun setPatternVisibility(): Unit?
     }
 }

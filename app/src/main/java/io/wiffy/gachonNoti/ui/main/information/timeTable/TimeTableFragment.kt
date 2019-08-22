@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.information.timeTable
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -33,6 +34,7 @@ class TimeTableFragment : TimeTableContract.View() {
         return myView
     }
 
+    override fun sendContext()= context
     override fun initView() {
         changeTheme()
         mInfo?.let {

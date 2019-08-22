@@ -18,15 +18,20 @@ interface MainContract {
         abstract fun logout()
         abstract fun setTitle(pair: Pair<String, Boolean>)
         abstract fun askSetPattern()
+        abstract fun changePattern()
+        abstract fun checkPattern(): Unit?
+        abstract fun patternVisibility()
     }
 
     interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
         fun changeThemes()
         fun deleteRoomData(): AlertDialog
-        fun resetTimeTable():Unit?
+        fun resetTimeTable(): Unit?
         fun logout()
         fun login()
+        fun checkPattern(): Unit?
+        fun patternVisibility()
     }
 
 }

@@ -114,6 +114,9 @@ class SettingFragment : SettingContract.View() {
                 }
             }
         }
+        myView.patternsetting.setOnClickListener {
+            MainActivity.mView.changePattern()
+        }
         myView.detailSetting.setOnClickListener {
             LoginDialog(context!!).show()
         }
@@ -403,6 +406,16 @@ class SettingFragment : SettingContract.View() {
             toast("ADMIN MODE ON")
         }
     }
+
+    fun patternVisibility() =
+        if (Component.isLogin) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }.run {
+            myView.patternsettingA.visibility = this
+            myView.patternsettingB.visibility = this
+        }
 
     @SuppressLint("ApplySharedPref")
     private fun setOn() = FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnCompleteListener {

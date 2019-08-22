@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.TimeTableInformation
@@ -32,9 +33,10 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
         MainActivity.mView.builderUp()
     }
 
-    override fun doInBackground(vararg params: Void?) =
+    override fun doInBackground(vararg params: Void?): Int {
+        if (!isNetworkConnected(mView.sendContext()!!)) return ACTION_FAILURE
+        return try {
 
-        try {
             val page = Jsoup.parseBodyFragment(
                 EntityUtils.toString(
                     DefaultHttpClient().execute(
@@ -70,13 +72,14 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
             mView.initTable(set)
             console("success")
             ACTION_SUCCESS
-
         } catch (e: Exception) {
             console("fail")
             ACTION_FAILURE
         }
+    }
 
     override fun onPostExecute(result: Int?) {
         MainActivity.mView.builderDismiss()
+        if (result == ACTION_FAILURE) mView.toast("인터넷 연결을 확인해주세요.")
     }
 }

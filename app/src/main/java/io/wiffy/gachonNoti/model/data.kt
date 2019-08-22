@@ -41,3 +41,18 @@ data class TimeTableInformation(
                 "place : $place \n" +
                 "time : $start - $end"
 }
+
+data class CreditAverage(val credit: Double, val score: Double, val mark: Double) {
+    override fun toString() = "CREDIT : $credit, SCORE : $score, MARK : $mark"
+}
+
+data class CreditFormal(
+    val year: String,
+    val term: String,
+    val name: String,
+    val grade: Int,
+    val credit: Int,
+    val mark: String
+) {
+    override fun toString() = "${year}년 $term $name ${grade}학년 ${credit}학점 ($mark)"
+}

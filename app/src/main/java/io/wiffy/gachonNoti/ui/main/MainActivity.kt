@@ -174,11 +174,28 @@ class MainActivity : MainContract.View() {
             }
             setNegativeButton("아니요") { _, _ -> }
         }.create().show()
+
+        patternVisibility()
+    }
+
+
+    override fun patternVisibility() = mPresenter.patternVisibility()
+
+    override fun checkPattern() = mPresenter.checkPattern()
+
+    override fun changePattern() {
+        PatternLockDialog(this@MainActivity, CHANGE_PATTERN).apply {
+            setOnCancelListener {
+                toast("설정을 취소하였습니다.")
+            }
+        }.show()
     }
 
     private fun setPattern() {
         PatternLockDialog(this@MainActivity, SET_PATTERN).apply {
-            setCancelable(false)
+            setOnCancelListener {
+                toast("패턴은 설정에서 설정할 수 있습니다.")
+            }
         }.show()
     }
 

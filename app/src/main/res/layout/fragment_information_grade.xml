@@ -14,13 +14,82 @@
                 android:layout_height="match_parent">
             <RelativeLayout
                     android:id="@+id/gradeLayoutOn"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                <TextView
+                        android:layout_margin="5dp"
+                        android:text="*이수학점: 140/ 평점:4.50 /백분율 점수:99.99"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/creditAverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                <LinearLayout
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:layout_below="@+id/creditAverage"
+                        android:id="@+id/bububaba"
+                        android:weightSum="10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                    <TextView
+
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:text="년도\n(학기)"
+                            android:gravity="center"
+                            android:id="@+id/creditYear"
+                            android:layout_weight="2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                    <TextView
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:text="Practical English C1"
+                            android:layout_weight="5"
+                            android:id="@+id/creditName"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"/>
+                    <TextView
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:text="학년"
+                            android:layout_weight="1"
+                            android:id="@+id/creditGrade"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"/>
+                    <TextView
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:text="학점"
+                            android:layout_weight="1"
+                            android:id="@+id/creditCredit"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"/>
+                    <TextView
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:text="A+"
+                            android:layout_weight="1"
+                            android:id="@+id/creditMark"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"/>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_margin="5dp"
+                        android:layout_below="@+id/bububaba"
+                        android:id="@+id/recyclerCredit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
             </RelativeLayout>
             <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/gradeLayoutOff"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

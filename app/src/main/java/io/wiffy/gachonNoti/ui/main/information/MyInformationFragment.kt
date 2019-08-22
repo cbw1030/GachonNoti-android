@@ -88,6 +88,9 @@ class MyInformationFragment : MyInformationContract.View() {
 
     override fun dismissLoad() = (activity as MainActivity).builderDismiss()
 
+    override fun patternCheck() = mPresenter.patternCheck()
+
+    override fun setPatternVisibility() = mPresenter.setPatternVisibility()
 
     fun themeChanger(bool: Boolean) {
         loginExecute()

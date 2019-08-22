@@ -27,13 +27,18 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         }
     }
 
+    override fun checkPattern() = (mList[STATE_INFORMATION] as MyInformationFragment).patternCheck()
 
     override fun logout() = (mList[STATE_SETTING] as SettingFragment).adminLogout()
-
 
     override fun login() = (mList[STATE_SETTING] as SettingFragment).adminLogin()
 
     override fun resetTimeTable() = (mList[STATE_INFORMATION] as MyInformationFragment).resetTable()
+
+    override fun patternVisibility() {
+        (mList[STATE_SETTING] as SettingFragment).patternVisibility()
+        (mList[STATE_INFORMATION] as MyInformationFragment).setPatternVisibility()
+    }
 
     override fun changeThemes() = mList.let {
         (it[STATE_NOTIFICATION] as NotificationFragment).themeChanger(true)
