@@ -177,7 +177,9 @@ class MainActivity : MainContract.View() {
     }
 
     private fun setPattern() {
-        PatternLockDialog(this@MainActivity, 0).show()
+        PatternLockDialog(this@MainActivity, 0).apply {
+            setCancelable(false)
+        }.show()
     }
 
     override fun setTitle(pair: Pair<String, Boolean>) {

@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.splash
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -10,11 +11,8 @@ import android.os.Looper
 import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getSharedItem
-import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.getWordByKorean
-import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.text.SimpleDateFormat
@@ -65,6 +63,9 @@ class SplashActivity : SplashContract.View() {
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun checking() {
+
+        getScreenSize(this@SplashActivity)
+
         try {
             val date = SimpleDateFormat("MMdd").format(Date())
             val birthday: String? = getSharedItem<String>("birthday").substring(2, 6)

@@ -50,4 +50,7 @@ object Component {
 
     var colorCount = 0
 
+    var deviceWidth = 0
+    var deviceHeight = 0
+
 }

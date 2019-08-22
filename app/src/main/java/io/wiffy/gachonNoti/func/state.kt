@@ -11,4 +11,5 @@ const val ACTION_FAILURE = -1
 
 const val CHECK_PATTERN = 1357
 const val SET_PATTERN = 1358
+const val SET_PATTERN2 = 13581
 const val REMOVE_PATTERN = 1359

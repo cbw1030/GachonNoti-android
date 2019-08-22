@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.model
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Point
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
@@ -38,6 +39,7 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.timeTableSet = getSharedItem("tableItems", HashSet())
         Component.adminMode = getSharedItem("ADMIN", false)
         Component.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
+
 
         // 학기 조정은 여기서 하면 편하다.
         Component.SEMESTER = 2
