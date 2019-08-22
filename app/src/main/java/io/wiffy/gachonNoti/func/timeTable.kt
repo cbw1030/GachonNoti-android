@@ -2,9 +2,9 @@ package io.wiffy.gachonNoti.func
 
 import android.annotation.SuppressLint
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.`object`.Component.colorCount
 import java.lang.Exception
 import java.text.SimpleDateFormat
-import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 fun classToTime(time: String): LongArray {
@@ -88,7 +88,9 @@ fun getRandomColorId(): Int = intArrayOf(
     R.color.ran6,
     R.color.ran7,
     R.color.ran8
-)[Random().nextInt(8)]
+)[colorCount % 8].apply {
+    colorCount += 1
+}
 
 fun dayToInt(day: String): Int = when (day) {
     "월" -> 0

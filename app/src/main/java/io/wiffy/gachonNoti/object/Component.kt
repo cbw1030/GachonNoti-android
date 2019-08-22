@@ -48,4 +48,6 @@ object Component {
         Pair("가천알림이", false)
     )
 
+    var colorCount = 0
+
 }

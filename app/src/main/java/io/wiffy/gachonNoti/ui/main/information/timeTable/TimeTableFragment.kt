@@ -75,6 +75,8 @@ class TimeTableFragment : TimeTableContract.View() {
                 for (n in 0 until 6) add(ArrayList())
             }
 
+            val colorStateList = HashMap<String, Int>()
+
             for (value in set.iterator()) {
                 value.split("%^").let {
                     superList[dayToInt(it[0])].add(
@@ -107,7 +109,13 @@ class TimeTableFragment : TimeTableContract.View() {
                                 TimeData(
                                     1,
                                     superList[n][x]?.title,
-                                    getRandomColorId(),
+                                    if (colorStateList.containsKey(superList[n][x]?.title)) {
+                                        colorStateList[superList[n][x]?.title] ?: getRandomColorId()
+                                    } else {
+                                        getRandomColorId().apply {
+                                            colorStateList[superList[n][x]?.title ?: ""] = this
+                                        }
+                                    },
                                     R.color.white,
                                     superList[n][x]?.startMills ?: 0,
                                     superList[n][x]?.stopMills ?: 0
@@ -120,7 +128,13 @@ class TimeTableFragment : TimeTableContract.View() {
                                 TimeData(
                                     0,
                                     superList[n][x]?.title,
-                                    getRandomColorId(),
+                                    if (colorStateList.containsKey(superList[n][x]?.title)) {
+                                        colorStateList[superList[n][x]?.title] ?: getRandomColorId()
+                                    } else {
+                                        getRandomColorId().apply {
+                                            colorStateList[superList[n][x]?.title ?: ""] = this
+                                        }
+                                    },
                                     R.color.white,
                                     superList[n][x]?.startMills ?: 0,
                                     superList[n][x + 1]?.stopMills ?: 0
@@ -132,7 +146,13 @@ class TimeTableFragment : TimeTableContract.View() {
                                 TimeData(
                                     0,
                                     superList[n][x]?.title,
-                                    getRandomColorId(),
+                                    if (colorStateList.containsKey(superList[n][x]?.title)) {
+                                        colorStateList[superList[n][x]?.title] ?: getRandomColorId()
+                                    } else {
+                                        getRandomColorId().apply {
+                                            colorStateList[superList[n][x]?.title ?: ""] = this
+                                        }
+                                    },
                                     R.color.white,
                                     superList[n][x]?.startMills ?: 0,
                                     superList[n][x]?.stopMills ?: 0
@@ -145,6 +165,7 @@ class TimeTableFragment : TimeTableContract.View() {
                 }
             }
             superList.clear()
+            colorStateList.clear()
             myView?.findViewById<TimeTableView>(R.id.mTable)?.let {
                 it.setOnTimeItemClickListener { _, _, data ->
                     toast(data.time.title)

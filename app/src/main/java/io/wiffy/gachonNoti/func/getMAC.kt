@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.func
 
+import android.content.Context
 import java.lang.Exception
 import java.net.NetworkInterface
 import java.util.*
@@ -20,3 +21,4 @@ fun getMACAddress(): String {
     }
     return "park"
 }
+

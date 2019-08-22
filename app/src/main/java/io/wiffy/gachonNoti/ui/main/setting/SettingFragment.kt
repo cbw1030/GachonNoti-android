@@ -87,7 +87,7 @@ class SettingFragment : SettingContract.View() {
             } else {
                 "메디컬"
             }
-        myView.notiSwitch.setOnCheckedChangeListener { switch, isChecked ->
+        myView.notiSwitch.setOnCheckedChangeListener { _, isChecked ->
             when (isChecked) {
                 false -> setOff()
                 true -> {
@@ -96,7 +96,6 @@ class SettingFragment : SettingContract.View() {
                     ) {
                         setOn()
                     } else {
-                        switch.isChecked = false
                         setOff()
 
                         val tent = Intent().apply {
@@ -403,16 +402,29 @@ class SettingFragment : SettingContract.View() {
     }
 
     @SuppressLint("ApplySharedPref")
-    private fun setOn() {
-        Component.notificationSet = true
-        setSharedItem("notiOn", true)
-        FirebaseMessaging.getInstance().subscribeToTopic("noti")
+    private fun setOn() = FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnCompleteListener {
+        myView.notiSwitch.isChecked = if (it.isSuccessful) {
+            Component.notificationSet = true
+            setSharedItem("notiOn", true)
+            true
+        } else {
+            console("알 수 없는 오류")
+            false
+        }
+
     }
 
+
     @SuppressLint("ApplySharedPref")
-    private fun setOff() {
-        Component.notificationSet = false
-        setSharedItem("notiOn", false)
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
+    private fun setOff() = FirebaseMessaging.getInstance().unsubscribeFromTopic("noti").addOnCompleteListener {
+        myView.notiSwitch.isChecked = if (it.isSuccessful) {
+            Component.notificationSet = false
+            setSharedItem("notiOn", false)
+            false
+        } else {
+            console("알 수 없는 오류")
+            true
+        }
     }
+
 }
