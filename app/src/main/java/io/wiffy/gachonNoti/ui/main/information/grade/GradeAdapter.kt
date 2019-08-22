@@ -11,8 +11,7 @@ import io.wiffy.gachonNoti.model.CreditFormal
 import kotlinx.android.synthetic.main.adapter_credit.view.*
 
 class GradeAdapter(
-    var items: ArrayList<CreditFormal>,
-    private val context: Context
+    var items: ArrayList<CreditFormal>
 ) : RecyclerView.Adapter<GradeAdapter.GradeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = GradeViewHolder(parent)
     override fun getItemCount(): Int = items.size
@@ -20,7 +19,11 @@ class GradeAdapter(
     override fun onBindViewHolder(holder: GradeViewHolder, position: Int) {
         items[position].let { item ->
             with(holder) {
-
+                year.text = "${item.year}년\n${item.term}"
+                name.text = item.name
+                grade.text = "${item.grade}"
+                credit.text = "${item.credit}"
+                mark.text = item.mark
             }
         }
     }

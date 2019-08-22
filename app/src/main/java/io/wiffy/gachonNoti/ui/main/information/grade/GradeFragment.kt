@@ -54,7 +54,7 @@ class GradeFragment : GradeContract.View() {
         //set View plz
         myView?.findViewById<TextView>(R.id.creditAverage)?.text =
             Html.fromHtml("*이수학점:<font color=\"#5F00FF\">${avg?.credit}</font>/평점:<font color=\"#5F00FF\">${avg?.mark}</font>/백분률 점수:<font color=\"#5F00FF\">${avg?.score}</font>")
-        adapter = GradeAdapter(list, context!!)
+        adapter = GradeAdapter(list)
         myView?.findViewById<RecyclerView>(R.id.creditRecycler)?.run {
             this.adapter = this@GradeFragment.adapter
             layoutManager = LinearLayoutManager(activity)
