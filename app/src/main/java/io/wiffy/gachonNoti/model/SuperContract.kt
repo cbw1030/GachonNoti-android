@@ -12,6 +12,7 @@ interface SuperContract {
 
     interface WiffyObject {
         fun console(str: String) = Log.d("asdf", str)
+        fun console(tag: String, str: String) = Log.d(tag, str)
         fun toast(context: Context, str: String) = Toast.makeText(context, str, Toast.LENGTH_SHORT).show()
         fun toast(context: Context, id: Int) = Toast.makeText(context, id, Toast.LENGTH_SHORT).show()
         fun toastLong(context: Context, str: String) = Toast.makeText(context, str, Toast.LENGTH_LONG).show()

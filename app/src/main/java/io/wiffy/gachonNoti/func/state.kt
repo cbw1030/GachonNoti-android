@@ -8,3 +8,7 @@ const val STATE_WEB_VIEW = 4
 const val NOT_UPDATED_YET = -99
 const val ACTION_SUCCESS = 0
 const val ACTION_FAILURE = -1
+
+const val CHECK_PATTERN = 1357
+const val SET_PATTERN = 1358
+const val REMOVE_PATTERN = 1359

@@ -144,13 +144,14 @@ class SettingFragment : SettingContract.View() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
         myView.adminOption.setOnClickListener {
-            AlertDialog.Builder(activity).apply {
-                setTitle("관리자 옵션")
-                setMessage("관리자 옵션을 추가해주십시요.")
-                setPositiveButton(
-                    "OK"
-                ) { _, _ -> }
-            }.show()
+            //            AlertDialog.Builder(activity).apply {
+//                setTitle("관리자 옵션")
+//                setMessage("관리자 옵션을 추가해주십시요.")
+//                setPositiveButton(
+//                    "OK"
+//                ) { _, _ -> }
+//            }.show()
+            MainActivity.mView.askSetPattern()
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true
@@ -181,7 +182,9 @@ class SettingFragment : SettingContract.View() {
                             "QRCode\n" +
                             "com.journeyapps:zxing-android-embedded:3.5.0\n\n" +
                             "android-segmented-control\n" +
-                            "info.hoang8f:android-segmented:1.0.6"
+                            "info.hoang8f:android-segmented:1.0.6\n\n" +
+                            "PatternLockView\n" +
+                            "com.andrognito.patternlockview:patternlockview:1.0.0"
                 )
                 setPositiveButton(
                     "OK"

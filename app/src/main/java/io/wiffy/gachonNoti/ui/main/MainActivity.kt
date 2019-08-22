@@ -22,6 +22,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.model.PatternLockDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
@@ -176,7 +177,7 @@ class MainActivity : MainContract.View() {
     }
 
     private fun setPattern() {
-
+        PatternLockDialog(this@MainActivity, 0).show()
     }
 
     override fun setTitle(pair: Pair<String, Boolean>) {
