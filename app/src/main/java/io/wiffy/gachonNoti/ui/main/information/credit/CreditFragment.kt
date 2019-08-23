@@ -30,6 +30,7 @@ class CreditFragment : CreditContract.View() {
 
     override fun initList(list: ArrayList<CreditInformation>) {
             //List까지 가져옴
+        // view 만들어야함
     }
 
     fun loginInformationSetting(info: String) {
