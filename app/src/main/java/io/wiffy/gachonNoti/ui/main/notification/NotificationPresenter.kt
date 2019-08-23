@@ -33,14 +33,6 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
 
     override fun setType(mType: Int) {
         type = mType
-        Component.titles[STATE_NOTIFICATION] = Pair(
-            when (type) {
-                1 -> "가천뉴스"
-                2 -> "행사소식"
-                3 -> "장학소식"
-                else -> "공지사항"
-            }, false
-        )
         MainActivity.mView.setTitle(
             Pair(
                 Component.titles[STATE_NOTIFICATION].first,
