@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import android.widget.*
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getThemeTransColor
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
 class NotificationFragment : NotificationContract.View() {
@@ -130,7 +129,6 @@ class NotificationFragment : NotificationContract.View() {
             myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
             myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
             myView.segmented.setTintColor(resources.getColor(getThemeColor()))
-            myView.backbackback.setBackgroundColor(resources.getColor(getThemeTransColor()))
         }
     }
 

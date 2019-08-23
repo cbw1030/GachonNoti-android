@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/backbackback2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
-
+            android:visibility="gone"
             android:id="@+id/information_true"
             android:background="@color/table_out"
             android:layout_width="match_parent"
@@ -14,7 +16,6 @@
                 android:id="@+id/seglay2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
             <info.hoang8f.android.segmented.SegmentedGroup
                     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:layout_alignParentTop="true"
@@ -22,7 +23,9 @@
                     android:id="@+id/segmented2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     segmentedgroup:sc_tint_color="@color/main2Blue"
                     segmentedgroup:sc_border_width="1dp"
@@ -57,26 +60,10 @@
             </info.hoang8f.android.segmented.SegmentedGroup>
 
         </RelativeLayout>
-        <com.google.android.material.tabs.TabLayout
-                android:visibility="gone"
-                android:id="@+id/navigation3"
-                app:tabMode="fixed"
-                android:elevation="0dp"
-                app:tabIndicatorGravity="bottom"
-                app:tabIndicatorColor="@color/gray2"
-                android:layout_width="match_parent"
-                app:tabSelectedTextColor="@color/WHITE"
-                app:tabTextColor="@color/gray"
-                app:tabIndicatorHeight="3dp"
-                android:background="@color/white"
-                app:tabRippleColor="@color/gray2"
-                android:layout_alignParentBottom="true"
-                android:layout_height="40dp"/>
-
 
         <io.wiffy.gachonNoti.model.MyViewPager
                 android:layout_below="@+id/seglay2"
-                android:layout_above="@+id/navigation3"
+                android:layout_alignParentBottom="true"
                 android:id="@+id/pager3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -84,7 +71,7 @@
         />
     </RelativeLayout>
     <RelativeLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/information_false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
