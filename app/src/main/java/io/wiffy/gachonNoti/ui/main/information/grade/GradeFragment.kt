@@ -52,7 +52,6 @@ class GradeFragment : GradeContract.View() {
     }
 
     override fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>) {
-        //set View plz
         myView?.findViewById<TextView>(R.id.creditAverage)?.text =
             Html.fromHtml(avg.toString())
         adapter = GradeAdapter(list)

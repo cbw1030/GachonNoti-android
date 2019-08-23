@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.information
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.model.StudentInformation
+import io.wiffy.gachonNoti.ui.main.information.credit.CreditFragment
 import io.wiffy.gachonNoti.ui.main.information.grade.GradeFragment
 import io.wiffy.gachonNoti.ui.main.information.idCard.IDCardFragment
 import io.wiffy.gachonNoti.ui.main.information.timeTable.TimeTableFragment
@@ -15,20 +16,24 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
     private var idCard: IDCardFragment? = null
     private var timeTable: TimeTableFragment? = null
     private var grade: GradeFragment? = null
+    private var credit: CreditFragment? = null
 
     override fun fragmentInflation(list: ArrayList<Fragment?>) = with(list) {
         idCard = IDCardFragment()
         timeTable = TimeTableFragment()
         grade = GradeFragment()
+        credit = CreditFragment()
         add(idCard)
         add(timeTable)
         add(grade)
+        add(credit)
     }
 
     override fun themeChange() {
         idCard?.changeTheme()
         timeTable?.changeTheme()
         grade?.changeTheme()
+        credit?.changeTheme()
     }
 
     override fun resetTable() = timeTable?.resetTable()
@@ -52,5 +57,6 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
             )
         )
         timeTable?.loginInformationSetting(getSharedItem("number", "null"))
+        credit?.loginInformationSetting(getSharedItem("number", "null"))
     }
 }
