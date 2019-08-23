@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.model.CreditInformation
 
 class CreditFragment : CreditContract.View() {
     var myView: View? = null
@@ -27,11 +28,15 @@ class CreditFragment : CreditContract.View() {
         }
     }
 
+    override fun initList(list: ArrayList<CreditInformation>) {
+            //List까지 가져옴
+    }
+
     fun loginInformationSetting(info: String) {
         mInfo = info
         myView?.let {
             if (info.length > 6) {
-                //TDOO
+                CreditAsyncTask(this, info).execute()
             }
         }
     }

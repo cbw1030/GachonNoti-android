@@ -13,7 +13,6 @@ import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
 
-
 class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     SuperContract.SuperAsyncTask<Void, Void, Int>() {
 

@@ -57,3 +57,9 @@ data class CreditFormal(
 ) {
     override fun toString() = "${year}년 $term $name ${grade}학년 ${credit}학점 ($mark)"
 }
+
+data class CreditInformation(
+    val name: String,
+    val isu: String,
+    val chu: String
+)
