@@ -12,6 +12,7 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
@@ -86,6 +87,11 @@ class MainActivity : MainContract.View() {
             }
             setCancelable(false)
         }.show()
+    }
+
+    override fun changeStatusBar(bool: Boolean) {
+        window.statusBarColor = if (bool) resources.getColor(getThemeColor())
+        else resources.getColor(getThemeMyTransColor())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -148,14 +148,13 @@ class SettingFragment : SettingContract.View() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
         myView.adminOption.setOnClickListener {
-            //            AlertDialog.Builder(activity).apply {
-//                setTitle("관리자 옵션")
-//                setMessage("관리자 옵션을 추가해주십시요.")
-//                setPositiveButton(
-//                    "OK"
-//                ) { _, _ -> }
-//            }.show()
-            MainActivity.mView.askSetPattern()
+            AlertDialog.Builder(activity).apply {
+                setTitle("관리자 옵션")
+                setMessage("관리자 옵션을 추가해주십시요.")
+                setPositiveButton(
+                    "OK"
+                ) { _, _ -> }
+            }.show()
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true

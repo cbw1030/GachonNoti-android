@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent" android:layout_height="match_parent">
+                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent">
     <androidx.cardview.widget.CardView
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
@@ -32,12 +32,11 @@
                     android:layout_below="@id/creditAverage2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
             <LinearLayout
+                    android:layout_below="@+id/credityou"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:orientation="horizontal"
-                    android:layout_below="@+id/credityou"
                     android:id="@+id/bububaba3"
                     android:weightSum="10"
                     android:layout_width="match_parent"
@@ -75,15 +74,74 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"/>
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
+            <ScrollView
+                    android:layout_below="@+id/bububaba3"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_below="@+id/bububaba3"
-                    android:id="@+id/creditRecycler2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
+                    android:layout_height="match_parent">
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:layout_alignParentTop="true"
+                            android:scrollbars="none"
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/creditRecycler2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    <RelativeLayout
+                            android:layout_below="@id/creditRecycler2"
+                            android:background="#EBE9E9"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <TextView
+                                android:layout_marginTop="8dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_alignParentTop="true"
+                                android:text="졸업사정기준"
+                                android:id="@+id/vavavavava"
+                                android:textColor="@color/main2DeepBlue"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="10dp"
+                                android:text=" - "
+                                android:layout_below="@id/vavavavava"
+                                android:id="@+id/bzbzbzbzb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_below="@id/vavavavava"
+                                android:layout_marginStart="5dp"
+                                android:text="졸업학점 : 이수영역별 기준학점 취득"
+                                android:layout_toEndOf="@id/bzbzbzbzb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="10dp"
+                                android:text=" - "
+                                android:id="@+id/avasvsav"
+                                android:layout_below="@id/bzbzbzbzb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_toEndOf="@id/avasvsav"
+                                android:layout_below="@id/bzbzbzbzb"
+                                android:text="필수교과목 : 본인 학번 교과과정상의 교과목 (폐강시 대치과목으로 이수)"
+                                android:paddingEnd="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" tools:ignore="RtlSymmetry"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </ScrollView>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

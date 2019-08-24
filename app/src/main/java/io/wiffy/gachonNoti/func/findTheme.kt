@@ -74,3 +74,9 @@ fun getThemeTransColor() = when (Component.theme) {
     "green" -> R.color.transGreen
     else -> R.color.main2TransBlue
 }
+
+fun getThemeMyTransColor() = when (Component.theme) {
+    "red" -> R.color.myTrans_red
+    "green" -> R.color.myTrans_green
+    else -> R.color.myTrans_def
+}

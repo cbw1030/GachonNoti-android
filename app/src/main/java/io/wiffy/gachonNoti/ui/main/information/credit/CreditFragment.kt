@@ -41,7 +41,7 @@ class CreditFragment : CreditContract.View() {
     override fun initList(list: ArrayList<CreditInformation>, cmd: String) {
         Handler(Looper.getMainLooper()).post {
             myView?.findViewById<TextView>(R.id.credityou)?.text =
-                "* $cmd/${getSharedItem<String>("department")}/${getSharedItem<String>("name")}/${getSharedItem<String>(
+                "$cmd/${getSharedItem<String>("department")}/${getSharedItem<String>("name")}/${getSharedItem<String>(
                     "number"
                 )}"
             adapter = CreditAdapter(list)

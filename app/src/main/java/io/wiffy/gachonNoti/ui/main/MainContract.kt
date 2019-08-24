@@ -21,6 +21,7 @@ interface MainContract {
         abstract fun changePattern()
         abstract fun checkPattern(): Unit?
         abstract fun patternVisibility()
+        abstract fun changeStatusBar(bool: Boolean)
     }
 
     interface Presenter : SuperContract.WiffyObject {

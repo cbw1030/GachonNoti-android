@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/main2Blue</item>
     </style>
 
-        <!-- Base application theme. -->
-
+    <!-- Base application theme. -->
+    <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar"
+    >
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@color/myTarans</item>
+    </style>
 </resources>
