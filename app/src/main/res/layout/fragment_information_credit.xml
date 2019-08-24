@@ -65,7 +65,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"/>
                 <TextView
-                        android:background="@drawable/textborder"
+                        android:background="@drawable/textborder_end"
                         android:textColor="@color/black"
                         android:textAlignment="center"
                         android:gravity="center"
