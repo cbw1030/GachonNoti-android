@@ -8,7 +8,7 @@ interface CreditContract {
     abstract class View : SuperContract.SuperFragment() {
         abstract fun initView()
         abstract fun sendContext(): Context?
-        abstract fun initList(list:ArrayList<CreditInformation>)
+        abstract fun initList(list: ArrayList<CreditInformation>, cmd: String)
     }
 
     interface Presenter : SuperContract.WiffyObject {

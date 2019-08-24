@@ -59,10 +59,10 @@ class LoginAsyncTask(
                     ids,
                     password,
                     getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
-                    "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg"
+                    "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg",
+                    getJSONArray("clubList").getJSONObject(0).getString("clubCd")
                 )
             }
-
             try {
                 val data =
                     (DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(

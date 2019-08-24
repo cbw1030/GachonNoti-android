@@ -2,13 +2,16 @@ package io.wiffy.gachonNoti.ui.main.information.credit
 
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
+import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import java.lang.Exception
 
@@ -19,6 +22,9 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
     override fun onPreExecute() {
         MainActivity.mView.builderUp()
     }
+
+    private fun getJson() =
+        JSONObject("{\"DEPT_CD\":\"${getSharedItem<String>("clubCD")}\",\"fsp_ds_cmd\":[{\"TYPE\":\"N\",\"SQL_ID\":\"mobile/common:DEPT_INFO_SQL_S01\",\"INSERT_SQL_ID\":\"\",\"UPDATE_SQL_ID\":\"\",\"DELETE_SQL_ID\":\"\",\"SAVE_FLAG_COLUMN\":\"\",\"KEY_ZERO_LEN\":\"\",\"USE_INPUT\":\"N\",\"USE_ORDER\":\"Y\",\"EXEC\":\"\",\"FAIL\":\"\",\"FAIL_MSG\":\"\",\"EXEC_CNT\":0,\"MSG\":\"\"}],\"fsp_action\":\"xDefaultAction\",\"fsp_cmd\":\"execute\"}")
 
     override fun doInBackground(vararg params: Void?): Int {
         if (!isNetworkConnected(mView.sendContext()!!)) return ACTION_FAILURE
@@ -39,10 +45,14 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
                 } catch (e: Exception) {
                     console("no")
                 }
-
             }
 
-            mView.initList(list)
+            mView.initList(
+                list,
+                JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
+                    entity = StringEntity(getJson().toString())
+                }).entity)).getJSONArray("ds_dept_info").optJSONObject(0).getString("PRNT_DEPT_NM")
+            )
 
             ACTION_SUCCESS
         } catch (e: Exception) {

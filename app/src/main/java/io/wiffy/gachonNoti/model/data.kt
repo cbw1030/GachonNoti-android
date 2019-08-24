@@ -19,7 +19,8 @@ data class StudentInformation(
     val id: String?,
     val password: String?,
     val department: String?,
-    val imageURL: String?
+    val imageURL: String?,
+    val clubCD: String?
 ) {
     override fun toString() = "name:$name\nnumber:$number\ndepartment:$department"
 }

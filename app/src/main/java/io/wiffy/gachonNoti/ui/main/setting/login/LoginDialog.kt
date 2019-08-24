@@ -122,7 +122,8 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
             "image",
             "birthday",
             "gender",
-            "tableSet"
+            "tableSet",
+            "clubCD"
         )
         setSharedItem("login", false)
         Component.isLogin = false
@@ -144,7 +145,8 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
                 Pair("name", name),
                 Pair("number", number),
                 Pair("department", department),
-                Pair("image", imageURL)
+                Pair("image", imageURL),
+                Pair("clubCD", clubCD)
             )
             setSharedItem("login", true)
         }
