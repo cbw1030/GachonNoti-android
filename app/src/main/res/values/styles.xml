@@ -9,12 +9,11 @@
     </style>
 
     <!-- Base application theme. -->
-    <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar"
-    >
+    <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:statusBarColor">@color/myTarans</item>
+        <item name="android:statusBarColor">@color/myTrans</item>
     </style>
 </resources>

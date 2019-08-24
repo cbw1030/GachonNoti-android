@@ -37,9 +37,8 @@
     <color name="ran6">#FBAA67</color>
     <color name="ran7">#9E86E1</color>
     <color name="ran8">#76CA88</color>
-    <color name="myTarans">#99000000</color>
+    <color name="myTrans">#99000000</color>
     <color name="myTrans_def">#182f58</color>
     <color name="myTrans_red">#4f2123</color>
     <color name="myTrans_green">#214521</color>
-
 </resources>

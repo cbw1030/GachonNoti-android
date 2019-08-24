@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/gogobebe"
         android:layout_alignParentTop="true"
-        app:cardBackgroundColor="@color/myTarans"
+        app:cardBackgroundColor="@color/myTrans"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="0dp"
