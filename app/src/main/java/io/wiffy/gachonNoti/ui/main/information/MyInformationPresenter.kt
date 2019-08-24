@@ -53,7 +53,8 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
                 getSharedItem("id", "null"),
                 getSharedItem("password", "null"),
                 getSharedItem("department", "null"),
-                getSharedItem("image", "null")
+                getSharedItem("image", "null"),
+                getSharedItem("clubCD", "null")
             )
         )
         timeTable?.loginInformationSetting(getSharedItem("number", "null"))

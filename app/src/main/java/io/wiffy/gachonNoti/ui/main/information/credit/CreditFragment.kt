@@ -2,6 +2,8 @@ package io.wiffy.gachonNoti.ui.main.information.credit
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,14 +39,16 @@ class CreditFragment : CreditContract.View() {
 
     @SuppressLint("SetTextI18n")
     override fun initList(list: ArrayList<CreditInformation>, cmd: String) {
-        myView?.findViewById<TextView>(R.id.credityou)?.text =
-            "* $cmd/${getSharedItem<String>("department")}/${getSharedItem<String>("name")}/${getSharedItem<String>(
-                "number"
-            )}"
-        adapter = CreditAdapter(list)
-        myView?.findViewById<RecyclerView>(R.id.creditRecycler2)?.run {
-            this.adapter = this@CreditFragment.adapter
-            layoutManager = LinearLayoutManager(activity)
+        Handler(Looper.getMainLooper()).post {
+            myView?.findViewById<TextView>(R.id.credityou)?.text =
+                "* $cmd/${getSharedItem<String>("department")}/${getSharedItem<String>("name")}/${getSharedItem<String>(
+                    "number"
+                )}"
+            adapter = CreditAdapter(list)
+            myView?.findViewById<RecyclerView>(R.id.creditRecycler2)?.run {
+                this.adapter = this@CreditFragment.adapter
+                layoutManager = LinearLayoutManager(activity)
+            }
         }
     }
 

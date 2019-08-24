@@ -18,9 +18,9 @@ class CreditAdapter(
     override fun onBindViewHolder(holder: CreditViewHolder, position: Int) {
         items[position].let { item ->
             with(holder) {
-                A.text = item.name
-                B.text = item.isu
-                C.text = item.chu
+                a1.text = item.name
+                a2.text = item.isu
+                a3.text = item.chu
             }
         }
     }
@@ -40,8 +40,8 @@ class CreditAdapter(
     inner class CreditViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter_credit_information, parent, false)
     ) {
-        val A: TextView = itemView.isu_
-        val B: TextView = itemView.isu2_
-        val C: TextView = itemView.creditGrade_
+        val a1: TextView = itemView.isu_
+        val a2: TextView = itemView.isu2_
+        val a3: TextView = itemView.creditGrade_
     }
 }

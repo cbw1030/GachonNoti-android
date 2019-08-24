@@ -65,7 +65,8 @@ class IDCardWidget : AppWidgetProvider() {
                         getString("id", null),
                         getString("password", null),
                         getString("department", null),
-                        getString("image", null)
+                        getString("image", null),
+                        getString("clubCD", null)
                     ), context, appWidgetId, getString("theme", null),
                     getString("name", null)
                 )
