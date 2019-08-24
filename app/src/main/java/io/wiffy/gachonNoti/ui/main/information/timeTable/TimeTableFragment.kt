@@ -33,7 +33,7 @@ class TimeTableFragment : TimeTableContract.View() {
         return myView
     }
 
-    override fun sendContext()= context
+    override fun sendContext() = context
     override fun initView() {
         changeTheme()
         mInfo?.let {
@@ -100,7 +100,6 @@ class TimeTableFragment : TimeTableContract.View() {
 
             for (v in 0..4) Collections.sort(superList[v], TimeCompare)
 
-
             val list = ArrayList<TimeTableData>().apply {
                 for (n in 0 until 5) {
                     for (x in 0 until superList[n].size) {
@@ -125,6 +124,17 @@ class TimeTableFragment : TimeTableContract.View() {
                             break
                         }
                         if (superList[n][x]?.title == superList[n][x + 1]?.title) {
+                            var k = x + 1
+                            var temp: Long? = 0
+                            while (superList[n][x]?.title == superList[n][k]?.title) {
+                                temp = superList[n][k]?.stopMills
+                                superList[n][k] = null
+                                if (k < superList[n].size - 1) {
+                                    k += 1
+                                } else {
+                                    break
+                                }
+                            }
                             realList[n].add(
                                 TimeData(
                                     0,
@@ -138,10 +148,8 @@ class TimeTableFragment : TimeTableContract.View() {
                                     },
                                     R.color.white,
                                     superList[n][x]?.startMills ?: 0,
-                                    superList[n][x + 1]?.stopMills ?: 0
-                                )
-                            )
-                            superList[n][x + 1] = null
+                                    temp ?: 0
+                                ))
                         } else {
                             realList[n].add(
                                 TimeData(
