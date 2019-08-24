@@ -90,6 +90,7 @@ class MainActivity : MainContract.View() {
     }
 
     override fun changeStatusBar(bool: Boolean) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = if (bool) resources.getColor(getThemeColor())
         else resources.getColor(getThemeMyTransColor())
     }
@@ -249,6 +250,7 @@ class MainActivity : MainContract.View() {
 
     override fun themeChange() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = resources.getColor(getThemeColor())
         navigation.setBackgroundColor(resources.getColor(getThemeColor()))
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
@@ -294,7 +296,9 @@ class MainActivity : MainContract.View() {
 
     override fun logout() = mPresenter.logout()
     override fun login() = mPresenter.login()
+    override fun mainLogout() = mPresenter.mainLogChecking()
 
+    override fun mainLogin() = mPresenter.mainLogChecking()
     private fun visible() {
         main_main.visibility = View.VISIBLE
         main_splash.visibility = View.GONE

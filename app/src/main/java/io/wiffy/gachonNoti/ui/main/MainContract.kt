@@ -22,6 +22,8 @@ interface MainContract {
         abstract fun checkPattern(): Unit?
         abstract fun patternVisibility()
         abstract fun changeStatusBar(bool: Boolean)
+        abstract fun mainLogout()
+        abstract fun mainLogin()
     }
 
     interface Presenter : SuperContract.WiffyObject {
@@ -31,6 +33,7 @@ interface MainContract {
         fun resetTimeTable(): Unit?
         fun logout()
         fun login()
+        fun mainLogChecking()
         fun checkPattern(): Unit?
         fun patternVisibility()
     }

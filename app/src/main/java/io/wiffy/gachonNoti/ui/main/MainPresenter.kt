@@ -40,6 +40,8 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         (mList[STATE_INFORMATION] as MyInformationFragment).setPatternVisibility()
     }
 
+    override fun mainLogChecking() = (mList[STATE_INFORMATION] as MyInformationFragment).loginExecute()
+
     override fun changeThemes() = mList.let {
         (it[STATE_NOTIFICATION] as NotificationFragment).themeChanger(true)
         (it[STATE_INFORMATION] as MyInformationFragment).themeChanger(true)

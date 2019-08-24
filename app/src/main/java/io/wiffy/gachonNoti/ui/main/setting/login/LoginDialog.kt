@@ -128,7 +128,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         setSharedItem("login", false)
         Component.isLogin = false
         isLogin(false)
-        (MainActivity.mView).allThemeChange()
+        (MainActivity.mView).mainLogout()
         if (number == "201735829" || number == "201635812") (MainActivity.mView).logout()
         else toast("로그아웃 되었습니다.")
 
@@ -153,7 +153,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         gachonname.text = "${getSharedItem("name", "")}님 안녕하세요!"
         Component.isLogin = true
         isLogin(true)
-        (MainActivity.mView).allThemeChange()
+        (MainActivity.mView).mainLogin()
         if (information.number == "201735829" || information.number == "201635812") (MainActivity.mView).login()
         else if (information.department == "소프트웨어학과") toast("우리과 학생이시군요?")
         else toast("로그인에 성공하였습니다.")

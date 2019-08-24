@@ -31,7 +31,7 @@ class MyInformationFragment : MyInformationContract.View() {
         return myView
     }
 
-    private fun loginExecute() = if (Component.isLogin) {
+    fun loginExecute() = if (Component.isLogin) {
         isLogin()
     } else {
         isNotLogin()
@@ -89,7 +89,7 @@ class MyInformationFragment : MyInformationContract.View() {
     override fun setPatternVisibility() = mPresenter.setPatternVisibility()
 
     fun themeChanger(bool: Boolean) {
-        loginExecute()
+//        loginExecute()
 
         if (bool)
             mPresenter.themeChange()

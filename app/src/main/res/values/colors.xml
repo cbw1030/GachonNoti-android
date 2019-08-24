@@ -13,7 +13,7 @@
     <color name="mainBackground">#f8f8f8</color>
     <color name="table_in">#ffffffff</color>
     <color name="table_in_click">#1A121F30</color>
-<color name="orangeKun">#EC6746</color>
+    <color name="orangeKun">#EC6746</color>
     <color name="table_out">#efeff3</color>
     <color name="title2">#ff646464</color>
     <color name="red">#E6C84646</color>
@@ -39,7 +39,7 @@
     <color name="ran8">#76CA88</color>
     <color name="myTarans">#99000000</color>
     <color name="myTrans_def">#182f58</color>
-    <color name="myTrans_red">#522426</color>
-    <color name="myTrans_green">#234723</color>
+    <color name="myTrans_red">#4f2123</color>
+    <color name="myTrans_green">#214521</color>
 
 </resources>
