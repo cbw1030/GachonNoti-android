@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     <TextView
-            android:background="@drawable/textborder_adapter_end"
+            android:background="@drawable/textborder_adapter"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:gravity="center"
