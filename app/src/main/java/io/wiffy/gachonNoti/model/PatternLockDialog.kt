@@ -36,10 +36,10 @@ class PatternLockDialog(context: Context, mState: Int) :
         window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
         pattern_lock_view.run {
-            layoutParams = layoutParams.apply {
-                height = Component.deviceWidth
-                width = Component.deviceWidth
-            }
+//            layoutParams = layoutParams.apply {
+//                height = ViewGroup.LayoutParams.WRAP_CONTENT
+//                width = ViewGroup.LayoutParams.WRAP_CONTENT
+//            }
 
             if (getSharedItem<String>("pattern").length < 4) {
                 state = SET_PATTERN

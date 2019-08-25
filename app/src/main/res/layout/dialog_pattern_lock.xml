@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/gogobebe"
-        android:layout_alignParentTop="true"
-        app:cardBackgroundColor="@color/myTrans"
+<RelativeLayout
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp">
-    <RelativeLayout
-            android:layout_gravity="center"
-            android:id="@+id/gogobebe2"
-            android:background="@android:color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_alignParentTop="true"
-                android:id="@+id/lklklklk"
-                android:layout_above="@id/pattern_lock_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <TextView
-                    android:text="가천 알림이"
-                    android:textSize="30sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:layout_margin="25dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
-        </RelativeLayout>
-        <com.andrognito.patternlockview.PatternLockView
-                android:layout_centerInParent="true"
-                android:background="@android:color/transparent"
-                android:id="@+id/pattern_lock_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        <RelativeLayout
-                android:background="@android:color/transparent"
-                android:id="@+id/qweqwe"
-                android:layout_below="@id/pattern_lock_view"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <TextView
-                    android:text="패턴을 입력해주세요."
-                    android:id="@+id/bulabula"
-                    android:textColor="@color/white"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-        </RelativeLayout>
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/gogobebe"
+            app:cardBackgroundColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
+        <RelativeLayout
+                android:padding="20dp"
+                android:id="@+id/gogobebe2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <RelativeLayout
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/lklklklk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:text="패턴 잠금"
+                        android:textSize="30sp"
+                        android:textAlignment="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <com.andrognito.patternlockview.PatternLockView
+                    android:layout_below="@id/lklklklk"
+                    app:normalStateColor="@color/gray2"
+                    android:id="@+id/pattern_lock_view"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"/>
+            <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/qweqwe"
+                    android:layout_below="@id/pattern_lock_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:text="패턴을 입력해주세요."
+                        android:id="@+id/bulabula"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+

@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -55,8 +56,8 @@ class NotificationFragment : NotificationContract.View() {
                 layoutParams =
                     FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                         .apply {
-                            marginStart = 40
-                            marginEnd = 40
+                            marginStart = 70
+                            marginEnd = 70
                             topMargin = 20
                         }
                 hint = "내용"

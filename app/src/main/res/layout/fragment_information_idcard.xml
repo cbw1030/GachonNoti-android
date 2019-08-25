@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp"
             android:layout_width="match_parent"
@@ -35,31 +35,33 @@
                     android:layout_height="match_parent">
                 <ImageView
                         android:id="@+id/imageonyou"
+                        android:background="@drawable/border"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="15dp"
                         android:src="@drawable/defaultimage"
-                        android:layout_width="120dp"
-                        android:layout_height="160dp"/>
+                        android:layout_width="105dp"
+                        android:layout_height="140dp"/>
                 <TextView
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignTop="@+id/imageonyou"
+                        android:layout_marginStart="10dp"
                         android:id="@+id/yourname"
                         android:layout_toEndOf="@id/imageonyou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textColor="@color/black"
                         android:text="박가천"
                 />
                 <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
                         android:id="@+id/number"
                         android:maxLines="1"
                         android:text="000000000"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:layout_toEndOf="@id/imageonyou"
                         android:layout_below="@+id/yourname"
                         android:layout_width="wrap_content"
@@ -68,24 +70,24 @@
                         android:id="@+id/depart"
                         android:text="어쩌구저쩌구학과"
                         android:maxLines="1"
-                        android:textSize="20sp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="15dp"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/imageonyou"
                         android:layout_below="@+id/number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <ImageView
+                        android:layout_alignBottom="@+id/imageonyou"
                         android:id="@+id/gachonlogo"
-                        android:layout_marginEnd="15dp"
+                        android:layout_marginEnd="10dp"
                         android:src="@drawable/gachon"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@+id/depart"
                         android:layout_width="100dp"
-                        android:layout_height="50dp"/>
+                        android:layout_height="30dp"/>
                 <RelativeLayout
+                        android:layout_marginTop="10dp"
                         android:layout_below="@id/gachonlogo"
-
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                     <TextView
@@ -107,7 +109,6 @@
                             android:layout_height="wrap_content"/>
                     <TextView
                             android:id="@+id/youtonggihan"
-                            android:layout_marginBottom="5dp"
                             android:text="유효기간이 종료되면 재발급을 받으시기 바랍니다."
                             android:layout_above="@+id/rebalgup"
                             android:layout_centerHorizontal="true"
@@ -116,7 +117,7 @@
                             android:layout_height="wrap_content"/>
                     <Button
                             android:text="재발급"
-                            android:layout_marginBottom="20dp"
+                            android:layout_margin="15dp"
                             android:id="@+id/rebalgup"
                             android:background="@drawable/dialog_button_default"
                             android:textColor="@color/white"

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
 import com.github.eunsiljo.timetablelib.view.TimeTableView
+import kotlinx.android.synthetic.main.fragment_information_timetable.view.*
 import kotlin.collections.HashSet
 
 class TimeTableFragment : TimeTableContract.View() {
@@ -29,6 +30,10 @@ class TimeTableFragment : TimeTableContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
+        }
+        myView?.swipe?.setOnRefreshListener {
+            mPresenter.resetTable()
+            myView?.swipe?.isRefreshing = false
         }
     }
 

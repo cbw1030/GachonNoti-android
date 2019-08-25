@@ -6,11 +6,12 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
 
         <RelativeLayout
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             <TextView

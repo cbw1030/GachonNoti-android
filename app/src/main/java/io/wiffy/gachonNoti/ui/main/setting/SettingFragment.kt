@@ -129,8 +129,9 @@ class SettingFragment : SettingContract.View() {
             val container = FrameLayout(context!!)
             val params =
                 FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            params.marginStart = 40
-            params.marginEnd = 40
+            params.topMargin = 10
+            params.marginStart = 70
+            params.marginEnd = 70
             val editText = EditText(activity)
             editText.layoutParams = params
             container.addView(editText)

@@ -23,9 +23,9 @@
                     android:id="@+id/segmented2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     segmentedgroup:sc_tint_color="@color/main2Blue"
                     segmentedgroup:sc_border_width="1dp"
@@ -70,31 +70,68 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
     </RelativeLayout>
+
     <RelativeLayout
             android:visibility="visible"
             android:id="@+id/information_false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <TextView
-                android:layout_marginTop="5dp"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:text="로그인하셔야 이용이 가능합니다."
-                android:layout_centerHorizontal="true"
-                android:layout_above="@+id/login2"
-                android:gravity="center"
-                android:textColor="@color/gray2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        <Button
-                android:layout_margin="30dp"
-                android:text="로그인 하러가기"
-                android:layout_centerVertical="true"
-                android:id="@+id/login2"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:background="@drawable/dialog_button_default"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+
+            app:cardCornerRadius="5dp" app:cardElevation="10dp">
+
+            <RelativeLayout
+                    android:padding="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/text"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="로그인하셔야 이용이 가능합니다."
+                        android:gravity="center"
+                        android:textColor="@color/gray2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/text"
+                        android:id="@+id/text2"
+                        android:textSize="12sp"
+                        android:layout_marginTop="10dp"
+                        android:text="학생증, 개인시간표, 성적표, 이수학점 기능제공"
+                        android:gravity="center"
+                        android:textColor="@color/gray2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <Button
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="로그인"
+                        android:layout_centerVertical="true"
+                        android:layout_below="@+id/text2"
+                        android:id="@+id/login2"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:background="@drawable/dialog_button_default"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"/>
+
+            </RelativeLayout>
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 </FrameLayout>
