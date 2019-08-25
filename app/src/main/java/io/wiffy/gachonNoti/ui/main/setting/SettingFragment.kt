@@ -3,6 +3,9 @@ package io.wiffy.gachonNoti.ui.main.setting
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -15,7 +18,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
@@ -139,8 +144,16 @@ class SettingFragment : SettingContract.View() {
                         if (isNotBlank()) checkReport(this)
                     }
                 }
+                setNeutralButton("카카오톡 문의") { _, _ ->
+                    (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
+                        ClipData.newPlainText("가천알림이", "tkdgusdlqhek")
+                    AlertDialog.Builder(activity).apply {
+                        setMessage("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
+                        setPositiveButton("OK") { _, _ -> }
+                    }.create().show()
+                }
                 setNegativeButton("Cancel") { _, _ -> }
-            }.create().show()
+            }.create().apply { findViewById<TextView>(android.R.id.message).textSize = 20f }.show()
         }
         myView.money.setOnClickListener {
             Component.noneVisible = true
