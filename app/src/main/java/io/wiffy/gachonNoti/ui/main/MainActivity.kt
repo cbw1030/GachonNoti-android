@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +18,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
@@ -78,17 +76,15 @@ class MainActivity : MainContract.View() {
                         putExtra("app_uid", applicationInfo.uid)
                     }
                 })
-                setSharedItem("notiOn", true)
-                FirebaseMessaging.getInstance().subscribeToTopic("noti")
+                mPresenter.positiveButton()
             }
             setNegativeButton("Cancel") { _, _ ->
-                Component.notificationSet = false
-                setSharedItem("notiOn", false)
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
+                mPresenter.negativeButton()
             }
             setCancelable(false)
         }.show()
     }
+
 
     override fun changeStatusBar(bool: Boolean) {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -143,11 +139,11 @@ class MainActivity : MainContract.View() {
             } catch (e: Exception) {
 
             }
-            notificationCheck()
         }
     }
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
+        notificationCheck()
         themeChange()
         Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
         adapter = PagerAdapter(supportFragmentManager, mList)

@@ -36,6 +36,8 @@ interface MainContract {
         fun mainLogChecking()
         fun checkPattern(): Unit?
         fun patternVisibility()
+        fun positiveButton()
+        fun negativeButton()
     }
 
 }

@@ -8,6 +8,8 @@ object Component {
 
     lateinit var sharedPreferences: SharedPreferences
 
+    var isBirthday = false
+
     var adminMode = false
 
     var YEAR = "2019"

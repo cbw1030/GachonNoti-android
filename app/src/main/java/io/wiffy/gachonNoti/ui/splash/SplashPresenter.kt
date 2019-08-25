@@ -64,6 +64,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
             // birthday == date && name != null
 
             if (birthday == date && name != null) {
+                Component.isBirthday = true
                 Component.delay = 1500
                 mView.setParams()
                 mView.setImageView(R.drawable.happybirthday)
@@ -87,6 +88,4 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
     }.let {
         it[Random().nextInt(it.size)]
     }
-
-
 }

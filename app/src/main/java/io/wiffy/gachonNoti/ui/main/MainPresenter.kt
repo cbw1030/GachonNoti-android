@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
+import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.main.information.MyInformationFragment
@@ -25,6 +26,17 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         if (!getSharedItem(Component.version, false)) {
             mView.updatedContents()
         }
+    }
+
+    override fun positiveButton() {
+        setSharedItem("notiOn", true)
+        FirebaseMessaging.getInstance().subscribeToTopic("noti")
+    }
+
+    override fun negativeButton() {
+        Component.notificationSet = false
+        setSharedItem("notiOn", false)
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }
 
     override fun checkPattern() = (mList[STATE_INFORMATION] as MyInformationFragment).patternCheck()
