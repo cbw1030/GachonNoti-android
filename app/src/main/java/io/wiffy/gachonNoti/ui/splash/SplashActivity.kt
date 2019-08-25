@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.splash
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -66,6 +67,10 @@ class SplashActivity : SplashContract.View() {
     }
 
     override fun setImageView(id: Int) {
-        Glide.with(this).load(id).into(logo_splash)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            logo_splash.setImageDrawable(applicationContext.resources.getDrawable(id))
+        } else {
+            Glide.with(this).load(id).into(logo_splash)
+        }
     }
 }

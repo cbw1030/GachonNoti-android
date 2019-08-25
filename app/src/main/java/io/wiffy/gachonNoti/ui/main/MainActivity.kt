@@ -142,7 +142,12 @@ class MainActivity : MainContract.View() {
     override fun changeUI(mList: ArrayList<Fragment?>) {
         notificationCheck()
         themeChange()
-        Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            logo_splash2.setImageDrawable(applicationContext.resources.getDrawable(R.drawable.defaults))
+        } else {
+            Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
+        }
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab1_home))
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab2_id))

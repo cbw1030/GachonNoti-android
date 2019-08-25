@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        android:id="@+id/backbackback"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/table_out"
+        android:id="@+id/backbackback"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/table_out">
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -16,10 +16,10 @@
                      android:layout_height="match_parent">
 
             <RelativeLayout
-                    android:visibility="gone"
                     android:id="@+id/lottieXX"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
 
                 <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/animation_viewa"
@@ -32,12 +32,12 @@
                         app:lottie_loop="true"/>
 
                 <TextView
-                        android:layout_marginTop="-100dp"
                         android:layout_width="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/animation_viewa"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-100dp"
+                        android:gravity="center"
                         android:text="인터넷 연결을 확인해주세요."/>
             </RelativeLayout>
 
@@ -52,84 +52,85 @@
                         android:layout_height="wrap_content">
 
                     <info.hoang8f.android.segmented.SegmentedGroup
-                            android:layout_centerHorizontal="true"
                             xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/segmented"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
                             android:layout_margin="15dp"
                             android:orientation="horizontal"
-                            segmentedgroup:sc_tint_color="@color/main2Blue"
                             segmentedgroup:sc_border_width="1dp"
-                            segmentedgroup:sc_corner_radius="10dp">
+                            segmentedgroup:sc_corner_radius="10dp"
+                            segmentedgroup:sc_tint_color="@color/main2Blue">
 
                         <RadioButton
                                 android:id="@+id/button1"
+                                style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="공지사항"
-                                style="@style/RadioButton" />
+                                android:text="공지사항"/>
 
                         <RadioButton
                                 android:id="@+id/button2"
+                                style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="가천뉴스"
-                                style="@style/RadioButton" />
+                                android:text="가천뉴스"/>
 
                         <RadioButton
                                 android:id="@+id/button3"
+                                style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="행사소식"
-                                style="@style/RadioButton" />
+                                android:text="행사소식"/>
 
                         <RadioButton
                                 android:id="@+id/button4"
+                                style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="장학소식"
-                                style="@style/RadioButton" />
+                                android:text="장학소식"/>
                     </info.hoang8f.android.segmented.SegmentedGroup>
 
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/seglay"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_below="@+id/seglay"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginBottom="15dp"
+                        app:cardBackgroundColor="@color/table_out"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="10dp">
 
                     <androidx.recyclerview.widget.RecyclerView
-                            android:visibility="visible"
                             android:id="@+id/recylcer"
                             android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:paddingBottom="0dp"
                             android:scrollbars="vertical"
-                            android:layout_height="match_parent"/>
+                            android:visibility="visible"/>
 
 
                 </androidx.cardview.widget.CardView>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fab_main"
-                        android:src="@drawable/search"
-                        app:fabSize="normal"
-                        app:elevation="10dp"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
-                        android:clickable="true"
-                        android:focusable="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_gravity="center"
-                        app:maxImageSize="30dp"
                         android:layout_marginEnd="35dp"
                         android:layout_marginBottom="35dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"/>
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:src="@drawable/search"
+                        app:elevation="10dp"
+                        app:fabSize="normal"
+                        app:maxImageSize="30dp"/>
 
             </RelativeLayout>
         </FrameLayout>

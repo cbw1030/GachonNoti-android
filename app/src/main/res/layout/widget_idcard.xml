@@ -95,8 +95,8 @@
                     android:layout_below="@+id/timer_widget"
                     android:id="@+id/qrcode_widget"
                     android:layout_above="@+id/rebalgup_widget"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             <Button
                     android:text="재발급"
                     android:layout_margin="15dp"
