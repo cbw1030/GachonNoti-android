@@ -147,13 +147,10 @@ class SettingFragment : SettingContract.View() {
                 setNeutralButton("카카오톡 문의") { _, _ ->
                     (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
                         ClipData.newPlainText("가천알림이", "tkdgusdlqhek")
-                    AlertDialog.Builder(activity).apply {
-                        setMessage("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
-                        setPositiveButton("OK") { _, _ -> }
-                    }.create().show()
+                    toastLong("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
                 }
                 setNegativeButton("Cancel") { _, _ -> }
-            }.create().apply { findViewById<TextView>(android.R.id.message).textSize = 20f }.show()
+            }.create().show()
         }
         myView.money.setOnClickListener {
             Component.noneVisible = true

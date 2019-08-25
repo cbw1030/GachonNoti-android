@@ -3,7 +3,6 @@ package io.wiffy.gachonNoti.model
 import android.app.Dialog
 import android.content.Context
 import android.os.AsyncTask
-import android.util.AttributeSet
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,27 +20,25 @@ interface SuperContract {
     }
 
     abstract class SuperActivity : AppCompatActivity(), WiffyObject {
-        fun toast(str: String) = Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
-        fun toast(id: Int) = Toast.makeText(applicationContext, id, Toast.LENGTH_SHORT).show()
-        fun toastLong(str: String) = Toast.makeText(applicationContext, str, Toast.LENGTH_LONG).show()
-        fun toastLong(id: Int) = Toast.makeText(applicationContext, id, Toast.LENGTH_LONG).show()
+        open fun toast(str: String) = Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
+        open fun toast(id: Int) = Toast.makeText(applicationContext, id, Toast.LENGTH_SHORT).show()
+        open fun toastLong(str: String) = Toast.makeText(applicationContext, str, Toast.LENGTH_LONG).show()
+        open fun toastLong(id: Int) = Toast.makeText(applicationContext, id, Toast.LENGTH_LONG).show()
     }
 
     abstract class SuperFragment : Fragment(), WiffyObject {
-        fun toast(str: String) = Toast.makeText(activity, str, Toast.LENGTH_SHORT).show()
-        fun toast(id: Int) = Toast.makeText(activity, id, Toast.LENGTH_SHORT).show()
-        fun toastLong(str: String) = Toast.makeText(activity, str, Toast.LENGTH_LONG).show()
-        fun toastLong(id: Int) = Toast.makeText(activity, id, Toast.LENGTH_LONG).show()
+        open fun toast(str: String) = Toast.makeText(activity, str, Toast.LENGTH_SHORT).show()
+        open fun toast(id: Int) = Toast.makeText(activity, id, Toast.LENGTH_SHORT).show()
+        open fun toastLong(str: String) = Toast.makeText(activity, str, Toast.LENGTH_LONG).show()
+        open fun toastLong(id: Int) = Toast.makeText(activity, id, Toast.LENGTH_LONG).show()
     }
 
-    abstract class SuperDialog : Dialog, WiffyObject {
-        constructor(context: Context) : super(context)
-        constructor(context: Context, themeId: Int) : super(context, themeId)
+    abstract class SuperDialog(context: Context, themeId: Int = 0) : Dialog(context, themeId), WiffyObject {
 
-        fun toast(str: String) = Toast.makeText(context, str, Toast.LENGTH_SHORT).show()
-        fun toast(id: Int) = Toast.makeText(context, id, Toast.LENGTH_SHORT).show()
-        fun toastLong(str: String) = Toast.makeText(context, str, Toast.LENGTH_LONG).show()
-        fun toastLong(id: Int) = Toast.makeText(context, id, Toast.LENGTH_LONG).show()
+        open fun toast(str: String) = Toast.makeText(context, str, Toast.LENGTH_SHORT).show()
+        open fun toast(id: Int) = Toast.makeText(context, id, Toast.LENGTH_SHORT).show()
+        open fun toastLong(str: String) = Toast.makeText(context, str, Toast.LENGTH_LONG).show()
+        open fun toastLong(id: Int) = Toast.makeText(context, id, Toast.LENGTH_LONG).show()
     }
 
     abstract class SuperAsyncTask<A, B, C> : AsyncTask<A, B, C>(), WiffyObject

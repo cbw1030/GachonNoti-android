@@ -1,6 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
 
+import android.view.Gravity
+import android.widget.Toast
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.SuperContract
 
@@ -19,6 +21,10 @@ interface SettingContract {
         abstract fun builderDismiss(): Boolean
         abstract fun changeCampus(bool: Boolean)
         abstract fun setSwitch(bool: Boolean)
+        override fun toastLong(str: String) {
+            Toast.makeText(activity, str, Toast.LENGTH_LONG).apply { setGravity(Gravity.CENTER, xOffset, yOffset) }
+                .show()
+        }
     }
 
     interface Presenter : SuperContract.WiffyObject {
