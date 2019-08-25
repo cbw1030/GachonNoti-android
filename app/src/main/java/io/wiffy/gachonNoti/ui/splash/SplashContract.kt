@@ -6,7 +6,10 @@ interface SplashContract {
 
     abstract class View : SuperContract.SuperActivity() {
         abstract fun moveToMain()
-        abstract fun subscribe()
+        abstract fun setImageView(id: Int)
+        abstract fun setTextColor(id: Int)
+        abstract fun setBirthdayText(str: String)
+        abstract fun setParams()
     }
 
     interface Presenter : SuperContract.WiffyObject {
