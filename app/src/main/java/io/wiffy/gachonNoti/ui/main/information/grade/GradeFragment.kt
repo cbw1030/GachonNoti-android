@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.CHECK_PATTERN
-import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
@@ -41,7 +40,7 @@ class GradeFragment : GradeContract.View() {
     }
 
     fun patternCheck() {
-        GradeAsyncTask(this@GradeFragment, getSharedItem("number")).execute()
+       mPresenter.patternCheck()
         setViewVisibility(true)
     }
 

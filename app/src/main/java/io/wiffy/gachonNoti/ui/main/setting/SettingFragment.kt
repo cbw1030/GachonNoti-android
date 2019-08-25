@@ -16,7 +16,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.core.app.NotificationManagerCompat
-import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
@@ -90,14 +89,14 @@ class SettingFragment : SettingContract.View() {
             }
         myView.notiSwitch.setOnCheckedChangeListener { _, isChecked ->
             when (isChecked) {
-                false -> setOff()
+                false -> mPresenter.setOff()
                 true -> {
                     if (NotificationManagerCompat.from(activity?.applicationContext!!)
                             .areNotificationsEnabled()
                     ) {
-                        setOn()
+                        mPresenter.setOn()
                     } else {
-                        setOff()
+                        mPresenter.setOff()
 
                         val tent = Intent().apply {
                             action = "android.settings.APP_NOTIFICATION_SETTINGS"
@@ -379,33 +378,21 @@ class SettingFragment : SettingContract.View() {
         }
     }
 
-    private fun adminView() {
-        if (Component.adminMode) {
-            myView.adminOption.visibility = View.VISIBLE
-            myView.adminBar.visibility = View.VISIBLE
-        } else {
-            myView.adminOption.visibility = View.GONE
-            myView.adminBar.visibility = View.GONE
+    override fun adminView() {
+        Handler(Looper.getMainLooper()).post {
+            if (Component.adminMode) {
+                myView.adminOption.visibility = View.VISIBLE
+                myView.adminBar.visibility = View.VISIBLE
+            } else {
+                myView.adminOption.visibility = View.GONE
+                myView.adminBar.visibility = View.GONE
+            }
         }
     }
 
-    override fun adminLogout() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("admin").addOnSuccessListener {
-            setSharedItem("ADMIN", false)
-            Component.adminMode = false
-            adminView()
-            toast("ADMIN MODE OFF")
-        }
-    }
+    override fun adminLogout() = mPresenter.setAdminLogout()
 
-    override fun adminLogin() {
-        FirebaseMessaging.getInstance().subscribeToTopic("admin").addOnSuccessListener {
-            setSharedItem("ADMIN", true)
-            Component.adminMode = true
-            adminView()
-            toast("ADMIN MODE ON")
-        }
-    }
+    override fun adminLogin() = mPresenter.setAdminLogin()
 
     fun patternVisibility() =
         if (Component.isLogin) {
@@ -417,31 +404,9 @@ class SettingFragment : SettingContract.View() {
             myView.patternsettingB.visibility = this
         }
 
-    @SuppressLint("ApplySharedPref")
-    private fun setOn() = FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnCompleteListener {
-        myView.notiSwitch.isChecked = if (it.isSuccessful) {
-            Component.notificationSet = true
-            setSharedItem("notiOn", true)
-            true
-        } else {
-            setSharedItem("notiOn", false)
-            console("알 수 없는 오류")
-            false
+    override fun setSwitch(bool: Boolean) {
+        Handler(Looper.getMainLooper()).post {
+            myView.notiSwitch.isChecked = bool
         }
     }
-
-
-    @SuppressLint("ApplySharedPref")
-    private fun setOff() = FirebaseMessaging.getInstance().unsubscribeFromTopic("noti").addOnCompleteListener {
-        myView.notiSwitch.isChecked = if (it.isSuccessful) {
-            Component.notificationSet = false
-            setSharedItem("notiOn", false)
-            false
-        } else {
-            console("알 수 없는 오류")
-            setSharedItem("notiOn", true)
-            true
-        }
-    }
-
 }

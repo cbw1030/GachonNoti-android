@@ -89,8 +89,6 @@ class MyInformationFragment : MyInformationContract.View() {
     override fun setPatternVisibility() = mPresenter.setPatternVisibility()
 
     fun themeChanger(bool: Boolean) {
-//        loginExecute()
-
         if (bool)
             mPresenter.themeChange()
 

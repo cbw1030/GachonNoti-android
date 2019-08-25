@@ -6,17 +6,8 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.eunsiljo.timetablelib.data.TimeData
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getSharedItem
-import com.github.eunsiljo.timetablelib.data.TimeTableData
 import com.github.eunsiljo.timetablelib.view.TimeTableView
-import io.wiffy.gachonNoti.`object`.TimeCompare
-import io.wiffy.gachonNoti.func.dayToInt
-import io.wiffy.gachonNoti.func.getRandomColorId
-import io.wiffy.gachonNoti.func.intToDay
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
 class TimeTableFragment : TimeTableContract.View() {
@@ -49,132 +40,16 @@ class TimeTableFragment : TimeTableContract.View() {
         mInfo = info
         myView?.let {
             if (info.length > 6) {
-                val mTable = getSharedItem<HashSet<String>>("tableSet")
-
-                if (mTable.size <= 0) {
-                    TimeTableAsyncTask(this@TimeTableFragment, info).execute()
-                } else {
-                    initTable(mTable)
-                }
+              mPresenter.setLogin(info)
             }
         }
     }
 
-    fun resetTable() {
-        val info = getSharedItem<String>("number")
-        if (info.length > 6) TimeTableAsyncTask(this@TimeTableFragment, info).execute()
-    }
+    fun resetTable() = mPresenter.resetTable()
 
     override fun initTable(set: HashSet<String>) {
-
         Handler(Looper.getMainLooper()).post {
-
-            val superList = ArrayList<ArrayList<TimeData<Any?>?>>(6).apply {
-                for (n in 0 until 6) add(ArrayList())
-            }
-            val realList = ArrayList<ArrayList<TimeData<Any?>>>(6).apply {
-                for (n in 0 until 6) add(ArrayList())
-            }
-
-            val colorStateList = HashMap<String, Int>()
-
-            for (value in set.iterator()) {
-                value.split("%^").let {
-                    superList[dayToInt(it[0])].add(
-                        TimeData(
-                            0,
-                            if (it[3].isBlank()) {
-                                it[1]
-                            } else {
-                                "${it[1]}\n${it[3]}"
-                            }
-                            ,
-                            getRandomColorId(),
-                            R.color.white,
-                            it[4].toLong(),
-                            it[5].toLong()
-                        )
-                    )
-                }
-            }
-
-            for (v in 0..4) Collections.sort(superList[v], TimeCompare)
-
-            val list = ArrayList<TimeTableData>().apply {
-                for (n in 0 until 5) {
-                    for (x in 0 until superList[n].size) {
-                        if (superList[n][x] == null) continue
-                        if (x == superList[n].size - 1) {
-                            realList[n].add(
-                                TimeData(
-                                    1,
-                                    superList[n][x]?.title,
-                                    if (colorStateList.containsKey(superList[n][x]?.title)) {
-                                        colorStateList[superList[n][x]?.title] ?: getRandomColorId()
-                                    } else {
-                                        getRandomColorId().apply {
-                                            colorStateList[superList[n][x]?.title ?: ""] = this
-                                        }
-                                    },
-                                    R.color.white,
-                                    superList[n][x]?.startMills ?: 0,
-                                    superList[n][x]?.stopMills ?: 0
-                                )
-                            )
-                            break
-                        }
-                        if (superList[n][x]?.title == superList[n][x + 1]?.title) {
-                            var k = x + 1
-                            var temp: Long? = 0
-                            while (superList[n][x]?.title == superList[n][k]?.title) {
-                                temp = superList[n][k]?.stopMills
-                                superList[n][k] = null
-                                if (k < superList[n].size - 1) {
-                                    k += 1
-                                } else {
-                                    break
-                                }
-                            }
-                            realList[n].add(
-                                TimeData(
-                                    0,
-                                    superList[n][x]?.title,
-                                    if (colorStateList.containsKey(superList[n][x]?.title)) {
-                                        colorStateList[superList[n][x]?.title] ?: getRandomColorId()
-                                    } else {
-                                        getRandomColorId().apply {
-                                            colorStateList[superList[n][x]?.title ?: ""] = this
-                                        }
-                                    },
-                                    R.color.white,
-                                    superList[n][x]?.startMills ?: 0,
-                                    temp ?: 0
-                                ))
-                        } else {
-                            realList[n].add(
-                                TimeData(
-                                    0,
-                                    superList[n][x]?.title,
-                                    if (colorStateList.containsKey(superList[n][x]?.title)) {
-                                        colorStateList[superList[n][x]?.title] ?: getRandomColorId()
-                                    } else {
-                                        getRandomColorId().apply {
-                                            colorStateList[superList[n][x]?.title ?: ""] = this
-                                        }
-                                    },
-                                    R.color.white,
-                                    superList[n][x]?.startMills ?: 0,
-                                    superList[n][x]?.stopMills ?: 0
-                                )
-                            )
-                        }
-                    }
-                    Collections.sort(realList[n], TimeCompare)
-                    add(TimeTableData(intToDay(n), realList[n]))
-                }
-            }
-            superList.clear()
-            colorStateList.clear()
+            val list = mPresenter.setTableList(set)
             myView?.findViewById<TimeTableView>(R.id.mTable)?.let {
                 it.setOnTimeItemClickListener { _, _, data ->
                     toast(data.time.title)

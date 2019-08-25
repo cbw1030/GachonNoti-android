@@ -13,5 +13,6 @@ interface CreditContract {
 
     interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
+        fun setLogin(info: String)
     }
 }

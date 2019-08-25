@@ -56,7 +56,7 @@ class CreditFragment : CreditContract.View() {
         mInfo = info
         myView?.let {
             if (info.length > 6) {
-                CreditAsyncTask(this, info).execute()
+               mPresenter.setLogin(info)
             }
         }
     }

@@ -132,7 +132,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         if (number == "201735829" || number == "201635812") (MainActivity.mView).logout()
         else toast("로그아웃 되었습니다.")
 
-        Component.isLogin = false
+        Component.isBirthday = false
         MainActivity.mView.patternVisibility()
         dismiss()
     }

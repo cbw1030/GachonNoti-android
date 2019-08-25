@@ -14,5 +14,6 @@ interface GradeContract {
 
     interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
+        fun patternCheck()
     }
 }
