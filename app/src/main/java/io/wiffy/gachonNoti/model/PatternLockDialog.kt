@@ -3,15 +3,10 @@ package io.wiffy.gachonNoti.model
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-import android.view.ViewGroup
-import android.view.WindowManager
 import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.listener.PatternLockViewListener
 import com.andrognito.patternlockview.utils.PatternLockUtils
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_pattern_lock.*
@@ -26,20 +21,10 @@ class PatternLockDialog(context: Context, mState: Int) :
         setContentView(R.layout.dialog_pattern_lock)
 
         MainActivity.mView.changeStatusBar(false)
-//
-//        window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-//        window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//        window?.statusBarColor = context.resources.getColor(R.color.myTarans)
-//        window?.decorView?.systemUiVisibility = SYSTEM_UI_FLAG_LAYOUT_STABLE
-//        window?.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP)
 
         window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
         pattern_lock_view.run {
-//            layoutParams = layoutParams.apply {
-//                height = ViewGroup.LayoutParams.WRAP_CONTENT
-//                width = ViewGroup.LayoutParams.WRAP_CONTENT
-//            }
 
             if (getSharedItem<String>("pattern").length < 4) {
                 state = SET_PATTERN

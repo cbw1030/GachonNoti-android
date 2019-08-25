@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
 import com.github.eunsiljo.timetablelib.view.TimeTableView
+import io.wiffy.gachonNoti.func.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_timetable.view.*
 import kotlin.collections.HashSet
 
@@ -38,14 +39,14 @@ class TimeTableFragment : TimeTableContract.View() {
     }
 
     fun changeTheme() {
-
+        myView?.swipe?.setColorSchemeColors(resources.getColor(getThemeColor()))
     }
 
     fun loginInformationSetting(info: String) {
         mInfo = info
         myView?.let {
             if (info.length > 6) {
-              mPresenter.setLogin(info)
+                mPresenter.setLogin(info)
             }
         }
     }

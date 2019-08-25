@@ -30,7 +30,6 @@ import java.lang.Exception
 class MainActivity : MainContract.View() {
 
     var menuItem1: MenuItem? = null
-//    var menuItem2: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
     private var backKeyPressedTime: Long = 0L
@@ -95,8 +94,6 @@ class MainActivity : MainContract.View() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuItem1 = menu?.add(0, 201735829, 0, "강의실 데이터 삭제")
         menuItem1?.isVisible = false
-//        menuItem2 = menu?.add(0, 201735831, 0, "시간표 리셋")
-//        menuItem2?.isVisible = false
         return true
     }
 
@@ -208,7 +205,6 @@ class MainActivity : MainContract.View() {
         menuItem1?.let {
             it.isVisible = pair.second
         }
-//        menuItem2?.isVisible = (Component.isLogin && Component.state == STATE_INFORMATION)
     }
 
     @SuppressLint("ApplySharedPref")

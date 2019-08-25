@@ -1,7 +1,8 @@
 package io.wiffy.gachonNoti.ui.main.setting
 
 
-import android.view.Gravity
+import android.annotation.SuppressLint
+import android.widget.TextView
 import android.widget.Toast
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.SuperContract
@@ -21,8 +22,12 @@ interface SettingContract {
         abstract fun builderDismiss(): Boolean
         abstract fun changeCampus(bool: Boolean)
         abstract fun setSwitch(bool: Boolean)
+        @SuppressLint("ShowToast")
         override fun toastLong(str: String) {
-            Toast.makeText(activity, str, Toast.LENGTH_LONG).apply { setGravity(Gravity.CENTER, xOffset, yOffset) }
+            Toast.makeText(activity, str, Toast.LENGTH_LONG).apply {
+                view.findViewById<TextView>(android.R.id.message)
+                    ?.let { it.textAlignment = android.view.View.TEXT_ALIGNMENT_CENTER }
+            }
                 .show()
         }
     }

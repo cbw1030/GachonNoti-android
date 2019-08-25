@@ -1,7 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
 import android.app.AlertDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper

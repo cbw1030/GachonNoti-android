@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.model
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -9,6 +10,7 @@ class MyViewPager(context: Context, attrs: AttributeSet) : ViewPager(context, at
 
     private var mEnabled = true
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent?) = if (mEnabled) super.onTouchEvent(ev)
     else false
 

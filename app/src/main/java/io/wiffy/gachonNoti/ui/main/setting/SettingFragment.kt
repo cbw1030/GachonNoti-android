@@ -18,9 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
@@ -130,8 +128,8 @@ class SettingFragment : SettingContract.View() {
             val params =
                 FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             params.topMargin = 10
-            params.marginStart = 70
-            params.marginEnd = 70
+            params.marginStart = 40
+            params.marginEnd = 40
             val editText = EditText(activity)
             editText.layoutParams = params
             container.addView(editText)
