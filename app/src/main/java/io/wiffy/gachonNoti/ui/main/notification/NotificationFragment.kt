@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import android.widget.*
+import androidx.core.view.marginLeft
+import androidx.core.view.setPadding
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
@@ -49,14 +51,14 @@ class NotificationFragment : NotificationContract.View() {
 
     private fun setFab() {
         myView.fab_main.setOnClickListener {
-            val container = FrameLayout(context!!)
+            val container = RelativeLayout(context!!)
 
             val editText = EditText(activity).apply {
                 layoutParams =
                     FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                         .apply {
-                            marginStart = 70
-                            marginEnd = 70
+                            leftMargin = 40
+                            rightMargin = 40
                             topMargin = 20
                         }
                 hint = "내용"
