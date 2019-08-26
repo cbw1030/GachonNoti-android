@@ -9,11 +9,13 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.func.getSharedItem
+import io.wiffy.gachonNoti.func.doneLogin
 import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.func.restartApp
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
+import kotlin.system.exitProcess
 
 
 class MyInformationFragment : MyInformationContract.View() {
@@ -41,9 +43,13 @@ class MyInformationFragment : MyInformationContract.View() {
     fun resetTable() = mPresenter?.resetTable()
 
     override fun isLogin() {
-        myView.information_true.visibility = View.VISIBLE
-        myView.information_false.visibility = View.GONE
-        mPresenter?.loginSetting()
+        try {
+            myView.information_true.visibility = View.VISIBLE
+            myView.information_false.visibility = View.GONE
+            mPresenter?.loginSetting()
+        } catch (e: Exception) {
+            exitProcess(0)
+        }
     }
 
     override fun isNotLogin() {
@@ -90,6 +96,7 @@ class MyInformationFragment : MyInformationContract.View() {
     override fun setPatternVisibility() = mPresenter?.setPatternVisibility()
 
     fun themeChanger(bool: Boolean) {
+
         if (bool)
             mPresenter?.themeChange()
 

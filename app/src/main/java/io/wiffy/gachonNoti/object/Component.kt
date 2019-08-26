@@ -8,6 +8,8 @@ object Component {
 
     lateinit var sharedPreferences: SharedPreferences
 
+    var error = true
+
     var isBirthday = false
 
     var adminMode = false

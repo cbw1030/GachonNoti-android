@@ -9,6 +9,7 @@ import io.wiffy.gachonNoti.ui.main.information.MyInformationFragment
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.searcher.SearcherFragment
 import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
+import java.lang.Exception
 
 
 class MainPresenter(private val mView: MainContract.View, private val context: Activity) : MainContract.Presenter {
@@ -55,10 +56,14 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
     override fun mainLogChecking() = (mList[STATE_INFORMATION] as MyInformationFragment).loginExecute()
 
     override fun changeThemes() = mList.let {
-        (it[STATE_NOTIFICATION] as NotificationFragment).themeChanger(true)
-        (it[STATE_INFORMATION] as MyInformationFragment).themeChanger(true)
-        (it[STATE_SETTING] as SettingFragment).themeChanger()
-        (it[STATE_SEARCHER] as SearcherFragment).themeChanger()
+        try {
+            (it[STATE_NOTIFICATION] as NotificationFragment).themeChanger(true)
+            (it[STATE_INFORMATION] as MyInformationFragment).themeChanger(true)
+            (it[STATE_SETTING] as SettingFragment).themeChanger()
+            (it[STATE_SEARCHER] as SearcherFragment).themeChanger()
+        } catch (e: Exception) {
+            restartApp(mView.applicationContext)
+        }
     }
 
     override fun deleteRoomData() = (mList[STATE_SEARCHER] as SearcherFragment).resetDialog()
