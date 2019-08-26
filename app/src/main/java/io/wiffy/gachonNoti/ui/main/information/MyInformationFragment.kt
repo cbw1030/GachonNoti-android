@@ -31,6 +31,7 @@ class MyInformationFragment : MyInformationContract.View() {
         return myView
     }
 
+
     fun loginExecute() = if (Component.isLogin) {
         isLogin()
     } else {
@@ -95,14 +96,5 @@ class MyInformationFragment : MyInformationContract.View() {
         myView.segmented2.setTintColor(resources.getColor(getThemeColor()))
         myView.login2.setBackgroundResource(getThemeButtonResource())
 
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        console("onViewStateRestored")
-        if (mPresenter == null) {
-            mPresenter = MyInformationPresenter(this)
-            mPresenter?.initPresent()
-        }
     }
 }

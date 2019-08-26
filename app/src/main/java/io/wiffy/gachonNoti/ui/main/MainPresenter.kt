@@ -62,6 +62,4 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
     }
 
     override fun deleteRoomData() = (mList[STATE_SEARCHER] as SearcherFragment).resetDialog()
-
-
 }

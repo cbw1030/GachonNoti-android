@@ -2,7 +2,6 @@ package io.wiffy.gachonNoti.model
 
 import android.app.Application
 import android.content.Context
-import android.graphics.Point
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
@@ -12,12 +11,12 @@ import java.util.*
 class MyApplication : Application(), SuperContract.WiffyObject {
 
     override fun onCreate() {
+        console("Application On")
         super.onCreate()
         sharedPreferences = getSharedPreferences(appConstantPreferences, Context.MODE_PRIVATE)
 
         Component.version =
             applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
-
 
         //None Reset Component on Update
         Component.firstBoot = getSharedItem("firstBooting", true)

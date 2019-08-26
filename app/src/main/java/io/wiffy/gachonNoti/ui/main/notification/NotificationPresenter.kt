@@ -63,6 +63,10 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
         }
     }
 
+    override fun recyclerVisibility() {
+        mView.recyclerVisibility()
+    }
+
     override fun getContext() = mView.sendContext()
 
     override fun show() = mView.showLoad()

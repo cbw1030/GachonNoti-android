@@ -39,9 +39,14 @@ class NotificationFragment : NotificationContract.View() {
 
     private fun setRefresh() {
         myView.swipe.setOnRefreshListener {
+            myView.recylcer.visibility = View.GONE
             mPresenter.resetList()
             myView.swipe.isRefreshing = false
         }
+    }
+
+    override fun recyclerVisibility() {
+        myView.recylcer.visibility = View.VISIBLE
     }
 
     override fun recyclerViewClear() = myView.recylcer.recycledViewPool.clear()

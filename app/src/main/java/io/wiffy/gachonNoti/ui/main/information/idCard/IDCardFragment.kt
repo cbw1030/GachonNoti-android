@@ -107,5 +107,4 @@ class IDCardFragment : IDCardContract.View() {
             )
             .into(myView?.qrcode!!)
     }
-
 }

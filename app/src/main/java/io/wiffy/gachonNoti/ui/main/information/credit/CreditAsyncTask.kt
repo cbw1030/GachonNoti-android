@@ -40,10 +40,10 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
             for (x in 1 until page.size) page[x].text().split(" ").let {
                 try {
                     list.add(CreditInformation(it[0], it[1], it[2]).apply {
-                        console("${page[x].text()}->$name/$isu/$chu")
+//                        console("${page[x].text()}->$name/$isu/$chu")
                     })
                 } catch (e: Exception) {
-                    console("no")
+//                    console("no")
                 }
             }
 
