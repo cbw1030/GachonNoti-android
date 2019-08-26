@@ -42,41 +42,43 @@
                         android:src="@drawable/defaultimage"
                         android:layout_width="105dp"
                         android:layout_height="140dp"/>
+
                 <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_alignTop="@+id/imageonyou"
-                        android:layout_marginStart="10dp"
                         android:id="@+id/yourname"
-                        android:layout_toEndOf="@id/imageonyou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
-                        android:text="박가천"
-                />
-                <TextView
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="10dp"
-                        android:id="@+id/number"
-                        android:maxLines="1"
-                        android:text="000000000"
-                        android:textSize="18sp"
+                        android:layout_alignTop="@+id/imageonyou"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/imageonyou"
-                        android:layout_below="@+id/yourname"
+                        android:text="로그인 오류"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/number"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/yourname"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@id/imageonyou"
+                        android:maxLines="1"
+                        android:text="세션이 만료되었습니다."
+                        android:textSize="18sp" />
+
                 <TextView
                         android:id="@+id/depart"
-                        android:text="어쩌구저쩌구학과"
-                        android:maxLines="1"
-                        android:textSize="18sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/imageonyou"
-                        android:layout_below="@+id/number"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/number"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@id/imageonyou"
+                        android:maxLines="1"
+                        android:text="앱을 재실행해 주세요."
+                        android:textSize="18sp" />
                 <ImageView
                         android:layout_alignBottom="@+id/imageonyou"
                         android:id="@+id/gachonlogo"
@@ -84,21 +86,22 @@
                         android:src="@drawable/gachon"
                         android:layout_alignParentEnd="true"
                         android:layout_width="100dp"
-                        android:layout_height="30dp"/>
+                        android:layout_height="25dp"/>
                 <RelativeLayout
                         android:layout_marginTop="10dp"
                         android:layout_below="@id/gachonlogo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                     <TextView
                             android:id="@+id/timer"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center"
-                            android:textSize="20sp"
-                            android:layout_centerHorizontal="true"
-                            android:text="05 분 00 초"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="00 분 00 초"
+                            android:textSize="20sp" />
                     <ImageView
                             android:layout_marginTop="5dp"
                             android:layout_centerHorizontal="true"
