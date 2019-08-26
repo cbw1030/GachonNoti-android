@@ -9,10 +9,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <RelativeLayout
-                android:background="@color/mainBackground"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/mainBackground">
             <ImageView
                     android:id="@+id/logo_splash2"
                     android:layout_width="wrap_content"
@@ -22,31 +22,30 @@
     </RelativeLayout>
     <RelativeLayout
             android:id="@+id/main_main"
-            android:background="@color/table_out"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/table_out">
 
         <com.google.android.material.tabs.TabLayout
-                android:layout_alignParentTop="true"
                 android:id="@+id/navigation"
-                app:tabMode="fixed"
-                android:elevation="6dp"
-                app:tabIndicatorGravity="bottom"
-                app:tabIndicatorColor="@color/WHITE"
                 android:layout_width="match_parent"
-                app:tabSelectedTextColor="@color/WHITE"
-                app:tabTextColor="@color/gray"
-                app:tabIndicatorHeight="3dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
                 android:background="@color/main2Blue"
+                android:elevation="6dp"
+                app:tabIndicatorColor="@color/WHITE"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
                 app:tabRippleColor="@color/WHITE"
-                android:layout_height="50dp"/>
-
+                app:tabSelectedTextColor="@color/WHITE"
+                app:tabTextColor="@color/gray"/>
 
         <androidx.viewpager.widget.ViewPager
-                android:layout_below="@+id/navigation"
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/navigation"
                 android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>

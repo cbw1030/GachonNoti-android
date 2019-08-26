@@ -13,11 +13,8 @@ import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification.view.*
-
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import android.widget.*
-import androidx.core.view.marginLeft
-import androidx.core.view.setPadding
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 

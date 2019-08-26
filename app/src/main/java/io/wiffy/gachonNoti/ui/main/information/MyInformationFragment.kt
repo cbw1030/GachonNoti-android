@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_information.view.*
 
 class MyInformationFragment : MyInformationContract.View() {
     lateinit var myView: View
-    lateinit var mPresenter: MyInformationPresenter
+    var mPresenter: MyInformationPresenter? = null
     lateinit var adapter: PagerAdapter
 
     companion object {
@@ -27,7 +27,7 @@ class MyInformationFragment : MyInformationContract.View() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information, container, false)
         mPresenter = MyInformationPresenter(this)
-        mPresenter.initPresent()
+        mPresenter?.initPresent()
         return myView
     }
 
@@ -37,12 +37,12 @@ class MyInformationFragment : MyInformationContract.View() {
         isNotLogin()
     }
 
-    fun resetTable() = mPresenter.resetTable()
+    fun resetTable() = mPresenter?.resetTable()
 
     override fun isLogin() {
         myView.information_true.visibility = View.VISIBLE
         myView.information_false.visibility = View.GONE
-        mPresenter.loginSetting()
+        mPresenter?.loginSetting()
     }
 
     override fun isNotLogin() {
@@ -53,7 +53,7 @@ class MyInformationFragment : MyInformationContract.View() {
     override fun initView() {
         myView.button1_.isChecked = true
         fragmentList = ArrayList()
-        mPresenter.fragmentInflation(fragmentList)
+        mPresenter?.fragmentInflation(fragmentList)
         adapter = PagerAdapter(activity?.supportFragmentManager, fragmentList)
         myView.pager3.setPagingEnabled(false)
         myView.pager3.adapter = adapter
@@ -84,18 +84,25 @@ class MyInformationFragment : MyInformationContract.View() {
 
     override fun dismissLoad() = (activity as MainActivity).builderDismiss()
 
-    override fun patternCheck() = mPresenter.patternCheck()
+    override fun patternCheck() = mPresenter?.patternCheck()
 
-    override fun setPatternVisibility() = mPresenter.setPatternVisibility()
+    override fun setPatternVisibility() = mPresenter?.setPatternVisibility()
 
     fun themeChanger(bool: Boolean) {
         if (bool)
-            mPresenter.themeChange()
+            mPresenter?.themeChange()
 
         myView.segmented2.setTintColor(resources.getColor(getThemeColor()))
         myView.login2.setBackgroundResource(getThemeButtonResource())
 
     }
 
-
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        console("onViewStateRestored")
+        if (mPresenter == null) {
+            mPresenter = MyInformationPresenter(this)
+            mPresenter?.initPresent()
+        }
+    }
 }

@@ -13,6 +13,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.dialog_search.*
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 
@@ -51,7 +52,13 @@ class SearchDialog(
             Handler(Looper.getMainLooper()).post {
                 mView.showLoad()
             }
-            mPresenter.loadRoom(cate.getItemAtPosition(spinnerSelected).toString())
+            try {
+                mPresenter.loadRoom(cate.getItemAtPosition(spinnerSelected).toString())
+            } catch (e: Exception) {
+                Handler(Looper.getMainLooper()).post {
+                    mView.dismissLoad()
+                }
+            }
         }
 
         cate.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
