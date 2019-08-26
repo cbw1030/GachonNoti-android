@@ -121,13 +121,11 @@ class NotificationAsyncTask(
                     ACTION_SUCCESS -> {
                         mPresenter.dismiss()
                         update(list)
-                        mPresenter.recyclerVisibility()
                     }
                     33 -> {
                         dismiss()
                         list.clear()
                         update(list)
-                        mPresenter.recyclerVisibility()
                     }
                     else -> {
                         dismiss()

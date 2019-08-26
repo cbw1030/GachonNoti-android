@@ -1,8 +1,12 @@
 package io.wiffy.gachonNoti.ui.main.information.idCard
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +15,11 @@ import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getThemeButtonResource
-import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.matrixToBitmap
+import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
+import kotlin.system.exitProcess
 
 class IDCardFragment : IDCardContract.View() {
     private val initiation = 300000
@@ -40,7 +43,7 @@ class IDCardFragment : IDCardContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
-        }
+        } ?: doneLogin(requireActivity(),context!!)
     }
 
     fun changeTheme() {

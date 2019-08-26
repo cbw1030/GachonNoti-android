@@ -9,6 +9,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.getThemeColor
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
@@ -30,7 +31,6 @@ class MyInformationFragment : MyInformationContract.View() {
         mPresenter?.initPresent()
         return myView
     }
-
 
     fun loginExecute() = if (Component.isLogin) {
         isLogin()

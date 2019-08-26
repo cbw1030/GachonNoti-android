@@ -16,7 +16,6 @@ interface NotificationContract {
         abstract fun themeChanger(bool: Boolean)
         abstract fun sendContext(): Context?
         abstract fun recyclerViewClear()
-        abstract fun recyclerVisibility()
     }
 
     interface Presenter : SuperContract.WiffyObject {
@@ -32,6 +31,5 @@ interface NotificationContract {
         fun setType(mType: Int)
         fun pageUp()
         fun getContext(): Context?
-        fun recyclerVisibility()
     }
 }

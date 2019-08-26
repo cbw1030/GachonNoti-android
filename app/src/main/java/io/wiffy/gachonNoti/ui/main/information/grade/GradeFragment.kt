@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.CHECK_PATTERN
+import io.wiffy.gachonNoti.func.doneLogin
+import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
@@ -22,6 +24,7 @@ class GradeFragment : GradeContract.View() {
     var myView: View? = null
     lateinit var mPresenter: GradePresenter
     lateinit var adapter: GradeAdapter
+    private var mInfo: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information_grade, container, false)
@@ -34,13 +37,20 @@ class GradeFragment : GradeContract.View() {
 
     override fun initView() {
         changeTheme()
+        mInfo?.let {
+            loginInformationSetting(it)
+        } ?: doneLogin(requireActivity(),context!!)
         myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
             PatternLockDialog(context!!, CHECK_PATTERN).show()
         }
     }
 
+    fun loginInformationSetting(info: String) {
+        mInfo = info
+    }
+
     fun patternCheck() {
-       mPresenter.patternCheck()
+        mPresenter.patternCheck()
         setViewVisibility(true)
     }
 

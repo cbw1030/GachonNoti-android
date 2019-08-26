@@ -59,5 +59,6 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
         )
         timeTable?.loginInformationSetting(getSharedItem("number", "null"))
         credit?.loginInformationSetting(getSharedItem("number", "null"))
+        grade?.loginInformationSetting(getSharedItem("number", "null"))
     }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.func.doneLogin
 import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.adapter.CreditAdapter
@@ -34,7 +35,7 @@ class CreditFragment : CreditContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
-        }
+        } ?: doneLogin(requireActivity(),context!!)
     }
 
     @SuppressLint("SetTextI18n")
