@@ -50,5 +50,7 @@ class MyApplication : Application(), SuperContract.WiffyObject {
 //            else -> 4
 //        }
 
+
+        Component.cleaning = 13579
     }
 }

@@ -55,6 +55,11 @@ class MainActivity : MainContract.View() {
         mPresenter.initPresent()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        if (Component.cleaning != 13579) toast("메모리 청소 감지")
+    }
+
     @SuppressLint("ApplySharedPref")
     private fun notificationCheck() {
         if ((!NotificationManagerCompat.from(applicationContext)
