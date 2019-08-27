@@ -66,7 +66,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
             // birthday == date && name != null
 
-            if (name != null) {
+            if (birthday == date && name != null) {
                 Component.isBirthday = true
                 Component.delay = 1500
                 mView.setParams()

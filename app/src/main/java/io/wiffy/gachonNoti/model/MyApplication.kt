@@ -16,7 +16,8 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         sharedPreferences = getSharedPreferences(appConstantPreferences, Context.MODE_PRIVATE)
 
         Component.version =
-            applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
+            applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0)
+                .versionName
 
         //None Reset Component on Update
         Component.firstBoot = getSharedItem("firstBooting", true)
@@ -39,15 +40,13 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.adminMode = getSharedItem("ADMIN", false)
         Component.YEAR = Calendar.getInstance().get(Calendar.YEAR).toString()
 
-
         // 학기 조정은 여기서 하면 편하다.
-        Component.SEMESTER = 2
-//        when (Calendar.getInstance().get(Calendar.MONTH)) {
-//            in 2..5 -> 1
-//            in 6..7 -> 3
-//            in 8..11 -> 2
-//            else -> 4
-//        }
+        Component.SEMESTER = when (Calendar.getInstance().get(Calendar.MONTH)) {
+            in 2..5 -> 1
+            in 6..7 -> 3
+            in 8..11 -> 2
+            else -> 4
+        }
 
     }
 }

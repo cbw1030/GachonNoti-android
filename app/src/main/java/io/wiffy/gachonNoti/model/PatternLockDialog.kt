@@ -98,9 +98,4 @@ class PatternLockDialog(context: Context, mState: Int) :
     }
 
     override fun onBackPressed() = dismiss()
-
-    override fun dismiss() {
-        MainActivity.mView.changeStatusBar(true)
-        super.dismiss()
-    }
 }

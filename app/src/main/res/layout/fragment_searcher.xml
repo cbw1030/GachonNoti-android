@@ -53,9 +53,10 @@
                         android:gravity="center"
                         android:text="@string/load"/>
                 <TextView
+                        android:layout_marginTop="20dp"
                         android:layout_centerHorizontal="true"
                         android:textAlignment="center"
-                        android:text="현재 시간에 맞춰 자동으로\n 해당 학기 시간표를 가져옵니다."
+                        android:text="(현재 시간에 맞춰 자동으로\n 해당 학기 시간표를 가져옵니다.)"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/blblblbl"/>

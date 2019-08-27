@@ -86,12 +86,6 @@ class MainActivity : MainContract.View() {
     }
 
 
-    override fun changeStatusBar(bool: Boolean) {
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = if (bool) resources.getColor(getThemeColor())
-        else resources.getColor(getThemeMyTransColor())
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuItem1 = menu?.add(0, 201735829, 0, "강의실 데이터 삭제")
         menuItem1?.isVisible = false
@@ -312,5 +306,4 @@ class MainActivity : MainContract.View() {
             main_main.invalidate()
         }
     }
-
 }

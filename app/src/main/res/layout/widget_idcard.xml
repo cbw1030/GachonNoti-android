@@ -1,114 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <RelativeLayout
-            android:layout_alignParentTop="true"
             android:id="@+id/gachonback_widget"
-            android:background="@color/main2Blue"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/main2Blue">
+
         <TextView
-                android:textColor="@color/white"
-                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="가천대학교 학생증"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/white"
+                android:textSize="20sp" />
     </RelativeLayout>
 
     <RelativeLayout
-            android:layout_below="@+id/gachonback_widget"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/gachonback_widget"
+            android:background="@color/white">
+
         <ImageView
                 android:id="@+id/imageonyou_widget"
+                android:layout_width="105dp"
+                android:layout_height="140dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="15dp"
-                android:src="@drawable/defaultimage"
-                android:layout_width="105dp"
-                android:layout_height="140dp"/>
+                android:src="@drawable/defaultimage" />
+
         <TextView
-                android:layout_marginTop="10dp"
-                android:layout_alignTop="@+id/imageonyou_widget"
-                android:layout_marginStart="10dp"
                 android:id="@+id/yourname_widget"
-                android:layout_toEndOf="@id/imageonyou_widget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                android:textColor="@color/black"
-                android:text="박가천"
-        />
-        <TextView
-                android:layout_marginTop="5dp"
+                android:layout_alignTop="@+id/imageonyou_widget"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/imageonyou_widget"
+                android:text="박가천"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        <TextView
                 android:id="@+id/number_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/yourname_widget"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/imageonyou_widget"
                 android:maxLines="1"
                 android:text="000000000"
-                android:textSize="18sp"
-                android:layout_toEndOf="@id/imageonyou_widget"
-                android:layout_below="@+id/yourname_widget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="18sp" />
+
         <TextView
                 android:id="@+id/depart_widget"
-                android:text="어쩌구저쩌구학과"
-                android:maxLines="1"
-                android:textSize="18sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/imageonyou_widget"
-                android:layout_below="@+id/number_widget"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/number_widget"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/imageonyou_widget"
+                android:maxLines="1"
+                android:text="방탄소년단"
+                android:textSize="18sp" />
+
         <ImageView
-                android:layout_alignBottom="@+id/imageonyou_widget"
                 android:id="@+id/gachonlogo_widget"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/gachon"
-                android:layout_alignParentEnd="true"
                 android:layout_width="100dp"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/imageonyou_widget"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/gachon" />
+
         <RelativeLayout
-                android:layout_below="@id/gachonlogo_widget"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_below="@id/gachonlogo_widget"
+                android:layout_marginTop="10dp">
+
             <TextView
                     android:id="@+id/timer_widget"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_centerHorizontal="true"
-                    android:text="필요시 재발급 해주시길 바랍니다."
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            <ImageView
-                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/timer_widget"
+                    android:gravity="center"
+                    android:text="필요시 재발급 해주시길 바랍니다."
+                    android:textSize="20sp" />
+
+            <ImageView
                     android:id="@+id/qrcode_widget"
-                    android:layout_above="@+id/rebalgup_widget"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/rebalgup_widget"
+                    android:layout_below="@+id/timer_widget"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp" />
+
             <Button
-                    android:text="재발급"
-                    android:layout_margin="15dp"
                     android:id="@+id/rebalgup_widget"
-                    android:background="@drawable/dialog_button_default"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="15dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+                    android:background="@drawable/dialog_button_default"
+                    android:text="재발급"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
         </RelativeLayout>
     </RelativeLayout>
 
