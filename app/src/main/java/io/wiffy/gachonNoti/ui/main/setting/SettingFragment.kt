@@ -16,9 +16,10 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.FrameLayout
 import androidx.core.app.NotificationManagerCompat
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
@@ -46,7 +47,11 @@ class SettingFragment : SettingContract.View() {
     private var index = 0
     private var adminCode = StringBuilder()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_setting, container, false)
         mPresenter = SettingPresenter(this)
         mPresenter.initPresent()
@@ -105,7 +110,10 @@ class SettingFragment : SettingContract.View() {
                             action = "android.settings.APP_NOTIFICATION_SETTINGS"
                         }
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            tent.putExtra("android.provider.extra.APP_PACKAGE", activity?.packageName)
+                            tent.putExtra(
+                                "android.provider.extra.APP_PACKAGE",
+                                activity?.packageName
+                            )
 
                         } else {
                             tent.putExtra("app_package", activity?.packageName)
@@ -124,39 +132,29 @@ class SettingFragment : SettingContract.View() {
             LoginDialog(context!!).show()
         }
         myView.bugReport.setOnClickListener {
-            val container = FrameLayout(context!!)
-            val params =
-                FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            params.topMargin = 10
-            params.marginStart = 40
-            params.marginEnd = 40
-            val editText = EditText(activity)
-            editText.layoutParams = params
-            container.addView(editText)
-            editText.hint = "내용"
-            AlertDialog.Builder(activity).apply {
-                setTitle("버그리포트 / 개선사항")
-                setView(container)
-                setMessage("\n버그나 개선하고자 하는 사항을 입력해주세요.")
-                setPositiveButton("OK") { _, _ ->
-                    editText.text.toString().apply {
+            MaterialDialog(activity!!).show {
+                title(text = "버그리포트 / 개선사항")
+                message(text = "\n버그나 개선하고자 하는 사항을 입력해주세요.")
+                input(hint = "내용") { _, text ->
+                    text.toString().apply {
                         if (isNotBlank()) checkReport(this)
                     }
                 }
-                setNeutralButton("카카오톡 문의") { _, _ ->
+                positiveButton(text = "OK")
+                neutralButton(text = "카카오톡 문의") {
                     (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
                         ClipData.newPlainText("가천알림이", "tkdgusdlqhek")
                     toastLong("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
                 }
-                setNegativeButton("Cancel") { _, _ -> }
-            }.create().show()
+                negativeButton(text = "Cancel")
+            }
         }
         myView.money.setOnClickListener {
             Component.noneVisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
         myView.adminOption.setOnClickListener {
-            AlertDialog.Builder(activity).apply {
+            MaterialAlertDialogBuilder(activity).apply {
                 setTitle("관리자 옵션")
                 setMessage("관리자 옵션을 추가해주십시요.")
                 setPositiveButton(
@@ -166,7 +164,7 @@ class SettingFragment : SettingContract.View() {
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true
-            AlertDialog.Builder(activity).apply {
+            MaterialAlertDialogBuilder(activity).apply {
                 setTitle("만든이")
                 setMessage("박정호 - 소프트웨어학과\n(iveinvalue@gmail.com)\n\n박상현 - 소프트웨어학과\n(okpsh0033@gmail.com)")
                 setPositiveButton(
@@ -175,7 +173,7 @@ class SettingFragment : SettingContract.View() {
             }.show()
         }
         myView.source.setOnClickListener {
-            AlertDialog.Builder(activity).apply {
+            MaterialAlertDialogBuilder(activity).apply {
                 setTitle(resources.getString(R.string.source))
                 setMessage(
                     "Lottie\n" +
@@ -197,7 +195,7 @@ class SettingFragment : SettingContract.View() {
                             "PatternLockView\n" +
                             "com.andrognito.patternlockview:patternlockview:1.0.0\n\n" +
                             "material-dialogs\n" +
-                            "com.afollestad.material-dialogs:core:3.1.0\n"+
+                            "com.afollestad.material-dialogs:core:3.1.0\n" +
                             "com.afollestad.material-dialogs:input:3.1.0"
                 )
                 setPositiveButton(
@@ -207,7 +205,7 @@ class SettingFragment : SettingContract.View() {
         }
         myView.secretText.setOnClickListener {
             if (secretCount == 4) {
-                AlertDialog.Builder(activity).apply {
+                MaterialAlertDialogBuilder(activity).apply {
                     setTitle("Build Information")
                     setMessage("BRAND:${Build.BRAND}\nMODEL:${Build.MODEL}\nVERSION:${Build.VERSION.RELEASE}\nSDK:${Build.VERSION.SDK_INT}\nRELEASE:${Component.version}\nMAC:${getMACAddress()}")
 
@@ -215,6 +213,7 @@ class SettingFragment : SettingContract.View() {
                         "OK"
                     ) { _, _ -> }
                 }.show()
+
                 secretCount = 0
             } else {
                 secretCount += 1
@@ -222,7 +221,8 @@ class SettingFragment : SettingContract.View() {
         }
         myView.campusSetting.setOnClickListener {
             val item = arrayOf("글로벌", "메디컬")
-            AlertDialog.Builder(activity).apply {
+
+            MaterialAlertDialogBuilder(activity).apply {
                 setTitle("캠퍼스 설정")
                 setSingleChoiceItems(
                     item, if (Component.campus) {
@@ -245,7 +245,7 @@ class SettingFragment : SettingContract.View() {
             }.create().show()
         }
         myView.helper.setOnClickListener {
-            AlertDialog.Builder(activity).apply {
+            MaterialAlertDialogBuilder(activity).apply {
                 setTitle("후원 목록")
                 setMessage(Component.helper)
                 setPositiveButton(
@@ -254,7 +254,7 @@ class SettingFragment : SettingContract.View() {
             }.show()
         }
         myView.version.setOnClickListener {
-            AlertDialog.Builder(activity).apply {
+            MaterialAlertDialogBuilder(activity).apply {
                 setTitle(resources.getString(R.string.version))
                 setMessage(Component.version)
                 setPositiveButton(
@@ -280,7 +280,7 @@ class SettingFragment : SettingContract.View() {
         Component.campus = bool
     }
 
-    private fun checkReport(str: String) = AlertDialog.Builder(activity).apply {
+    private fun checkReport(str: String) = MaterialAlertDialogBuilder(activity).apply {
         setTitle("다음과 같은 내용으로 보내시겠습니까?")
         setMessage(str)
         setPositiveButton(
@@ -322,7 +322,10 @@ class SettingFragment : SettingContract.View() {
         intArrayOf(-android.R.attr.state_checked)
     ).let {
         myView.notiSwitch.thumbTintList =
-            ColorStateList(it, intArrayOf(resources.getColor(getThemeColor()), resources.getColor(R.color.gray2)))
+            ColorStateList(
+                it,
+                intArrayOf(resources.getColor(getThemeColor()), resources.getColor(R.color.gray2))
+            )
         myView.notiSwitch.trackTintList = ColorStateList(
             it, intArrayOf(
                 resources.getColor(

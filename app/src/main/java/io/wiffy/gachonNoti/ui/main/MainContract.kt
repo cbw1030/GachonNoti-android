@@ -29,7 +29,7 @@ interface MainContract {
     interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
         fun changeThemes()
-        fun deleteRoomData(): AlertDialog
+        fun deleteRoomData()
         fun resetTimeTable(): Unit?
         fun logout()
         fun login()

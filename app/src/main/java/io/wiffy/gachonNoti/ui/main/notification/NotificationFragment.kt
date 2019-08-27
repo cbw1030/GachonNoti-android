@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,7 +13,8 @@ import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import android.widget.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
@@ -24,7 +24,11 @@ class NotificationFragment : NotificationContract.View() {
     lateinit var mPresenter: NotificationPresenter
     lateinit var adapter: NotificationAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_notification, container, false)
 
         mPresenter = NotificationPresenter(this)
@@ -49,33 +53,17 @@ class NotificationFragment : NotificationContract.View() {
 
     private fun setFab() {
         myView.fab_main.setOnClickListener {
-            val container = RelativeLayout(context!!)
-
-            val editText = EditText(activity).apply {
-                layoutParams =
-                    FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                        .apply {
-                            leftMargin = 40
-                            rightMargin = 40
-                            topMargin = 20
-                        }
-                hint = "내용"
-            }
-
-            container.addView(editText)
-            AlertDialog.Builder(activity).apply {
-                setTitle(
-                    "검색어를 입력해주세요."
-                )
-                setView(container)
-                setPositiveButton("검색") { _, _ ->
-                    editText.text.toString().apply {
+            MaterialDialog(activity!!).show {
+                title(text = "검색어를 입력해주세요.")
+                input(hint = "내용") { _, text ->
+                    text.toString().apply {
                         if (isNotBlank())
                             mPresenter.search(this)
                     }
                 }
-                setNegativeButton("취소") { _, _ -> }
-            }.create().show()
+                positiveButton(text = "검색")
+                negativeButton(text = "취소")
+            }
         }
     }
 

@@ -13,10 +13,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
@@ -59,7 +59,7 @@ class MainActivity : MainContract.View() {
     private fun notificationCheck() {
         if ((!NotificationManagerCompat.from(applicationContext)
                 .areNotificationsEnabled()) and (Component.notificationSet)
-        ) AlertDialog.Builder(this).apply {
+        ) MaterialAlertDialogBuilder(this).apply {
             setTitle("알림 설정 확인")
             setMessage("가천 알림이의 알림을 허용하시겠습니까?")
             setPositiveButton("OK") { _, _ ->
@@ -81,6 +81,7 @@ class MainActivity : MainContract.View() {
                 mPresenter.negativeButton()
             }
             setCancelable(false)
+
         }.show()
     }
 
@@ -173,14 +174,14 @@ class MainActivity : MainContract.View() {
     }
 
     override fun askSetPattern() {
-        AlertDialog.Builder(this@MainActivity).apply {
+        MaterialAlertDialogBuilder(this).apply {
             setMessage("패턴을 설정하시겠습니까?")
             setPositiveButton("네") { _, _ ->
                 setPattern()
             }
             setNegativeButton("아니요") { _, _ -> }
-        }.create().show()
 
+        }.show()
         patternVisibility()
     }
 
@@ -215,10 +216,9 @@ class MainActivity : MainContract.View() {
     @SuppressLint("ApplySharedPref")
     override fun updatedContents() {
         setSharedItem(Component.version, true)
-
-        AlertDialog.Builder(this@MainActivity).apply {
+        MaterialAlertDialogBuilder(this).apply {
             setTitle("${Component.version} 버전 업데이트")
-            setMessage(" ${resources.getString(R.string.update)}")
+            setMessage(R.string.update)
             setPositiveButton(
                 "OK"
             ) { _, _ -> }

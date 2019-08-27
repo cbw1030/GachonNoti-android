@@ -11,7 +11,8 @@ import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import kotlinx.android.synthetic.main.dialog_contact.*
 
-class ContactDialog(context: Context, private val mView: SettingContract.View) : SuperContract.SuperDialog(context) {
+class ContactDialog(context: Context, private val mView: SettingContract.View) :
+    SuperContract.SuperDialog(context) {
     lateinit var myList: ArrayList<String>
     var spinnerSelected = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,12 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 spinnerSelected = position
             }
         }
