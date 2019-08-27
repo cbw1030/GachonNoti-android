@@ -4,8 +4,13 @@
 
 Screenshot
 <br>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen/screener_1562142606240.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen/screener_1562142612545.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen/screener_1562142619781.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen/screener_1562142625755.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen/screener_1562142635946.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/1.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/3.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/4.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/5.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/6.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/7.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/8.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/9.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/10.png' width='250px'/>
+<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/11.png' width='250px'/>
