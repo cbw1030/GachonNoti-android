@@ -12,7 +12,8 @@ import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 import java.lang.Exception
 
 
-class MainPresenter(private val mView: MainContract.View, private val context: Activity) : MainContract.Presenter {
+class MainPresenter(private val mView: MainContract.View, private val context: Activity) :
+    MainContract.Presenter {
 
     private val mList = ArrayList<Fragment?>()
 
@@ -53,7 +54,8 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         (mList[STATE_INFORMATION] as MyInformationFragment).setPatternVisibility()
     }
 
-    override fun mainLogChecking() = (mList[STATE_INFORMATION] as MyInformationFragment).loginExecute()
+    override fun mainLogChecking() =
+        (mList[STATE_INFORMATION] as MyInformationFragment).loginExecute()
 
     override fun changeThemes() = mList.let {
         try {
@@ -66,5 +68,7 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         }
     }
 
-    override fun deleteRoomData() = (mList[STATE_SEARCHER] as SearcherFragment).resetDialog()
+    override fun deleteRoomData() {
+        (mList[STATE_SEARCHER] as SearcherFragment).resetDialog()
+    }
 }

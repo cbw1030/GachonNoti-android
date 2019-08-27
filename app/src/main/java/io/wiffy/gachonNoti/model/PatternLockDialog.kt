@@ -12,7 +12,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_pattern_lock.*
 
 class PatternLockDialog(context: Context, mState: Int) :
-    SuperContract.SuperDialog(context, R.style.mStyle) {
+    SuperContract.SuperDialog(context) {
 
     private var state = mState
     private var prePattern: String = ""
@@ -20,12 +20,9 @@ class PatternLockDialog(context: Context, mState: Int) :
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.dialog_pattern_lock)
 
-        MainActivity.mView.changeStatusBar(false)
-
         window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
         pattern_lock_view.run {
-
             if (getSharedItem<String>("pattern").length < 4) {
                 state = SET_PATTERN
             }
@@ -101,9 +98,4 @@ class PatternLockDialog(context: Context, mState: Int) :
     }
 
     override fun onBackPressed() = dismiss()
-
-    override fun dismiss() {
-        MainActivity.mView.changeStatusBar(true)
-        super.dismiss()
-    }
 }

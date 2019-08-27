@@ -2,7 +2,6 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import com.github.eunsiljo.timetablelib.view.TimeTableView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.`object`.Component
 import kotlin.collections.ArrayList
@@ -23,7 +23,11 @@ class SearcherFragment : SearchContract.View() {
 
     var builder: SearchDialog? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_searcher, container, false)
         mPresenter = SearcherPresenter(this)
         mPresenter.initPresent()
@@ -43,7 +47,8 @@ class SearcherFragment : SearchContract.View() {
     }
 
     @SuppressLint("ApplySharedPref")
-    fun resetDialog(): AlertDialog = AlertDialog.Builder(context).apply {
+    fun resetDialog() = MaterialAlertDialogBuilder(context).apply {
+
         setMessage("저장된 데이터를 재설정 할까요?")
         setPositiveButton(
             "OK"
@@ -62,7 +67,7 @@ class SearcherFragment : SearchContract.View() {
             builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
             builder?.show()
         }
-    }.show()
+    }.show()!!
 
 
     fun themeChanger() {

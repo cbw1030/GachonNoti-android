@@ -15,7 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SplashPresenter(private val mView: SplashContract.View, private val context: Context) : SplashContract.Presenter {
+class SplashPresenter(private val mView: SplashContract.View, private val context: Context) :
+    SplashContract.Presenter {
 
     override fun initPresent() {
         checking()
@@ -32,7 +33,11 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
             val notiChannel =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val channelMessage =
-                NotificationChannel(channel, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                NotificationChannel(
+                    channel,
+                    channelName,
+                    NotificationManager.IMPORTANCE_DEFAULT
+                ).apply {
                     description = ""
                     enableLights(true)
                     enableVibration(true)
@@ -53,8 +58,6 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
     @SuppressLint("SimpleDateFormat")
     private fun checking() {
-
-
         try {
             val date = SimpleDateFormat("MMdd").format(Date())
             val birthday: String? = getSharedItem<String>("birthday").substring(2, 6)
@@ -69,7 +72,11 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                 mView.setParams()
                 mView.setImageView(R.drawable.happybirthday)
                 mView.setBirthdayText(
-                    "${randomCake(gender)} ${getWordByKorean(name.substring(1, name.length), "아", "야")}, 생일축하해~!"
+                    "${randomCake(gender)} ${getWordByKorean(
+                        name.substring(1, name.length),
+                        "아",
+                        "야"
+                    )}, 생일축하해~!"
                 )
             } else {
                 mView.setImageView(R.drawable.defaults)

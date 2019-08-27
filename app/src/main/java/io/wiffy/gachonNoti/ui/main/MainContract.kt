@@ -1,7 +1,5 @@
 package io.wiffy.gachonNoti.ui.main
 
-
-import android.app.AlertDialog
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.model.SuperContract
 
@@ -21,7 +19,6 @@ interface MainContract {
         abstract fun changePattern()
         abstract fun checkPattern(): Unit?
         abstract fun patternVisibility()
-        abstract fun changeStatusBar(bool: Boolean)
         abstract fun mainLogout()
         abstract fun mainLogin()
     }
@@ -29,7 +26,7 @@ interface MainContract {
     interface Presenter : SuperContract.WiffyObject {
         fun initPresent()
         fun changeThemes()
-        fun deleteRoomData(): AlertDialog
+        fun deleteRoomData()
         fun resetTimeTable(): Unit?
         fun logout()
         fun login()
