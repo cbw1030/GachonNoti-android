@@ -195,7 +195,10 @@ class SettingFragment : SettingContract.View() {
                             "android-segmented-control\n" +
                             "info.hoang8f:android-segmented:1.0.6\n\n" +
                             "PatternLockView\n" +
-                            "com.andrognito.patternlockview:patternlockview:1.0.0"
+                            "com.andrognito.patternlockview:patternlockview:1.0.0\n\n" +
+                            "material-dialogs\n" +
+                            "com.afollestad.material-dialogs:core:3.1.0\n"+
+                            "com.afollestad.material-dialogs:input:3.1.0"
                 )
                 setPositiveButton(
                     "OK"

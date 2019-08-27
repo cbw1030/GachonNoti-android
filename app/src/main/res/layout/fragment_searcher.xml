@@ -2,28 +2,28 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
             android:layout_margin="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
         <RelativeLayout
-                android:layout_below="@+id/card1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_below="@+id/card1">
 
 
             <com.github.eunsiljo.timetablelib.view.TimeTableView
-                    android:layout_marginTop="-1dp"
+                    android:id="@+id/timetable"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/timetable"/>
+                    android:layout_marginTop="-1dp"/>
 
             <RelativeLayout
                     android:id="@+id/showtu"
@@ -43,29 +43,37 @@
                         app:lottie_loop="true"/>
 
                 <TextView
-                        android:layout_marginTop="-100dp"
+                        android:textColor="@color/black"
+                        android:id="@+id/blblblbl"
                         android:layout_width="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/animation_view"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-100dp"
+                        android:gravity="center"
                         android:text="@string/load"/>
-
+                <TextView
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:text="현재 시간에 맞춰 자동으로\n 해당 학기 시간표를 가져옵니다."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/blblblbl"/>
             </RelativeLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab"
-                    app:fabSize="normal"
-                    app:elevation="10dp"
                     android:layout_width="58dp"
                     android:layout_height="58dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:layout_gravity="center"
-                    app:maxImageSize="30dp"
-                    android:layout_margin="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"/>
+                    app:elevation="10dp"
+                    app:fabSize="normal"
+                    app:maxImageSize="30dp"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
