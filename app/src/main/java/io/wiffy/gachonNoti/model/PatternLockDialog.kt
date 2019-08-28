@@ -8,10 +8,13 @@ import com.andrognito.patternlockview.listener.PatternLockViewListener
 import com.andrognito.patternlockview.utils.PatternLockUtils
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.*
-import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_pattern_lock.*
 
-class PatternLockDialog(context: Context, mState: Int) :
+class PatternLockDialog(
+    context: Context,
+    mState: Int,
+    val mCallback: SuperContract.Callback? = null
+) :
     SuperContract.SuperDialog(context) {
 
     private var state = mState
@@ -73,7 +76,7 @@ class PatternLockDialog(context: Context, mState: Int) :
                         }
                         CHECK_PATTERN -> {
                             if (getSharedItem<String>("pattern") == mPattern) {
-                                MainActivity.mView.checkPattern()
+                                mCallback?.callback()
                                 dismiss()
                             } else {
                                 bulabula.text = "패턴이 틀립니다. 다시 입력해주세요."

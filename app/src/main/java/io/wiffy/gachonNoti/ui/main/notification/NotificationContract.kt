@@ -8,8 +8,6 @@ interface NotificationContract {
     abstract class View : SuperContract.SuperFragment() {
         abstract fun changeUI(list: ParseList)
         abstract fun updateUI(list: ParseList)
-        abstract fun showLoad()
-        abstract fun dismissLoad(): Boolean?
         abstract fun internetUnusable(): Boolean
         abstract fun internetUsable(): Boolean
         abstract fun search(str: String)
@@ -24,8 +22,6 @@ interface NotificationContract {
         fun resetList()
         fun initPresent()
         fun update(data: ParseList)
-        fun show()
-        fun dismiss(): Boolean?
         fun request()
         fun search(src: String)
         fun setType(mType: Int)

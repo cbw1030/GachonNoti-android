@@ -1,12 +1,12 @@
 package io.wiffy.gachonNoti.ui.main.information.grade
 
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.SuperContract
-import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
@@ -37,7 +37,7 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     }
 
     override fun onPreExecute() {
-        MainActivity.mView.builderUp()
+        Component.getBuilder()?.show()
     }
 
     override fun doInBackground(vararg params: Void?): Int {
@@ -77,7 +77,7 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     }
 
     override fun onPostExecute(result: Int?) {
-        MainActivity.mView.builderDismiss()
+        Component.getBuilder()?.show()
         if (result == ACTION_SUCCESS) {
             mView.setView(creditAverage, creditList)
         } else mView.toast("인터넷 연결을 확인해주세요.")

@@ -1,12 +1,12 @@
 package io.wiffy.gachonNoti.ui.main.information.credit
 
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.SuperContract
-import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
@@ -20,7 +20,7 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
     val list = ArrayList<CreditInformation>()
 
     override fun onPreExecute() {
-        MainActivity.mView.builderUp()
+        Component.getBuilder()?.show()
     }
 
     private fun getJson() =
@@ -39,11 +39,8 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
 
             for (x in 1 until page.size) page[x].text().split(" ").let {
                 try {
-                    list.add(CreditInformation(it[0], it[1], it[2]).apply {
-//                        console("${page[x].text()}->$name/$isu/$chu")
-                    })
+                    list.add(CreditInformation(it[0], it[1], it[2]))
                 } catch (e: Exception) {
-//                    console("no")
                 }
             }
 
@@ -61,7 +58,7 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
     }
 
     override fun onPostExecute(result: Int?) {
-        MainActivity.mView.builderDismiss()
+        Component.getBuilder()?.dismiss()
         if (result == ACTION_FAILURE) mView.toast("인터넷 연결을 확인해주세요.")
     }
 }

@@ -19,7 +19,6 @@ import kotlin.collections.ArrayList
 
 class SearchDialog(
     context: Context,
-    private val mView: SearchContract.View,
     private val mPresenter: SearcherPresenter
 ) : SearchContract.DialogPresenter(context) {
 
@@ -50,13 +49,13 @@ class SearchDialog(
 
         search.setOnClickListener {
             Handler(Looper.getMainLooper()).post {
-                mView.showLoad()
+                Component.getBuilder()?.show()
             }
             try {
                 mPresenter.loadRoom(cate.getItemAtPosition(spinnerSelected).toString())
             } catch (e: Exception) {
                 Handler(Looper.getMainLooper()).post {
-                    mView.dismissLoad()
+                    Component.getBuilder()?.dismiss()
                 }
             }
         }
@@ -65,7 +64,12 @@ class SearchDialog(
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 spinnerSelected = position
             }
         }
@@ -117,11 +121,13 @@ class SearchDialog(
         }
     }
 
-    override fun requestLoad() = mPresenter.isDownloaded(Component.YEAR, Component.SEMESTER.toString())
+    override fun requestLoad() =
+        mPresenter.isDownloaded(Component.YEAR, Component.SEMESTER.toString())
 
     override fun setSpinner(arrayList: ArrayList<String>) {
         cate.visibility = View.VISIBLE
-        cate.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
+        cate.adapter =
+            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
     }
 
     override fun setListDialog(arrayList: ArrayList<String>) {

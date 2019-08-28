@@ -8,7 +8,6 @@ import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.TimeTableInformation
-import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
@@ -30,7 +29,7 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
     }
 
     override fun onPreExecute() {
-        MainActivity.mView.builderUp()
+        Component.getBuilder()?.show()
     }
 
     override fun doInBackground(vararg params: Void?): Int {
@@ -76,7 +75,7 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
     }
 
     override fun onPostExecute(result: Int?) {
-        MainActivity.mView.builderDismiss()
+        Component.getBuilder()?.dismiss()
         if (result == ACTION_FAILURE) mView.toast("인터넷 연결을 확인해주세요.")
     }
 }

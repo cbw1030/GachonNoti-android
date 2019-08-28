@@ -41,8 +41,6 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
     }
 
-    override fun checkPattern() = (mList[STATE_INFORMATION] as MyInformationFragment).patternCheck()
-
     override fun logout() = (mList[STATE_SETTING] as SettingFragment).adminLogout()
 
     override fun login() = (mList[STATE_SETTING] as SettingFragment).adminLogin()

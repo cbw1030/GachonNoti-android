@@ -65,10 +65,6 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
 
     override fun getContext() = mView.sendContext()
 
-    override fun show() = mView.showLoad()
-
-    override fun dismiss() = mView.dismissLoad()
-
     override fun internetInterrupted() = mView.internetUnusable()
 
     override fun internetNotInterrupted() = mView.internetUsable()

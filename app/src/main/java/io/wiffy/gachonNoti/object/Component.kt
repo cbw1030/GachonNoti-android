@@ -1,8 +1,9 @@
 package io.wiffy.gachonNoti.`object`
 
+import android.app.Dialog
 import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import io.wiffy.gachonNoti.R
-
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
 object Component {
@@ -45,6 +46,8 @@ object Component {
 
     lateinit var timeTableSet: HashSet<String>
 
+    private var builder: Dialog? = null
+
     var titles = arrayListOf(
         Pair("가천알림이", false),
         Pair("내 정보", false),
@@ -68,5 +71,21 @@ object Component {
         R.color.ran7,
         R.color.ran8
     )
+
+    fun getBuilder(activity: AppCompatActivity? = null): Dialog? {
+        if (activity != null && builder == null) {
+            builder = Dialog(activity).apply {
+                setContentView(R.layout.builder)
+                setCancelable(false)
+                setCanceledOnTouchOutside(false)
+                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            }
+        }
+        return if (builder?.isShowing == false) {
+            builder
+        } else {
+            null
+        }
+    }
 
 }

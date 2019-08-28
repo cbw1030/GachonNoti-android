@@ -24,8 +24,6 @@ import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.PatternLockDialog
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
-
 
 class MainActivity : MainContract.View() {
 
@@ -97,41 +95,16 @@ class MainActivity : MainContract.View() {
             mPresenter.deleteRoomData()
             true
         }
-        201735831 -> {
-            mPresenter.resetTimeTable()
-            true
-        }
         else -> super.onOptionsItemSelected(item)
     }
 
-    override fun builderUp() {
-        if (builder == null) {
-            builder = Dialog(this@MainActivity).apply {
-                setContentView(R.layout.builder)
-                setCancelable(false)
-                setCanceledOnTouchOutside(false)
-                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
-            }
-        }
-        Handler(Looper.getMainLooper()).post {
-            try {
-                if (builder?.isShowing == false)
-                    builder?.show()
-            } catch (e: Exception) {
-
-            }
-        }
+    override fun builderUp() = Handler(Looper.getMainLooper()).post {
+        Component.getBuilder(this@MainActivity)?.show()
     }
 
-    override fun builderDismiss() = builder?.let {
-        Handler(Looper.getMainLooper()).post {
-            try {
-                if (builder?.isShowing == true)
-                    builder?.dismiss()
-            } catch (e: Exception) {
 
-            }
-        }
+    override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
+        Component.getBuilder(this@MainActivity)?.dismiss()
     }
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
@@ -181,8 +154,6 @@ class MainActivity : MainContract.View() {
 
 
     override fun patternVisibility() = mPresenter.patternVisibility()
-
-    override fun checkPattern() = mPresenter.checkPattern()
 
     override fun changePattern() {
         PatternLockDialog(this@MainActivity, CHANGE_PATTERN).apply {
@@ -287,10 +258,13 @@ class MainActivity : MainContract.View() {
     }
 
     override fun logout() = mPresenter.logout()
+
     override fun login() = mPresenter.login()
+
     override fun mainLogout() = mPresenter.mainLogChecking()
 
     override fun mainLogin() = mPresenter.mainLogChecking()
+
     private fun visible() {
         main_main.visibility = View.VISIBLE
         main_splash.visibility = View.GONE

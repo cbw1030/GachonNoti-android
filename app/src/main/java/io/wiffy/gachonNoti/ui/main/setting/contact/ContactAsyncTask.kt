@@ -52,7 +52,6 @@ class ContactAsyncTask(
     }
 
     override fun onPostExecute(result: Int?) {
-
         myView.builderDismissAndContactUp(myList)
     }
 }

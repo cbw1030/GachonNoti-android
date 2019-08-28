@@ -1,10 +1,10 @@
 package io.wiffy.gachonNoti.func
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.wiffy.gachonNoti.`object`.Component
 import kotlin.math.roundToInt
 import kotlin.system.exitProcess
@@ -30,7 +30,7 @@ fun dpToPx(context: Context, dp: Int) = (dp * context.resources.displayMetrics.d
 
 fun doneLogin(act: Activity, cnt: Context) {
     if (Component.error)
-        AlertDialog.Builder(act).apply {
+        MaterialAlertDialogBuilder(act).apply {
             setTitle("세션이 만료되었습니다.")
             setMessage("앱을 재실행 합니다.")
             setPositiveButton(

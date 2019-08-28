@@ -38,7 +38,7 @@ class SearcherFragment : SearchContract.View() {
         Glide.with(this).load(R.drawable.search).into(myView.fab)
 
         myView.fab.setOnClickListener {
-            builder = SearchDialog(context!!, this, mPresenter)
+            builder = SearchDialog(context!!, mPresenter)
             builder?.show()
         }
 
@@ -64,7 +64,7 @@ class SearcherFragment : SearchContract.View() {
             Component.titles[STATE_SEARCHER] = Pair("강의실", true)
             MainActivity.mView.title = Component.titles[STATE_SEARCHER].first
 
-            builder = SearchDialog(context!!, this@SearcherFragment, mPresenter)
+            builder = SearchDialog(context!!, mPresenter)
             builder?.show()
         }
     }.show()!!
@@ -111,9 +111,4 @@ class SearcherFragment : SearchContract.View() {
         myView.showtu.visibility = View.GONE
         myView.timetable.visibility = View.VISIBLE
     }
-
-    override fun showLoad() = (activity as MainActivity).builderUp()
-
-    override fun dismissLoad() = (activity as MainActivity).builderDismiss()
-
 }

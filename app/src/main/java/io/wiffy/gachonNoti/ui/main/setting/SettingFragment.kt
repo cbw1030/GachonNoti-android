@@ -42,7 +42,6 @@ class SettingFragment : SettingContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: SettingPresenter
     lateinit var list: ArrayList<CircleImageView>
-    private var builderIn: Dialog? = null
     private var secretCount = 0
     private var index = 0
     private var adminCode = StringBuilder()
@@ -338,38 +337,29 @@ class SettingFragment : SettingContract.View() {
 
     override fun builderUp() {
         Handler(Looper.getMainLooper()).post {
-            builderIn = null
-            builderIn = Dialog(activity!!).apply {
-                setContentView(R.layout.builder)
-                setCancelable(false)
-                setCanceledOnTouchOutside(false)
-                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
-            }
-            builderIn?.show()
+            Component.getBuilder()?.show()
         }
     }
 
     override fun builderDismissAndContactUp(list: ArrayList<ContactInformation>) {
         Handler(Looper.getMainLooper()).post {
-            builderIn?.let {
-                it.dismiss()
-                if (list.isNotEmpty()) {
-                    ContactListDialog(activity!!, list).show()
-                } else {
-                    AlertDialog.Builder(activity).apply {
-                        setTitle("")
-                        setMessage("목록이 없습니다.")
-                        setPositiveButton(
-                            "OK"
-                        ) { _, _ -> }
-                    }.show()
-                }
+            if (list.isNotEmpty()) {
+                ContactListDialog(activity!!, list).show()
+            } else {
+                AlertDialog.Builder(activity).apply {
+                    setTitle("")
+                    setMessage("목록이 없습니다.")
+                    setPositiveButton(
+                        "OK"
+                    ) { _, _ -> }
+                }.show()
             }
+            Component.getBuilder()?.dismiss()
         }
     }
 
     override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
-        builderIn?.dismiss()
+        Component.getBuilder()?.dismiss()
     }
 
     private fun adminCode(id: Int) {

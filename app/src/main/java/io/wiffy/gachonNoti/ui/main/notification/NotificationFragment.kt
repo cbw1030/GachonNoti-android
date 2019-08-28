@@ -122,10 +122,6 @@ class NotificationFragment : NotificationContract.View() {
 
     override fun updateUI(list: ParseList) = adapter.update(list)
 
-    override fun showLoad() = MainActivity.mView.builderUp()
-
-    override fun dismissLoad() = MainActivity.mView.builderDismiss()
-
     override fun search(str: String) = mPresenter.search(str)
 
     override fun sendContext() = context

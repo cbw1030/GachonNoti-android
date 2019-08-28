@@ -40,7 +40,7 @@ class NotificationAsyncTask(
 
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
-            mPresenter.show()
+            Component.getBuilder()?.show()
         }
     }
 
@@ -117,18 +117,15 @@ class NotificationAsyncTask(
     override fun onPostExecute(result: Int?) {
         with(mPresenter) {
             Handler(Looper.getMainLooper()).post {
+                Component.getBuilder()?.dismiss()
                 when (result) {
-                    ACTION_SUCCESS -> {
-                        mPresenter.dismiss()
-                        update(list)
-                    }
+                    ACTION_SUCCESS -> update(list)
+
                     33 -> {
-                        dismiss()
                         list.clear()
                         update(list)
                     }
                     else -> {
-                        dismiss()
                         internetInterrupted()
                     }
                 }

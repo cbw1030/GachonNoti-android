@@ -7,11 +7,8 @@ interface MyInformationContract {
 
     abstract class View : SuperContract.SuperFragment() {
         abstract fun initView()
-        abstract fun showLoad()
-        abstract fun dismissLoad(): Boolean?
         abstract fun isLogin()
         abstract fun isNotLogin()
-        abstract fun patternCheck(): Unit?
         abstract fun setPatternVisibility(): Unit?
     }
 
@@ -22,7 +19,6 @@ interface MyInformationContract {
         fun isNotLogin()
         fun loginSetting(): Unit?
         fun resetTable(): Unit?
-        fun patternCheck(): Unit?
         fun setPatternVisibility(): Unit?
     }
 }

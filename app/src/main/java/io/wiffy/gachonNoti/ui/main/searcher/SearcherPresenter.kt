@@ -17,7 +17,6 @@ import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 import kotlin.collections.ArrayList
 import java.util.*
-import kotlin.Comparator
 
 
 class SearcherPresenter(private val mView: SearchContract.View) : SearchContract.Presenter {
@@ -44,7 +43,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     override fun getData(yearSemester: String) {
         loadCount = 0
         errorCnt = 0
-        mView.showLoad()
+        Component.getBuilder()?.show()
         SearchAsyncTask("1", yearSemester, this).execute()
         SearchAsyncTask("2", yearSemester, this).execute()
         SearchAsyncTask("3", yearSemester, this).execute()
@@ -52,7 +51,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
     }
 
     override fun showLoad() {
-        mView.showLoad()
+        Component.getBuilder()?.show()
     }
 
     override fun dismissLoad() {
@@ -60,14 +59,14 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
         if (loadCount >= 4) {
             mView2.showBtn(false)
             mView2.requestLoad()
-            mView.dismissLoad()
+            Component.getBuilder()?.dismiss()
         }
     }
 
     override fun error() {
         errorCnt += 1
         if (errorCnt == 1) {
-            mView.dismissLoad()
+            Component.getBuilder()?.dismiss()
             mView2.errorDialog()
         }
     }
@@ -171,7 +170,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             findRoom.sort()
             Handler(Looper.getMainLooper()).post {
                 mView2.setListDialog(findRoom)
-                mView.dismissLoad()
+                Component.getBuilder()?.dismiss()
             }
         }).start()
 
@@ -212,7 +211,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
     override fun loadTable(str: String) {
         Handler(Looper.getMainLooper()).post {
-            mView.showLoad()
+            Component.getBuilder()?.show()
         }
         Thread(Runnable {
             tableArr = ArrayList(6)
@@ -243,7 +242,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
             Handler(Looper.getMainLooper()).post {
                 mView.setTimeTable(array2, str)
-                mView.dismissLoad()
+                Component.getBuilder()?.show()
             }
         }).start()
     }

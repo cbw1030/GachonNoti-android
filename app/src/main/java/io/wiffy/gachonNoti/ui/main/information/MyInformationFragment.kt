@@ -9,10 +9,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.func.doneLogin
 import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.restartApp
-import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlin.system.exitProcess
@@ -74,8 +71,6 @@ class MyInformationFragment : MyInformationContract.View() {
         setTypeView()
     }
 
-    override fun showLoad() = (activity as MainActivity).builderUp()
-
     private fun setTypeView() {
         myView.segmented2.setOnCheckedChangeListener { _, checkedId ->
             myView.pager3.currentItem =
@@ -88,10 +83,6 @@ class MyInformationFragment : MyInformationContract.View() {
                 }
         }
     }
-
-    override fun dismissLoad() = (activity as MainActivity).builderDismiss()
-
-    override fun patternCheck() = mPresenter?.patternCheck()
 
     override fun setPatternVisibility() = mPresenter?.setPatternVisibility()
 

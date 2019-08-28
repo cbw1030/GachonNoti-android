@@ -41,8 +41,6 @@ class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformat
     override fun isNotLogin() {
     }
 
-    override fun patternCheck() = grade?.patternCheck()
-
     override fun setPatternVisibility() = grade?.setViewVisibility(false)
 
     override fun loginSetting() {

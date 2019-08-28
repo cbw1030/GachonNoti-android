@@ -2,13 +2,13 @@ package io.wiffy.gachonNoti.ui.main.setting.login
 
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.ACTION_FAILURE
 import io.wiffy.gachonNoti.func.ACTION_SUCCESS
 import io.wiffy.gachonNoti.func.isNetworkConnected
 import io.wiffy.gachonNoti.func.setSharedItem
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.SuperContract
-import io.wiffy.gachonNoti.ui.main.MainActivity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
@@ -30,9 +30,7 @@ class LoginAsyncTask(
     lateinit var studentInformation: StudentInformation
 
     override fun onPreExecute() {
-        Handler(Looper.getMainLooper()).post {
-            MainActivity.mView.builderUp()
-        }
+        Component.getBuilder()?.show()
     }
 
     override fun doInBackground(vararg params: Void?): Int {
@@ -93,7 +91,7 @@ class LoginAsyncTask(
 
     override fun onPostExecute(result: Int?) {
         Handler(Looper.getMainLooper()).post {
-            MainActivity.mView.builderDismiss()
+            Component.getBuilder()?.dismiss()
         }
         when (result ?: ACTION_FAILURE) {
             ACTION_SUCCESS -> {

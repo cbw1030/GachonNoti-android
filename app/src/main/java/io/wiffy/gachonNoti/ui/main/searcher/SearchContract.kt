@@ -8,8 +8,6 @@ interface SearchContract {
 
     abstract class View : SuperContract.SuperFragment() {
         abstract fun initUI()
-        abstract fun showLoad()
-        abstract fun dismissLoad(): Boolean?
         abstract fun setTimeTable(arr: ArrayList<TimeTableData>?, name: String)
         abstract fun searcherVisible(bool: Boolean)
     }

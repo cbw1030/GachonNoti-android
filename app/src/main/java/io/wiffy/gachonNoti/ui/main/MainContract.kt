@@ -6,7 +6,7 @@ import io.wiffy.gachonNoti.model.SuperContract
 interface MainContract {
     abstract class View : SuperContract.SuperActivity() {
         abstract fun changeUI(mList: ArrayList<Fragment?>)
-        abstract fun builderUp()
+        abstract fun builderUp(): Boolean?
         abstract fun builderDismiss(): Boolean?
         abstract fun updatedContents()
         abstract fun setTabText(str: String)
@@ -17,7 +17,6 @@ interface MainContract {
         abstract fun setTitle(pair: Pair<String, Boolean>)
         abstract fun askSetPattern()
         abstract fun changePattern()
-        abstract fun checkPattern(): Unit?
         abstract fun patternVisibility()
         abstract fun mainLogout()
         abstract fun mainLogin()
@@ -31,7 +30,6 @@ interface MainContract {
         fun logout()
         fun login()
         fun mainLogChecking()
-        fun checkPattern(): Unit?
         fun patternVisibility()
         fun positiveButton()
         fun negativeButton()

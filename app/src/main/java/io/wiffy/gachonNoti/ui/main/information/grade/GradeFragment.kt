@@ -18,6 +18,7 @@ import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.PatternLockDialog
+import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 
 class GradeFragment : GradeContract.View() {
@@ -26,7 +27,11 @@ class GradeFragment : GradeContract.View() {
     lateinit var adapter: GradeAdapter
     private var mInfo: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_information_grade, container, false)
 
         mPresenter = GradePresenter(this)
@@ -39,9 +44,13 @@ class GradeFragment : GradeContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
-        } ?: doneLogin(requireActivity(),context!!)
+        } ?: doneLogin(requireActivity(), context!!)
         myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
-            PatternLockDialog(context!!, CHECK_PATTERN).show()
+            PatternLockDialog(context!!, CHECK_PATTERN, object : SuperContract.Callback {
+                override fun callback() {
+                    patternCheck()
+                }
+            }).show()
         }
     }
 
@@ -49,7 +58,7 @@ class GradeFragment : GradeContract.View() {
         mInfo = info
     }
 
-    fun patternCheck() {
+    private fun patternCheck() {
         mPresenter.patternCheck()
         setViewVisibility(true)
     }
@@ -57,7 +66,8 @@ class GradeFragment : GradeContract.View() {
     override fun sendContext() = context
 
     fun changeTheme() {
-        myView?.findViewById<Button>(R.id.gradeButton)?.setBackgroundResource(getThemeButtonResource())
+        myView?.findViewById<Button>(R.id.gradeButton)
+            ?.setBackgroundResource(getThemeButtonResource())
     }
 
     override fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>) {
