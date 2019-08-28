@@ -72,16 +72,18 @@ object Component {
         R.color.ran8
     )
 
-    fun getBuilder(): Dialog? =
-        if (builder?.isShowing == false) {
-            builder
-        } else {
-            null
-        }
-
+    fun getBuilder(): Dialog? = builder
 
     fun setBuilder(activity: AppCompatActivity) {
-        builder = Dialog(activity).apply {
+        builder = object : Dialog(activity) {
+            override fun show() {
+                if (!isShowing) super.show()
+            }
+
+            override fun dismiss() {
+                if (isShowing) super.dismiss()
+            }
+        }.apply {
             setContentView(R.layout.builder)
             setCancelable(false)
             setCanceledOnTouchOutside(false)

@@ -26,6 +26,7 @@ import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import io.wiffy.gachonNoti.ui.main.setting.administrator.AdministratorDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
@@ -152,14 +153,12 @@ class SettingFragment : SettingContract.View() {
             Component.noneVisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
         }
+
         myView.adminOption.setOnClickListener {
-            MaterialAlertDialogBuilder(activity).apply {
-                setTitle("관리자 옵션")
-                setMessage("관리자 옵션을 추가해주십시요.")
-                setPositiveButton(
-                    "OK"
-                ) { _, _ -> }
-            }.show()
+            val number = getSharedItem<String>("number")
+//            if (number == "201735829" || number == "201635812") AdministratorDialog(context!!).show()
+//            else
+                toast("No permission")
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true
