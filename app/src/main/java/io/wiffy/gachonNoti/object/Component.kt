@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.`object`
 
 import android.content.SharedPreferences
+import io.wiffy.gachonNoti.R
 
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
@@ -56,5 +57,16 @@ object Component {
 
     var deviceWidth = 0
     var deviceHeight = 0
+
+    val timeTableColor = arrayListOf(
+        R.color.ran1,
+        R.color.ran2,
+        R.color.ran3,
+        R.color.ran4,
+        R.color.ran5,
+        R.color.ran6,
+        R.color.ran7,
+        R.color.ran8
+    )
 
 }

@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.func
 
 import android.annotation.SuppressLint
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.`object`.Component.colorCount
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -79,16 +80,7 @@ fun classToTime(time: String): LongArray {
     return longArrayOf(format.parse(start).time, format.parse(end).time)
 }
 
-fun getRandomColorId(): Int = intArrayOf(
-    R.color.ran1,
-    R.color.ran2,
-    R.color.ran3,
-    R.color.ran4,
-    R.color.ran5,
-    R.color.ran6,
-    R.color.ran7,
-    R.color.ran8
-)[colorCount % 8].apply {
+fun getRandomColorId(): Int = Component.timeTableColor[colorCount % 8].apply {
     colorCount += 1
 }
 
