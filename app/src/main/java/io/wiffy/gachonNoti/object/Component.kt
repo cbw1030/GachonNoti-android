@@ -72,19 +72,20 @@ object Component {
         R.color.ran8
     )
 
-    fun getBuilder(activity: AppCompatActivity? = null): Dialog? {
-        if (activity != null && builder == null) {
-            builder = Dialog(activity).apply {
-                setContentView(R.layout.builder)
-                setCancelable(false)
-                setCanceledOnTouchOutside(false)
-                this.window?.setBackgroundDrawableResource(android.R.color.transparent)
-            }
-        }
-        return if (builder?.isShowing == false) {
+    fun getBuilder(): Dialog? =
+        if (builder?.isShowing == false) {
             builder
         } else {
             null
+        }
+
+
+    fun setBuilder(activity: AppCompatActivity) {
+        builder = Dialog(activity).apply {
+            setContentView(R.layout.builder)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+            this.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
     }
 

@@ -37,13 +37,11 @@ class MainActivity : MainContract.View() {
         lateinit var mView: MainContract.View
     }
 
-    override fun setTabText(str: String) {
-        navigation.getTabAt(0)?.text = str
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Component.setBuilder(this@MainActivity)
         title = Component.titles[STATE_NOTIFICATION].first
 
         mView = this
@@ -83,6 +81,9 @@ class MainActivity : MainContract.View() {
         }.show()
     }
 
+    override fun setTabText(str: String) {
+        navigation.getTabAt(0)?.text = str
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuItem1 = menu?.add(0, 201735829, 0, "강의실 데이터 삭제")
@@ -99,12 +100,12 @@ class MainActivity : MainContract.View() {
     }
 
     override fun builderUp() = Handler(Looper.getMainLooper()).post {
-        Component.getBuilder(this@MainActivity)?.show()
+        Component.getBuilder()?.show()
     }
 
 
     override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
-        Component.getBuilder(this@MainActivity)?.dismiss()
+        Component.getBuilder()?.dismiss()
     }
 
     override fun changeUI(mList: ArrayList<Fragment?>) {
