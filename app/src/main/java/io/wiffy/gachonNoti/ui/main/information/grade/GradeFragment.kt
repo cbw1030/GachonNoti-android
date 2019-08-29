@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.func.CHECK_PATTERN
 import io.wiffy.gachonNoti.func.doneLogin
-import io.wiffy.gachonNoti.func.getSharedItem
 import io.wiffy.gachonNoti.func.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.PatternLockDialog
-import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 
 class GradeFragment : GradeContract.View() {
@@ -46,11 +44,7 @@ class GradeFragment : GradeContract.View() {
             loginInformationSetting(it)
         } ?: doneLogin(requireActivity(), context!!)
         myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
-            PatternLockDialog(context!!, CHECK_PATTERN, object : SuperContract.Callback {
-                override fun callback() {
-                    patternCheck()
-                }
-            }).show()
+            PatternLockDialog(context!!, CHECK_PATTERN) { patternCheck() }.show()
         }
     }
 

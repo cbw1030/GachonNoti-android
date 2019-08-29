@@ -55,8 +55,4 @@ interface SuperContract {
     }
 
     abstract class SuperAsyncTask<A, B, C> : AsyncTask<A, B, C>(), WiffyObject
-
-    interface Callback {
-        fun callback()
-    }
 }

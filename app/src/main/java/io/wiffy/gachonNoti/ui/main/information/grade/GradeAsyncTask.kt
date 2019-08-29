@@ -77,7 +77,7 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     }
 
     override fun onPostExecute(result: Int?) {
-        Component.getBuilder()?.show()
+        Component.getBuilder()?.dismiss()
         if (result == ACTION_SUCCESS) {
             mView.setView(creditAverage, creditList)
         } else mView.toast("인터넷 연결을 확인해주세요.")

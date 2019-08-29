@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.dialog_pattern_lock.*
 class PatternLockDialog(
     context: Context,
     mState: Int,
-    val mCallback: SuperContract.Callback? = null
+    val callback: (() -> (Unit))? = null
 ) :
     SuperContract.SuperDialog(context) {
 
@@ -76,7 +76,7 @@ class PatternLockDialog(
                         }
                         CHECK_PATTERN -> {
                             if (getSharedItem<String>("pattern") == mPattern) {
-                                mCallback?.callback()
+                                callback?.invoke()
                                 dismiss()
                             } else {
                                 bulabula.text = "패턴이 틀립니다. 다시 입력해주세요."
