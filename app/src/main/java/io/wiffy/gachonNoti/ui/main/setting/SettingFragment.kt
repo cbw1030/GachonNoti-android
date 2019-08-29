@@ -156,9 +156,8 @@ class SettingFragment : SettingContract.View() {
 
         myView.adminOption.setOnClickListener {
             val number = getSharedItem<String>("number")
-//            if (number == "201735829" || number == "201635812") AdministratorDialog(context!!).show()
-//            else
-                toast("No permission")
+            if (number == "201735829" || number == "201635812") AdministratorDialog(context!!).show()
+            else toast("No permission")
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true
