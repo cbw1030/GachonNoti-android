@@ -4,23 +4,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/mkmk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="관리자 옵션"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/mmkk"
-            android:layout_below="@+id/mkmk"
+            android:layout_alignParentTop="true"
             android:layout_margin="8dp"
             android:orientation="vertical">
 
@@ -32,6 +19,70 @@
                 android:stretchColumns="*">
 
             <TableRow>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textborder"
+                        android:gravity="center"
+                        android:text="관리자 옵션"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <LinearLayout
+                        android:background="@drawable/textborder"
+                        android:orientation="horizontal"
+                        android:weightSum="10"
+                        tools:ignore="UselessParent">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:text="성명"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    <EditText
+                            android:id="@+id/option_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:textAlignment="center" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginTop="1dp">
+
+                <LinearLayout
+                        android:background="@drawable/textborder"
+                        android:orientation="horizontal"
+                        android:weightSum="10"
+                        tools:ignore="UselessParent">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:text="학과"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    <EditText
+                            android:id="@+id/option_depart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:textAlignment="center" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginTop="1dp">
 
                 <LinearLayout
                         android:background="@drawable/textborder"
@@ -82,49 +133,93 @@
                             android:textAlignment="center" />
                 </LinearLayout>
             </TableRow>
+
+            <TableRow android:layout_marginTop="1dp">
+
+                <LinearLayout
+                        android:background="@drawable/textborder"
+                        android:orientation="horizontal"
+                        android:weightSum="10"
+                        tools:ignore="UselessParent">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:text="성별"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    <RadioGroup
+                            android:id="@+id/option_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:textAlignment="center"
+                            android:weightSum="2">
+
+                        <RadioButton
+                                android:id="@+id/option_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="남" />
+
+                        <RadioButton
+                                android:id="@+id/option_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="여" />
+                    </RadioGroup>
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginTop="1dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textborder"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                    <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                        <Button
+                                android:id="@+id/lefts"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="10dp"
+                                android:text="확인"
+                                android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                        <Button
+                                android:id="@+id/rights"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="10dp"
+                                android:text="취소"
+                                android:textColor="@color/white" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </TableRow>
         </TableLayout>
     </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/mmkk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-            <Button
-                    android:id="@+id/lefts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="20dp"
-                    android:text="확인"
-                    android:textColor="@color/white" />
-        </RelativeLayout>
-
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-            <Button
-                    android:id="@+id/rights"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="20dp"
-                    android:text="취소"
-                    android:textColor="@color/white" />
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
 </RelativeLayout>
