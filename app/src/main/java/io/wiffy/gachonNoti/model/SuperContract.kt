@@ -47,7 +47,6 @@ interface SuperContract {
 
     abstract class SuperDialog(context: Context, themeId: Int = 0) : Dialog(context, themeId),
         WiffyObject {
-
         open fun toast(str: String) = Toast.makeText(context, str, Toast.LENGTH_SHORT).show()
         open fun toast(id: Int) = Toast.makeText(context, id, Toast.LENGTH_SHORT).show()
         open fun toastLong(str: String) = Toast.makeText(context, str, Toast.LENGTH_LONG).show()
@@ -55,4 +54,8 @@ interface SuperContract {
     }
 
     abstract class SuperAsyncTask<A, B, C> : AsyncTask<A, B, C>(), WiffyObject
+
+    interface SuperPresenter : WiffyObject {
+        fun initPresent()
+    }
 }

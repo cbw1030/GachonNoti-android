@@ -12,8 +12,7 @@ interface GradeContract {
         abstract fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>)
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun patternCheck()
     }
 }

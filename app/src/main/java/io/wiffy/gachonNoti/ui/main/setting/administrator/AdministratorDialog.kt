@@ -3,9 +3,7 @@ package io.wiffy.gachonNoti.ui.main.setting.administrator
 import android.content.Context
 import android.os.Bundle
 import android.text.method.KeyListener
-import android.view.View
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.dialog_administrator.*
@@ -27,6 +25,7 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context,
         } else {
             option_female.isChecked = true
         }
+
         keyListener = option_year.keyListener
 
         if (getSharedItem("yearAuto", true)) {

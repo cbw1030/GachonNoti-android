@@ -92,7 +92,10 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
                     toast("인터넷 연결을 확인해주세요.")
                     dialog.cancel()
                 } else {
-                    executeLogin(prompt.login_name.text.toString(), prompt.login_password.text.toString())
+                    executeLogin(
+                        prompt.login_name.text.toString(),
+                        prompt.login_password.text.toString()
+                    )
                 }
             }
             setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
@@ -110,8 +113,6 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
 
     @SuppressLint("ApplySharedPref")
     private fun logout() {
-        val number = getSharedItem<String>("number")
-
         removeSharedItems(
             "id",
             "password",
@@ -129,7 +130,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         Component.isLogin = false
         isLogin(false)
         (MainActivity.mView).mainLogout()
-        if (number == "201735829" || number == "201635812") (MainActivity.mView).logout()
+        if (Component.adminMode) (MainActivity.mView).logout()
         else toast("로그아웃 되었습니다.")
 
         Component.isBirthday = false

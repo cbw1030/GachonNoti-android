@@ -1,8 +1,8 @@
 package io.wiffy.gachonNoti.ui.webView
 
-class WebViewPresenter(private val mView: WebViewContract.View) : WebViewContract.Presenter {
+class WebViewPresenter(private val mView: WebViewContract.View, private val url: String) : WebViewContract.Presenter {
 
-    override fun initPresent(url: String) {
+    override fun initPresent() {
         WebAsyncTask(url, this, false).execute()
     }
 

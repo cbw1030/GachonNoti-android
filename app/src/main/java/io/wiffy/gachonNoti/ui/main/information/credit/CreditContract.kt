@@ -11,8 +11,7 @@ interface CreditContract {
         abstract fun initList(list: ArrayList<CreditInformation>, cmd: String)
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun setLogin(info: String)
     }
 }

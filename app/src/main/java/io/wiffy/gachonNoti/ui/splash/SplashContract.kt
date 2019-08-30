@@ -12,7 +12,5 @@ interface SplashContract {
         abstract fun setParams()
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
-    }
+    interface Presenter : SuperContract.SuperPresenter
 }

@@ -12,8 +12,7 @@ interface MyInformationContract {
         abstract fun setPatternVisibility(): Unit?
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun fragmentInflation(list: ArrayList<Fragment?>): Boolean
         fun themeChange(): Unit?
         fun isNotLogin()

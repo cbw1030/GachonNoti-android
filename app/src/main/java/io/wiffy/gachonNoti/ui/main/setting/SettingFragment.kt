@@ -2,7 +2,6 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE

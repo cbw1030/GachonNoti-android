@@ -32,8 +32,7 @@ interface SettingContract {
         }
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun setOn()
         fun setAdminLogin()
         fun setAdminLogout()

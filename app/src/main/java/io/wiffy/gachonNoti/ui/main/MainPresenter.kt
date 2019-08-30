@@ -1,6 +1,5 @@
 package io.wiffy.gachonNoti.ui.main
 
-import android.app.Activity
 import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.func.*
@@ -12,7 +11,7 @@ import io.wiffy.gachonNoti.ui.main.setting.SettingFragment
 import java.lang.Exception
 
 
-class MainPresenter(private val mView: MainContract.View, private val context: Activity) :
+class MainPresenter(private val mView: MainContract.View) :
     MainContract.Presenter {
 
     private val mList = ArrayList<Fragment?>()
@@ -24,7 +23,7 @@ class MainPresenter(private val mView: MainContract.View, private val context: A
         add(MyInformationFragment())
         add(SearcherFragment())
         add(SettingFragment())
-        mView.changeUI(this)
+        mView.initView(this)
         if (!getSharedItem(Component.version, false)) {
             mView.updatedContents()
         }

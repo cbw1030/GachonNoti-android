@@ -23,8 +23,7 @@ interface SearchContract {
         abstract fun dismissSelf()
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun initPresentDialog(tmp: DialogPresenter)
         fun getData(yearSemester: String)
         fun isDownloaded(year: String, semester: String)

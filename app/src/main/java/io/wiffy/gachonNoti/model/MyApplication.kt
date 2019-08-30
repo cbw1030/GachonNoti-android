@@ -45,7 +45,6 @@ class MyApplication : Application(), SuperContract.WiffyObject {
             getSharedItem<Int>("year").toString()
         }
 
-        // 학기 조정은 여기서 하면 편하다.
         Component.SEMESTER = if (getSharedItem("semesterAuto", true)) {
             when (Calendar.getInstance().get(Calendar.MONTH)) {
                 in 2..5 -> 1
@@ -53,7 +52,6 @@ class MyApplication : Application(), SuperContract.WiffyObject {
                 in 8..11 -> 2
                 else -> 4
             }
-
         } else {
             getSharedItem("semester")
         }

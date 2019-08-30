@@ -20,8 +20,7 @@ interface TimeTableContract {
         }
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun setTableList(set: HashSet<String>): ArrayList<TimeTableData>
         fun resetTable()
         fun setLogin(info: String)

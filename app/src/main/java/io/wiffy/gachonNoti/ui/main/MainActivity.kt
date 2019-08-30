@@ -47,7 +47,7 @@ class MainActivity : MainContract.View() {
         mView = this
         invisible()
 
-        mPresenter = MainPresenter(this, this@MainActivity)
+        mPresenter = MainPresenter(this)
         mPresenter.initPresent()
     }
 
@@ -108,7 +108,7 @@ class MainActivity : MainContract.View() {
         Component.getBuilder()?.dismiss()
     }
 
-    override fun changeUI(mList: ArrayList<Fragment?>) {
+    override fun initView(mList: ArrayList<Fragment?>) {
         notificationCheck()
         themeChange()
 

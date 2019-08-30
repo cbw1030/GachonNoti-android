@@ -5,7 +5,7 @@ import io.wiffy.gachonNoti.model.SuperContract
 
 interface MainContract {
     abstract class View : SuperContract.SuperActivity() {
-        abstract fun changeUI(mList: ArrayList<Fragment?>)
+        abstract fun initView(mList: ArrayList<Fragment?>)
         abstract fun builderUp(): Boolean?
         abstract fun builderDismiss(): Boolean?
         abstract fun updatedContents()
@@ -22,8 +22,7 @@ interface MainContract {
         abstract fun mainLogin()
     }
 
-    interface Presenter : SuperContract.WiffyObject {
-        fun initPresent()
+    interface Presenter : SuperContract.SuperPresenter {
         fun changeThemes()
         fun deleteRoomData()
         fun resetTimeTable(): Unit?

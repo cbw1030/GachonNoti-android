@@ -40,8 +40,8 @@ class WebViewActivity : WebViewContract.View() {
         title = "${bundle.value} ${bundle.data}"
         webview_text.text = bundle.text
         window.statusBarColor = resources.getColor(R.color.mainBlue)
-        mPresenter = WebViewPresenter(this)
-        mPresenter.initPresent(bundle.link)
+        mPresenter = WebViewPresenter(this, bundle.link)
+        mPresenter.initPresent()
         themeChange()
     }
 
@@ -148,7 +148,7 @@ class WebViewActivity : WebViewContract.View() {
         }
         else -> super.onOptionsItemSelected(item)
     }
-    
+
     private fun themeChange() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
         webview_layout.setBackgroundColor(resources.getColor(getThemeDeepColor()))

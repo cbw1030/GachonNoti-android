@@ -16,11 +16,10 @@ interface NotificationContract {
         abstract fun recyclerViewClear()
     }
 
-    interface Presenter : SuperContract.WiffyObject {
+    interface Presenter : SuperContract.SuperPresenter{
         fun internetInterrupted(): Boolean
         fun internetNotInterrupted(): Boolean
         fun resetList()
-        fun initPresent()
         fun update(data: ParseList)
         fun request()
         fun search(src: String)
