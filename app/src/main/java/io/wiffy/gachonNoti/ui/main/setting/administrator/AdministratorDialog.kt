@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.setting.administrator
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.func.*
@@ -9,7 +10,7 @@ import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.dialog_administrator.*
 import java.util.*
 
-class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context) {
+class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context, R.style.mStyle) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +25,11 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context)
             option_female.isChecked = true
         }
         if (getSharedItem("yearAuto", true)) {
+            option_year.setText(Calendar.getInstance().get(Calendar.YEAR).toString())
+            yearAuto.isChecked = true
+        } else {
             option_year.setText(getSharedItem<String>("year"))
             yearAuto.isChecked = false
-        } else {
-            option_year.setText(Component.YEAR)
-            yearAuto.isChecked = true
         }
         if (getSharedItem("semesterAuto", true)) {
             option_autoSeme.isChecked = true
@@ -43,9 +44,9 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context)
         yearAuto.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 option_year.setText(Calendar.getInstance().get(Calendar.YEAR).toString())
-                option_year.isClickable = false
+//                option_year.isInEditMode = false
             } else {
-                option_year.isClickable = true
+//                option_year.isClickable = true
             }
         }
         lefts.run {
@@ -96,7 +97,15 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context)
         )
         setSharedItems(
             Pair("year", option_year.text.toString().trim().toInt()),
-            Pair("semester", when ())
+            Pair(
+                "semester", when (option_semester.checkedRadioButtonId) {
+                    R.id.option_1 -> 1
+                    R.id.option_2 -> 2
+                    R.id.option_summer -> 3
+                    R.id.option_winter -> 4
+                    else -> 0
+                }
+            )
         )
         dismiss()
         restartApp(context)
