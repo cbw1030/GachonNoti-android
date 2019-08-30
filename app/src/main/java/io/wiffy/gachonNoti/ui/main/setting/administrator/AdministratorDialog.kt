@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.setting.administrator
 
 import android.content.Context
 import android.os.Bundle
+import android.text.method.KeyListener
 import android.view.View
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
@@ -11,6 +12,8 @@ import kotlinx.android.synthetic.main.dialog_administrator.*
 import java.util.*
 
 class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context, R.style.mStyle) {
+
+    lateinit var keyListener: KeyListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +27,14 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context,
         } else {
             option_female.isChecked = true
         }
+        keyListener = option_year.keyListener
+
         if (getSharedItem("yearAuto", true)) {
             option_year.setText(Calendar.getInstance().get(Calendar.YEAR).toString())
+            option_year.keyListener = null
             yearAuto.isChecked = true
         } else {
-            option_year.setText(getSharedItem<String>("year"))
+            option_year.setText(getSharedItem<Int>("year").toString())
             yearAuto.isChecked = false
         }
         if (getSharedItem("semesterAuto", true)) {
@@ -41,12 +47,14 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context,
                 else -> option_winter
             }.isChecked = true
         }
-        yearAuto.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                option_year.setText(Calendar.getInstance().get(Calendar.YEAR).toString())
-//                option_year.isInEditMode = false
-            } else {
-//                option_year.isClickable = true
+        yearAuto.setOnCheckedChangeListener { _, check ->
+            option_year.let {
+                if (check) {
+                    it.setText(Calendar.getInstance().get(Calendar.YEAR).toString())
+                    it.keyListener = null
+                } else {
+                    it.keyListener = keyListener
+                }
             }
         }
         lefts.run {

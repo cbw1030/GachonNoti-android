@@ -39,21 +39,23 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.timeTableSet = getSharedItem("tableItems", HashSet())
         Component.adminMode = getSharedItem("ADMIN", false)
         Component.YEAR = if (getSharedItem("yearAuto", true)) {
-            getSharedItem("year")
-        } else {
             Calendar.getInstance().get(Calendar.YEAR).toString()
+
+        } else {
+            getSharedItem<Int>("year").toString()
         }
 
         // 학기 조정은 여기서 하면 편하다.
         Component.SEMESTER = if (getSharedItem("semesterAuto", true)) {
-            getSharedItem("semester")
-        } else {
             when (Calendar.getInstance().get(Calendar.MONTH)) {
                 in 2..5 -> 1
                 in 6..7 -> 3
                 in 8..11 -> 2
                 else -> 4
             }
+
+        } else {
+            getSharedItem("semester")
         }
 
     }
