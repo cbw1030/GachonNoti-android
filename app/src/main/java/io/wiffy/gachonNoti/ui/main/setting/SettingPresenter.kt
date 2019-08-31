@@ -10,33 +10,30 @@ class SettingPresenter(private val mView: SettingContract.View) : SettingContrac
     override fun initPresent() = mView.changeView()
     override fun setOff() {
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti").addOnCompleteListener {
-            mView.setSwitch(
-                if (it.isSuccessful) {
-                    Component.notificationSet = false
-                    setSharedItem("notiOn", false)
-                    false
-                } else {
-                    console("알 수 없는 오류")
-                    setSharedItem("notiOn", true)
-                    true
-                }
-            )
+            if (it.isSuccessful) {
+                Component.notificationSet = false
+                setSharedItem("notiOn", false)
+                toast("알림 OFF")
+            } else {
+                toast("알 수 없는 오류")
+                setSharedItem("notiOn", true)
+                mView.setSwitch(true)
+            }
         }
     }
 
     override fun setOn() {
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnCompleteListener {
-            mView.setSwitch(
-                if (it.isSuccessful) {
-                    Component.notificationSet = true
-                    setSharedItem("notiOn", true)
-                    true
-                } else {
-                    setSharedItem("notiOn", false)
-                    console("알 수 없는 오류")
-                    false
-                }
-            )
+            if (it.isSuccessful) {
+                Component.notificationSet = true
+                setSharedItem("notiOn", true)
+                toast("알림 ON")
+            } else {
+                setSharedItem("notiOn", false)
+                toast("알 수 없는 오류")
+                mView.setSwitch(false)
+            }
+
         }
     }
 

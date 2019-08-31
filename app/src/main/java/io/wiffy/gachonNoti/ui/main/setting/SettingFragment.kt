@@ -94,34 +94,38 @@ class SettingFragment : SettingContract.View() {
                 "메디컬"
             }
         myView.notiSwitch.setOnCheckedChangeListener { _, isChecked ->
-            when (isChecked) {
-                false -> mPresenter.setOff()
-                true -> {
-                    if (NotificationManagerCompat.from(activity?.applicationContext!!)
-                            .areNotificationsEnabled()
-                    ) {
-                        mPresenter.setOn()
-                    } else {
-                        mPresenter.setOff()
-
-                        val tent = Intent().apply {
-                            action = "android.settings.APP_NOTIFICATION_SETTINGS"
-                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            tent.putExtra(
-                                "android.provider.extra.APP_PACKAGE",
-                                activity?.packageName
-                            )
-
+            if (!isNetworkConnected(context!!)) {
+                myView.notiSwitch.isChecked = isChecked.xor(true)
+                toast("인터넷 연결 오류")
+            } else
+                when (isChecked) {
+                    false -> mPresenter.setOff()
+                    true -> {
+                        if (NotificationManagerCompat.from(activity?.applicationContext!!)
+                                .areNotificationsEnabled()
+                        ) {
+                            mPresenter.setOn()
                         } else {
-                            tent.putExtra("app_package", activity?.packageName)
-                            tent.putExtra("app_uid", activity?.applicationInfo?.uid)
+                            mPresenter.setOff()
+
+                            val tent = Intent().apply {
+                                action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                            }
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                tent.putExtra(
+                                    "android.provider.extra.APP_PACKAGE",
+                                    activity?.packageName
+                                )
+
+                            } else {
+                                tent.putExtra("app_package", activity?.packageName)
+                                tent.putExtra("app_uid", activity?.applicationInfo?.uid)
+                            }
+                            startActivity(tent)
+                            toast(R.string.ssss)
                         }
-                        startActivity(tent)
-                        toast(R.string.ssss)
                     }
                 }
-            }
         }
         myView.patternsetting.setOnClickListener {
             MainActivity.mView.changePattern()

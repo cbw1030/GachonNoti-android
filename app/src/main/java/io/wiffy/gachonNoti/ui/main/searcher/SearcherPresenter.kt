@@ -242,7 +242,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
             Handler(Looper.getMainLooper()).post {
                 mView.setTimeTable(array2, str)
-                Component.getBuilder()?.show()
+                Component.getBuilder()?.dismiss()
             }
         }).start()
     }

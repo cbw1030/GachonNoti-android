@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.function.getThemeButtonResource
 import io.wiffy.gachonNoti.function.isNetworkConnected
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
@@ -36,6 +37,7 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
                 spinnerSelected = position
             }
         }
+        search2.setBackgroundResource(getThemeButtonResource())
         search2.setOnClickListener {
             if (isNetworkConnected(context)) {
                 val text = editor1.text.toString()
