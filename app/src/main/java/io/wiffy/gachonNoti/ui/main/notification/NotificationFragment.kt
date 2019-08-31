@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.function.getThemeColor
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification.view.*

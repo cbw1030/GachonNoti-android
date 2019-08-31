@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.func
+package io.wiffy.gachonNoti.function
 
 import java.lang.Exception
 import java.net.NetworkInterface

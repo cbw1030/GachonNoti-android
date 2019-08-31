@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getThemeButtonResource
+import io.wiffy.gachonNoti.function.getThemeButtonResource
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.function.getThemeColor
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlin.system.exitProcess

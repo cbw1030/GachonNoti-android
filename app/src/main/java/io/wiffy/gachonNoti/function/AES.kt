@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.func
+package io.wiffy.gachonNoti.function
 
 import android.util.Base64
 import java.lang.Exception

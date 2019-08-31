@@ -6,7 +6,7 @@ import android.os.Looper
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.ClassDataInformation
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.`object`.TimeCompare
@@ -242,7 +242,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
             Handler(Looper.getMainLooper()).post {
                 mView.setTimeTable(array2, str)
-                Component.getBuilder()?.show()
+                Component.getBuilder()?.dismiss()
             }
         }).start()
     }

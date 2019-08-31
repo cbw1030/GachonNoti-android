@@ -14,7 +14,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainActivity

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.`object`.Component
 import kotlin.collections.ArrayList
 

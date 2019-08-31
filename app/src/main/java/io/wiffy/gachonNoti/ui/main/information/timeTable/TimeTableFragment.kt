@@ -8,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
 import com.github.eunsiljo.timetablelib.view.TimeTableView
-import io.wiffy.gachonNoti.func.doneLogin
-import io.wiffy.gachonNoti.func.getSharedItem
-import io.wiffy.gachonNoti.func.getThemeColor
+import io.wiffy.gachonNoti.function.doneLogin
+import io.wiffy.gachonNoti.function.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_timetable.view.*
 import kotlin.collections.HashSet
 

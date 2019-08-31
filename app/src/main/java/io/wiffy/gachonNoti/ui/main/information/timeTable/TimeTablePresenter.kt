@@ -4,10 +4,10 @@ import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.TimeCompare
-import io.wiffy.gachonNoti.func.dayToInt
-import io.wiffy.gachonNoti.func.getRandomColorId
-import io.wiffy.gachonNoti.func.getSharedItem
-import io.wiffy.gachonNoti.func.intToDay
+import io.wiffy.gachonNoti.function.dayToInt
+import io.wiffy.gachonNoti.function.getRandomColorId
+import io.wiffy.gachonNoti.function.getSharedItem
+import io.wiffy.gachonNoti.function.intToDay
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet

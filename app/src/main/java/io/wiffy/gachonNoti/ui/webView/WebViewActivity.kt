@@ -12,8 +12,8 @@ import android.view.View
 import android.webkit.WebSettings
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.getThemeDeepColor
+import io.wiffy.gachonNoti.function.getThemeColor
+import io.wiffy.gachonNoti.function.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.activity_webview.*

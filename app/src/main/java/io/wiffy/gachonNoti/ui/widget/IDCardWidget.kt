@@ -15,10 +15,10 @@ import com.bumptech.glide.request.target.AppWidgetTarget
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.getThemeButtonResource
-import io.wiffy.gachonNoti.func.getThemeColor
-import io.wiffy.gachonNoti.func.ifNotNullOrElse
-import io.wiffy.gachonNoti.func.matrixToBitmap
+import io.wiffy.gachonNoti.function.getThemeButtonResource
+import io.wiffy.gachonNoti.function.getThemeColor
+import io.wiffy.gachonNoti.function.ifNotNullOrElse
+import io.wiffy.gachonNoti.function.matrixToBitmap
 import io.wiffy.gachonNoti.model.StudentInformation
 import java.text.SimpleDateFormat
 

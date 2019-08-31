@@ -11,8 +11,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.doneLogin
-import io.wiffy.gachonNoti.func.getSharedItem
+import io.wiffy.gachonNoti.function.doneLogin
+import io.wiffy.gachonNoti.function.getSharedItem
 import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.adapter.CreditAdapter
 

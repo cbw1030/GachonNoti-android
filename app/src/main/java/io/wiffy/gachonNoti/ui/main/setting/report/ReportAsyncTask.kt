@@ -1,9 +1,9 @@
 package io.wiffy.gachonNoti.ui.main.setting.report
 
 import android.os.Build
-import io.wiffy.gachonNoti.func.ACTION_FAILURE
-import io.wiffy.gachonNoti.func.ACTION_SUCCESS
-import io.wiffy.gachonNoti.func.NOT_UPDATED_YET
+import io.wiffy.gachonNoti.function.ACTION_FAILURE
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS
+import io.wiffy.gachonNoti.function.NOT_UPDATED_YET
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract

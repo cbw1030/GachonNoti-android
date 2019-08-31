@@ -1,6 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.information.grade
 
-import io.wiffy.gachonNoti.func.getSharedItem
+import io.wiffy.gachonNoti.function.getSharedItem
 
 class GradePresenter(val mView: GradeContract.View) : GradeContract.Presenter {
     override fun initPresent() = mView.initView()

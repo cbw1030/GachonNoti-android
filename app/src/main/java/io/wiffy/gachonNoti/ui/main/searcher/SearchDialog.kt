@@ -10,8 +10,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.isNetworkConnected
+import io.wiffy.gachonNoti.function.isNetworkConnected
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.function.getThemeButtonResource
 import kotlinx.android.synthetic.main.dialog_search.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
@@ -42,11 +43,12 @@ class SearchDialog(
         }
         }학기"
 
-
+        getdata.setBackgroundResource(getThemeButtonResource())
         getdata.setOnClickListener {
             getDataDialog("${Component.YEAR}-${Component.SEMESTER}")
         }
 
+        search.setBackgroundResource(getThemeButtonResource())
         search.setOnClickListener {
             Handler(Looper.getMainLooper()).post {
                 Component.getBuilder()?.show()

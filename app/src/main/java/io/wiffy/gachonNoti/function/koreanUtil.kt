@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.func
+package io.wiffy.gachonNoti.function
 
 fun getWordByKorean(str: String, first: String, second: String) = str.last().let {
     if (it < 0xAC00.toChar() || it > 0xD7A3.toChar()) {

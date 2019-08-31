@@ -21,7 +21,7 @@ import com.afollestad.materialdialogs.input.input
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
@@ -66,7 +66,6 @@ class SettingFragment : SettingContract.View() {
             else -> 0
         }
         patternVisibility()
-        adminView()
         list = ArrayList<CircleImageView>().apply {
             add(myView.defaultColor)
             add(myView.redColor)
@@ -95,34 +94,38 @@ class SettingFragment : SettingContract.View() {
                 "메디컬"
             }
         myView.notiSwitch.setOnCheckedChangeListener { _, isChecked ->
-            when (isChecked) {
-                false -> mPresenter.setOff()
-                true -> {
-                    if (NotificationManagerCompat.from(activity?.applicationContext!!)
-                            .areNotificationsEnabled()
-                    ) {
-                        mPresenter.setOn()
-                    } else {
-                        mPresenter.setOff()
-
-                        val tent = Intent().apply {
-                            action = "android.settings.APP_NOTIFICATION_SETTINGS"
-                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            tent.putExtra(
-                                "android.provider.extra.APP_PACKAGE",
-                                activity?.packageName
-                            )
-
+            if (!isNetworkConnected(context!!)) {
+                myView.notiSwitch.isChecked = isChecked.xor(true)
+                toast("인터넷 연결 오류")
+            } else
+                when (isChecked) {
+                    false -> mPresenter.setOff()
+                    true -> {
+                        if (NotificationManagerCompat.from(activity?.applicationContext!!)
+                                .areNotificationsEnabled()
+                        ) {
+                            mPresenter.setOn()
                         } else {
-                            tent.putExtra("app_package", activity?.packageName)
-                            tent.putExtra("app_uid", activity?.applicationInfo?.uid)
+                            mPresenter.setOff()
+
+                            val tent = Intent().apply {
+                                action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                            }
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                tent.putExtra(
+                                    "android.provider.extra.APP_PACKAGE",
+                                    activity?.packageName
+                                )
+
+                            } else {
+                                tent.putExtra("app_package", activity?.packageName)
+                                tent.putExtra("app_uid", activity?.applicationInfo?.uid)
+                            }
+                            startActivity(tent)
+                            toast(R.string.ssss)
                         }
-                        startActivity(tent)
-                        toast(R.string.ssss)
                     }
                 }
-            }
         }
         myView.patternsetting.setOnClickListener {
             MainActivity.mView.changePattern()
@@ -151,10 +154,6 @@ class SettingFragment : SettingContract.View() {
         myView.money.setOnClickListener {
             Component.noneVisible = true
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://wiffy.io/gachon/donation")))
-        }
-
-        myView.adminOption.setOnClickListener {
-            AdministratorDialog(context!!).show()
         }
         myView.maker.setOnClickListener {
             Component.noneVisible = true
@@ -361,8 +360,24 @@ class SettingFragment : SettingContract.View() {
         when (id) {
             0 -> {
                 adminCode.append("0")
-                if (adminCode.toString() == "01210") {
-                    toast("add action")
+                if (adminCode.toString() == "012120" && Component.adminMode) {
+                    MaterialDialog(activity!!).show {
+                        title(text = "Administrator Option")
+                        message(text = "Input Secret Code")
+                        input(hint = "Code") { _, text ->
+                            when (text.toString().trim()) {
+                                "twopark123!" -> {
+                                    AdministratorDialog(context).show()
+                                }
+                                else -> {
+                                    toast("Error")
+                                    dismiss()
+                                }
+                            }
+                        }
+                        positiveButton(text = "OK")
+                        negativeButton(text = "Cancel")
+                    }
                     adminCode.clear()
                 } else {
                     adminCode.clear()
@@ -374,18 +389,6 @@ class SettingFragment : SettingContract.View() {
             }
             2 -> {
                 adminCode.append("2")
-            }
-        }
-    }
-
-    override fun adminView() {
-        Handler(Looper.getMainLooper()).post {
-            if (Component.adminMode) {
-                myView.adminOption.visibility = View.VISIBLE
-                myView.adminBar.visibility = View.VISIBLE
-            } else {
-                myView.adminOption.visibility = View.GONE
-                myView.adminBar.visibility = View.GONE
             }
         }
     }
