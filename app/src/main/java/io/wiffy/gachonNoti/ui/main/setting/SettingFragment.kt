@@ -361,11 +361,14 @@ class SettingFragment : SettingContract.View() {
                         title(text = "Administrator Option")
                         message(text = "Input Secret Code")
                         input(hint = "Code") { _, text ->
-                            if (text == "twopark123!") {
-                                AdministratorDialog(context).show()
-                            } else {
-                                toast("Error")
-                                dismiss()
+                            when (text.toString().trim()) {
+                                "twopark123!" -> {
+                                    AdministratorDialog(context).show()
+                                }
+                                else -> {
+                                    toast("Error")
+                                    dismiss()
+                                }
                             }
                         }
                         positiveButton(text = "OK")
