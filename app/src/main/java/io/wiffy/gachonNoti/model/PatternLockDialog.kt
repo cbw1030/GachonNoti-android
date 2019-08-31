@@ -7,7 +7,7 @@ import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.listener.PatternLockViewListener
 import com.andrognito.patternlockview.utils.PatternLockUtils
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import kotlinx.android.synthetic.main.dialog_pattern_lock.*
 
 class PatternLockDialog(

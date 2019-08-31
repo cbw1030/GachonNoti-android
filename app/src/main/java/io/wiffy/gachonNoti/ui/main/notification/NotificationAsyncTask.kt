@@ -2,9 +2,9 @@ package io.wiffy.gachonNoti.ui.main.notification
 
 import android.os.Handler
 import android.os.Looper
-import io.wiffy.gachonNoti.func.ACTION_FAILURE
-import io.wiffy.gachonNoti.func.ACTION_SUCCESS
-import io.wiffy.gachonNoti.func.isNetworkConnected
+import io.wiffy.gachonNoti.function.ACTION_FAILURE
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS
+import io.wiffy.gachonNoti.function.isNetworkConnected
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.Component

@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.func
+package io.wiffy.gachonNoti.function
 
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component

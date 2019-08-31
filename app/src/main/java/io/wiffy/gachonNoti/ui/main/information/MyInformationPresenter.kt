@@ -1,7 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.information
 
 import androidx.fragment.app.Fragment
-import io.wiffy.gachonNoti.func.getSharedItem
+import io.wiffy.gachonNoti.function.getSharedItem
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.ui.main.information.credit.CreditFragment
 import io.wiffy.gachonNoti.ui.main.information.grade.GradeFragment

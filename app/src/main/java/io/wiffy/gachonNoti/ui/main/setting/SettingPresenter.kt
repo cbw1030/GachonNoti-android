@@ -4,7 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.func.setSharedItem
+import io.wiffy.gachonNoti.function.setSharedItem
 
 class SettingPresenter(private val mView: SettingContract.View) : SettingContract.Presenter {
     override fun initPresent() = mView.changeView()
@@ -44,7 +44,6 @@ class SettingPresenter(private val mView: SettingContract.View) : SettingContrac
         FirebaseMessaging.getInstance().subscribeToTopic("admin").addOnSuccessListener {
             setSharedItem("ADMIN", true)
             Component.adminMode = true
-            mView.adminView()
             toast("ADMIN MODE ON")
         }
     }
@@ -53,7 +52,6 @@ class SettingPresenter(private val mView: SettingContract.View) : SettingContrac
         FirebaseMessaging.getInstance().unsubscribeFromTopic("admin").addOnSuccessListener {
             setSharedItem("ADMIN", false)
             Component.adminMode = false
-            mView.adminView()
             toast("ADMIN MODE OFF")
         }
     }

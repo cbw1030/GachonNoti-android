@@ -12,7 +12,6 @@ interface SettingContract {
 
     abstract class View : SuperContract.SuperFragment() {
         abstract fun changeView()
-        abstract fun adminView()
         abstract fun adminLogout()
         abstract fun adminLogin()
         abstract fun executeTask(query: String, query2: Boolean, query3: Boolean)

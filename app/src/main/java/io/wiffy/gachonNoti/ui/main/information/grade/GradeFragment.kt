@@ -11,9 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.CHECK_PATTERN
-import io.wiffy.gachonNoti.func.doneLogin
-import io.wiffy.gachonNoti.func.getThemeButtonResource
+import io.wiffy.gachonNoti.function.CHECK_PATTERN
+import io.wiffy.gachonNoti.function.doneLogin
+import io.wiffy.gachonNoti.function.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.PatternLockDialog

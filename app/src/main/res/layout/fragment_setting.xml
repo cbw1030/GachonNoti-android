@@ -1,469 +1,497 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/table_out"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/table_out">
 
     <androidx.cardview.widget.CardView
-            app:cardBackgroundColor="#F7F7F7"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
             android:layout_margin="15dp"
+            app:cardBackgroundColor="#F7F7F7"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
 
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
             <TableLayout
-                    android:stretchColumns="*"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:stretchColumns="*">
+
                 <TableRow>
+
                     <RelativeLayout>
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:gravity="bottom"
                                 android:text="@string/func"
                                 android:textColor="@color/title2"
-                                android:textStyle="bold"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textStyle="bold" />
                     </RelativeLayout>
                 </TableRow>
 
                 <TableRow>
+
                     <RelativeLayout
                             android:layout_width="match_parent"
-                            android:background="@drawable/setting_button"
-                            >
+                            android:background="@drawable/setting_button">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/NotificationFunction"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
+
                         <androidx.appcompat.widget.SwitchCompat
 
                                 android:id="@+id/notiSwitch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="15dp"
-                                android:layout_alignParentEnd="true"
-                                app:switchMinWidth="50dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                app:switchMinWidth="50dp" />
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
-                </TableRow>
-                <TableRow>
-                    <RelativeLayout
-                            android:layout_height="wrap_content"
+
+                    <View
                             android:layout_width="match_parent"
-                            android:background="@drawable/setting_button"
-                            >
+                            android:layout_height="1dp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/setting_button">
+
                         <TextView
                                 android:id="@+id/asdfdd"
-                                android:layout_alignParentStart="true"
-                                android:layout_centerVertical="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="테마"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
 
                         <RelativeLayout
 
-                                android:layout_toEndOf="@+id/asdfdd"
-                                android:background="@color/white"
                                 android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="8dp"
-                                android:layout_height="wrap_content">
+                                android:layout_toEndOf="@+id/asdfdd"
+                                android:background="@color/white">
+
                             <RelativeLayout
-                                    android:layout_marginEnd="20dp"
-                                    android:layout_toStartOf="@id/redman"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_toStartOf="@id/redman">
+
                                 <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/defaultColor"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:layout_centerHorizontal="true"
                                         android:clickable="true"
                                         android:focusable="true"
-                                        android:layout_centerHorizontal="true"
-                                        android:id="@+id/defaultColor"
                                         android:src="@color/main2Blue"
                                         app:civ_border_color="@color/main2DeepBlue"
-                                        app:civ_border_width="0dp"
-                                        android:layout_width="35dp"
-                                        android:layout_height="35dp"/>
+                                        app:civ_border_width="0dp" />
 
                             </RelativeLayout>
+
                             <RelativeLayout
-                                    android:layout_marginEnd="20dp"
                                     android:id="@+id/redman"
-                                    android:layout_toStartOf="@+id/greenman"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_toStartOf="@+id/greenman">
+
                                 <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/redColor"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+
+                                        android:layout_centerHorizontal="true"
                                         android:clickable="true"
                                         android:focusable="true"
-                                        android:layout_centerHorizontal="true"
-
-                                        android:id="@+id/redColor"
                                         android:src="@color/red"
                                         app:civ_border_color="@color/deepRed"
-                                        app:civ_border_width="0dp"
-                                        android:layout_width="35dp"
-                                        android:layout_height="35dp"/>
+                                        app:civ_border_width="0dp" />
                             </RelativeLayout>
 
                             <RelativeLayout
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginEnd="20dp"
                                     android:id="@+id/greenman"
-                                    android:layout_centerHorizontal="true"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginEnd="20dp">
+
                                 <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/greenColor"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+
+                                        android:layout_centerHorizontal="true"
                                         android:clickable="true"
                                         android:focusable="true"
-                                        android:layout_centerHorizontal="true"
-
-                                        android:id="@+id/greenColor"
                                         android:src="@color/green"
                                         app:civ_border_color="@color/deepGreen"
-                                        app:civ_border_width="0dp"
-                                        android:layout_width="35dp"
-                                        android:layout_height="35dp"/>
+                                        app:civ_border_width="0dp" />
                             </RelativeLayout>
                         </RelativeLayout>
 
                     </RelativeLayout>
 
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/detailSetting"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/details"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow
-                        android:visibility="gone"
                         android:id="@+id/patternsettingA"
-                        >
+                        android:visibility="gone">
+
                     <RelativeLayout
                             android:id="@+id/patternsetting"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
                             android:clickable="true"
-                            android:focusable="true"
-                            >
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="패턴 설정"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
+
                     <View
-                            android:visibility="gone"
                             android:id="@+id/patternsettingB"
+                            android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_width="match_parent"/>
+                            android:visibility="gone" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/campusSetting"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/mCampus"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
+
                         <TextView
                                 android:id="@+id/campustext"
-                                android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="20dp"
                                 android:gravity="center"
                                 android:text="@string/mCampus"
-                                android:textColor="@color/gray2"
-                                android:layout_marginEnd="20dp"
-                                />
+                                android:textColor="@color/gray2" />
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/bugReport"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
                             android:clickable="true"
-                            android:focusable="true"
-                            >
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/report"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/money"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/money"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
+
                         <TextView
-                                android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="20dp"
                                 android:gravity="center"
                                 android:text="@string/moneygive"
-                                android:textColor="@color/gray2"
-                                android:layout_marginEnd="20dp"
-                                />
-                    </RelativeLayout>
-                </TableRow>
-                <TableRow>
-                    <View
-                            android:visibility="gone"
-                            android:id="@+id/adminBar"
-                            android:layout_height="1dp"
-                            android:layout_width="match_parent"/>
-                </TableRow>
-                <TableRow>
-                    <RelativeLayout
-                            android:visibility="gone"
-                            android:id="@+id/adminOption"
-                            android:layout_width="match_parent"
-                            android:background="@drawable/setting_button"
-                            android:clickable="true"
-                            android:focusable="true"
-                            >
-                        <TextView
-                                android:layout_alignParentStart="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="50dp"
-                                android:gravity="center"
-                                android:text="관리자 옵션"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
-
+                                android:textColor="@color/gray2" />
                     </RelativeLayout>
                 </TableRow>
 
                 <TableRow>
+
                     <RelativeLayout>
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:gravity="bottom"
                                 android:text="@string/info"
                                 android:textColor="@color/title2"
-                                android:textStyle="bold"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textStyle="bold" />
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/calling"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/calling"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
 
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/maker"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/maker"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp"
-                            android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/source"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/source"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp" android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/helper"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/helper"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
-                    <View android:layout_height="1dp"
-                            android:layout_width="match_parent"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout
                             android:id="@+id/version"
                             android:layout_width="match_parent"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:background="@drawable/setting_button"
-                            >
+                            android:clickable="true"
+                            android:focusable="true">
+
                         <TextView
-                                android:layout_alignParentStart="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
                                 android:gravity="center"
                                 android:text="@string/version"
-                                android:textColor="@color/BLACK"
-                                android:layout_marginStart="15dp"
-                                />
+                                android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
                 </TableRow>
+
                 <TableRow>
+
                     <RelativeLayout>
+
                         <TextView
                                 android:id="@+id/secretText"
-                                android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="5dp"
                                 android:layout_marginBottom="10dp"
                                 android:gravity="bottom"
                                 android:text="@string/wiffy"
-                                android:textColor="@color/supergray"
-                                android:layout_marginEnd="5dp"
-                                />
+                                android:textColor="@color/supergray" />
                     </RelativeLayout>
                 </TableRow>
             </TableLayout>

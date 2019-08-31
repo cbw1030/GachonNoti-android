@@ -1,9 +1,9 @@
 package io.wiffy.gachonNoti.ui.main.information.grade
 
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.func.ACTION_FAILURE
-import io.wiffy.gachonNoti.func.ACTION_SUCCESS
-import io.wiffy.gachonNoti.func.isNetworkConnected
+import io.wiffy.gachonNoti.function.ACTION_FAILURE
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS
+import io.wiffy.gachonNoti.function.isNetworkConnected
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.SuperContract

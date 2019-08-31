@@ -3,10 +3,10 @@ package io.wiffy.gachonNoti.ui.main.setting.login
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.func.ACTION_FAILURE
-import io.wiffy.gachonNoti.func.ACTION_SUCCESS
-import io.wiffy.gachonNoti.func.isNetworkConnected
-import io.wiffy.gachonNoti.func.setSharedItem
+import io.wiffy.gachonNoti.function.ACTION_FAILURE
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS
+import io.wiffy.gachonNoti.function.isNetworkConnected
+import io.wiffy.gachonNoti.function.setSharedItem
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import org.apache.http.client.methods.HttpPost

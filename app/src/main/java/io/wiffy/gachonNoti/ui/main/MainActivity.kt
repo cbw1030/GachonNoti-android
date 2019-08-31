@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.PatternLockDialog

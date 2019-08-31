@@ -3,8 +3,8 @@ package io.wiffy.gachonNoti.ui.main.searcher
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
-import io.wiffy.gachonNoti.func.ACTION_SUCCESS
-import io.wiffy.gachonNoti.func.setSharedItem
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS
+import io.wiffy.gachonNoti.function.setSharedItem
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import java.io.BufferedReader

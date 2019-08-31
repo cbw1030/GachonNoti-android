@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.method.KeyListener
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.func.*
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.dialog_administrator.*
 import java.util.*

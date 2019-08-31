@@ -1,6 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.setting.contact
 
-import io.wiffy.gachonNoti.func.ACTION_SUCCESS
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
