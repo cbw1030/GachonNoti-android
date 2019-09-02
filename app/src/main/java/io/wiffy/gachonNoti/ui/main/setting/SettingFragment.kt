@@ -334,7 +334,7 @@ class SettingFragment : SettingContract.View() {
                         message(text = "Input Secret Code")
                         input(hint = "Code") { _, text ->
                             when (text.toString().trim()) {
-                                "twopark123!" -> {
+                                "훔쳐보지마세요" -> {
                                     AdministratorDialog(context).show()
                                 }
                                 else -> {
