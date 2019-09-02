@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.setting.contact
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,7 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
     SuperContract.SuperDialog(context) {
     lateinit var myList: ArrayList<String>
     var spinnerSelected = 0
+    @SuppressLint("DefaultLocale")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_contact)

@@ -228,9 +228,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
             findTable(load1, str)
             findTable(load2, str)
             findTable(load3, str)
-            for (num in 0..4) {
-                Collections.sort(tableArr[num], TimeCompare)
-            }
+            for (num in 0..4) Collections.sort(tableArr[num], TimeCompare)
 
             val array2 = ArrayList<TimeTableData>().apply {
                 add(TimeTableData("월", tableArr[0]))

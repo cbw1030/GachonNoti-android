@@ -2,9 +2,6 @@ package io.wiffy.gachonNoti.ui.main.setting
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -30,7 +27,6 @@ import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
-import io.wiffy.gachonNoti.ui.main.setting.report.ReportAsyncTask
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
 import kotlinx.android.synthetic.main.fragment_setting.view.greenColor
@@ -134,22 +130,12 @@ class SettingFragment : SettingContract.View() {
             LoginDialog(context!!).show()
         }
         myView.bugReport.setOnClickListener {
-            MaterialDialog(activity!!).show {
-                title(text = "버그리포트 / 개선사항")
-                message(text = "\n버그나 개선하고자 하는 사항을 입력해주세요.")
-                input(hint = "내용") { _, text ->
-                    text.toString().apply {
-                        if (isNotBlank()) checkReport(this)
-                    }
-                }
-                positiveButton(text = "OK")
-                neutralButton(text = "카카오톡 문의") {
-                    (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
-                        ClipData.newPlainText("가천알림이", "tkdgusdlqhek")
-                    toastLong("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
-                }
-                negativeButton(text = "Cancel")
-            }
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://open.kakao.com/o/gE49yGCb")
+                )
+            )
         }
         myView.money.setOnClickListener {
             Component.noneVisible = true
@@ -273,20 +259,6 @@ class SettingFragment : SettingContract.View() {
         Component.campus = bool
     }
 
-    private fun checkReport(str: String) = MaterialAlertDialogBuilder(activity).apply {
-        setTitle("다음과 같은 내용으로 보내시겠습니까?")
-        setMessage(str)
-        setPositiveButton(
-            "OK"
-        ) { _, _ ->
-            executeTask2(str)
-        }
-        setNegativeButton(
-            "Cancel"
-        ) { _, _ -> }
-    }.create().show()
-
-
     @SuppressLint("ApplySharedPref")
     fun settingColor(int: Int) {
         Component.theme = when (int) {
@@ -302,10 +274,6 @@ class SettingFragment : SettingContract.View() {
 
     override fun executeTask(query: String, query2: Boolean, query3: Boolean) {
         ContactAsyncTask(this, query, query2, query3).execute()
-    }
-
-    override fun executeTask2(query: String) {
-        ReportAsyncTask(this, query).execute()
     }
 
     fun themeChanger() = arrayOf(
