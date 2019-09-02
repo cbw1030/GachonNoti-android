@@ -15,6 +15,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.app.NotificationManagerCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
@@ -144,9 +145,32 @@ class SettingFragment : SettingContract.View() {
                 }
                 positiveButton(text = "OK")
                 neutralButton(text = "카카오톡 문의") {
-                    (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
-                        ClipData.newPlainText("가천알림이", "tkdgusdlqhek")
-                    toastLong("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
+
+                    AlertDialog.Builder(context).apply {
+                        setTitle("강의실 목록")
+                        setAdapter(
+                            ArrayAdapter<String>(
+                                context,
+                                android.R.layout.simple_list_item_1
+                            ).apply {
+                                add("오픈 채팅")
+                                add("관리자 카카오톡")
+                            }) { _, which ->
+                            if (which == 0) {
+                                startActivity(
+                                    Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("https://open.kakao.com/o/gE49yGCb")
+                                    )
+                                )
+                            } else {
+                                (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
+                                    ClipData.newPlainText("가천알림이", "tkdgusdlqhek")
+                                toastLong("개발자 카카오톡 아이디를 복사했습니다.\n카카오톡 ID로 친구찾기 기능을 이용해주세요.")
+                            }
+                        }
+                        setPositiveButton("취소") { dialog, _ -> dialog.cancel() }
+                    }.show()
                 }
                 negativeButton(text = "Cancel")
             }
