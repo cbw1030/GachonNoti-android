@@ -125,8 +125,11 @@ class SettingFragment : SettingContract.View() {
                     }
                 }
         }
-        myView.darkMode.setOnCheckedChangeListener { _, isChecked ->
-            toast(isChecked.toString())
+        myView.darkMode.setOnCheckedChangeListener { it, isChecked ->
+            it.isChecked = isChecked.xor(true)
+            MaterialAlertDialogBuilder(context).apply {
+            
+            }.show()
         }
         myView.patternsetting.setOnClickListener {
             MainActivity.mView.changePattern()
