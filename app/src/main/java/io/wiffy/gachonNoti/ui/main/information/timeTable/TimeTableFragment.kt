@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
 import com.github.eunsiljo.timetablelib.view.TimeTableView
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.doneLogin
+import io.wiffy.gachonNoti.function.getDarkColor1
 import io.wiffy.gachonNoti.function.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_timetable.view.*
 import kotlin.collections.HashSet
@@ -18,7 +20,11 @@ class TimeTableFragment : TimeTableContract.View() {
     lateinit var mPresenter: TimeTablePresenter
     private var mInfo: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_information_timetable, container, false)
 
         mPresenter = TimeTablePresenter(this)
@@ -32,7 +38,7 @@ class TimeTableFragment : TimeTableContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
-        } ?: doneLogin(requireActivity(),context!!)
+        } ?: doneLogin(requireActivity(), context!!)
         myView?.swipe?.setOnRefreshListener {
             mPresenter.resetTable()
             myView?.swipe?.isRefreshing = false
@@ -40,7 +46,13 @@ class TimeTableFragment : TimeTableContract.View() {
     }
 
     fun changeTheme() {
-        myView?.swipe?.setColorSchemeColors(resources.getColor(getThemeColor()))
+        myView?.swipe?.setColorSchemeColors(
+            if (Component.darkTheme) {
+                resources.getColor(getDarkColor1())
+            } else {
+                resources.getColor(getThemeColor())
+            }
+        )
     }
 
     fun loginInformationSetting(info: String) {
