@@ -303,7 +303,7 @@ class SettingFragment : SettingContract.View() {
     }
 
     private fun darkTheme() {
-        myView.setting_background.setBackgroundColor(resources.getColor(getDarkLightColor()))
+        myView.setting_background.setBackgroundColor(resources.getColor(R.color.myDarkDeep))
         myView.setting_card.setCardBackgroundColor(resources.getColor(getDarkColor1()))
         myView.setting_text1.setTextColor(resources.getColor(R.color.white))
         myView.setting_text2.setTextColor(resources.getColor(R.color.white))
@@ -311,6 +311,28 @@ class SettingFragment : SettingContract.View() {
         myView.setting1_.setTextColor(resources.getColor(R.color.white))
         myView.setting2.setBackgroundResource(R.drawable.setting_button_dark)
         myView.asdfdd.setTextColor(resources.getColor(R.color.white))
+        myView.setting3.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting3_.setTextColor(resources.getColor(R.color.white))
+        myView.detailSetting.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting4_.setTextColor(resources.getColor(R.color.white))
+        myView.patternsetting.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting5_.setTextColor(resources.getColor(R.color.white))
+        myView.campusSetting.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting6_.setTextColor(resources.getColor(R.color.white))
+        myView.bugReport.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting7_.setTextColor(resources.getColor(R.color.white))
+        myView.money.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting8_.setTextColor(resources.getColor(R.color.white))
+        myView.calling.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting9_.setTextColor(resources.getColor(R.color.white))
+        myView.maker.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting10_.setTextColor(resources.getColor(R.color.white))
+        myView.source.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting11_.setTextColor(resources.getColor(R.color.white))
+        myView.helper.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting12_.setTextColor(resources.getColor(R.color.white))
+        myView.version.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting13_.setTextColor(resources.getColor(R.color.white))
     }
 
     fun themeChanger() {
@@ -328,7 +350,7 @@ class SettingFragment : SettingContract.View() {
                         intArrayOf(
                             resources.getColor(
                                 if (Component.darkTheme) {
-                                    getDarkColor2()
+                                    getDarkColor1()
                                 } else {
                                     getThemeColor()
                                 }
@@ -355,7 +377,7 @@ class SettingFragment : SettingContract.View() {
                         intArrayOf(
                             resources.getColor(
                                 if (Component.darkTheme) {
-                                    getDarkColor2()
+                                    getDarkColor1()
                                 } else {
                                     getThemeColor()
                                 }

@@ -16,6 +16,9 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.function.getDarkColor1
+import io.wiffy.gachonNoti.function.getDarkColor2
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
 class NotificationFragment : NotificationContract.View() {
@@ -114,9 +117,22 @@ class NotificationFragment : NotificationContract.View() {
 
     override fun themeChanger(bool: Boolean) {
         if (bool) {
-            myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
-            myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
-            myView.segmented.setTintColor(resources.getColor(getThemeColor()))
+            if (Component.darkTheme) {
+                myView.netnet.setTextColor(resources.getColor(R.color.white))
+                myView.notification_card.setCardBackgroundColor(resources.getColor(getDarkColor1()))
+                myView.backbackback.setBackgroundColor(resources.getColor(R.color.myDarkDeep))
+                myView.swipe.setColorSchemeColors(resources.getColor(getDarkColor1()))
+                myView.fab_main.backgroundTintList =
+                    resources.getColorStateList(R.color.myDarkLight)
+                myView.segmented.setTintColor(
+                    resources.getColor(R.color.white),
+                    resources.getColor(R.color.myDarkDeep)
+                )
+            } else {
+                myView.swipe.setColorSchemeColors(resources.getColor(getThemeColor()))
+                myView.fab_main.backgroundTintList = resources.getColorStateList(getThemeColor())
+                myView.segmented.setTintColor(resources.getColor(getThemeColor()))
+            }
         }
     }
 

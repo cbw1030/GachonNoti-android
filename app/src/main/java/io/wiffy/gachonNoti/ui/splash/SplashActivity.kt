@@ -21,7 +21,7 @@ class SplashActivity : SplashContract.View() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         window.statusBarColor = if (Component.darkTheme) {
-            resources.getColor(getDarkColor2())
+            resources.getColor(getDarkColor1())
         } else {
             resources.getColor(getThemeColor())
         }

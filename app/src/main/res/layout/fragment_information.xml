@@ -1,134 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/backbackback2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/information_true"
-            android:background="@color/table_out"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/table_out"
+            android:visibility="gone">
+
         <RelativeLayout
-                android:layout_alignParentTop="true"
                 android:id="@+id/seglay2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <info.hoang8f.android.segmented.SegmentedGroup
-                    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true">
+
+            <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/segmented2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
                     android:orientation="horizontal"
-                    segmentedgroup:sc_tint_color="@color/main2Blue"
                     segmentedgroup:sc_border_width="1dp"
-                    segmentedgroup:sc_corner_radius="10dp">
+                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_tint_color="@color/main2Blue">
 
                 <RadioButton
                         android:id="@+id/button1_"
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="학생증"
-                        style="@style/RadioButton"/>
+                        android:text="학생증" />
 
                 <RadioButton
                         android:id="@+id/button2_"
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="시간표"
-                        style="@style/RadioButton"/>
+                        android:text="시간표" />
 
                 <RadioButton
                         android:id="@+id/button3_"
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="성적표"
-                        style="@style/RadioButton"/>
+                        android:text="성적표" />
+
                 <RadioButton
                         android:id="@+id/button4_"
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="이수학점"
-                        style="@style/RadioButton"/>
+                        android:text="이수학점" />
             </info.hoang8f.android.segmented.SegmentedGroup>
 
         </RelativeLayout>
 
         <io.wiffy.gachonNoti.model.MyViewPager
-                android:layout_below="@+id/seglay2"
-                android:layout_alignParentBottom="true"
                 android:id="@+id/pager3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+                android:layout_below="@+id/seglay2"
+                android:layout_alignParentBottom="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </RelativeLayout>
 
     <RelativeLayout
-            android:visibility="visible"
             android:id="@+id/information_false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
         <androidx.cardview.widget.CardView
-            android:layout_centerHorizontal="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+                android:id="@+id/loghara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
 
-            app:cardCornerRadius="5dp" app:cardElevation="10dp">
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
 
             <RelativeLayout
-                    android:padding="20dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
 
                 <TextView
-                        android:layout_centerHorizontal="true"
                         android:id="@+id/text"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="로그인하셔야 이용이 가능합니다."
-                        android:gravity="center"
-                        android:textColor="@color/gray2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="로그인하셔야 이용이 가능합니다."
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                 <TextView
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/text"
                         android:id="@+id/text2"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        android:text="학생증, 개인시간표, 성적표, 이수학점 기능제공"
-                        android:gravity="center"
-                        android:textColor="@color/gray2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="학생증, 개인시간표, 성적표, 이수학점 기능제공"
+                        android:textColor="@color/gray2"
+                        android:textSize="12sp" />
 
                 <Button
+                        android:id="@+id/login2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/text2"
+                        android:layout_centerVertical="true"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="0dp"
-                        android:text="로그인"
-                        android:layout_centerVertical="true"
-                        android:layout_below="@+id/text2"
-                        android:id="@+id/login2"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
                         android:background="@drawable/dialog_button_default"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"/>
+                        android:text="로그인"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
             </RelativeLayout>
-
-
 
 
         </androidx.cardview.widget.CardView>

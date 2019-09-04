@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/backbackback"
         android:layout_width="match_parent"
@@ -12,8 +11,10 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="match_parent">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <RelativeLayout
                     android:id="@+id/lottieXX"
@@ -29,16 +30,17 @@
                         android:layout_centerVertical="true"
                         app:lottie_autoPlay="true"
                         app:lottie_fileName="notfound.json"
-                        app:lottie_loop="true"/>
+                        app:lottie_loop="true" />
 
                 <TextView
+                        android:id="@+id/netnet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/animation_viewa"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="-100dp"
                         android:gravity="center"
-                        android:text="인터넷 연결을 확인해주세요."/>
+                        android:text="인터넷 연결을 확인해주세요." />
             </RelativeLayout>
 
             <RelativeLayout
@@ -68,33 +70,34 @@
                                 style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="공지사항"/>
+                                android:text="공지사항" />
 
                         <RadioButton
                                 android:id="@+id/button2"
                                 style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="가천뉴스"/>
+                                android:text="가천뉴스" />
 
                         <RadioButton
                                 android:id="@+id/button3"
                                 style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="행사소식"/>
+                                android:text="행사소식" />
 
                         <RadioButton
                                 android:id="@+id/button4"
                                 style="@style/RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="장학소식"/>
+                                android:text="장학소식" />
                     </info.hoang8f.android.segmented.SegmentedGroup>
 
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
+                        android:id="@+id/notification_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/seglay"
@@ -111,7 +114,7 @@
                             android:layout_height="match_parent"
                             android:paddingBottom="0dp"
                             android:scrollbars="vertical"
-                            android:visibility="visible"/>
+                            android:visibility="visible" />
 
 
                 </androidx.cardview.widget.CardView>
@@ -130,7 +133,7 @@
                         android:src="@drawable/search"
                         app:elevation="10dp"
                         app:fabSize="normal"
-                        app:maxImageSize="30dp"/>
+                        app:maxImageSize="30dp" />
 
             </RelativeLayout>
         </FrameLayout>

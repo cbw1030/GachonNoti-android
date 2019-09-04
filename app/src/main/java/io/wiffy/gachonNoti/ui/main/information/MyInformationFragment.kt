@@ -9,6 +9,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.function.getThemeButtonResource
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.function.getDarkColor1
 import io.wiffy.gachonNoti.function.getThemeColor
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
@@ -24,7 +25,11 @@ class MyInformationFragment : MyInformationContract.View() {
         lateinit var fragmentList: ArrayList<Fragment?>
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_information, container, false)
         mPresenter = MyInformationPresenter(this)
         mPresenter?.initPresent()
@@ -91,7 +96,19 @@ class MyInformationFragment : MyInformationContract.View() {
         if (bool)
             mPresenter?.themeChange()
 
-        myView.segmented2.setTintColor(resources.getColor(getThemeColor()))
+        if (Component.darkTheme) {
+            myView.segmented2.setTintColor(
+                resources.getColor(R.color.white),
+                resources.getColor(R.color.myDarkDeep)
+            )
+            myView.information_true.setBackgroundColor(resources.getColor(R.color.myDarkDeep))
+            myView.information_false.setBackgroundColor(resources.getColor(R.color.myDarkDeep))
+            myView.loghara.setCardBackgroundColor(resources.getColor(getDarkColor1()))
+            myView.text.setTextColor(resources.getColor(R.color.white))
+            myView.text2.setTextColor(resources.getColor(R.color.white))
+
+        } else
+            myView.segmented2.setTintColor(resources.getColor(getThemeColor()))
         myView.login2.setBackgroundResource(getThemeButtonResource())
 
     }

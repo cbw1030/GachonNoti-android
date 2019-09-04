@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
@@ -26,7 +27,11 @@ class IDCardFragment : IDCardContract.View() {
     var count = initiation
     private var handlerTask: Runnable? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_information_idcard, container, false)
         handler = Handler()
         mPresenter = IDCardPresenter(this)
@@ -38,11 +43,19 @@ class IDCardFragment : IDCardContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
-        } ?: doneLogin(requireActivity(),context!!)
+        } ?: doneLogin(requireActivity(), context!!)
     }
 
     fun changeTheme() {
-        myView?.gachonback?.setBackgroundColor(ContextCompat.getColor(context!!, getThemeColor()))
+        myView?.gachonback?.setBackgroundColor(
+            ContextCompat.getColor(
+                context!!, if (Component.darkTheme) {
+                    R.color.superDarkLight
+                } else {
+                    getThemeColor()
+                }
+            )
+        )
         myView?.rebalgup?.setBackgroundResource(getThemeButtonResource())
     }
 

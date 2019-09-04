@@ -24,6 +24,7 @@ import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.adapter_notification.view.*
+import kotlinx.android.synthetic.main.adapter_notification_dark.view.*
 
 //        TYPE
 //        0 -> NOTIFICATION
@@ -46,9 +47,16 @@ class NotificationAdapter(
             with(holder) {
                 Handler(Looper.getMainLooper()).post {
                     itemView.setBackgroundResource(
-                        when {
-                            item.isNotification -> R.color.notiBackground
-                            else -> R.color.WHITE
+                        if (Component.darkTheme) {
+                            when {
+                                item.isNotification -> R.color.myDarkLight
+                                else -> R.color.myDark2
+                            }
+                        } else {
+                            when {
+                                item.isNotification -> R.color.notiBackground
+                                else -> R.color.WHITE
+                            }
                         }
                     )
                     title.text = item.text
@@ -107,6 +115,7 @@ class NotificationAdapter(
                             2 -> View.GONE
                             else -> View.VISIBLE
                         }
+
                 }
             }
         }
@@ -125,14 +134,45 @@ class NotificationAdapter(
 
 
     inner class ComponentViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.adapter_notification, parent, false)
+        LayoutInflater.from(parent.context).inflate(
+            if (Component.darkTheme) {
+                R.layout.adapter_notification_dark
+            } else {
+                R.layout.adapter_notification
+            }, parent, false
+        )
     ) {
-        val title: TextView = itemView.titleIn
-        val contexts: TextView = itemView.contextsIn
-        val date: TextView = itemView.date
-        val new: ImageView = itemView.neww
-        val save: ImageView = itemView.save
-        val card: CardView = itemView.contexts
+
+        val title: TextView = if (Component.darkTheme) {
+            itemView.titleIn_
+        } else {
+            itemView.titleIn
+        }
+        val contexts: TextView = if (Component.darkTheme) {
+            itemView.contextsIn_
+        } else {
+            itemView.contextsIn
+        }
+        val date: TextView = if (Component.darkTheme) {
+            itemView.date_
+        } else {
+            itemView.date
+        }
+        val new: ImageView = if (Component.darkTheme) {
+            itemView.neww_
+        } else {
+            itemView.neww
+        }
+        val save: ImageView = if (Component.darkTheme) {
+            itemView.save_
+        } else {
+            itemView.save
+        }
+        val card: CardView = if (Component.darkTheme) {
+            itemView.contexts_
+        } else {
+            itemView.contexts
+        }
     }
 
 }

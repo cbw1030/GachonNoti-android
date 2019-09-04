@@ -71,7 +71,15 @@ class SearcherFragment : SearchContract.View() {
 
 
     fun themeChanger() {
-        myView.fab.backgroundTintList = resources.getColorStateList(getThemeColor())
+        if (Component.darkTheme) {
+            myView.blblblbl2.setTextColor(resources.getColor(R.color.myDarkLight))
+            myView.blblblbl.setTextColor(resources.getColor(R.color.white))
+            myView.fab.backgroundTintList = resources.getColorStateList(R.color.myDarkLight)
+            myView.search_background.setBackgroundColor(resources.getColor(R.color.myDarkDeep))
+            myView.search_card.setCardBackgroundColor(resources.getColor(getDarkColor1()))
+        } else {
+            myView.fab.backgroundTintList = resources.getColorStateList(getThemeColor())
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -79,7 +87,6 @@ class SearcherFragment : SearchContract.View() {
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
-
         arr.ifNotNullOrElse({
             myView.timetable.setOnTimeItemClickListener { _, _, data ->
                 toast(data.time.title)

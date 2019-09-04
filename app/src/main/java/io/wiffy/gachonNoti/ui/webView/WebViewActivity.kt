@@ -16,6 +16,8 @@ import io.wiffy.gachonNoti.function.getThemeColor
 import io.wiffy.gachonNoti.function.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.function.getDarkColor1
+import io.wiffy.gachonNoti.function.getDarkColor2
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
@@ -150,8 +152,32 @@ class WebViewActivity : WebViewContract.View() {
     }
 
     private fun themeChange() {
-        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
-        webview_layout.setBackgroundColor(resources.getColor(getThemeDeepColor()))
-        window.statusBarColor = resources.getColor(getThemeColor())
+        supportActionBar!!.setBackgroundDrawable(
+            ColorDrawable(
+                if (Component.darkTheme) {
+                    resources.getColor(
+                        getDarkColor2()
+                    )
+                } else {
+                    resources.getColor(getThemeColor())
+                }
+            )
+        )
+        webview_layout.setBackgroundColor(
+            if (Component.darkTheme) {
+                resources.getColor(
+                    getDarkColor1()
+                )
+            } else {
+                resources.getColor(getThemeDeepColor())
+            }
+        )
+        window.statusBarColor = if (Component.darkTheme) {
+            resources.getColor(
+                getDarkColor2()
+            )
+        } else {
+            resources.getColor(getThemeColor())
+        }
     }
 }

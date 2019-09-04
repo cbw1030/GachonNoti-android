@@ -9,6 +9,8 @@ fun getDarkColor2() = R.color.myDark2
 
 fun getDarkLightColor() = R.color.myDarkLight
 
+
+
 fun getThemeColor(mTheme: String?) = when (mTheme) {
     "red" -> {
         R.color.red

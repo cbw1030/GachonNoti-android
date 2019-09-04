@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="15dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+            app:cardElevation="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <RelativeLayout
-                    android:layout_alignParentTop="true"
                     android:id="@+id/gachonback"
-                    android:background="@color/main2Blue"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/main2Blue">
+
                 <TextView
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:id="@+id/ananan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="가천대학교 학생증"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
-                    android:layout_below="@+id/gachonback"
-                    android:background="@color/white"
+                    android:id="@+id/gagamama"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/gachonback"
+                    android:background="@color/white">
+
                 <ImageView
                         android:id="@+id/imageonyou"
-                        android:background="@drawable/border"
+                        android:layout_width="105dp"
+                        android:layout_height="140dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="15dp"
-                        android:src="@drawable/defaultimage"
-                        android:layout_width="105dp"
-                        android:layout_height="140dp"/>
+                        android:background="@drawable/border"
+                        android:src="@drawable/defaultimage" />
 
                 <TextView
                         android:id="@+id/yourname"
@@ -79,19 +85,22 @@
                         android:maxLines="1"
                         android:text="앱을 재실행해 주세요."
                         android:textSize="18sp" />
+
                 <ImageView
-                        android:layout_alignBottom="@+id/imageonyou"
                         android:id="@+id/gachonlogo"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/gachon"
-                        android:layout_alignParentEnd="true"
                         android:layout_width="100dp"
-                        android:layout_height="25dp"/>
+                        android:layout_height="25dp"
+                        android:layout_alignBottom="@+id/imageonyou"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/gachon" />
+
                 <RelativeLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@id/gachonlogo"
+                        android:id="@+id/gagamama2"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/gachonlogo"
+                        android:layout_marginTop="10dp">
 
                     <TextView
                             android:id="@+id/timer"
@@ -102,34 +111,37 @@
                             android:gravity="center"
                             android:text="00 분 00 초"
                             android:textSize="20sp" />
+
                     <ImageView
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/timer"
                             android:id="@+id/qrcode"
-                            android:layout_above="@+id/youtonggihan"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/youtonggihan"
+                            android:layout_below="@+id/timer"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp" />
+
                     <TextView
                             android:id="@+id/youtonggihan"
-                            android:text="유효기간이 종료되면 재발급을 받으시기 바랍니다."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_above="@+id/rebalgup"
                             android:layout_centerHorizontal="true"
-                            android:layout_width="wrap_content"
-                            android:textSize="10sp"
-                            android:layout_height="wrap_content"/>
+                            android:text="유효기간이 종료되면 재발급을 받으시기 바랍니다."
+                            android:textSize="10sp" />
+
                     <Button
-                            android:text="재발급"
-                            android:layout_margin="15dp"
                             android:id="@+id/rebalgup"
-                            android:background="@drawable/dialog_button_default"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_margin="15dp"
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"/>
+                            android:background="@drawable/dialog_button_default"
+                            android:text="재발급"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
                 </RelativeLayout>
             </RelativeLayout>
         </RelativeLayout>
