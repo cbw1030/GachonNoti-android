@@ -23,6 +23,7 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.firstBoot = getSharedItem("firstBooting", true)
         Component.notificationSet = getSharedItem("notiOn", true)
         Component.theme = getSharedItem("theme", "default")
+        Component.darkTheme = getSharedItem("dark", false)
         Component.campus = getSharedItem("campus", true)
 
         if (getSharedItem("preVersion", "") != Component.version) {

@@ -12,6 +12,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.NotificationManagerCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
@@ -82,6 +83,7 @@ class SettingFragment : SettingContract.View() {
             }
         }
         myView.notiSwitch.isChecked = Component.notificationSet
+        myView.darkMode.isChecked = Component.darkTheme
         themeChanger()
         myView.campustext.text =
             if (Component.campus) {
@@ -122,6 +124,19 @@ class SettingFragment : SettingContract.View() {
                         }
                     }
                 }
+        }
+        myView.darkMode.setOnCheckedChangeListener { it, isChecked ->
+            MaterialAlertDialogBuilder(context).apply {
+                setTitle("경고")
+                setMessage("어플리케이션이 재시작됩니다.")
+                setPositiveButton("네") { _, _ ->
+                    setSharedItem("dark", isChecked)
+                    restartApp(context)
+                }
+                setNegativeButton("아니용") { _, _ ->
+                    it.isChecked = isChecked.xor(true)
+                }
+            }.show()
         }
         myView.patternsetting.setOnClickListener {
             MainActivity.mView.changePattern()
@@ -281,21 +296,43 @@ class SettingFragment : SettingContract.View() {
             android.R.attr.state_checked
         ),
         intArrayOf(-android.R.attr.state_checked)
-    ).let {
-        myView.notiSwitch.thumbTintList =
-            ColorStateList(
-                it,
-                intArrayOf(resources.getColor(getThemeColor()), resources.getColor(R.color.gray2))
+    ).also {
+        myView.notiSwitch.apply {
+            thumbTintList =
+                ColorStateList(
+                    it,
+                    intArrayOf(
+                        resources.getColor(getThemeColor()),
+                        resources.getColor(R.color.gray2)
+                    )
+                )
+            trackTintList = ColorStateList(
+                it, intArrayOf(
+                    resources.getColor(
+                        getThemeLightColor()
+                    ), resources.getColor(R.color.lightGray)
+                )
             )
-        myView.notiSwitch.trackTintList = ColorStateList(
-            it, intArrayOf(
-                resources.getColor(
-                    getThemeLightColor()
-                ), resources.getColor(R.color.lightGray)
+        }
+        myView.darkMode.apply {
+            thumbTintList =
+                ColorStateList(
+                    it,
+                    intArrayOf(
+                        resources.getColor(getThemeColor()),
+                        resources.getColor(R.color.gray2)
+                    )
+                )
+            trackTintList = ColorStateList(
+                it, intArrayOf(
+                    resources.getColor(
+                        getThemeLightColor()
+                    ), resources.getColor(R.color.lightGray)
+                )
             )
-        )
-    }
+        }
 
+    }
 
     override fun builderUp() {
         Handler(Looper.getMainLooper()).post {
