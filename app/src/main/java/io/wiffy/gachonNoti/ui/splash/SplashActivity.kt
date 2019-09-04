@@ -77,6 +77,7 @@ class SplashActivity : SplashContract.View() {
     }
 
     override fun darkTheme() {
+        window.navigationBarColor = resources.getColor(getDarkColor2())
         bububu.setBackgroundColor(resources.getColor(R.color.myDark1))
         bababa.setBackgroundColor(resources.getColor(R.color.myDark1))
         setTextColor(R.color.white)

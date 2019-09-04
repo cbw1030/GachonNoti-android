@@ -231,6 +231,7 @@ class MainActivity : MainContract.View() {
     override fun darkTheme() {
         main_splash.setBackgroundColor(resources.getColor(getDarkColor1()))
         window.statusBarColor = resources.getColor(getDarkColor2())
+        window.navigationBarColor = resources.getColor(getDarkColor2())
         navigation.setBackgroundColor(resources.getColor(getDarkColor2()))
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getDarkColor2())))
     }

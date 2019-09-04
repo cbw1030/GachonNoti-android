@@ -3,7 +3,7 @@ package io.wiffy.gachonNoti.function
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 
-fun getDarkColor1()=R.color.myDark1
+fun getDarkColor1() = R.color.myDark1
 
 fun getDarkColor2() = R.color.myDark2
 
@@ -45,15 +45,19 @@ fun getThemeButtonResource(mTheme: String?) = when (mTheme) {
     }
 }
 
-fun getThemeButtonResource() = when (Component.theme) {
-    "red" -> {
-        R.drawable.dialog_button_red
-    }
-    "green" -> {
-        R.drawable.dialog_button_green
-    }
-    else -> {
-        R.drawable.dialog_button_default
+fun getThemeButtonResource() = if (Component.darkTheme) {
+    R.drawable.dialog_button_dark
+} else {
+    when (Component.theme) {
+        "red" -> {
+            R.drawable.dialog_button_red
+        }
+        "green" -> {
+            R.drawable.dialog_button_green
+        }
+        else -> {
+            R.drawable.dialog_button_default
+        }
     }
 }
 

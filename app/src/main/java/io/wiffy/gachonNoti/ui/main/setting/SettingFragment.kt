@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.get
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -27,6 +28,7 @@ import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
+import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
 import kotlinx.android.synthetic.main.fragment_setting.view.greenColor
@@ -300,67 +302,80 @@ class SettingFragment : SettingContract.View() {
         ContactAsyncTask(this, query, query2, query3).execute()
     }
 
-    fun themeChanger() = arrayOf(
-        intArrayOf(
-            android.R.attr.state_checked
-        ),
-        intArrayOf(-android.R.attr.state_checked)
-    ).also {
-        myView.notiSwitch.apply {
-            thumbTintList =
-                ColorStateList(
-                    it,
-                    intArrayOf(
-                        resources.getColor(
-                            if (Component.darkTheme) {
-                                getDarkColor2()
-                            } else {
-                                getThemeColor()
-                            }
-                        ),
-                        resources.getColor(R.color.gray2)
-                    )
-                )
-            trackTintList = ColorStateList(
-                it, intArrayOf(
-                    resources.getColor(
-                        if (Component.darkTheme) {
-                            getDarkLightColor()
-                        } else {
-                            getThemeLightColor()
-                        }
-                    ), resources.getColor(R.color.lightGray)
-                )
-            )
-        }
-        myView.darkMode.apply {
-            thumbTintList =
-                ColorStateList(
-                    it,
-                    intArrayOf(
-                        resources.getColor(
-                            if (Component.darkTheme) {
-                                getDarkColor2()
-                            } else {
-                                getThemeColor()
-                            }
-                        ),
-                        resources.getColor(R.color.gray2)
-                    )
-                )
-            trackTintList = ColorStateList(
-                it, intArrayOf(
-                    resources.getColor(
-                        if (Component.darkTheme) {
-                            getDarkLightColor()
-                        } else {
-                            getThemeLightColor()
-                        }
-                    ), resources.getColor(R.color.lightGray)
-                )
-            )
-        }
+    private fun darkTheme() {
+        myView.setting_background.setBackgroundColor(resources.getColor(getDarkLightColor()))
+        myView.setting_card.setCardBackgroundColor(resources.getColor(getDarkColor1()))
+        myView.setting_text1.setTextColor(resources.getColor(R.color.white))
+        myView.setting_text2.setTextColor(resources.getColor(R.color.white))
+        myView.setting1.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting1_.setTextColor(resources.getColor(R.color.white))
+        myView.setting2.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.asdfdd.setTextColor(resources.getColor(R.color.white))
+    }
 
+    fun themeChanger() {
+        if (Component.darkTheme) darkTheme()
+        arrayOf(
+            intArrayOf(
+                android.R.attr.state_checked
+            ),
+            intArrayOf(-android.R.attr.state_checked)
+        ).also {
+            myView.notiSwitch.apply {
+                thumbTintList =
+                    ColorStateList(
+                        it,
+                        intArrayOf(
+                            resources.getColor(
+                                if (Component.darkTheme) {
+                                    getDarkColor2()
+                                } else {
+                                    getThemeColor()
+                                }
+                            ),
+                            resources.getColor(R.color.gray2)
+                        )
+                    )
+                trackTintList = ColorStateList(
+                    it, intArrayOf(
+                        resources.getColor(
+                            if (Component.darkTheme) {
+                                getDarkLightColor()
+                            } else {
+                                getThemeLightColor()
+                            }
+                        ), resources.getColor(R.color.lightGray)
+                    )
+                )
+            }
+            myView.darkMode.apply {
+                thumbTintList =
+                    ColorStateList(
+                        it,
+                        intArrayOf(
+                            resources.getColor(
+                                if (Component.darkTheme) {
+                                    getDarkColor2()
+                                } else {
+                                    getThemeColor()
+                                }
+                            ),
+                            resources.getColor(R.color.gray2)
+                        )
+                    )
+                trackTintList = ColorStateList(
+                    it, intArrayOf(
+                        resources.getColor(
+                            if (Component.darkTheme) {
+                                getDarkLightColor()
+                            } else {
+                                getThemeLightColor()
+                            }
+                        ), resources.getColor(R.color.lightGray)
+                    )
+                )
+            }
+        }
     }
 
     override fun builderUp() {
