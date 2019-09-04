@@ -72,4 +72,11 @@ class SplashActivity : SplashContract.View() {
             Glide.with(this).load(id).into(logo_splash)
         }
     }
+
+    override fun darkTheme() {
+        bububu.setBackgroundColor(resources.getColor(R.color.myDark1))
+        bababa.setBackgroundColor(resources.getColor(R.color.myDark1))
+        setTextColor(R.color.white)
+        setImageView(R.drawable.default_dark)
+    }
 }

@@ -41,6 +41,7 @@ class SettingFragment : SettingContract.View() {
     private var secretCount = 0
     private var index = 0
     private var adminCode = StringBuilder()
+    private var flag = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -124,18 +125,25 @@ class SettingFragment : SettingContract.View() {
                     }
                 }
         }
+        myView.darkMode.setOnTouchListener { _, _ ->
+            flag = true
+            false
+        }
         myView.darkMode.setOnCheckedChangeListener { it, isChecked ->
-            MaterialAlertDialogBuilder(context).apply {
-                setTitle("경고")
-                setMessage("어플리케이션이 재시작됩니다.")
-                setPositiveButton("ㅇㅋ") { _, _ ->
-                    setSharedItem("dark", isChecked)
-                    restartApp(context)
-                }
-                setNegativeButton("그건 좀..") { _, _ ->
-                    it.isChecked = isChecked.xor(true)
-                }
-            }.show()
+            if (flag)
+                MaterialAlertDialogBuilder(context).apply {
+                    setTitle("경고")
+                    setMessage("어플리케이션이 재시작됩니다.")
+                    setCancelable(false)
+                    setPositiveButton("ㅇㅋ") { _, _ ->
+                        setSharedItem("dark", isChecked)
+                        restartApp(context)
+                    }
+                    setNegativeButton("그건 좀..") { _, _ ->
+                        flag = false
+                        it.isChecked = isChecked.xor(true)
+                    }
+                }.show()
         }
         myView.patternsetting.setOnClickListener {
             MainActivity.mView.changePattern()

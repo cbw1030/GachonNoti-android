@@ -79,10 +79,12 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                     )}, 생일축하해~!"
                 )
             } else {
-                mView.setImageView(R.drawable.defaults)
+                if (Component.darkTheme) mView.darkTheme()
+                else mView.setImageView(R.drawable.defaults)
             }
         } catch (e: Exception) {
-            mView.setImageView(R.drawable.defaults)
+            if (Component.darkTheme) mView.darkTheme()
+            else mView.setImageView(R.drawable.defaults)
         }
     }
 

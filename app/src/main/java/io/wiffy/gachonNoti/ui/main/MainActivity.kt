@@ -213,12 +213,17 @@ class MainActivity : MainContract.View() {
     override fun allThemeChange() = mPresenter.changeThemes()
 
     override fun themeChange() {
+        darkTheme()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = resources.getColor(getThemeColor())
         navigation.setBackgroundColor(resources.getColor(getThemeColor()))
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
         supportActionBar!!.elevation = 0f
+    }
+
+    override fun darkTheme() {
+
     }
 
     override fun onUserLeaveHint() {

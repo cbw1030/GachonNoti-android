@@ -10,6 +10,7 @@ interface SplashContract {
         abstract fun setTextColor(id: Int)
         abstract fun setBirthdayText(str: String)
         abstract fun setParams()
+        abstract fun darkTheme()
     }
 
     interface Presenter : SuperContract.SuperPresenter

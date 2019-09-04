@@ -20,6 +20,7 @@ interface MainContract {
         abstract fun patternVisibility()
         abstract fun mainLogout()
         abstract fun mainLogin()
+        abstract fun darkTheme()
     }
 
     interface Presenter : SuperContract.SuperPresenter {
