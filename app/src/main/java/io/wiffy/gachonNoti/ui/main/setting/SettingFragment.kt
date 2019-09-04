@@ -126,9 +126,16 @@ class SettingFragment : SettingContract.View() {
                 }
         }
         myView.darkMode.setOnCheckedChangeListener { it, isChecked ->
-            it.isChecked = isChecked.xor(true)
             MaterialAlertDialogBuilder(context).apply {
-            
+                setTitle("경고")
+                setMessage("어플리케이션이 재시작됩니다.")
+                setPositiveButton("네") { _, _ ->
+                    setSharedItem("dark", isChecked)
+                    restartApp(context)
+                }
+                setNegativeButton("아니용") { _, _ ->
+                    it.isChecked = isChecked.xor(true)
+                }
             }.show()
         }
         myView.patternsetting.setOnClickListener {
