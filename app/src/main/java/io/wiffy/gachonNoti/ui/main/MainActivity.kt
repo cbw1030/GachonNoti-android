@@ -37,7 +37,6 @@ class MainActivity : MainContract.View() {
         lateinit var mView: MainContract.View
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -108,15 +107,20 @@ class MainActivity : MainContract.View() {
         Component.getBuilder()?.dismiss()
     }
 
+    private fun logoChange(id: Int) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            logo_splash2.setImageDrawable(applicationContext.resources.getDrawable(id))
+        } else {
+            Glide.with(this).load(id).into(logo_splash2)
+        }
+    }
+
     override fun initView(mList: ArrayList<Fragment?>) {
         notificationCheck()
         themeChange()
+        if (Component.darkTheme) logoChange(R.drawable.default_dark)
+        else logoChange(R.drawable.defaults)
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            logo_splash2.setImageDrawable(applicationContext.resources.getDrawable(R.drawable.defaults))
-        } else {
-            Glide.with(this).load(R.drawable.defaults).into(logo_splash2)
-        }
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab1_home))
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab2_id))
@@ -213,17 +217,22 @@ class MainActivity : MainContract.View() {
     override fun allThemeChange() = mPresenter.changeThemes()
 
     override fun themeChange() {
-        darkTheme()
+        if (Component.darkTheme) darkTheme()
+        else {
+            window.statusBarColor = resources.getColor(getThemeColor())
+            navigation.setBackgroundColor(resources.getColor(getThemeColor()))
+            supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
+        }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = resources.getColor(getThemeColor())
-        navigation.setBackgroundColor(resources.getColor(getThemeColor()))
-        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))
         supportActionBar!!.elevation = 0f
     }
 
     override fun darkTheme() {
-
+        main_splash.setBackgroundColor(resources.getColor(getDarkColor1()))
+        window.statusBarColor = resources.getColor(getDarkColor2())
+        navigation.setBackgroundColor(resources.getColor(getDarkColor2()))
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getDarkColor2())))
     }
 
     override fun onUserLeaveHint() {

@@ -67,17 +67,21 @@ class SettingFragment : SettingContract.View() {
             add(myView.defaultColor)
             add(myView.redColor)
             add(myView.greenColor)
-            this[index].borderWidth = myBorder
+            if (!Component.darkTheme) this[index].borderWidth = myBorder
             for (x in 0 until size) {
                 this[x].setOnClickListener {
-                    for (v in 0 until size) {
-                        if (x == v)
-                            this[v].borderWidth = myBorder
-                        else
-                            this[v].borderWidth = 0
+                    if (!Component.darkTheme) {
+                        for (v in 0 until size) {
+                            if (x == v)
+                                this[v].borderWidth = myBorder
+                            else
+                                this[v].borderWidth = 0
+                        }
+                        index = x
+                        settingColor(x)
+                    } else {
+                        toast("다크모드 사용중!")
                     }
-                    index = x
-                    settingColor(x)
                     adminCode(x)
                 }
             }
@@ -307,14 +311,24 @@ class SettingFragment : SettingContract.View() {
                 ColorStateList(
                     it,
                     intArrayOf(
-                        resources.getColor(getThemeColor()),
+                        resources.getColor(
+                            if (Component.darkTheme) {
+                                getDarkColor2()
+                            } else {
+                                getThemeColor()
+                            }
+                        ),
                         resources.getColor(R.color.gray2)
                     )
                 )
             trackTintList = ColorStateList(
                 it, intArrayOf(
                     resources.getColor(
-                        getThemeLightColor()
+                        if (Component.darkTheme) {
+                            getDarkLightColor()
+                        } else {
+                            getThemeLightColor()
+                        }
                     ), resources.getColor(R.color.lightGray)
                 )
             )
@@ -324,14 +338,24 @@ class SettingFragment : SettingContract.View() {
                 ColorStateList(
                     it,
                     intArrayOf(
-                        resources.getColor(getThemeColor()),
+                        resources.getColor(
+                            if (Component.darkTheme) {
+                                getDarkColor2()
+                            } else {
+                                getThemeColor()
+                            }
+                        ),
                         resources.getColor(R.color.gray2)
                     )
                 )
             trackTintList = ColorStateList(
                 it, intArrayOf(
                     resources.getColor(
-                        getThemeLightColor()
+                        if (Component.darkTheme) {
+                            getDarkLightColor()
+                        } else {
+                            getThemeLightColor()
+                        }
                     ), resources.getColor(R.color.lightGray)
                 )
             )

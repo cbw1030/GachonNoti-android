@@ -3,6 +3,12 @@ package io.wiffy.gachonNoti.function
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 
+fun getDarkColor1()=R.color.myDark1
+
+fun getDarkColor2() = R.color.myDark2
+
+fun getDarkLightColor() = R.color.myDarkLight
+
 fun getThemeColor(mTheme: String?) = when (mTheme) {
     "red" -> {
         R.color.red

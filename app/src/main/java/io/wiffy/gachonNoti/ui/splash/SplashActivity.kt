@@ -20,8 +20,11 @@ class SplashActivity : SplashContract.View() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        window.statusBarColor = resources.getColor(getThemeColor())
+        window.statusBarColor = if (Component.darkTheme) {
+            resources.getColor(getDarkColor2())
+        } else {
+            resources.getColor(getThemeColor())
+        }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
 

@@ -41,5 +41,7 @@
     <color name="myTrans_def">#182f58</color>
     <color name="myTrans_red">#4f2123</color>
     <color name="myTrans_green">#214521</color>
-    <color name="myDark1">#2b2b2b</color>
+    <color name="myDark1">#1d2125</color>
+    <color name="myDark2">#24292e</color>
+    <color name="myDarkLight">#5A5A5A</color>
 </resources>
