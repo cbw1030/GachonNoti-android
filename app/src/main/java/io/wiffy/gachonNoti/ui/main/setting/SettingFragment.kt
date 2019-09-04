@@ -12,7 +12,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.NotificationManagerCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
@@ -129,11 +128,11 @@ class SettingFragment : SettingContract.View() {
             MaterialAlertDialogBuilder(context).apply {
                 setTitle("경고")
                 setMessage("어플리케이션이 재시작됩니다.")
-                setPositiveButton("네") { _, _ ->
+                setPositiveButton("ㅇㅋ") { _, _ ->
                     setSharedItem("dark", isChecked)
                     restartApp(context)
                 }
-                setNegativeButton("아니용") { _, _ ->
+                setNegativeButton("그건 좀..") { _, _ ->
                     it.isChecked = isChecked.xor(true)
                 }
             }.show()
@@ -214,12 +213,10 @@ class SettingFragment : SettingContract.View() {
             }
         }
         myView.campusSetting.setOnClickListener {
-            val item = arrayOf("글로벌", "메디컬")
-
             MaterialAlertDialogBuilder(activity).apply {
                 setTitle("캠퍼스 설정")
                 setSingleChoiceItems(
-                    item, if (Component.campus) {
+                    arrayOf("글로벌", "메디컬"), if (Component.campus) {
                         0
                     } else {
                         1
