@@ -38,7 +38,11 @@ class CreditAdapter(
 
 
     inner class CreditViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.adapter_credit_information, parent, false)
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.adapter_credit_information,
+            parent,
+            false
+        )
     ) {
         val a1: TextView = itemView.isu_
         val a2: TextView = itemView.isu2_

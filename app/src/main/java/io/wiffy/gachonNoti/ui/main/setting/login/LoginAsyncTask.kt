@@ -34,7 +34,9 @@ class LoginAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(mView.sendContext())) return ACTION_FAILURE
+        if (!isNetworkConnected(mView.sendContext())) {
+            return ACTION_FAILURE
+        }
         val number: String
         try {
             val sendObject = JSONObject().apply {
@@ -76,7 +78,9 @@ class LoginAsyncTask(
                                 )
                             )
                         )
-                    ).getElementsByTagName("rsCommonInfo").item(0) as Element).getElementsByTagName("jumin").item(0)
+                    ).getElementsByTagName("rsCommonInfo").item(0) as Element).getElementsByTagName(
+                        "jumin"
+                    ).item(0)
                         .childNodes.item(0).nodeValue.split("-")
                 setSharedItem("birthday", data[0])
                 setSharedItem("gender", data[1][0].toInt() % 2 == 1)

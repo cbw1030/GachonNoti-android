@@ -45,7 +45,9 @@ class NotificationAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(mPresenter.getContext()!!)) return ACTION_FAILURE
+        if (!isNetworkConnected(mPresenter.getContext()!!)) {
+            return ACTION_FAILURE
+        }
         return try {
             if (keyword == "" && list.isEmpty()) {
                 request(true)
@@ -56,7 +58,6 @@ class NotificationAsyncTask(
                 Component.helper = URL("http://wiffy.io/gachon/thanks.txt").readText()
             } catch (e: Exception) {
             }
-
             ACTION_SUCCESS
         } catch (e: Exception) {
             33
@@ -119,8 +120,9 @@ class NotificationAsyncTask(
             Handler(Looper.getMainLooper()).post {
                 Component.getBuilder()?.dismiss()
                 when (result) {
-                    ACTION_SUCCESS -> update(list)
-
+                    ACTION_SUCCESS -> {
+                        update(list)
+                    }
                     33 -> {
                         list.clear()
                         update(list)

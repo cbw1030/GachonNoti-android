@@ -93,8 +93,7 @@ class MyInformationFragment : MyInformationContract.View() {
 
     fun themeChanger(bool: Boolean) {
 
-        if (bool)
-            mPresenter?.themeChange()
+        if (bool) mPresenter?.themeChange()
 
         if (Component.darkTheme) {
             myView.segmented2.setTintColor(
@@ -106,7 +105,6 @@ class MyInformationFragment : MyInformationContract.View() {
             myView.loghara.setCardBackgroundColor(resources.getColor(getDarkColor1()))
             myView.text.setTextColor(resources.getColor(R.color.white))
             myView.text2.setTextColor(resources.getColor(R.color.white))
-
         } else
             myView.segmented2.setTintColor(resources.getColor(getThemeColor()))
         myView.login2.setBackgroundResource(getThemeButtonResource())

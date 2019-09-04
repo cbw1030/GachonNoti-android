@@ -68,9 +68,7 @@ class WebViewActivity : WebViewContract.View() {
         webview.loadDataWithBaseURL("", javaS, "text/html", "UTF-8", "");
         webview.settings?.javaScriptEnabled = true
     } catch (e: Exception) {
-
     }
-
 
     override fun onUserLeaveHint() {
         invisible()
@@ -148,7 +146,9 @@ class WebViewActivity : WebViewContract.View() {
             goPage()
             true
         }
-        else -> super.onOptionsItemSelected(item)
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     private fun themeChange() {

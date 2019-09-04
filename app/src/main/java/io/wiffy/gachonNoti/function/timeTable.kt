@@ -34,7 +34,6 @@ fun classToTime(time: String): LongArray {
                 end = "17:15:00"
             }
             else -> {
-
                 when (time.toInt()) {
                     in 1..8 -> {
                         start = "${(time.toInt() + 8)}:00:00"

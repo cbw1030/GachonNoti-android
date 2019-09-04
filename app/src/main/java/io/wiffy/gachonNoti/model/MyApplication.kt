@@ -7,7 +7,6 @@ import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
 import java.util.*
 
-
 class MyApplication : Application(), SuperContract.WiffyObject {
 
     override fun onCreate() {
@@ -41,7 +40,6 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.adminMode = getSharedItem("ADMIN", false)
         Component.YEAR = if (getSharedItem("yearAuto", true)) {
             Calendar.getInstance().get(Calendar.YEAR).toString()
-
         } else {
             getSharedItem<Int>("year").toString()
         }

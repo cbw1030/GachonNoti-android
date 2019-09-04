@@ -82,7 +82,9 @@ class IDCardFragment : IDCardContract.View() {
 
     @SuppressLint("SimpleDateFormat")
     fun setTimerAndQRCode(number: String) {
-        if (handlerTask != null) handler.removeCallbacks(handlerTask)
+        if (handlerTask != null) {
+            handler.removeCallbacks(handlerTask)
+        }
         myView?.timer?.text = initiationText
         count = initiation
         handlerTask = object : Runnable {
@@ -97,9 +99,11 @@ class IDCardFragment : IDCardContract.View() {
                     else -> "$s"
                 }
                 } 초"
-                if (count > 0) handler.postDelayed(this, 1000)
-                else handler.removeCallbacks(this)
-
+                if (count > 0) {
+                    handler.postDelayed(this, 1000)
+                } else {
+                    handler.removeCallbacks(this)
+                }
             }
         }
 

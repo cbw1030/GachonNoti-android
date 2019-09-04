@@ -25,7 +25,11 @@ import java.text.SimpleDateFormat
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class IDCardWidget : AppWidgetProvider() {
 
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray
+    ) {
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -87,7 +91,11 @@ class IDCardWidget : AppWidgetProvider() {
                 "setBackgroundColor",
                 context?.resources?.getColor(getThemeColor(theme)) ?: 0
             )
-            views.setInt(R.id.rebalgup_widget, "setBackgroundResource", getThemeButtonResource(theme))
+            views.setInt(
+                R.id.rebalgup_widget,
+                "setBackgroundResource",
+                getThemeButtonResource(theme)
+            )
 
             name.ifNotNullOrElse({
                 views.setTextViewText(R.id.yourname_widget, info.name)
@@ -134,8 +142,7 @@ class IDCardWidget : AppWidgetProvider() {
                                 setPixel(x, y, Color.WHITE)
                     }
                 }
-            )
-                .into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
+            ).into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
     }
 }
 

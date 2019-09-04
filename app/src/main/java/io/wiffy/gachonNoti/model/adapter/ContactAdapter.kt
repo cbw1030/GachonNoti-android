@@ -24,22 +24,28 @@ class ContactAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) = items[position].let { item ->
-        with(holder) {
-            t1.text = item.dept
-            t2.text = item.name
-            t3.text = Html.fromHtml(
-                "<u>${item.tel}</u>"
-            )
-            t3.setTextColor(
-                context.resources.getColorStateList(getThemeColor())
-            )
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) =
+        items[position].let { item ->
+            with(holder) {
+                t1.text = item.dept
+                t2.text = item.name
+                t3.text = Html.fromHtml(
+                    "<u>${item.tel}</u>"
+                )
+                t3.setTextColor(
+                    context.resources.getColorStateList(getThemeColor())
+                )
 
-            t3.setOnClickListener {
-                context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:${item.tel.replace("-", "")}")))
+                t3.setOnClickListener {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_DIAL,
+                            Uri.parse("tel:${item.tel.replace("-", "")}")
+                        )
+                    )
+                }
             }
         }
-    }
 
 
     inner class ContactViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(

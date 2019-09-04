@@ -45,12 +45,16 @@ class TimeTablePresenter(val mView: TimeTableContract.View) : TimeTableContract.
             }
         }
 
-        for (v in 0..4) Collections.sort(superList[v], TimeCompare)
+        for (v in 0..4) {
+            Collections.sort(superList[v], TimeCompare)
+        }
 
         val list = ArrayList<TimeTableData>().apply {
             for (n in 0 until 5) {
                 for (x in 0 until superList[n].size) {
-                    if (superList[n][x] == null) continue
+                    if (superList[n][x] == null) {
+                        continue
+                    }
                     if (x == superList[n].size - 1) {
                         realList[n].add(
                             TimeData(
@@ -128,7 +132,9 @@ class TimeTablePresenter(val mView: TimeTableContract.View) : TimeTableContract.
 
     override fun resetTable() {
         val info = getSharedItem<String>("number")
-        if (info.length > 6) TimeTableAsyncTask(mView, info).execute()
+        if (info.length > 6) {
+            TimeTableAsyncTask(mView, info).execute()
+        }
     }
 
     override fun setLogin(info: String) {

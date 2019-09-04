@@ -87,5 +87,4 @@ class GradeFragment : GradeContract.View() {
         }
     }
 
-
 }

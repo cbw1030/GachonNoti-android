@@ -11,7 +11,7 @@ object Component {
     lateinit var sharedPreferences: SharedPreferences
 
     var error = true
-    
+
     var darkTheme = false
 
     var isBirthday = false

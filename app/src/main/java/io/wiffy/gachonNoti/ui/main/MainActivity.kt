@@ -95,7 +95,9 @@ class MainActivity : MainContract.View() {
             mPresenter.deleteRoomData()
             true
         }
-        else -> super.onOptionsItemSelected(item)
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     override fun builderUp() = Handler(Looper.getMainLooper()).post {
@@ -118,8 +120,11 @@ class MainActivity : MainContract.View() {
     override fun initView(mList: ArrayList<Fragment?>) {
         notificationCheck()
         themeChange()
-        if (Component.darkTheme) logoChange(R.drawable.default_dark)
-        else logoChange(R.drawable.defaults)
+        if (Component.darkTheme) {
+            logoChange(R.drawable.default_dark)
+        } else {
+            logoChange(R.drawable.defaults)
+        }
 
         adapter = PagerAdapter(supportFragmentManager, mList)
         navigation.addTab(navigation.newTab().setIcon(R.drawable.tab1_home))
@@ -217,8 +222,9 @@ class MainActivity : MainContract.View() {
     override fun allThemeChange() = mPresenter.changeThemes()
 
     override fun themeChange() {
-        if (Component.darkTheme) darkTheme()
-        else {
+        if (Component.darkTheme) {
+            darkTheme()
+        } else {
             window.statusBarColor = resources.getColor(getThemeColor())
             navigation.setBackgroundColor(resources.getColor(getThemeColor()))
             supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(getThemeColor())))

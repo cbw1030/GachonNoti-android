@@ -69,7 +69,9 @@ class SettingFragment : SettingContract.View() {
             add(myView.defaultColor)
             add(myView.redColor)
             add(myView.greenColor)
+
             if (!Component.darkTheme) this[index].borderWidth = myBorder
+
             for (x in 0 until size) {
                 this[x].setOnClickListener {
                     if (!Component.darkTheme) {
@@ -101,9 +103,11 @@ class SettingFragment : SettingContract.View() {
             if (!isNetworkConnected(context!!)) {
                 myView.notiSwitch.isChecked = isChecked.xor(true)
                 toast("인터넷 연결 오류")
-            } else
+            } else {
                 when (isChecked) {
-                    false -> mPresenter.setOff()
+                    false -> {
+                        mPresenter.setOff()
+                    }
                     true -> {
                         if (NotificationManagerCompat.from(activity?.applicationContext!!)
                                 .areNotificationsEnabled()
@@ -130,13 +134,14 @@ class SettingFragment : SettingContract.View() {
                         }
                     }
                 }
+            }
         }
         myView.darkMode.setOnTouchListener { _, _ ->
             flag = true
             false
         }
         myView.darkMode.setOnCheckedChangeListener { it, isChecked ->
-            if (flag)
+            if (flag) {
                 MaterialAlertDialogBuilder(context).apply {
                     setTitle("경고")
                     setMessage("어플리케이션이 재시작됩니다.")
@@ -150,6 +155,7 @@ class SettingFragment : SettingContract.View() {
                         it.isChecked = isChecked.xor(true)
                     }
                 }.show()
+            }
         }
         myView.patternsetting.setOnClickListener {
             MainActivity.mView.changePattern()
@@ -302,6 +308,8 @@ class SettingFragment : SettingContract.View() {
         ContactAsyncTask(this, query, query2, query3).execute()
     }
 
+
+    // hard coding
     private fun darkTheme() {
         myView.setting_background.setBackgroundColor(resources.getColor(R.color.myDarkDeep))
         myView.setting_card.setCardBackgroundColor(resources.getColor(getDarkColor1()))
@@ -337,6 +345,7 @@ class SettingFragment : SettingContract.View() {
 
     fun themeChanger() {
         if (Component.darkTheme) darkTheme()
+
         arrayOf(
             intArrayOf(
                 android.R.attr.state_checked
@@ -437,7 +446,7 @@ class SettingFragment : SettingContract.View() {
                         message(text = "Input Secret Code")
                         input(hint = "Code") { _, text ->
                             when (text.toString().trim()) {
-                                "훔쳐보지마세요" -> {
+                                "감사합니다" -> {
                                     AdministratorDialog(context).show()
                                 }
                                 else -> {

@@ -50,7 +50,6 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
                     mView.executeTask(
                         when (spinnerSelected) {
                             1 -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=dept&searchword=$text"
-
                             else -> "http://m.gachon.ac.kr/number/index.jsp?search=1&searchopt=name&searchword=$text"
                         },
                         (("박상현".contains(text) || text.contains("박상현")) && spinnerSelected == 0) || isWiffy,

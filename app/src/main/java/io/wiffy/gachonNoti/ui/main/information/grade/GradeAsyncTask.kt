@@ -41,7 +41,9 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(mView.sendContext()!!)) return ACTION_FAILURE
+        if (!isNetworkConnected(mView.sendContext()!!)) {
+            return ACTION_FAILURE
+        }
         return try {
             JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
                 entity = StringEntity(getJson("AVG_SQL").toString())
@@ -80,6 +82,8 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
         Component.getBuilder()?.dismiss()
         if (result == ACTION_SUCCESS) {
             mView.setView(creditAverage, creditList)
-        } else mView.toast("인터넷 연결을 확인해주세요.")
+        } else {
+            mView.toast("인터넷 연결을 확인해주세요.")
+        }
     }
 }

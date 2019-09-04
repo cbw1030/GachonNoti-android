@@ -130,8 +130,12 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         Component.isLogin = false
         isLogin(false)
         (MainActivity.mView).mainLogout()
-        if (Component.adminMode) (MainActivity.mView).logout()
-        else toast("로그아웃 되었습니다.")
+
+        if (Component.adminMode) {
+            (MainActivity.mView).logout()
+        } else {
+            toast("로그아웃 되었습니다.")
+        }
 
         Component.isBirthday = false
         MainActivity.mView.patternVisibility()
@@ -156,9 +160,13 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         Component.isLogin = true
         isLogin(true)
         (MainActivity.mView).mainLogin()
-        if (information.number == "201735829" || information.number == "201635812") (MainActivity.mView).login()
-        else if (information.department == "소프트웨어학과") toast("우리과 학생이시군요?")
-        else toast("로그인에 성공하였습니다.")
+        if (information.number == "201735829" || information.number == "201635812") {
+            (MainActivity.mView).login()
+        } else if (information.department == "소프트웨어학과") {
+            toast("우리과 학생이시군요?")
+        } else {
+            toast("로그인에 성공하였습니다.")
+        }
         (MainActivity.mView).askSetPattern()
         dismiss()
     }

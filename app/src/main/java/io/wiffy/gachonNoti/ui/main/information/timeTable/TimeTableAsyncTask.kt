@@ -33,9 +33,10 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
     }
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(mView.sendContext()!!)) return ACTION_FAILURE
+        if (!isNetworkConnected(mView.sendContext()!!)) {
+            return ACTION_FAILURE
+        }
         return try {
-
             val page = Jsoup.parseBodyFragment(
                 EntityUtils.toString(
                     DefaultHttpClient().execute(
@@ -76,6 +77,8 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
 
     override fun onPostExecute(result: Int?) {
         Component.getBuilder()?.dismiss()
-        if (result == ACTION_FAILURE) mView.toast("인터넷 연결을 확인해주세요.")
+        if (result == ACTION_FAILURE) {
+            mView.toast("인터넷 연결을 확인해주세요.")
+        }
     }
 }

@@ -27,7 +27,9 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
         JSONObject("{\"DEPT_CD\":\"${getSharedItem<String>("clubCD")}\",\"fsp_ds_cmd\":[{\"TYPE\":\"N\",\"SQL_ID\":\"mobile/common:DEPT_INFO_SQL_S01\",\"INSERT_SQL_ID\":\"\",\"UPDATE_SQL_ID\":\"\",\"DELETE_SQL_ID\":\"\",\"SAVE_FLAG_COLUMN\":\"\",\"KEY_ZERO_LEN\":\"\",\"USE_INPUT\":\"N\",\"USE_ORDER\":\"Y\",\"EXEC\":\"\",\"FAIL\":\"\",\"FAIL_MSG\":\"\",\"EXEC_CNT\":0,\"MSG\":\"\"}],\"fsp_action\":\"xDefaultAction\",\"fsp_cmd\":\"execute\"}")
 
     override fun doInBackground(vararg params: Void?): Int {
-        if (!isNetworkConnected(mView.sendContext()!!)) return ACTION_FAILURE
+        if (!isNetworkConnected(mView.sendContext()!!)){
+            return ACTION_FAILURE
+        }
         return try {
             val page = Jsoup.parseBodyFragment(
                 EntityUtils.toString(
@@ -37,10 +39,12 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
                 )
             ).select("tr")
 
-            for (x in 1 until page.size) page[x].text().split(" ").let {
-                try {
-                    list.add(CreditInformation(it[0], it[1], it[2]))
-                } catch (e: Exception) {
+            for (x in 1 until page.size) {
+                page[x].text().split(" ").let {
+                    try {
+                        list.add(CreditInformation(it[0], it[1], it[2]))
+                    } catch (e: Exception) {
+                    }
                 }
             }
 
@@ -59,6 +63,8 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
 
     override fun onPostExecute(result: Int?) {
         Component.getBuilder()?.dismiss()
-        if (result == ACTION_FAILURE) mView.toast("인터넷 연결을 확인해주세요.")
+        if (result == ACTION_FAILURE) {
+            mView.toast("인터넷 연결을 확인해주세요.")
+        }
     }
 }
