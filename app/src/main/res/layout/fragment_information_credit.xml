@@ -50,7 +50,6 @@
                         android:textAlignment="center"
                         android:text="이수구분"
                         android:gravity="center"
-                        android:id="@+id/isu"
                         android:layout_weight="6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"/>
@@ -61,7 +60,6 @@
                         android:gravity="center"
                         android:text="이수기준"
                         android:layout_weight="2"
-                        android:id="@+id/isu2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"/>
                 <TextView
@@ -71,7 +69,6 @@
                         android:gravity="center"
                         android:text="취득학점"
                         android:layout_weight="2"
-                        android:id="@+id/creditGrade"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"/>
             </LinearLayout>

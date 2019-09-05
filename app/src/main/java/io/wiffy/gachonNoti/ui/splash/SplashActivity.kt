@@ -81,6 +81,6 @@ class SplashActivity : SplashContract.View() {
         bububu.setBackgroundColor(resources.getColor(R.color.myDark1))
         bababa.setBackgroundColor(resources.getColor(R.color.myDark1))
         setTextColor(R.color.white)
-        setImageView(R.mipmap.defaults_dark_round)
+        setImageView(R.drawable.defaults_round_new)
     }
 }

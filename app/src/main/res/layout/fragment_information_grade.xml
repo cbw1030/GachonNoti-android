@@ -42,7 +42,6 @@
                             android:textAlignment="center"
                             android:text="년도\n(학기)"
                             android:gravity="center"
-                            android:id="@+id/creditYear"
                             android:layout_weight="2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
@@ -53,7 +52,6 @@
                             android:gravity="center"
                             android:text="교과목명"
                             android:layout_weight="5"
-                            android:id="@+id/creditName"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"/>
                     <TextView
@@ -63,7 +61,6 @@
                             android:gravity="center"
                             android:text="학년"
                             android:layout_weight="1"
-                            android:id="@+id/creditGrade"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"/>
                     <TextView
@@ -73,7 +70,6 @@
                             android:gravity="center"
                             android:text="학점"
                             android:layout_weight="1"
-                            android:id="@+id/creditCredit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"/>
                     <TextView
@@ -83,7 +79,6 @@
                             android:gravity="center"
                             android:text="성적"
                             android:layout_weight="1"
-                            android:id="@+id/creditMark"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"/>
                 </LinearLayout>

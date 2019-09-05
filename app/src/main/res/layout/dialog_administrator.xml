@@ -12,7 +12,6 @@
             android:orientation="vertical">
 
         <TableLayout
-                android:id="@+id/tabless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -156,7 +155,6 @@
                             android:textColor="@color/black" />
 
                     <RadioGroup
-                            android:id="@+id/option_gender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"

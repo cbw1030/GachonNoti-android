@@ -144,7 +144,7 @@ class SettingFragment : SettingContract.View() {
             if (flag) {
                 MaterialAlertDialogBuilder(context).apply {
                     setTitle("경고")
-                    setMessage("어플리케이션이 재시작됩니다.")
+                    setMessage("앱이 재시작됩니다.")
                     setCancelable(false)
                     setPositiveButton("예") { _, _ ->
                         setSharedItem("dark", isChecked)

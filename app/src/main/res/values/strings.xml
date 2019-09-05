@@ -1,8 +1,6 @@
 <resources>
     <string name="channel" translatable="false">NOTIFICATIONCHANNEL</string>
     <string name="app_name">가천 알림이</string>
-    <string name="Notification">공지 사항</string>
-    <string name="Setting">설정</string>
     <string name="NotificationFunction">알림 설정</string>
     <string name="func">기능</string>
     <string name="money">후원</string>
@@ -13,7 +11,6 @@
     <string name="maker">만든이</string>
     <string name="source">오픈소스 정보</string>
     <string name="calling">교내 연락처</string>
-    <string name="searcher">강의실</string>
     <string name="load">오른쪽 하단 검색으로\n강의실 시간표를 불러오세요.</string>
     <string name="helper">도움을 주신 분들</string>
     <string name="version">버전</string>

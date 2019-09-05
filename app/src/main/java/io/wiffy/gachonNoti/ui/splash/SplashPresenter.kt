@@ -82,14 +82,14 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                 if (Component.darkTheme) {
                     mView.darkTheme()
                 } else {
-                    mView.setImageView(R.mipmap.defaults_dark_round)
+                    mView.setImageView(R.drawable.defaults_round_new)
                 }
             }
         } catch (e: Exception) {
             if (Component.darkTheme) {
                 mView.darkTheme()
             } else {
-                mView.setImageView(R.mipmap.defaults_dark_round)
+                mView.setImageView(R.drawable.defaults_round_new)
             }
         }
     }
