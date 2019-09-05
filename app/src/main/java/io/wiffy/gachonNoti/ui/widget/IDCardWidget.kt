@@ -137,9 +137,11 @@ class IDCardWidget : AppWidgetProvider() {
                     )
                 } else {
                     Bitmap.createBitmap(100, 100, Bitmap.Config.RGB_565).apply {
-                        for (x in 0 until 100)
-                            for (y in 0 until 100)
+                        for (x in 0 until 100) {
+                            for (y in 0 until 100) {
                                 setPixel(x, y, Color.WHITE)
+                            }
+                        }
                     }
                 }
             ).into(AppWidgetTarget(context, R.id.qrcode_widget, views, widgetId))
