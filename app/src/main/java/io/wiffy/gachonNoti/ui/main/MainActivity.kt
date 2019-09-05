@@ -121,9 +121,9 @@ class MainActivity : MainContract.View() {
         notificationCheck()
         themeChange()
         if (Component.darkTheme) {
-            logoChange(R.drawable.default_dark)
+            logoChange(R.mipmap.defaults_dark_round)
         } else {
-            logoChange(R.drawable.defaults)
+            logoChange(R.mipmap.defaults_dark_round)
         }
 
         adapter = PagerAdapter(supportFragmentManager, mList)

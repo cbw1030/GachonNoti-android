@@ -21,7 +21,7 @@
         <TextView
                 android:id="@+id/gachonAlimi"
                 android:layout_below="@id/logo_splash"
-                android:layout_marginTop="-5dp"
+                android:layout_marginTop="10dp"
                 android:textSize="17sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
