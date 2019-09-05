@@ -146,11 +146,11 @@ class SettingFragment : SettingContract.View() {
                     setTitle("경고")
                     setMessage("어플리케이션이 재시작됩니다.")
                     setCancelable(false)
-                    setPositiveButton("ㅇㅋ") { _, _ ->
+                    setPositiveButton("예") { _, _ ->
                         setSharedItem("dark", isChecked)
                         restartApp(context)
                     }
-                    setNegativeButton("그건 좀..") { _, _ ->
+                    setNegativeButton("아니요") { _, _ ->
                         flag = false
                         it.isChecked = isChecked.xor(true)
                     }
