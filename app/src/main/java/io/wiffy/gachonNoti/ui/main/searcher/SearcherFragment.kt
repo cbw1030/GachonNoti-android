@@ -65,7 +65,7 @@ class SearcherFragment : SearchContract.View() {
             Component.titles[STATE_SEARCHER] = Pair("강의실", true)
             MainActivity.mView.title = Component.titles[STATE_SEARCHER].first
 
-            builder = SearchDialog(context!!, mPresenter)
+            builder = SearchDialog(context, mPresenter)
             builder?.show()
         }
     }.show()!!

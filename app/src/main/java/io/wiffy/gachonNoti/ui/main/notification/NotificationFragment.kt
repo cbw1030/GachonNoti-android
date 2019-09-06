@@ -18,7 +18,6 @@ import com.afollestad.materialdialogs.input.input
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.getDarkColor1
-import io.wiffy.gachonNoti.function.getDarkColor2
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
 @Suppress("DEPRECATION")
