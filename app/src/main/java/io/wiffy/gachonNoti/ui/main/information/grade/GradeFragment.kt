@@ -19,6 +19,7 @@ import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.PatternLockDialog
 import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 
+@Suppress("DEPRECATION")
 class GradeFragment : GradeContract.View() {
     var myView: View? = null
     lateinit var mPresenter: GradePresenter

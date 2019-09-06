@@ -21,6 +21,7 @@ import io.wiffy.gachonNoti.function.getDarkColor2
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 
+@Suppress("DEPRECATION")
 class WebViewActivity : WebViewContract.View() {
 
     lateinit var mPresenter: WebViewPresenter

@@ -15,7 +15,7 @@ import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlin.system.exitProcess
 
-
+@Suppress("DEPRECATION")
 class MyInformationFragment : MyInformationContract.View() {
     lateinit var myView: View
     var mPresenter: MyInformationPresenter? = null

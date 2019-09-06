@@ -13,6 +13,7 @@ import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
+@Suppress("DEPRECATION")
 class SplashActivity : SplashContract.View() {
 
     lateinit var mPresenter: SplashPresenter

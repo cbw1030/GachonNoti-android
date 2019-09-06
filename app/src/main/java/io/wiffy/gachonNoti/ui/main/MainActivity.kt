@@ -25,6 +25,7 @@ import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.PatternLockDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
+@Suppress("DEPRECATION")
 class MainActivity : MainContract.View() {
 
     var menuItem1: MenuItem? = null

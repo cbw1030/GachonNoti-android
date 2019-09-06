@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.view.get
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -28,13 +27,12 @@ import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
-import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
 import kotlinx.android.synthetic.main.fragment_setting.view.greenColor
 import kotlinx.android.synthetic.main.fragment_setting.view.redColor
 
-
+@Suppress("DEPRECATION")
 class SettingFragment : SettingContract.View() {
     private val myBorder = 5
     lateinit var myView: View

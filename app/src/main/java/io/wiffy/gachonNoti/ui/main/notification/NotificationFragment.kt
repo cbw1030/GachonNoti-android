@@ -21,6 +21,7 @@ import io.wiffy.gachonNoti.function.getDarkColor1
 import io.wiffy.gachonNoti.function.getDarkColor2
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
+@Suppress("DEPRECATION")
 class NotificationFragment : NotificationContract.View() {
 
     private lateinit var myView: View

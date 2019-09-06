@@ -22,7 +22,7 @@ import io.wiffy.gachonNoti.function.matrixToBitmap
 import io.wiffy.gachonNoti.model.StudentInformation
 import java.text.SimpleDateFormat
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "DEPRECATION")
 class IDCardWidget : AppWidgetProvider() {
 
     override fun onUpdate(

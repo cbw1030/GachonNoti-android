@@ -15,6 +15,7 @@ import io.wiffy.gachonNoti.function.getThemeColor
 import kotlinx.android.synthetic.main.fragment_information_timetable.view.*
 import kotlin.collections.HashSet
 
+@Suppress("DEPRECATION")
 class TimeTableFragment : TimeTableContract.View() {
     var myView: View? = null
     lateinit var mPresenter: TimeTablePresenter

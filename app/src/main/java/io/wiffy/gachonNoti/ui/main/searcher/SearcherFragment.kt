@@ -17,6 +17,7 @@ import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.`object`.Component
 import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class SearcherFragment : SearchContract.View() {
     lateinit var myView: View
     lateinit var mPresenter: SearcherPresenter
