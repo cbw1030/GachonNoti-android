@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_searcher.view.*
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.`object`.Component
 import kotlin.collections.ArrayList
@@ -88,28 +89,28 @@ class SearcherFragment : SearchContract.View() {
         myView.timetable.setStartHour(9)
         myView.timetable.setShowHeader(true)
         myView.timetable.setTableMode(TimeTableView.TableMode.SHORT)
-        arr.ifNotNullOrElse({
-            myView.timetable.setOnTimeItemClickListener { _, _, data ->
-                toast(data.time.title)
-            }
-            myView.timetable.setTimeTable(0, arr)
 
-            Component.titles[STATE_SEARCHER] = Pair(
-                "(${when (Component.SEMESTER) {
-                    1 -> "1"
-                    2 -> "2"
-                    3 -> "여름"
-                    else -> "겨울"
-                }}학기) $name ", true
-            )
-            MainActivity.mView.title = Component.titles[STATE_SEARCHER].first
-            themeChanger()
-            this@SearcherFragment.searcherVisible(false)
+        arr.whatIfNotNull(
+            whatIf = {
+                myView.timetable.setOnTimeItemClickListener { _, _, data ->
+                    toast(data.time.title)
+                }
+                myView.timetable.setTimeTable(0, arr)
 
-        },
-            { this@SearcherFragment.searcherVisible(true) })
+                Component.titles[STATE_SEARCHER] = Pair(
+                    "(${when (Component.SEMESTER) {
+                        1 -> "1"
+                        2 -> "2"
+                        3 -> "여름"
+                        else -> "겨울"
+                    }}학기) $name ", true
+                )
+                MainActivity.mView.title = Component.titles[STATE_SEARCHER].first
+                themeChanger()
+                this@SearcherFragment.searcherVisible(false)
 
-
+            },
+            whatIfNot = { this@SearcherFragment.searcherVisible(true) })
     }
 
     override fun searcherVisible(bool: Boolean) = if (bool) {

@@ -21,7 +21,7 @@ import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 
 @Suppress("DEPRECATION")
 class GradeFragment : GradeContract.View() {
-    var myView: View? = null
+    private var myView: View? = null
     lateinit var mPresenter: GradePresenter
     lateinit var adapter: GradeAdapter
     private var mInfo: String? = null

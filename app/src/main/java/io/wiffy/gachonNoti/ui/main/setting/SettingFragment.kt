@@ -207,7 +207,9 @@ class SettingFragment : SettingContract.View() {
                             "com.andrognito.patternlockview:patternlockview:1.0.0\n\n" +
                             "material-dialogs\n" +
                             "com.afollestad.material-dialogs:core:3.1.0\n" +
-                            "com.afollestad.material-dialogs:input:3.1.0"
+                            "com.afollestad.material-dialogs:input:3.1.0\n\n" +
+                            "WhatIf\n" +
+                            "com.github.skydoves:whatif:1.0.0"
                 )
                 setPositiveButton(
                     "OK"

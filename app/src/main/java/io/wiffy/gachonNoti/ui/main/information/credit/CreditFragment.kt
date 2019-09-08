@@ -17,10 +17,10 @@ import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.adapter.CreditAdapter
 
 class CreditFragment : CreditContract.View() {
-    var myView: View? = null
-    lateinit var mPresenter: CreditPresenter
+    private var myView: View? = null
+    private lateinit var mPresenter: CreditPresenter
     private var mInfo: String? = null
-    lateinit var adapter: CreditAdapter
+    private lateinit var adapter: CreditAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_information_credit, container, false)

@@ -14,10 +14,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.AppWidgetTarget
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
+import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.function.getThemeButtonResource
 import io.wiffy.gachonNoti.function.getThemeColor
-import io.wiffy.gachonNoti.function.ifNotNullOrElse
 import io.wiffy.gachonNoti.function.matrixToBitmap
 import io.wiffy.gachonNoti.model.StudentInformation
 import java.text.SimpleDateFormat
@@ -97,21 +97,24 @@ class IDCardWidget : AppWidgetProvider() {
                 getThemeButtonResource(theme)
             )
 
-            name.ifNotNullOrElse({
-                views.setTextViewText(R.id.yourname_widget, info.name)
-                views.setTextViewText(R.id.number_widget, info.number)
-                views.setTextViewText(R.id.depart_widget, info.department)
-                Glide.with(context!!).asBitmap().load(info.imageURL)
-                    .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
-                qrCode(views, info.number!!, context, widgetId)
-            }, {
-                views.setTextViewText(R.id.yourname_widget, "박가천")
-                views.setTextViewText(R.id.number_widget, "201735829")
-                views.setTextViewText(R.id.depart_widget, "어쩌구학과")
-                Glide.with(context!!).asBitmap().load(R.drawable.defaultimage)
-                    .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
-                qrCode(views, "hello", context, widgetId)
-            })
+            name.whatIfNotNull(
+                whatIf = {
+                    views.setTextViewText(R.id.yourname_widget, info.name)
+                    views.setTextViewText(R.id.number_widget, info.number)
+                    views.setTextViewText(R.id.depart_widget, info.department)
+                    Glide.with(context!!).asBitmap().load(info.imageURL)
+                        .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
+                    qrCode(views, info.number!!, context, widgetId)
+                },
+                whatIfNot = {
+                    views.setTextViewText(R.id.yourname_widget, "박가천")
+                    views.setTextViewText(R.id.number_widget, "201735829")
+                    views.setTextViewText(R.id.depart_widget, "어쩌구학과")
+                    Glide.with(context!!).asBitmap().load(R.drawable.defaultimage)
+                        .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
+                    qrCode(views, "hello", context, widgetId)
+                }
+            )
 
             views.setOnClickPendingIntent(
                 R.id.rebalgup_widget, PendingIntent.getBroadcast(
