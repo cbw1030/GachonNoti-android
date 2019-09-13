@@ -13,7 +13,11 @@ import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
 import org.json.JSONObject
 
-class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
+class GradeAsyncTask(
+    private val mView: GradeContract.View, private val number: String,
+    private val mYear: String = "", private val mSemester: String = "",
+    private val mGrade: String = ""
+) :
     SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     var creditAverage: CreditAverage? = null
@@ -25,15 +29,15 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
     private fun getJson(str: String) = JSONObject().apply {
         put("fsp_cmd", "executeAjaxMap")
         put("fsp_action", "AffairsAction")
-        put("GRADE", "")
+        put("GRADE", mGrade)
         put(
             "jsonParams",
-            "{\"STUDENT_NO\":\"$number\",\"YEAR\":\"\",\"TERM_CD\":\"\",\"GRADE\":\"\",\"SQL_ID\":\"mobile/affairs:EXAM_GRADE_STUDENT_${str}_S01\",\"fsp_action\":\"AffairsAction\",\"fsp_cmd\":\"executeAjaxMap\"}"
+            "{\"STUDENT_NO\":\"$number\",\"YEAR\":\"${mYear}\",\"TERM_CD\":\"${mSemester}\",\"GRADE\":\"${mGrade}\",\"SQL_ID\":\"mobile/affairs:EXAM_GRADE_STUDENT_${str}_S01\",\"fsp_action\":\"AffairsAction\",\"fsp_cmd\":\"executeAjaxMap\"}"
         )
         put("SQL_ID", "mobile/affairs:EXAM_GRADE_STUDENT_${str}_S01")
         put("STUDENT_NO", number)
-        put("TERM_CD", "")
-        put("YEAR", "")
+        put("TERM_CD", mSemester)
+        put("YEAR", mYear)
     }
 
     override fun onPreExecute() {
@@ -74,16 +78,16 @@ class GradeAsyncTask(val mView: GradeContract.View, val number: String) :
             }
             ACTION_SUCCESS
         } catch (e: Exception) {
-            ACTION_FAILURE
+            333
         }
     }
 
     override fun onPostExecute(result: Int?) {
         Component.getBuilder()?.dismiss()
-        if (result == ACTION_SUCCESS) {
-            mView.setView(creditAverage, creditList)
-        } else {
-            mView.toast("인터넷 연결을 확인해주세요.")
+        when (result) {
+            ACTION_SUCCESS -> mView.setView(creditAverage, creditList)
+            ACTION_FAILURE -> mView.toast("인터넷 연결을 확인해주세요.")
+            else -> mView.setView(CreditAverage(0.0, 0.0, 0.0), ArrayList())
         }
     }
 }

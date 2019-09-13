@@ -20,7 +20,8 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
-        약간의 디자인 수정
+        약간의 디자인 수정\n
+        분기별 성적 업데이트
     </string>
 <string name="jcjc">전체</string>
 </resources>

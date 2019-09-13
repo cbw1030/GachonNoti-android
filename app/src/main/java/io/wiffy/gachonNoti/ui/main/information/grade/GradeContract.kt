@@ -10,11 +10,8 @@ interface GradeContract {
         abstract fun initView()
         abstract fun sendContext(): Context?
         abstract fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>)
-        abstract fun setSpinner(
-            list1: ArrayList<String>,
-            list2: ArrayList<String>,
-            list3: ArrayList<String>
-        )
+        abstract fun setSpinner(list: ArrayList<String>)
+
     }
 
     interface Presenter : SuperContract.SuperPresenter {
