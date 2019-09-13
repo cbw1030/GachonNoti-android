@@ -63,6 +63,8 @@ class GradeFragment : GradeContract.View() {
     fun changeTheme() {
         myView?.findViewById<Button>(R.id.gradeButton)
             ?.setBackgroundResource(getThemeButtonResource())
+        myView?.findViewById<Button>(R.id.johaebutton)
+            ?.setBackgroundResource(getThemeButtonResource())
     }
 
     override fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>) {
