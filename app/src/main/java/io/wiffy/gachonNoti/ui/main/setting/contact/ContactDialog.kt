@@ -25,7 +25,7 @@ class ContactDialog(context: Context, private val mView: SettingContract.View) :
         myList = arrayListOf("이름", "소속")
 
         cate2.setPadding(0, 0, 5, 0)
-        cate2.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, myList)
+        cate2.adapter = ArrayAdapter(context, R.layout.my_spinner, myList)
         cate2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }

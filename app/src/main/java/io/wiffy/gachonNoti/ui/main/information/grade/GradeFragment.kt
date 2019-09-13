@@ -5,9 +5,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
@@ -19,7 +17,7 @@ import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.PatternLockDialog
 import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class GradeFragment : GradeContract.View() {
     private var myView: View? = null
     lateinit var mPresenter: GradePresenter
@@ -47,6 +45,21 @@ class GradeFragment : GradeContract.View() {
         myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
             PatternLockDialog(context!!, CHECK_PATTERN) { patternCheck() }.show()
         }
+        setSpinner(arrayListOf("전체"), arrayListOf("전체"), arrayListOf("전체"))
+
+    }
+
+    override fun setSpinner(
+        list1: ArrayList<String>,
+        list2: ArrayList<String>,
+        list3: ArrayList<String>
+    ) {
+        myView?.findViewById<Spinner>(R.id.spinner_year)?.adapter =
+            ArrayAdapter(context, R.layout.my_spinner, list1)
+        myView?.findViewById<Spinner>(R.id.spinner_semester)?.adapter =
+            ArrayAdapter(context, R.layout.my_spinner, list2)
+        myView?.findViewById<Spinner>(R.id.spinner_grade)?.adapter =
+            ArrayAdapter(context, R.layout.my_spinner, list3)
     }
 
     fun loginInformationSetting(info: String) {
