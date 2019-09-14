@@ -3,6 +3,8 @@ package io.wiffy.gachonNoti.ui.main.searcher
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +42,8 @@ class SearcherFragment : SearchContract.View() {
         Glide.with(this).load(R.drawable.search).into(myView.fab)
 
         myView.fab.setOnClickListener {
+            Component.getBuilder()?.show()
+
             builder = SearchDialog(context!!, mPresenter)
             builder?.show()
         }

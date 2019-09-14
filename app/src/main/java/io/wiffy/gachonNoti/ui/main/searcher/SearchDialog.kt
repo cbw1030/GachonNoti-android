@@ -121,6 +121,7 @@ class SearchDialog(
             cate.visibility = View.VISIBLE
             search.visibility = View.VISIBLE
         }
+        Component.getBuilder()?.dismiss()
     }
 
     override fun requestLoad() =
@@ -130,6 +131,8 @@ class SearchDialog(
         cate.visibility = View.VISIBLE
         cate.adapter =
             ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, arrayList)
+
+        Component.getBuilder()?.dismiss()
     }
 
     override fun setListDialog(arrayList: ArrayList<String>) {
