@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
