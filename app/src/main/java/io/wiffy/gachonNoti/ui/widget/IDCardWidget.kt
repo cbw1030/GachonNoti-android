@@ -16,6 +16,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
+import io.wiffy.gachonNoti.function.getDarkColor1
 import io.wiffy.gachonNoti.function.getThemeButtonResource
 import io.wiffy.gachonNoti.function.getThemeColor
 import io.wiffy.gachonNoti.function.matrixToBitmap
@@ -71,8 +72,10 @@ class IDCardWidget : AppWidgetProvider() {
                         getString("department", null),
                         getString("image", null),
                         getString("clubCD", null)
-                    ), context, appWidgetId, getString("theme", null),
-                    getString("name", null)
+                    ), context, appWidgetId,
+                    getString("name", null),
+                    getBoolean("dark", false)
+
                 )
             }
             appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -83,18 +86,24 @@ class IDCardWidget : AppWidgetProvider() {
             info: StudentInformation,
             context: Context?,
             widgetId: Int,
-            theme: String?,
-            name: String?
+            name: String?,
+            mode: Boolean
         ) {
             views.setInt(
                 R.id.gachonback_widget,
                 "setBackgroundColor",
-                context?.resources?.getColor(getThemeColor(theme)) ?: 0
+                context?.resources?.getColor(
+                    if (mode) {
+                        getDarkColor1()
+                    } else {
+                        getThemeColor()
+                    }
+                ) ?: 0
             )
             views.setInt(
                 R.id.rebalgup_widget,
                 "setBackgroundResource",
-                getThemeButtonResource(theme)
+                getThemeButtonResource()
             )
 
             name.whatIfNotNull(
