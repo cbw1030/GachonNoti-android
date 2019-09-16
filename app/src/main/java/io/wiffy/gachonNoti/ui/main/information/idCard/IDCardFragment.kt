@@ -48,7 +48,7 @@ class IDCardFragment : IDCardContract.View() {
     }
 
     fun changeTheme() {
-        myView?.imageonyou?.clipToOutline = true
+            myView?.imageonyou?.clipToOutline = true
 
         myView?.gachonback?.setBackgroundColor(
             ContextCompat.getColor(
