@@ -1,6 +1,7 @@
 package io.wiffy.gachonNoti.ui.main.information.idCard
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -47,6 +48,10 @@ class IDCardFragment : IDCardContract.View() {
     }
 
     fun changeTheme() {
+        myView?.imageonyou?.run {
+            background = context.getDrawable(R.drawable.imageview_round)
+            clipToOutline = true
+        }
         myView?.gachonback?.setBackgroundColor(
             ContextCompat.getColor(
                 context!!, if (Component.darkTheme) {
@@ -64,16 +69,16 @@ class IDCardFragment : IDCardContract.View() {
         myView?.let {
             with(info)
             {
-                myView?.yourname?.text = name
-                myView?.number?.text = number
-                myView?.depart?.text = department
+                it.yourname?.text = name
+                it.number?.text = number
+                it.depart?.text = department
 
                 Glide.with(activity!!)
                     .load(imageURL)
-                    .into(myView?.imageonyou!!)
+                    .into(it.imageonyou!!)
 
                 setTimerAndQRCode(number!!)
-                myView?.rebalgup?.setOnClickListener {
+                it.rebalgup?.setOnClickListener {
                     setTimerAndQRCode(number)
                 }
             }
