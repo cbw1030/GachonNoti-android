@@ -121,7 +121,10 @@ class SearchDialog(
             cate.visibility = View.VISIBLE
             search.visibility = View.VISIBLE
         }
-        Component.getBuilder()?.dismiss()
+
+        Handler(Looper.getMainLooper()).post {
+            Component.getBuilder()?.dismiss()
+        }
     }
 
     override fun requestLoad() =

@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
-import android.view.ViewOutlineProvider
 import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.AppWidgetTarget
@@ -109,10 +108,16 @@ class IDCardWidget : AppWidgetProvider() {
                                 resource: Bitmap,
                                 transition: Transition<in Bitmap>?
                             ) {
-                                val bitmap = getRoundedCornerBitmap(resource,10)
-                                Glide.with(context!!).asBitmap().load(bitmap)
-                                    .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
-                                //views.setBitmap(R.id.imageonyou_widget,"setImageBitmap",bitamp)
+                                val bitmap = getRoundedCornerBitmap(resource)
+                                Glide.with(context).asBitmap().load(bitmap)
+                                    .into(
+                                        AppWidgetTarget(
+                                            context,
+                                            R.id.imageonyou_widget,
+                                            views,
+                                            widgetId
+                                        )
+                                    )
                             }
                         })
                     qrCode(views, info.number!!, context, widgetId)
@@ -121,9 +126,24 @@ class IDCardWidget : AppWidgetProvider() {
                     views.setTextViewText(R.id.yourname_widget, "박가천")
                     views.setTextViewText(R.id.number_widget, "201735829")
                     views.setTextViewText(R.id.depart_widget, "어쩌구학과")
-                    val bitmap = getRoundedCornerBitmap((((R.drawable.defaultimage) as BitmapDrawable).bitmap),15)
-                    Glide.with(context!!).asBitmap().load(bitmap)
-                        .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
+                    Glide.with(context!!).asBitmap().load(R.drawable.defaultimage)
+                        .into(object : SimpleTarget<Bitmap>() {
+                            override fun onResourceReady(
+                                resource: Bitmap,
+                                transition: Transition<in Bitmap>?
+                            ) {
+                                val bitmap = getRoundedCornerBitmap(resource)
+                                Glide.with(context).asBitmap().load(bitmap)
+                                    .into(
+                                        AppWidgetTarget(
+                                            context,
+                                            R.id.imageonyou_widget,
+                                            views,
+                                            widgetId
+                                        )
+                                    )
+                            }
+                        })
                     qrCode(views, "hello", context, widgetId)
                 }
             )
@@ -138,32 +158,31 @@ class IDCardWidget : AppWidgetProvider() {
             )
         }
 
-        fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int): Bitmap {
+        private fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int = 10): Bitmap {
             val output = Bitmap.createBitmap(
                 bitmap.width, bitmap
                     .height, Bitmap.Config.ARGB_8888
             )
             val canvas = Canvas(output)
 
-            val color = -0xbdbdbe
             val paint = Paint()
             val rect = Rect(0, 0, bitmap.width, bitmap.height)
             val rectF = RectF(rect)
             val roundPx = pixels.toFloat()
 
-            paint.setAntiAlias(true)
+            paint.isAntiAlias = true
             canvas.drawARGB(0, 0, 0, 0)
-            paint.setColor(color)
+            paint.color = -0xbdbdbe
             canvas.drawRoundRect(rectF, roundPx, roundPx, paint)
 
-            paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_IN))
+            paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
             canvas.drawBitmap(bitmap, rect, rect, paint)
 
             return output
         }
 
         @SuppressLint("SimpleDateFormat")
-        fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) =
+        private fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) =
             Glide.with(context).asBitmap().load(
                 if (num != "hello") {
                     matrixToBitmap(
