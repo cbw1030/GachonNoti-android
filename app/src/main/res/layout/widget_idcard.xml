@@ -98,7 +98,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:text="필요시 재발급 해주시길 바랍니다."
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
 
             <ImageView
                     android:id="@+id/qrcode_widget"

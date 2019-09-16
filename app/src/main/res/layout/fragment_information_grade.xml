@@ -4,11 +4,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
     <androidx.cardview.widget.CardView
+            android:id="@+id/johaecard"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp">
+
+        <LinearLayout
+                android:id="@+id/johae"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+            <Spinner
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/spinner_year"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+            <Spinner
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/spinner_semester"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+            <Spinner
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/spinner_grade"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+            <Button
+                    android:id="@+id/johaebutton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="조회"
+                    android:textColor="@color/white" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_below="@+id/johaecard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_margin="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
 
@@ -23,54 +82,14 @@
                     android:layout_height="match_parent"
                     android:visibility="gone">
 
-                <LinearLayout
-                        android:id="@+id/johae"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:orientation="horizontal"
-                        android:weightSum="7">
-
-                    <Spinner
-                            android:layout_gravity="center_vertical"
-                            android:id="@+id/spinner_year"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2" />
-
-                    <Spinner
-                            android:layout_gravity="center_vertical"
-                            android:id="@+id/spinner_semester"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2" />
-
-                    <Spinner
-                            android:layout_gravity="center_vertical"
-                            android:id="@+id/spinner_grade"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2" />
-
-                    <Button
-                            android:layout_marginTop="5dp"
-                            android:id="@+id/johaebutton"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="조회"
-                            android:textColor="@color/white" />
-                </LinearLayout>
-
                 <TextView
                         android:id="@+id/creditAverage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/johae"
                         android:layout_alignParentStart="true"
-                        android:layout_margin="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black" />
 
                 <LinearLayout

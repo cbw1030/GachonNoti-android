@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
@@ -66,13 +67,13 @@ class GradeFragment : GradeContract.View() {
         myView?.findViewById<Spinner>(R.id.spinner_semester)?.adapter =
             ArrayAdapter(
                 context,
-                android.R.layout.simple_spinner_dropdown_item,
+                R.layout.my_spinner,
                 arrayListOf("전체", "1학기", "2학기", "여름계절학기", "겨울계절학기")
             )
         myView?.findViewById<Spinner>(R.id.spinner_grade)?.adapter =
             ArrayAdapter(
                 context,
-                android.R.layout.simple_spinner_dropdown_item,
+                R.layout.my_spinner,
                 arrayListOf("전체", "1학년", "2학년", "3학년", "4학년")
             )
 
@@ -127,7 +128,7 @@ class GradeFragment : GradeContract.View() {
 
     override fun setSpinner(list: ArrayList<String>) {
         myView?.findViewById<Spinner>(R.id.spinner_year)?.adapter =
-            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, list)
+            ArrayAdapter(context, R.layout.my_spinner, list)
     }
 
     fun loginInformationSetting(info: String) {
@@ -161,12 +162,15 @@ class GradeFragment : GradeContract.View() {
 
     fun setViewVisibility(bool: Boolean) {
         val on = myView?.findViewById<RelativeLayout>(R.id.gradeLayoutOn)
+        val on2 = myView?.findViewById<CardView>(R.id.johaecard)
         val off = myView?.findViewById<RelativeLayout>(R.id.gradeLayoutOff)
         if (bool) {
             on?.visibility = View.VISIBLE
+            on2?.visibility = View.VISIBLE
             off?.visibility = View.GONE
         } else {
             off?.visibility = View.VISIBLE
+            on2?.visibility = View.GONE
             on?.visibility = View.GONE
         }
     }
