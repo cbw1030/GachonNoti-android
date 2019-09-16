@@ -100,7 +100,7 @@ class IDCardWidget : AppWidgetProvider() {
                     views.setTextViewText(R.id.yourname_widget, info.name)
                     views.setTextViewText(R.id.number_widget, info.number)
                     views.setTextViewText(R.id.depart_widget, info.department)
-                    Glide.with(context!!).asBitmap().load(info.imageURL)
+                    Glide.with(context!!).asBitmap().centerCrop().load(info.imageURL)
                         .into(AppWidgetTarget(context, R.id.imageonyou_widget, views, widgetId))
                     qrCode(views, info.number!!, context, widgetId)
                 },
