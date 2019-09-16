@@ -83,6 +83,7 @@ class IDCardWidget : AppWidgetProvider() {
             widgetId: Int,
             name: String?
         ) {
+
             views.setInt(
                 R.id.gachonback_widget,
                 "setBackgroundResource",

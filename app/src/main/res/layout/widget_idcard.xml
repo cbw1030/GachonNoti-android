@@ -30,9 +30,12 @@
                 android:id="@+id/imageonyou_widget"
                 android:layout_width="105dp"
                 android:layout_height="140dp"
+                android:clipChildren="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="15dp"
+                android:elevation="5dp"
+                android:background="@drawable/imageview_round"
                 android:src="@drawable/defaultimage" />
 
         <TextView

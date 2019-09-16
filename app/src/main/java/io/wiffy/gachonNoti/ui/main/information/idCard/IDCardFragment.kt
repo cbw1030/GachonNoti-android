@@ -48,10 +48,6 @@ class IDCardFragment : IDCardContract.View() {
     }
 
     fun changeTheme() {
-        myView?.imageonyou?.run {
-            background = context.getDrawable(R.drawable.imageview_round)
-            clipToOutline = true
-        }
         myView?.gachonback?.setBackgroundColor(
             ContextCompat.getColor(
                 context!!, if (Component.darkTheme) {
