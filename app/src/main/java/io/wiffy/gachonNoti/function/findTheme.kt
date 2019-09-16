@@ -9,6 +9,21 @@ fun getDarkColor2() = R.color.myDark2
 
 fun getDarkLightColor() = R.color.myDarkLight
 
+fun getWidgetLayoutColor() = if (Component.darkTheme) {
+    R.drawable.myround_dark
+} else {
+    when (Component.theme) {
+        "red" -> {
+            R.drawable.myround_red
+        }
+        "green" -> {
+            R.drawable.myround_green
+        }
+        else -> {
+            R.drawable.myround_default
+        }
+    }
+}
 
 
 fun getThemeColor(mTheme: String?) = when (mTheme) {
