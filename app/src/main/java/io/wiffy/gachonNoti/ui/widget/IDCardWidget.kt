@@ -16,10 +16,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.getDarkColor1
-import io.wiffy.gachonNoti.function.getThemeButtonResource
-import io.wiffy.gachonNoti.function.getThemeColor
-import io.wiffy.gachonNoti.function.matrixToBitmap
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import java.text.SimpleDateFormat
 
@@ -73,9 +70,7 @@ class IDCardWidget : AppWidgetProvider() {
                         getString("image", null),
                         getString("clubCD", null)
                     ), context, appWidgetId,
-                    getString("name", null),
-                    getBoolean("dark", false)
-
+                    getString("name", null)
                 )
             }
             appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -86,19 +81,12 @@ class IDCardWidget : AppWidgetProvider() {
             info: StudentInformation,
             context: Context?,
             widgetId: Int,
-            name: String?,
-            mode: Boolean
+            name: String?
         ) {
             views.setInt(
                 R.id.gachonback_widget,
-                "setBackgroundColor",
-                context?.resources?.getColor(
-                    if (mode) {
-                        getDarkColor1()
-                    } else {
-                        getThemeColor()
-                    }
-                ) ?: 0
+                "setBackgroundResource",
+                getWidgetLayoutColor()
             )
             views.setInt(
                 R.id.rebalgup_widget,
