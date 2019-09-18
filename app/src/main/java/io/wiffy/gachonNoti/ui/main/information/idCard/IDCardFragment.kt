@@ -1,7 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.information.idCard
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
