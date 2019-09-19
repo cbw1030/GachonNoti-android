@@ -83,7 +83,7 @@ class NotificationAsyncTask(
                         "http://m.gachon.ac.kr/gachon/${n.select("a").attr("href")}"
                     )
                 )
-            } else if (!n.html().contains("alt=\"공지\"")) {
+            } else if (!bool && !n.html().contains("alt=\"공지\"")) {
                 val x = n.select("a").text()
                 if (type == 1) {
                     list.add(
@@ -122,9 +122,9 @@ class NotificationAsyncTask(
                 when (result) {
                     ACTION_SUCCESS -> {
                         update(list)
+
                     }
                     33 -> {
-                        list.clear()
                         update(list)
                     }
                     else -> {

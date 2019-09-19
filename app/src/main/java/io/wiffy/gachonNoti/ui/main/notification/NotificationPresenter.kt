@@ -24,8 +24,8 @@ class NotificationPresenter(private val mView: NotificationContract.View) :
         request()
     }
 
-    override fun search(str: String) {
-        searchKey = str
+    override fun search(src: String) {
+        searchKey = src
         page = 0
         list.clear()
         request()
