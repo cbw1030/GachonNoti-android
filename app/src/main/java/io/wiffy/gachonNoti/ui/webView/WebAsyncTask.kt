@@ -18,9 +18,9 @@ class WebAsyncTask(
     private var goHref = ""
 
     override fun onPreExecute() {
-        Handler(Looper.getMainLooper()).post {
-            mPresenter.builderUp()
-        }
+            Handler(Looper.getMainLooper()).post {
+                mPresenter.builderUp()
+            }
     }
 
     override fun doInBackground(vararg params: Void?): Int {
@@ -69,7 +69,7 @@ class WebAsyncTask(
             }
         } catch (e: Exception) {
             mPresenter.updateWeb("<p>인터넷 연결을 확인해주세요.</p>")
-            mPresenter.builderDismiss()
+            //mPresenter.builderDismiss()
         }
 
         return ACTION_SUCCESS
@@ -81,6 +81,7 @@ class WebAsyncTask(
             if (goHref.isNotBlank()) {
                 WebAsyncTask(goHref, mPresenter, true).execute()
             }
+            mPresenter.builderDismiss()
         }
     }
 }
