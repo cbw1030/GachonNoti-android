@@ -122,7 +122,6 @@ class NotificationAsyncTask(
                 when (result) {
                     ACTION_SUCCESS -> {
                         update(list)
-
                     }
                     33 -> {
                         update(list)

@@ -18,7 +18,7 @@ class MyApplication : Application(), SuperContract.WiffyObject {
             applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0)
                 .versionName
 
-        //None Reset Component on Update
+
         Component.firstBoot = getSharedItem("firstBooting", true)
         Component.notificationSet = getSharedItem("notiOn", true)
         Component.theme = getSharedItem("theme", "default")
@@ -26,15 +26,9 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.campus = getSharedItem("campus", true)
 
         if (getSharedItem("preVersion", "") != Component.version) {
-            resetSharedPreference()
             setSharedItem("preVersion", Component.version)
-            setSharedItem("firstBooting", Component.firstBoot)
-            setSharedItem("notiOn", Component.notificationSet)
-            setSharedItem("theme", Component.theme)
-            setSharedItem("campus", Component.campus)
         }
 
-        //Reset Component on Update
         Component.isLogin = getSharedItem("login", false)
         Component.timeTableSet = getSharedItem("tableItems", HashSet())
         Component.adminMode = getSharedItem("ADMIN", false)
