@@ -22,7 +22,8 @@
     <string name="update">
         공지사항 안들어가지던 버그 수정\n
         공지사항 인덱스 오류 수정\n
-        업데이트시 로그인 유지되도록 변경
+        업데이트시 로그인 유지되도록 변경\n
+        인앱메세지 추가
     </string>
 <string name="jcjc">전체</string>
 </resources>

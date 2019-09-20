@@ -21,6 +21,7 @@ interface MainContract {
         abstract fun mainLogout()
         abstract fun mainLogin()
         abstract fun darkTheme()
+        abstract fun message()
     }
 
     interface Presenter : SuperContract.SuperPresenter {

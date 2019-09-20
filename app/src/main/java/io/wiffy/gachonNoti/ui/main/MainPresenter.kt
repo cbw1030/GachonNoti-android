@@ -27,6 +27,7 @@ class MainPresenter(private val mView: MainContract.View) :
         if (!getSharedItem(Component.version, false)) {
             mView.updatedContents()
         }
+        mView.message()
     }
 
     override fun positiveButton() {

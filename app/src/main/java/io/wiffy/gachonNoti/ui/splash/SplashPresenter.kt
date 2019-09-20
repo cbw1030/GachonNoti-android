@@ -49,10 +49,12 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         subscribe()
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun subscribe() {
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
             setSharedItem("firstBooting", false)
         }
+        setSharedItem("lastDate",SimpleDateFormat("yyyy-mm-dd").format(Date(System.currentTimeMillis())))
         mView.moveToMain()
     }
 

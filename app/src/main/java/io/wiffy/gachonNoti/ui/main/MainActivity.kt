@@ -23,6 +23,7 @@ import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.PatternLockDialog
+import io.wiffy.gachonNoti.ui.main.message.InAppMessageDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Suppress("DEPRECATION")
@@ -149,6 +150,23 @@ class MainActivity : MainContract.View() {
                 )
             }
         })
+    }
+
+    override fun message() {
+        if(getSharedItem("message", true))
+        {
+            InAppMessageDialog(applicationContext).apply {
+                setCancelable(false)
+            }.show()
+        }else{
+            if(calculateDateDifference(getSharedItem("lastDate")) >= 7)
+            {
+                setSharedItem("message", true)
+                InAppMessageDialog(applicationContext).apply {
+                    setCancelable(false)
+                }.show()
+            }
+        }
     }
 
     override fun askSetPattern() {
