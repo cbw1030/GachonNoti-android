@@ -22,6 +22,7 @@ interface MainContract {
         abstract fun mainLogin()
         abstract fun darkTheme()
         abstract fun message()
+        abstract fun setMessage(mList:ArrayList<Fragment?>)
     }
 
     interface Presenter : SuperContract.SuperPresenter {
