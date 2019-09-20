@@ -5,10 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,7 +21,7 @@ import io.wiffy.gachonNoti.model.adapter.PagerAdapter
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.model.PatternLockDialog
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
-import io.wiffy.gachonNoti.ui.main.message.InAppMessageDialog
+import io.wiffy.gachonNoti.ui.main.message.InAppMessageActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Suppress("DEPRECATION")
@@ -154,12 +151,10 @@ class MainActivity : MainContract.View() {
     }
 
     override fun message() {
-        if(getSharedItem("message", true))
-        {
+        if (getSharedItem("message", true)) {
             InAppMessageAsyncTask(this).execute()
-        }else{
-            if(calculateDateDifference(getSharedItem("lastDate")) >= 7)
-            {
+        } else {
+            if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
                 setSharedItem("message", true)
                 InAppMessageAsyncTask(this).execute()
             }
@@ -167,10 +162,18 @@ class MainActivity : MainContract.View() {
     }
 
     override fun setMessage(mList: ArrayList<Fragment?>) {
-        if(mList.size > 0)
-        InAppMessageDialog(this, mList).apply {
-            setCancelable(false)
-        }.show()
+        if (mList.size > 0) {
+            Component.mFragmentList = mList
+           Handler(mainLooper).post {
+               startActivity(Intent(this, InAppMessageActivity::class.java).apply {
+                   putExtra("isOpen", true)
+               })
+           }
+        }
+
+//        InAppMessageActivity(this, mList).apply {
+//            setCancelable(false)
+//        }.show()
     }
 
     override fun askSetPattern() {

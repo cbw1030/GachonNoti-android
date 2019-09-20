@@ -6,16 +6,21 @@
         <item name="colorPrimary">@color/main2Blue</item>
         <item name="colorPrimaryDark">@color/main2DeepBlue</item>
         <item name="colorAccent">@color/main2Blue</item>
-        <item name="android:actionBarSize">40dip</item>
+        <item name="actionBarSize">40dip</item>
         <item name="colorSurface">#ffffff</item>
     </style>
 
     <!-- Base application theme. -->
     <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@color/myTrans</item>
+    </style>
+
+    <style name="mStyle2" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>

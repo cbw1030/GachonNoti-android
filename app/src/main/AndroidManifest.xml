@@ -56,7 +56,10 @@
         <uses-library
                 android:name="org.apache.http.legacy"
                 android:required="false" />
-
+<activity android:name=".ui.main.message.InAppMessageActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/mStyle2"
+        />
         <activity
                 android:name=".ui.splash.SplashActivity"
                 android:screenOrientation="portrait">

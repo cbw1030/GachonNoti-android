@@ -9,15 +9,16 @@ import io.wiffy.gachonNoti.model.SuperContract
 
 class InAppMessageFragment:SuperContract.SuperFragment() {
 
-    lateinit var mView:View
+    lateinit var myView:View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(R.layout.fragment_inappmessage, container, false)
+        myView = inflater.inflate(R.layout.fragment_inappmessage, container, false)
 
-        return mView
+        return myView
     }
+
 }

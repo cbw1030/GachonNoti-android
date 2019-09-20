@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
@@ -13,6 +14,8 @@ object Component {
     lateinit var sharedPreferences: SharedPreferences
 
     var mHandler: Handler? = null
+
+    var mFragmentList:ArrayList<Fragment?>?=null
 
     var error = true
 
