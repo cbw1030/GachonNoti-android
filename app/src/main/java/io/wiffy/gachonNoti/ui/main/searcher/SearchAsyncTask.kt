@@ -30,12 +30,6 @@ class SearchAsyncTask(
         else -> 20
     }
 
-    override fun onPreExecute() {
-        Handler(Looper.getMainLooper()).post {
-
-        }
-    }
-
     override fun doInBackground(vararg params: Void?): Int {
 
         val type = if (Component.campus) {

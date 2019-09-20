@@ -76,13 +76,10 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
 
     @SuppressLint("InflateParams")
     private fun login() {
+        val prompt = LayoutInflater.from(context).inflate(R.layout.dialog_login, null)
 
-        val li = LayoutInflater.from(context)
-        val prompt = li.inflate(R.layout.dialog_login, null)
-        val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.run {
+        AlertDialog.Builder(context).apply {
             setView(prompt)
-
             setTitle("계정 정보")
             setCancelable(false)
             setPositiveButton("로그인") { dialog, _ ->
@@ -100,8 +97,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
             }
             setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
 
-            show()
-        }
+        }.show()
 
     }
 

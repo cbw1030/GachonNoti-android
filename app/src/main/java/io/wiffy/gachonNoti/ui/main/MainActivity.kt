@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Suppress("DEPRECATION")
 class MainActivity : MainContract.View() {
 
-    var menuItem1: MenuItem? = null
+    private var menuItem: MenuItem? = null
     lateinit var adapter: PagerAdapter
     var builder: Dialog? = null
     private var backKeyPressedTime: Long = 0L
@@ -86,13 +86,13 @@ class MainActivity : MainContract.View() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuItem1 = menu?.add(0, 201735829, 0, "강의실 데이터 삭제")
-        menuItem1?.isVisible = false
+        menuItem = menu?.add(0, MENU_ITEM_ID1, 0, "강의실 데이터 삭제")
+        menuItem?.isVisible = false
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
-        201735829 -> {
+        MENU_ITEM_ID1 -> {
             mPresenter.deleteRoomData()
             true
         }
@@ -184,7 +184,7 @@ class MainActivity : MainContract.View() {
 
     override fun setTitle(pair: Pair<String, Boolean>) {
         title = pair.first
-        menuItem1?.let {
+        menuItem?.let {
             it.isVisible = pair.second
         }
     }

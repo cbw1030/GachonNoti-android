@@ -8,6 +8,7 @@ import io.wiffy.gachonNoti.function.isNetworkConnected
 import io.wiffy.gachonNoti.model.Parse
 import io.wiffy.gachonNoti.model.ParseList
 import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.function.ACTION_SUCCESS2
 import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL
@@ -60,7 +61,7 @@ class NotificationAsyncTask(
             }
             ACTION_SUCCESS
         } catch (e: Exception) {
-            33
+            ACTION_SUCCESS2
         }
     }
 
@@ -123,7 +124,7 @@ class NotificationAsyncTask(
                     ACTION_SUCCESS -> {
                         update(list)
                     }
-                    33 -> {
+                    ACTION_SUCCESS2 -> {
                         update(list)
                     }
                     else -> {

@@ -5,8 +5,10 @@ const val STATE_INFORMATION = 1
 const val STATE_SEARCHER = 2
 const val STATE_SETTING = 3
 const val STATE_WEB_VIEW = 4
+
 const val NOT_UPDATED_YET = -99
 const val ACTION_SUCCESS = 0
+const val ACTION_SUCCESS2 = 2
 const val ACTION_FAILURE = -1
 
 const val CHECK_PATTERN = 1357
@@ -14,3 +16,5 @@ const val SET_PATTERN = 1358
 const val SET_PATTERN2 = 13581
 const val CHANGE_PATTERN = 13421
 const val REMOVE_PATTERN = 1359
+
+const val MENU_ITEM_ID1 = 201735829

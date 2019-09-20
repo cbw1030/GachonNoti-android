@@ -107,7 +107,7 @@ class IDCardWidget : AppWidgetProvider() {
                                 resource: Bitmap,
                                 transition: Transition<in Bitmap>?
                             ) {
-                                val bitmap = getRoundedCornerBitmap(resource,5)
+                                val bitmap = getRoundedCornerBitmap(resource, 5)
                                 Glide.with(context).asBitmap().load(bitmap)
                                     .into(
                                         AppWidgetTarget(

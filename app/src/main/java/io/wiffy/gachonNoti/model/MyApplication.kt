@@ -18,7 +18,6 @@ class MyApplication : Application(), SuperContract.WiffyObject {
             applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0)
                 .versionName
 
-
         Component.firstBoot = getSharedItem("firstBooting", true)
         Component.notificationSet = getSharedItem("notiOn", true)
         Component.theme = getSharedItem("theme", "default")
