@@ -60,7 +60,7 @@ class LoginAsyncTask(
                     password,
                     getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
                     "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg",
-                    getJSONArray("clubList").getJSONObject(0).getString("clubCd")
+                    getString("affiCd")
                 )
             }
             try {
