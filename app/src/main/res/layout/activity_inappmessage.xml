@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,31 +27,35 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true">
+
         <TextView
                 android:id="@+id/inAppButton"
-                android:focusable="true"
-                android:clickable="true"
-                android:textSize="20sp"
-                android:layout_marginEnd="30dp"
-                android:text="확인"
-                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="30dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="확인"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
         <CheckBox
-                android:layout_marginStart="10dp"
                 android:id="@+id/inAppBox"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp" />
+
         <TextView
                 android:id="@+id/inAppBox2"
-            android:text="일주일간 보지않기"
-            android:layout_toEndOf="@+id/inAppBox"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/inAppBox"
+                android:text="일주일간 보지않기"
+                android:textSize="8sp" />
     </RelativeLayout>
 </RelativeLayout>
