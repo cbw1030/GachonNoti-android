@@ -22,6 +22,7 @@ import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
+import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.administrator.AdministratorDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
@@ -277,6 +278,10 @@ class SettingFragment : SettingContract.View() {
             ContactDialog(context!!, this).show()
         }
 
+        myView.know.setOnClickListener {
+            InAppMessageAsyncTask(MainActivity.mView, false).execute()
+        }
+
     }
 
     @SuppressLint("ApplySharedPref")
@@ -341,6 +346,8 @@ class SettingFragment : SettingContract.View() {
         myView.setting12_.setTextColor(resources.getColor(R.color.white))
         myView.version.setBackgroundResource(R.drawable.setting_button_dark)
         myView.setting13_.setTextColor(resources.getColor(R.color.white))
+        myView.know.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting14_.setTextColor(resources.getColor(R.color.white))
     }
 
     fun themeChanger() {

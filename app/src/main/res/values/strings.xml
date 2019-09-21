@@ -20,10 +20,7 @@
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
     <string name="update">
-        공지사항 안들어가지던 버그 수정\n
-        공지사항 인덱스 오류 수정\n
-        업데이트시 로그인 유지되도록 변경\n
-        인앱메세지 추가
+        공지사항 안들어가지던 버그 수정\n\n공지사항 인덱스 오류 수정\n\n업데이트시 로그인 유지되도록 변경\n\n인앱메세지 추가
     </string>
 <string name="jcjc">전체</string>
 </resources>

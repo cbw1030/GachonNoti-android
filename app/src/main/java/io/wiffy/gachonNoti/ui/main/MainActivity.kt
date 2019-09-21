@@ -2,9 +2,11 @@ package io.wiffy.gachonNoti.ui.main
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.*
 import android.view.Menu
 import android.view.MenuItem
@@ -161,19 +163,17 @@ class MainActivity : MainContract.View() {
         }
     }
 
-    override fun setMessage(mList: ArrayList<Fragment?>) {
+    override fun setMessage(mList: ArrayList<Fragment?>, flag: Boolean) {
         if (mList.size > 0) {
             Component.mFragmentList = mList
-           Handler(mainLooper).post {
-               startActivity(Intent(this, InAppMessageActivity::class.java).apply {
-                   putExtra("isOpen", true)
-               })
-           }
+            Handler(mainLooper).post {
+                startActivity(Intent(this, InAppMessageActivity::class.java).apply {
+                    putExtra("isOpen", flag)
+                })
+                overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
+            }
         }
 
-//        InAppMessageActivity(this, mList).apply {
-//            setCancelable(false)
-//        }.show()
     }
 
     override fun askSetPattern() {
@@ -214,17 +214,12 @@ class MainActivity : MainContract.View() {
         }
     }
 
-    @SuppressLint("ApplySharedPref")
-    override fun updatedContents() {
-        setSharedItem(Component.version, true)
-        MaterialAlertDialogBuilder(this).apply {
-            setTitle("${Component.version} 버전 업데이트")
-            setMessage(R.string.update)
-            setPositiveButton(
-                "OK"
-            ) { _, _ -> }
-        }.show()
+    override fun linkToSite(url: String) {
+        Component.noneVisible = true
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
+
+    override fun sendContext(): Context = applicationContext
 
     override fun onBackPressed() {
         when (Component.state) {

@@ -24,9 +24,6 @@ class MainPresenter(private val mView: MainContract.View) :
         add(SearcherFragment())
         add(SettingFragment())
         mView.initView(this)
-        if (!getSharedItem(Component.version, false)) {
-            mView.updatedContents()
-        }
         mView.message()
     }
 

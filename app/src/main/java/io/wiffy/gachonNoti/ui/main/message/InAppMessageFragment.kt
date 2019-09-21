@@ -9,9 +9,13 @@ import io.wiffy.gachonNoti.function.getRandomColorId
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.fragment_inappmessage.view.*
 
-class InAppMessageFragment:SuperContract.SuperFragment() {
+class InAppMessageFragment(
+    private val title: String = "", private val mContext: String = "",
+    private val onClick: (() -> (Unit))? = null
+) :
+    SuperContract.SuperFragment() {
 
-    lateinit var myView:View
+    lateinit var myView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,9 +24,16 @@ class InAppMessageFragment:SuperContract.SuperFragment() {
     ): View? {
         myView = inflater.inflate(R.layout.fragment_inappmessage, container, false)
 
-        myView.inAppBackground.setBackgroundColor(resources.getColor(
-            getRandomColorId()
-        ))
+        myView.inAppBackground.setBackgroundColor(
+            resources.getColor(
+                getRandomColorId()
+            )
+        )
+
+        if (onClick != null) myView.inAppBackground.setOnClickListener { onClick.invoke() }
+
+        myView.inapptitle.text = title
+        myView.inappcontext.text = mContext
 
         return myView
     }
