@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:focusable="true"
-        android:clickable="true"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/inAppBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
 
     <TextView
 
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
             android:id="@+id/inapptitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
-<TextView
-        android:id="@+id/inappcontext"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:layout_below="@+id/inapptitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    <TextView
+            android:id="@+id/inappcontext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/inapptitle"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:textColor="@color/white" />
+
+    <TextView
+            android:id="@+id/inappgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="터치시 해당 페이지로 이동합니다."
+            android:textColor="#99ffffff"
+            android:textSize="10sp"
+            android:visibility="gone" />
 </RelativeLayout>

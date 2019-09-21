@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.wiffy.gachonNoti.ui.widget
 
 import android.annotation.SuppressLint

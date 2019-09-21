@@ -9,6 +9,7 @@ import io.wiffy.gachonNoti.function.getRandomColorId
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.fragment_inappmessage.view.*
 
+@Suppress("DEPRECATION")
 class InAppMessageFragment(
     private val title: String = "", private val mContext: String = "",
     private val onClick: (() -> (Unit))? = null
@@ -30,7 +31,10 @@ class InAppMessageFragment(
             )
         )
 
-        if (onClick != null) myView.inAppBackground.setOnClickListener { onClick.invoke() }
+        if (onClick != null) {
+            myView.inAppBackground.setOnClickListener { onClick.invoke() }
+            myView.inappgo.visibility = View.VISIBLE
+        }
 
         myView.inapptitle.text = title
         myView.inappcontext.text = mContext
