@@ -167,5 +167,9 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         dismiss()
     }
 
-    fun loginFailed() = toast("로그인에 실패하였습니다.")
+    fun loginFailed(str: String) {
+        toast("로그인에 실패하였습니다.")
+    }
+
+    fun networkFailed() = toast("네트워크에 연결할 수 없습니다.")
 }

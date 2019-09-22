@@ -3,10 +3,7 @@ package io.wiffy.gachonNoti.ui.main.setting.login
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.ACTION_FAILURE
-import io.wiffy.gachonNoti.function.ACTION_SUCCESS
-import io.wiffy.gachonNoti.function.isNetworkConnected
-import io.wiffy.gachonNoti.function.setSharedItem
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import org.apache.http.client.methods.HttpPost
@@ -17,8 +14,8 @@ import org.json.JSONObject
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader
-import java.lang.Exception
 import javax.xml.parsers.DocumentBuilderFactory
+import kotlin.Exception
 
 
 class LoginAsyncTask(
@@ -28,6 +25,7 @@ class LoginAsyncTask(
 ) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
+    val strBuilder = StringBuilder()
 
     override fun onPreExecute() {
         Component.getBuilder()?.show()
@@ -35,7 +33,7 @@ class LoginAsyncTask(
 
     override fun doInBackground(vararg params: Void?): Int {
         if (!isNetworkConnected(mView.sendContext())) {
-            return ACTION_FAILURE
+            return ACTION_NETWORK_FAILURE
         }
         val number: String
         try {
@@ -58,11 +56,20 @@ class LoginAsyncTask(
                     number,
                     ids,
                     password,
-                    getJSONArray("clubList").getJSONObject(0).getString("clubNm"),
+                    try {
+                        getJSONArray("clubList").getJSONObject(0).getString("clubNm")
+                    } catch (e: Exception) {
+                        "undefined"
+                    },
                     "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg",
-                    getString("affiCd")
+                    try {
+                        getString("affiCd")
+                    } catch (e: Exception) {
+                        "undefined"
+                    }
                 )
             }
+
             try {
                 val data =
                     (DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
@@ -101,10 +108,12 @@ class LoginAsyncTask(
             ACTION_SUCCESS -> {
                 mView.saveInformation(studentInformation)
             }
+            ACTION_NETWORK_FAILURE -> {
+                mView.networkFailed()
+            }
             else -> {
-                mView.loginFailed()
+                mView.loginFailed(strBuilder.toString())
             }
         }
     }
-
 }

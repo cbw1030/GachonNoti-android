@@ -10,6 +10,7 @@ const val NOT_UPDATED_YET = -99
 const val ACTION_SUCCESS = 0
 const val ACTION_SUCCESS2 = 2
 const val ACTION_FAILURE = -1
+const val ACTION_NETWORK_FAILURE = -2
 
 const val CHECK_PATTERN = 1357
 const val SET_PATTERN = 1358

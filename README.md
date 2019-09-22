@@ -15,6 +15,9 @@ Screenshot
 <img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/10.png' width='250px'/>
 <img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/11.png' width='250px'/>
 
+
+#License
+
 ```
    Copyright 2019 WIFFY
 
