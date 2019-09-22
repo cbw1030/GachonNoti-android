@@ -25,7 +25,7 @@ class LoginAsyncTask(
 ) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
     lateinit var studentInformation: StudentInformation
-    val strBuilder = StringBuilder()
+    private val strBuilder = StringBuilder()
 
     override fun onPreExecute() {
         Component.getBuilder()?.show()
@@ -59,12 +59,14 @@ class LoginAsyncTask(
                     try {
                         getJSONArray("clubList").getJSONObject(0).getString("clubNm")
                     } catch (e: Exception) {
+                        strBuilder.append("clubList : ${e.message}\n")
                         "undefined"
                     },
                     "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg",
                     try {
                         getString("affiCd")
                     } catch (e: Exception) {
+                        strBuilder.append("affiCd : ${e.message}\n")
                         "undefined"
                     }
                 )
@@ -92,9 +94,11 @@ class LoginAsyncTask(
                 setSharedItem("birthday", data[0])
                 setSharedItem("gender", data[1][0].toInt() % 2 == 1)
             } catch (e: Exception) {
+                strBuilder.append("birthday : ${e.message}\n")
             }
 
         } catch (e: Exception) {
+            strBuilder.append("functionError : ${e.message}\n")
             return ACTION_FAILURE
         }
         return ACTION_SUCCESS
