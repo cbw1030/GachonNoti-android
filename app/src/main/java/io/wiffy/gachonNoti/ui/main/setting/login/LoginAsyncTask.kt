@@ -47,6 +47,8 @@ class LoginAsyncTask(
                 put("APPS_ID", "com.sz.Atwee.gachon")
             }
 
+            // TODO 학번만 가져온후에 다른걸로 보내기
+
             JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
                 entity = StringEntity(sendObject.toString())
             }).entity)).getJSONObject("ds_output").apply {
