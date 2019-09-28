@@ -29,13 +29,13 @@
                 android:layout_below="@+id/adkkk" />
 
         <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_above="@+id/ckks"
                 app:tabBackground="@drawable/tab_selector"
                 app:tabGravity="center"
-                app:tabIndicatorHeight="0dp"
-                android:id="@+id/tab_layout" />
+                app:tabIndicatorHeight="0dp" />
 
         <RelativeLayout
                 android:id="@+id/ckks"
@@ -58,7 +58,6 @@
                     android:textSize="12sp" />
 
             <CheckBox
-                    android:textColor="@color/gray"
                     android:id="@+id/inAppBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

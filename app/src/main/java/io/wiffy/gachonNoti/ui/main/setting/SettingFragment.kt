@@ -279,7 +279,11 @@ class SettingFragment : SettingContract.View() {
         }
 
         myView.know.setOnClickListener {
-            InAppMessageAsyncTask(MainActivity.mView, false).execute()
+            if(Component.newActivity)
+            {
+                Component.newActivity = false
+                InAppMessageAsyncTask(MainActivity.mView, false).execute()
+            }
         }
 
     }

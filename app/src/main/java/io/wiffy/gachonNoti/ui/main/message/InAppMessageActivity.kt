@@ -6,13 +6,12 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.TableLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.getDarkColor1
-import io.wiffy.gachonNoti.function.getThemeColor
+import io.wiffy.gachonNoti.function.calculateDateDifference
+import io.wiffy.gachonNoti.function.getSharedItem
 import io.wiffy.gachonNoti.function.setSharedItem
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
@@ -31,6 +30,10 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
 
         setLayoutParams()
 
+        if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
+            setSharedItem("message", true)
+        }
+
         mList = Component.mFragmentList ?: ArrayList()
 
         mAdapter = PagerAdapter(supportFragmentManager, mList)
@@ -40,15 +43,15 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
 
         findViewById<TabLayout>(R.id.tab_layout).setupWithViewPager(inAppPager)
 
-        if (!intent.getBooleanExtra("isOpen", true)) {
-            inAppBox.visibility = View.GONE
-        }
+//        if (!intent.getBooleanExtra("isOpen", true)) {
+//            inAppBox.visibility = View.GONE
+//        }
 
         val rs = resources.getColor(
             R.color.color_gray
         )
 
-        inAppBox.buttonTintList = ColorStateList(
+        val state = ColorStateList(
             arrayOf(
                 intArrayOf(-android.R.attr.state_checked),
                 intArrayOf(android.R.attr.state_checked)
@@ -57,18 +60,23 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
             )
         )
 
+        inAppBox.buttonTintList = state
+        inAppBox.setTextColor(state)
+
+        inAppBox.isChecked = !getSharedItem("message", true)
+
         inAppButton.setOnClickListener(this)
     }
 
     @SuppressLint("SimpleDateFormat")
     override fun onClick(v: View?) {
-        if (inAppBox.isChecked) {
-            setSharedItem(
-                "lastDate",
-                SimpleDateFormat("yyyy-mm-dd").format(Date(System.currentTimeMillis()))
-            )
-            setSharedItem("message", false)
-        }
+
+        setSharedItem(
+            "lastDate",
+            SimpleDateFormat("yyyy-mm-dd").format(Date(System.currentTimeMillis()))
+        )
+        setSharedItem("message", !inAppBox.isChecked)
+
         finish()
         overridePendingTransition(R.anim.not_move_activity, R.anim.abc_fade_out)
     }
@@ -85,4 +93,8 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Component.newActivity = true
+    }
 }

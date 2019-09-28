@@ -56,6 +56,8 @@ object Component {
 
     var campus = true
 
+    var newActivity = true
+
     lateinit var timeTableSet: HashSet<String>
 
     private var builder: Dialog? = null
