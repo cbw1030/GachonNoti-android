@@ -47,31 +47,50 @@ class LoginAsyncTask(
                 put("APPS_ID", "com.sz.Atwee.gachon")
             }
 
-            // TODO 학번만 가져온후에 다른걸로 보내기
+            val checkObject =
+                "{\"USER_ID\":\"${ids}\",\"fsp_ds_cmd\":[{\"TYPE\":\"N\",\"SQL_ID\":\"mobile/common:USER_INFO_SQL_S01\",\"INSERT_SQL_ID\":\"\",\"UPDATE_SQL_ID\":\"\",\"DELETE_SQL_ID\":\"\",\"SAVE_FLAG_COLUMN\":\"\",\"KEY_ZERO_LEN\":\"\",\"USE_INPUT\":\"N\",\"USE_ORDER\":\"Y\",\"EXEC\":\"\",\"FAIL\":\"\",\"FAIL_MSG\":\"\",\"EXEC_CNT\":0,\"MSG\":\"\"}],\"fsp_action\":\"xDefaultAction\",\"fsp_cmd\":\"execute\"}";
 
-            JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
-                entity = StringEntity(sendObject.toString())
-            }).entity)).getJSONObject("ds_output").apply {
-                number = getString("userUniqNo")
-                studentInformation = StudentInformation(
-                    getString("userNm"),
-                    number,
-                    ids,
-                    password,
+            var mObject: JSONObject? = null
+
+            try {
+
+                mObject =
+                    JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
+                        entity = StringEntity(sendObject.toString())
+                    }).entity))
+
+                number = mObject.getJSONObject("ds_output").getString("userUniqNo")
+
+            } catch (e: Exception) {
+                strBuilder.append(
                     try {
-                        getJSONArray("clubList").getJSONObject(0).getString("clubNm")
+                        "Login Error : ${
+                        mObject?.getString("ErrorMsg")
+                        }"
                     } catch (e: Exception) {
-                        strBuilder.append("clubList : ${e.message}\n")
-                        "undefined"
-                    },
-                    "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg",
-                    try {
-                        getString("affiCd")
-                    } catch (e: Exception) {
-                        strBuilder.append("affiCd : ${e.message}\n")
-                        "undefined"
+                        ""
                     }
                 )
+                return ACTION_FAILURE;
+            }
+
+            try {
+                JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
+                    entity = StringEntity(checkObject)
+                }).entity)).getJSONArray("ds_user_info").getJSONObject(0).apply {
+                    studentInformation = StudentInformation(
+                        getString("KNAME"),
+                        number,
+                        ids,
+                        password,
+                        getString("DEPT_NAME"),
+                        "http://gcis.gachon.ac.kr/common/picture/haksa/shj/$number.jpg",
+                        getString("DEPT_CD")
+                    )
+                }
+
+            } catch (e: Exception) {
+                return ACTION_FAILURE;
             }
 
             try {
