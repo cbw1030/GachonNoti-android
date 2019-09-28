@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.ACTION_SUCCESS
-import io.wiffy.gachonNoti.function.getSharedItem
-import io.wiffy.gachonNoti.function.setSharedItem
+import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainContract
 import org.json.JSONObject
 import java.net.URL
+import kotlin.collections.ArrayList
 
 @SuppressLint("StaticFieldLeak")
 class InAppMessageAsyncTask(
@@ -52,12 +51,18 @@ class InAppMessageAsyncTask(
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun setFragmentList() {
         Component.myObject?.let {
             val count = it.getInt("count")
             val obj = it.getJSONArray("request")
 
             for (n in 0 until count) {
+
+                if (calculateDateIntegerDifference(obj.getJSONObject(n).getString("exp")) < 0) {
+                    continue
+                }
+
                 when (obj.getJSONObject(n).getString("type")) {
                     "text" -> {
                         mList.add(
