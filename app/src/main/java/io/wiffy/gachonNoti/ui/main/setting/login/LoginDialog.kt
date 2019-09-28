@@ -14,6 +14,7 @@ import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
+import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.gachonNoti.BuildConfig
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation
@@ -110,6 +111,8 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
 
     @SuppressLint("ApplySharedPref")
     private fun logout() {
+
+        val number = getSharedItem<String>("number")
         removeSharedItems(
             "id",
             "password",
@@ -133,6 +136,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         } else {
             toast("로그아웃 되었습니다.")
         }
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(number)
 
         Component.isBirthday = false
         MainActivity.mView.patternVisibility()
@@ -164,6 +168,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         } else {
             toast("로그인에 성공하였습니다.")
         }
+        FirebaseMessaging.getInstance().subscribeToTopic(information.number)
         (MainActivity.mView).askSetPattern()
         dismiss()
     }

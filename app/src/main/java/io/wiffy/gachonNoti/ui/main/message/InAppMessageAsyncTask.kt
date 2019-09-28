@@ -76,7 +76,12 @@ class InAppMessageAsyncTask(
                         )
                     }
                     "image" -> {
-                        TODO()
+                        mList.add(
+                            InAppImageFragment(
+                                obj.getJSONObject(n).getString("title"),
+                                obj.getJSONObject(n).getString("image")
+                            ) { mView.linkToSite(obj.getJSONObject(n).getString("url")) }
+                        )
                     }
                 }
             }

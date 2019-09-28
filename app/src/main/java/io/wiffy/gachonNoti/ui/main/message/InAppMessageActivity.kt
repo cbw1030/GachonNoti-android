@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.calculateDateDifference
@@ -41,11 +40,7 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
         inAppPager.adapter = mAdapter
         inAppPager.offscreenPageLimit = mList.size
 
-        findViewById<TabLayout>(R.id.tab_layout).setupWithViewPager(inAppPager)
-
-//        if (!intent.getBooleanExtra("isOpen", true)) {
-//            inAppBox.visibility = View.GONE
-//        }
+        tab_layout.setupWithViewPager(inAppPager)
 
         val rs = resources.getColor(
             R.color.color_gray
@@ -86,7 +81,7 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
             (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.let {
                 window.attributes.run {
                     width = (it.width * 0.8).toInt()
-                    height = (it.height * 0.7).toInt()
+                    height = (it.height * 0.8).toInt()
                 }
             }
         } catch (e: Exception) {

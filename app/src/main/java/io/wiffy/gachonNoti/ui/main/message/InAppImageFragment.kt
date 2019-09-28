@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.function.getRandomColorId
 import io.wiffy.gachonNoti.model.SuperContract
-import kotlinx.android.synthetic.main.fragment_inappmessage.view.*
+import kotlinx.android.synthetic.main.fragment_inappmessage_image.view.*
 
 @Suppress("DEPRECATION")
 class InAppImageFragment(
-    private val title: String = "", private val mContext: String = "",
+    private val title: String = "",
+    private val image: String,
     private val onClick: (() -> (Unit))? = null
 ) :
     SuperContract.SuperFragment() {
@@ -23,7 +25,12 @@ class InAppImageFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        myView = inflater.inflate(R.layout.fragment_inappmessage, container, false)
+        myView = inflater.inflate(R.layout.fragment_inappmessage_image, container, false)
+
+        if (onClick != null) {
+            myView.inappImage.setOnClickListener { onClick.invoke() }
+            myView.inappgo2.visibility = View.VISIBLE
+        }
 
         myView.inAppBackground.setBackgroundColor(
             resources.getColor(
@@ -31,13 +38,8 @@ class InAppImageFragment(
             )
         )
 
-        if (onClick != null) {
-            myView.inAppBackground.setOnClickListener { onClick.invoke() }
-            myView.inappgo.visibility = View.VISIBLE
-        }
+        Glide.with(this).load(image).into(myView.inappImage)
 
-        myView.inapptitle.text = title
-        myView.inappcontext.text = mContext
 
         return myView
     }
