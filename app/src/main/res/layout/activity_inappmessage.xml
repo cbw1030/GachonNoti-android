@@ -58,6 +58,7 @@
                     android:textSize="12sp" />
 
             <CheckBox
+                    android:textColor="@color/gray"
                     android:id="@+id/inAppBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,5 +69,6 @@
                     android:textSize="8sp" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

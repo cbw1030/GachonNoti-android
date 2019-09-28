@@ -45,11 +45,7 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
         }
 
         val rs = resources.getColor(
-            if (Component.darkTheme) {
-                getDarkColor1()
-            } else {
-                getThemeColor()
-            }
+            R.color.color_gray
         )
 
         inAppBox.buttonTintList = ColorStateList(

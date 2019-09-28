@@ -5,42 +5,40 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true">
-    <View
-            android:background="@color/white"
-            android:layout_alignParentStart="true"
-            android:id="@+id/leftview"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"/>
-    <View
-            android:background="@color/white"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/rightview"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"/>
 
-<RelativeLayout
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-
-            android:id="@+id/inapptitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    <TextView
-            android:id="@+id/inappcontext"
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/inapptitle"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:textColor="@color/white" />
+            android:scrollbars="vertical">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp">
+
+            <TextView
+
+                    android:id="@+id/inapptitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/inappcontext"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/inapptitle"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+    </ScrollView>
 
     <TextView
             android:id="@+id/inappgo"
@@ -53,5 +51,4 @@
             android:textColor="#99ffffff"
             android:textSize="10sp"
             android:visibility="gone" />
-</RelativeLayout>
 </RelativeLayout>
