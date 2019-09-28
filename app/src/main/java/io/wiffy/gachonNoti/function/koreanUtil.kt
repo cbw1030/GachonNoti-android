@@ -11,3 +11,8 @@ fun getWordByKorean(str: String, first: String, second: String) = str.last().let
         }
     }
 }
+
+fun StringBuilder.appendf(string:String)
+{
+    append("${string}\n")
+}

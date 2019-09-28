@@ -32,6 +32,7 @@ class LoginAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
+
         if (!isNetworkConnected(mView.sendContext())) {
             return ACTION_NETWORK_FAILURE
         }
@@ -53,7 +54,6 @@ class LoginAsyncTask(
             var mObject: JSONObject? = null
 
             try {
-
                 mObject =
                     JSONObject(EntityUtils.toString(DefaultHttpClient().execute(HttpPost("http://smart.gachon.ac.kr:8080//WebJSON").apply {
                         entity = StringEntity(sendObject.toString())
@@ -62,7 +62,7 @@ class LoginAsyncTask(
                 number = mObject.getJSONObject("ds_output").getString("userUniqNo")
 
             } catch (e: Exception) {
-                strBuilder.append(
+                strBuilder.appendf(
                     try {
                         "Login Error : ${
                         mObject?.getString("ErrorMsg")
@@ -71,7 +71,7 @@ class LoginAsyncTask(
                         ""
                     }
                 )
-                return ACTION_FAILURE;
+                return ACTION_FAILURE
             }
 
             try {
@@ -90,6 +90,8 @@ class LoginAsyncTask(
                 }
 
             } catch (e: Exception) {
+
+                strBuilder.appendf("Login Error : second error")
                 return ACTION_FAILURE;
             }
 
@@ -115,11 +117,11 @@ class LoginAsyncTask(
                 setSharedItem("birthday", data[0])
                 setSharedItem("gender", data[1][0].toInt() % 2 == 1)
             } catch (e: Exception) {
-                strBuilder.append("birthday : ${e.message}\n")
+                strBuilder.appendf("birthday : ${e.message}\n")
             }
 
         } catch (e: Exception) {
-            strBuilder.append("functionError : ${e.message}\n")
+            strBuilder.appendf("functionError : ${e.message}\n")
             return ACTION_FAILURE
         }
         return ACTION_SUCCESS

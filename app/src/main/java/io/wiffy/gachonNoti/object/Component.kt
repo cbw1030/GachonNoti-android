@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import io.wiffy.gachonNoti.R
+import org.json.JSONObject
 
 @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
 object Component {
@@ -14,6 +15,8 @@ object Component {
     lateinit var sharedPreferences: SharedPreferences
 
     var mHandler: Handler? = null
+
+    var myObject:JSONObject? = null
 
     var mFragmentList:ArrayList<Fragment?>?=null
 
