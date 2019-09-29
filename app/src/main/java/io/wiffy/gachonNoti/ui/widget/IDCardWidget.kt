@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
+import com.palecosmos.escapableforeach.escapableForEach
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.function.*
@@ -31,8 +32,9 @@ class IDCardWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        for (appWidgetId in appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId)
+        appWidgetIds.escapableForEach { _, value ->
+            updateAppWidget(context, appWidgetManager, value)
+            true
         }
     }
 
