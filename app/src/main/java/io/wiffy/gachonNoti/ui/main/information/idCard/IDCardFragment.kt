@@ -47,7 +47,7 @@ class IDCardFragment : IDCardContract.View() {
     }
 
     fun changeTheme() {
-            myView?.imageonyou?.clipToOutline = true
+        myView?.imageonyou?.clipToOutline = true
 
         myView?.gachonback?.setBackgroundColor(
             ContextCompat.getColor(
@@ -85,7 +85,7 @@ class IDCardFragment : IDCardContract.View() {
     @SuppressLint("SimpleDateFormat")
     fun setTimerAndQRCode(number: String) {
         if (handlerTask != null) {
-            handler.removeCallbacks(handlerTask)
+            handler.removeCallbacks(handlerTask!!)
         }
         myView?.timer?.text = initiationText
         count = initiation
@@ -109,7 +109,8 @@ class IDCardFragment : IDCardContract.View() {
             }
         }
 
-        handler.post(handlerTask)
+        if(handlerTask!=null)
+            handler.post(handlerTask!!)
 
         Glide.with(activity!!)
             .load(

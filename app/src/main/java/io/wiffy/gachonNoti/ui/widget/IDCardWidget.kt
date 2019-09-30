@@ -49,9 +49,9 @@ class IDCardWidget : AppWidgetProvider() {
 
         if (intent?.action == mAction) {
             val appWidgetManager = AppWidgetManager.getInstance(context)
-            val thisAppWidget = ComponentName(context?.packageName, IDCardWidget::class.java.name)
+            val thisAppWidget = ComponentName(context?.packageName!!, IDCardWidget::class.java.name)
             val appWidgets = appWidgetManager.getAppWidgetIds(thisAppWidget)
-            onUpdate(context!!, appWidgetManager, appWidgets)
+            onUpdate(context, appWidgetManager, appWidgets)
         }
     }
 

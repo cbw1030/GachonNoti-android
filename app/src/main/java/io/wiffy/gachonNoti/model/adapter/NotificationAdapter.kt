@@ -105,8 +105,9 @@ class NotificationAdapter(
                         }
                     }
                     itemView.setOnLongClickListener {
-                        (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).primaryClip =
+                        (context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
                             ClipData.newPlainText(item.text, item.link)
+                        )
                         Toast.makeText(context, "주소를 복사했습니다.", Toast.LENGTH_SHORT).show()
                         true
                     }

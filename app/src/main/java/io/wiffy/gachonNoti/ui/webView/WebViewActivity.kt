@@ -148,7 +148,7 @@ class WebViewActivity : WebViewContract.View() {
             true
         }
         else -> {
-            super.onOptionsItemSelected(item)
+            super.onOptionsItemSelected(item!!)
         }
     }
 

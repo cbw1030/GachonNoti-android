@@ -62,7 +62,7 @@ class LoginAsyncTask(
                 number = mObject.getJSONObject("ds_output").getString("userUniqNo")
 
             } catch (e: Exception) {
-                strBuilder.appendf(
+                strBuilder.appendEnter(
                     try {
                         "Login Error : ${
                         mObject?.getString("ErrorMsg")
@@ -91,7 +91,7 @@ class LoginAsyncTask(
 
             } catch (e: Exception) {
 
-                strBuilder.appendf("Login Error : second error")
+                strBuilder.appendEnter("Login Error : second error")
                 return ACTION_FAILURE;
             }
 
@@ -117,11 +117,11 @@ class LoginAsyncTask(
                 setSharedItem("birthday", data[0])
                 setSharedItem("gender", data[1][0].toInt() % 2 == 1)
             } catch (e: Exception) {
-                strBuilder.appendf("birthday : ${e.message}\n")
+                strBuilder.appendEnter("birthday : ${e.message}\n")
             }
 
         } catch (e: Exception) {
-            strBuilder.appendf("functionError : ${e.message}\n")
+            strBuilder.appendEnter("functionError : ${e.message}\n")
             return ACTION_FAILURE
         }
         return ACTION_SUCCESS

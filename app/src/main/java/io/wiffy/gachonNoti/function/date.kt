@@ -7,16 +7,19 @@ import kotlin.math.abs
 
 @SuppressLint("SimpleDateFormat")
 fun calculateDateDifference(date: String): Int = try {
-    val format = SimpleDateFormat("yyyy-mm-dd")
-    abs((format.parse(format.format(Date(System.currentTimeMillis()))).time - format.parse(date).time) / (24 * 60 * 60 * 1000)).toInt()
+    abs(
+        (Date().time - (SimpleDateFormat("yyyy-mm-dd").parse(
+            date
+        )?.time ?: 0L)) / (24 * 60 * 60 * 1000)
+    ).toInt()
 } catch (e: Exception) {
     7
 }
 
 @SuppressLint("SimpleDateFormat")
 fun calculateDateIntegerDifference(date: String): Int = try {
-    val format = SimpleDateFormat("yyyy-mm-dd")
-    ((format.parse(date).time - format.parse(format.format(Date(System.currentTimeMillis()))).time) / (24 * 60 * 60 * 1000)).toInt()
+    (((SimpleDateFormat("yyyy-mm-dd").parse(date)?.time ?: 0L)
+            - Date().time) / (24 * 60 * 60 * 1000)).toInt()
 } catch (e: Exception) {
-    7
+    -1
 }

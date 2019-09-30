@@ -75,7 +75,7 @@ fun classToTime(time: String): LongArray {
         end = "00:00:00"
     }
 
-    return longArrayOf(format.parse(start).time, format.parse(end).time)
+    return longArrayOf(format.parse(start)?.time?:0L, format.parse(end)?.time?:0L)
 }
 
 fun getRandomColorId(): Int = Component.timeTableColor[colorCount % 8].apply {

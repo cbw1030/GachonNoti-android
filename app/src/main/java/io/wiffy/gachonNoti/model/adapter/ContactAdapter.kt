@@ -14,6 +14,7 @@ import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.adapter_contact.view.*
 
+@Suppress("DEPRECATION")
 class ContactAdapter(
     var items: ArrayList<ContactInformation>,
     val context: Context

@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.information.credit
 
+import com.palecosmos.escapableforeach.escapableForEach
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.ACTION_FAILURE
 import io.wiffy.gachonNoti.function.ACTION_SUCCESS
@@ -39,13 +40,14 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
                 )
             ).select("tr")
 
-            for (x in 1 until page.size) {
-                page[x].text().split(" ").let {
+            page.escapableForEach { _, value ->
+                value?.text()!!.split(" ").let {
                     try {
                         list.add(CreditInformation(it[0], it[1], it[2]))
                     } catch (e: Exception) {
                     }
                 }
+                true
             }
 
             mView.initList(

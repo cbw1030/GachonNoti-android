@@ -12,8 +12,9 @@ import io.wiffy.gachonNoti.R
 
 class FirebaseMessagingService : FirebaseMessagingService() {
 
-    override fun onMessageReceived(p0: RemoteMessage?) {
-        if (p0?.notification != null) sendNotification(p0)
+    override fun onMessageReceived(p0: RemoteMessage) {
+        super.onMessageReceived(p0)
+        if (p0.notification != null) sendNotification(p0)
     }
 
     private fun sendNotification(p0: RemoteMessage) {

@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_inappmessage.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("DEPRECATION")
 class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener {
 
     lateinit var mAdapter: PagerAdapter

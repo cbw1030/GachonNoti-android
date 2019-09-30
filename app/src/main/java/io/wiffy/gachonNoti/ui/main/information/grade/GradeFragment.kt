@@ -60,19 +60,17 @@ class GradeFragment : GradeContract.View() {
                     add("${n}년")
                 }
             } catch (e: Exception) {
-
             }
-
         })
         myView?.findViewById<Spinner>(R.id.spinner_semester)?.adapter =
             ArrayAdapter(
-                context,
+                context!!,
                 R.layout.my_spinner,
                 arrayListOf("전체", "1학기", "2학기", "여름계절학기", "겨울계절학기")
             )
         myView?.findViewById<Spinner>(R.id.spinner_grade)?.adapter =
             ArrayAdapter(
-                context,
+                context!!,
                 R.layout.my_spinner,
                 arrayListOf("전체", "1학년", "2학년", "3학년", "4학년")
             )
@@ -88,7 +86,6 @@ class GradeFragment : GradeContract.View() {
                 ).execute()
             }
     }
-
 
     private fun getSpinnerValue(spinner: Spinner?): String {
         if (spinner?.selectedItem.toString() == "전체") return ""
@@ -128,7 +125,7 @@ class GradeFragment : GradeContract.View() {
 
     override fun setSpinner(list: ArrayList<String>) {
         myView?.findViewById<Spinner>(R.id.spinner_year)?.adapter =
-            ArrayAdapter(context, R.layout.my_spinner, list)
+            ArrayAdapter(context!!, R.layout.my_spinner, list)
     }
 
     fun loginInformationSetting(info: String) {
@@ -174,5 +171,4 @@ class GradeFragment : GradeContract.View() {
             on?.visibility = View.GONE
         }
     }
-
 }

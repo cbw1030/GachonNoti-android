@@ -98,7 +98,7 @@ class MainActivity : MainContract.View() {
             true
         }
         else -> {
-            super.onOptionsItemSelected(item)
+            super.onOptionsItemSelected(item!!)
         }
     }
 
@@ -187,7 +187,6 @@ class MainActivity : MainContract.View() {
         }.show()
         patternVisibility()
     }
-
 
     override fun patternVisibility() = mPresenter.patternVisibility()
 

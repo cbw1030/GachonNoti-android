@@ -23,6 +23,7 @@ import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_login.view.*
 
 
+@Suppress("DEPRECATION")
 class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
     private var tempLogin = false
 
@@ -168,7 +169,7 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         } else {
             toast("로그인에 성공하였습니다.")
         }
-        FirebaseMessaging.getInstance().subscribeToTopic(information.number)
+        FirebaseMessaging.getInstance().subscribeToTopic(information.number!!)
         (MainActivity.mView).askSetPattern()
         dismiss()
     }

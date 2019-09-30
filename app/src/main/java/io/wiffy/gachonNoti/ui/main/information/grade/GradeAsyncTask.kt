@@ -26,8 +26,6 @@ class GradeAsyncTask(
     //getJson("AVG_SQL")
     //getJson("SQL")
 
-    //TODO 메디컬 캠퍼스 성적이 안나온다.
-
     private fun getJson(str: String) = JSONObject().apply {
         put("fsp_cmd", "executeAjaxMap")
         put("fsp_action", "AffairsAction")

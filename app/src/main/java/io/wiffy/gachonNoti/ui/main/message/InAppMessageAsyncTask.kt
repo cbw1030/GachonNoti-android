@@ -59,7 +59,6 @@ class InAppMessageAsyncTask(
 
 
             for (n in 0 until count) {
-
                 if (calculateDateIntegerDifference(obj.getJSONObject(n).getString("exp")) < 0) {
                     continue
                 }

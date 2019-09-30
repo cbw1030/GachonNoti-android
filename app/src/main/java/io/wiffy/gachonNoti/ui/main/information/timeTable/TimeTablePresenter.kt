@@ -25,6 +25,7 @@ class TimeTablePresenter(val mView: TimeTableContract.View) : TimeTableContract.
 
         val colorStateList = HashMap<String, Int>()
 
+
         for (value in set.iterator()) {
             value.split("%^").let {
                 superList[dayToInt(it[0])].add(

@@ -80,7 +80,6 @@ class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context,
         option_birthday.run {
             setText(getSharedItem<String>("birthday"))
         }
-
     }
 
     override fun onBackPressed() = dismiss()

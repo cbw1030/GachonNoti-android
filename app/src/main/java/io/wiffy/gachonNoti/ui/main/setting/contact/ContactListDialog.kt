@@ -10,6 +10,7 @@ import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.adapter.ContactAdapter
 import kotlinx.android.synthetic.main.dialog_contact_list.*
 
+@Suppress("DEPRECATION")
 class ContactListDialog(context: Context, private val mList: ArrayList<ContactInformation>) :
     SuperContract.SuperDialog(context) {
     lateinit var adapter: ContactAdapter

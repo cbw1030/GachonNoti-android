@@ -22,7 +22,11 @@ class CreditFragment : CreditContract.View() {
     private var mInfo: String? = null
     private lateinit var adapter: CreditAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         myView = inflater.inflate(R.layout.fragment_information_credit, container, false)
 
         mPresenter = CreditPresenter(this)
@@ -35,7 +39,7 @@ class CreditFragment : CreditContract.View() {
         changeTheme()
         mInfo?.let {
             loginInformationSetting(it)
-        } ?: doneLogin(requireActivity(),context!!)
+        } ?: doneLogin(requireActivity(), context!!)
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,7 +61,7 @@ class CreditFragment : CreditContract.View() {
         mInfo = info
         myView?.let {
             if (info.length > 6) {
-               mPresenter.setLogin(info)
+                mPresenter.setLogin(info)
             }
         }
     }

@@ -58,10 +58,10 @@ class TimeTableAsyncTask(val mView: TimeTableContract.View, val number: String) 
                             information[1].trim(),
                             format.parse(preInformation[1].let {
                                 "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
-                            }.trim()).time,
+                            }.trim())?.time ?: 0,
                             format.parse(preInformation[3].let {
                                 "${it.substring(0, 2)}:${it.substring(2, 4)}:00"
-                            }.trim()).time
+                            }.trim())?.time ?: 0
                         )
                         set.add(table.information)
                     }

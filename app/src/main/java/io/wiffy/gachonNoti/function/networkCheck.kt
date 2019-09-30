@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.wiffy.gachonNoti.function
 
 import android.content.Context
