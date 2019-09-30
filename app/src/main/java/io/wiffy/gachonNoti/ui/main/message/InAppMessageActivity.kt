@@ -69,7 +69,7 @@ class InAppMessageActivity : SuperContract.SuperActivity(), View.OnClickListener
 
         setSharedItem(
             "lastDate",
-            SimpleDateFormat("yyyy-mm-dd").format(Date(System.currentTimeMillis()))
+            SimpleDateFormat("yyyy-MM-dd").format(Date(System.currentTimeMillis()))
         )
         setSharedItem("message", !inAppBox.isChecked)
 

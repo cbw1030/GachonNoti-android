@@ -40,7 +40,6 @@ class InAppImageFragment(
 
         Glide.with(this).load(image).into(myView.inappImage)
 
-
         return myView
     }
 

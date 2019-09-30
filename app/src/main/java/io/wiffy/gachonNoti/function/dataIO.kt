@@ -50,14 +50,15 @@ inline fun <reified T> getSharedItem(key: String, default: T): T = sharedPrefere
     } as T
 }
 
-inline fun <reified T> getSharedItems(vararg keys: String): HashMap<String, T>? = HashMap<String, T>().apply {
-    for (key in keys) {
-        try {
-            put(key, getSharedItem(key))
-        } catch (e: Exception) {
+inline fun <reified T> getSharedItems(vararg keys: String): HashMap<String, T>? =
+    HashMap<String, T>().apply {
+        for (key in keys) {
+            try {
+                put(key, getSharedItem(key))
+            } catch (e: Exception) {
+            }
         }
     }
-}
 
 fun removeSharedItem(key: String) = sharedPreferences.edit().remove(key).commit()
 
