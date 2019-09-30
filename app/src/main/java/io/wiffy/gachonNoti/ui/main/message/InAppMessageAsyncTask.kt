@@ -2,6 +2,7 @@ package io.wiffy.gachonNoti.ui.main.message
 
 import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
+import com.palecosmos.escapableforeach.escapableForEach
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
@@ -53,43 +54,37 @@ class InAppMessageAsyncTask(
 
     @SuppressLint("SimpleDateFormat")
     private fun setFragmentList() {
-        Component.myObject?.let {
-            val count = it.getInt("count")
-            val obj = it.getJSONArray("request")
-
-
-            for (n in 0 until count) {
-                if (calculateDateIntegerDifference(obj.getJSONObject(n).getString("exp")) < 0) {
-                    continue
+        Component.myObject?.getJSONArray("request").escapableForEach<JSONObject> { _, value ->
+            if (calculateDateIntegerDifference(value!!.getString("exp")) < 0) {
+                return@escapableForEach true
+            }
+            when (value.getString("type")) {
+                "text" -> {
+                    mList.add(
+                        InAppMessageFragment(
+                            value.getString("title"),
+                            value.getString("context")
+                        )
+                    )
                 }
-
-                when (obj.getJSONObject(n).getString("type")) {
-                    "text" -> {
-                        mList.add(
-                            InAppMessageFragment(
-                                obj.getJSONObject(n).getString("title"),
-                                obj.getJSONObject(n).getString("context")
-                            )
-                        )
-                    }
-                    "link" -> {
-                        mList.add(
-                            InAppMessageFragment(
-                                obj.getJSONObject(n).getString("title"),
-                                obj.getJSONObject(n).getString("context")
-                            ) { mView.linkToSite(obj.getJSONObject(n).getString("url")) }
-                        )
-                    }
-                    "image" -> {
-                        mList.add(
-                            InAppImageFragment(
-                                obj.getJSONObject(n).getString("title"),
-                                obj.getJSONObject(n).getString("image")
-                            ) { mView.linkToSite(obj.getJSONObject(n).getString("url")) }
-                        )
-                    }
+                "link" -> {
+                    mList.add(
+                        InAppMessageFragment(
+                            value.getString("title"),
+                            value.getString("context")
+                        ) { mView.linkToSite(value.getString("url")) }
+                    )
+                }
+                "image" -> {
+                    mList.add(
+                        InAppImageFragment(
+                            value.getString("title"),
+                            value.getString("image")
+                        ) { mView.linkToSite(value.getString("url")) }
+                    )
                 }
             }
+            return@escapableForEach true
         }
     }
 
