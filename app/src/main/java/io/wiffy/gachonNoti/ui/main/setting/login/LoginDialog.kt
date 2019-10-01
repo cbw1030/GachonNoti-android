@@ -35,7 +35,11 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
         settingColor()
 
         logout.setOnClickListener {
-            logout()
+            if (!isNetworkConnected(context)) {
+                toast("로그아웃에 문제가 발생했습니다.")
+            } else {
+                logout()
+            }
         }
         isLogin(Component.isLogin)
         gachon.text = Html.fromHtml(
@@ -170,6 +174,9 @@ class LoginDialog(context: Context) : SuperContract.SuperDialog(context) {
             toast("로그인에 성공하였습니다.")
         }
         FirebaseMessaging.getInstance().subscribeToTopic(information.number!!)
+            .addOnCompleteListener {
+                setSharedItem("mynum", true)
+            }
         (MainActivity.mView).askSetPattern()
         dismiss()
     }

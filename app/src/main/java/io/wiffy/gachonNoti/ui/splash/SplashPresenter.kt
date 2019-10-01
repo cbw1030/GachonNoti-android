@@ -20,6 +20,13 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
     override fun initPresent() {
         checking()
+        if (Component.isLogin && !getSharedItem("mynum", false)) {
+            FirebaseMessaging.getInstance().subscribeToTopic(getSharedItem("number"))
+                .addOnCompleteListener {
+                    setSharedItem("mynum", true)
+                }
+        }
+
         when (Component.firstBoot) {
             true -> channelSet()
             false -> mView.moveToMain()
@@ -54,7 +61,10 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
             setSharedItem("firstBooting", false)
         }
-        setSharedItem("lastDate",SimpleDateFormat("yyyy-mm-dd").format(Date(System.currentTimeMillis())))
+        setSharedItem(
+            "lastDate",
+            SimpleDateFormat("yyyy-mm-dd").format(Date(System.currentTimeMillis()))
+        )
         mView.moveToMain()
     }
 
