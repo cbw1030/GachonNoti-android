@@ -6,10 +6,10 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.google.firebase.messaging.FirebaseMessaging
+import io.wiffy.extension.getWordByKorean
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.getSharedItem
-import io.wiffy.gachonNoti.function.getWordByKorean
 import io.wiffy.gachonNoti.function.setSharedItem
 import java.text.SimpleDateFormat
 import java.util.*

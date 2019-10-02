@@ -15,6 +15,9 @@ import io.wiffy.gachonNoti.`object`.Component
 import kotlinx.android.synthetic.main.dialog_sign_in.*
 import android.app.AlertDialog
 import com.google.firebase.messaging.FirebaseMessaging
+import io.wiffy.extension.encrypt
+import io.wiffy.extension.getMACAddress
+import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.BuildConfig
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation

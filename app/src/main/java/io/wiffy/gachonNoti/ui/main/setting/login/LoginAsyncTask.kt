@@ -2,6 +2,8 @@ package io.wiffy.gachonNoti.ui.main.setting.login
 
 import android.os.Handler
 import android.os.Looper
+import io.wiffy.extension.appendEnter
+import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.StudentInformation

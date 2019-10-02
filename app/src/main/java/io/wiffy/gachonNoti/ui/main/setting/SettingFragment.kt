@@ -17,6 +17,9 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.hdodenhof.circleimageview.CircleImageView
+import io.wiffy.extension.getMACAddress
+import io.wiffy.extension.isNetworkConnected
+import io.wiffy.extension.restartApp
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.ContactInformation

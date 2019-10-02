@@ -53,4 +53,5 @@ dependencies {
     implementation 'info.hoang8f:android-segmented:1.0.6'
 
     implementation 'com.github.PaleCosmos:Escapable-Foreach:v1.2'
+    implementation 'com.github.wiffy-io:Extension_kotlin:v1.0'
 }

@@ -1,10 +1,10 @@
 package io.wiffy.gachonNoti.ui.main.information.timeTable
 
 import android.annotation.SuppressLint
+import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.`object`.Component
 import io.wiffy.gachonNoti.function.ACTION_FAILURE
 import io.wiffy.gachonNoti.function.ACTION_SUCCESS
-import io.wiffy.gachonNoti.function.isNetworkConnected
 import io.wiffy.gachonNoti.function.setSharedItem
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.model.TimeTableInformation

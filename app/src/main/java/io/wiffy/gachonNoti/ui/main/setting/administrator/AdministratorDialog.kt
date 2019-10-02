@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.setting.administrator
 import android.content.Context
 import android.os.Bundle
 import android.text.method.KeyListener
+import io.wiffy.extension.restartApp
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.function.*
 import io.wiffy.gachonNoti.model.SuperContract

@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 
+@Suppress("UNUSED_PARAMETER")
 class TimeTableWidget : AppWidgetProvider() {
 
     override fun onUpdate(
