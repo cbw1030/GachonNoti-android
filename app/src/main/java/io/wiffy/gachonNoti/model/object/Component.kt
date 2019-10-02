@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.`object`
+package io.wiffy.gachonNoti.model.`object`
 
 import android.app.Dialog
 import android.content.SharedPreferences

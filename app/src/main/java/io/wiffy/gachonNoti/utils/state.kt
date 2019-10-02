@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.function
+package io.wiffy.gachonNoti.utils
 
 const val STATE_NOTIFICATION = 0
 const val STATE_INFORMATION = 1

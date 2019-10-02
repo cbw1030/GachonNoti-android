@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import com.palecosmos.escapableforeach.escapableForEach
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.MainContract
 import org.json.JSONObject

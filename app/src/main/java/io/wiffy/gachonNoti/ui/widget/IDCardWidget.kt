@@ -20,7 +20,7 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.palecosmos.escapableforeach.escapableForEach
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import java.text.SimpleDateFormat
 
@@ -188,14 +188,12 @@ class IDCardWidget : AppWidgetProvider() {
         private fun qrCode(views: RemoteViews, num: String, context: Context, widgetId: Int) =
             Glide.with(context).asBitmap().load(
                 if (num != "hello") {
-                    matrixToBitmap(
-                        QRCodeWriter().encode(
-                            "m$num${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
-                            BarcodeFormat.QR_CODE,
-                            400,
-                            400
-                        )
-                    )
+                    QRCodeWriter().encode(
+                        "m$num${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
+                        BarcodeFormat.QR_CODE,
+                        400,
+                        400
+                    ).toBitmap()
                 } else {
                     Bitmap.createBitmap(100, 100, Bitmap.Config.RGB_565).apply {
                         for (x in 0 until 100) {

@@ -6,10 +6,10 @@ import android.os.Looper
 import com.github.eunsiljo.timetablelib.data.TimeData
 import com.github.eunsiljo.timetablelib.data.TimeTableData
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.ClassDataInformation
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.`object`.TimeCompare
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.model.`object`.TimeCompare
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import java.io.StringReader

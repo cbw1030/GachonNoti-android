@@ -8,9 +8,9 @@ import android.os.Build
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.extension.getWordByKorean
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.getSharedItem
-import io.wiffy.gachonNoti.function.setSharedItem
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.getSharedItem
+import io.wiffy.gachonNoti.utils.setSharedItem
 import java.text.SimpleDateFormat
 import java.util.*
 

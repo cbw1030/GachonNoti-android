@@ -3,8 +3,8 @@ package io.wiffy.gachonNoti.ui.main.setting
 import android.os.Handler
 import android.os.Looper
 import com.google.firebase.messaging.FirebaseMessaging
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.setSharedItem
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.setSharedItem
 
 class SettingPresenter(private val mView: SettingContract.View) : SettingContract.Presenter {
     override fun initPresent() = mView.changeView()

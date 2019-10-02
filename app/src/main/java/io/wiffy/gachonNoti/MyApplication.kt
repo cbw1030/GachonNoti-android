@@ -1,10 +1,11 @@
-package io.wiffy.gachonNoti.model
+package io.wiffy.gachonNoti
 
 import android.app.Application
 import android.content.Context
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.*
-import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
+import io.wiffy.gachonNoti.model.SuperContract
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.*
+import io.wiffy.gachonNoti.model.`object`.Component.sharedPreferences
 import java.util.*
 
 class MyApplication : Application(), SuperContract.WiffyObject {

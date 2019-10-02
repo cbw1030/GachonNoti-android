@@ -8,8 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -29,7 +29,7 @@ class SplashActivity : SplashContract.View() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
 
-        getScreenSize(this@SplashActivity)
+        getScreenSize()
 
         mPresenter = SplashPresenter(this, applicationContext)
         mPresenter.initPresent()

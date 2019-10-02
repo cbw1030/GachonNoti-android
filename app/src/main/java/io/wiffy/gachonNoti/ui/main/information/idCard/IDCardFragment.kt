@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.StudentInformation
 import kotlinx.android.synthetic.main.fragment_information_idcard.view.*
 import java.text.SimpleDateFormat
@@ -109,19 +109,17 @@ class IDCardFragment : IDCardContract.View() {
             }
         }
 
-        if(handlerTask!=null)
+        if (handlerTask != null)
             handler.post(handlerTask!!)
 
         Glide.with(activity!!)
             .load(
-                matrixToBitmap(
-                    QRCodeWriter().encode(
-                        "m$number${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
-                        BarcodeFormat.QR_CODE,
-                        400,
-                        400
-                    )
-                )
+                QRCodeWriter().encode(
+                    "m$number${SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())}",
+                    BarcodeFormat.QR_CODE,
+                    400,
+                    400
+                ).toBitmap()
             )
             .into(myView?.qrcode!!)
     }

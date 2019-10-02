@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.function
+package io.wiffy.gachonNoti.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

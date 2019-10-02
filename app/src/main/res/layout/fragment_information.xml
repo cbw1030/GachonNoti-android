@@ -62,7 +62,7 @@
 
         </RelativeLayout>
 
-        <io.wiffy.gachonNoti.model.MyViewPager
+        <io.wiffy.gachonNoti.model.customView.MyViewPager
                 android:id="@+id/pager3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -10,13 +10,13 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.CHECK_PATTERN
-import io.wiffy.gachonNoti.function.doneLogin
-import io.wiffy.gachonNoti.function.getSharedItem
-import io.wiffy.gachonNoti.function.getThemeButtonResource
+import io.wiffy.gachonNoti.utils.CHECK_PATTERN
+import io.wiffy.gachonNoti.utils.doneLogin
+import io.wiffy.gachonNoti.utils.getSharedItem
+import io.wiffy.gachonNoti.utils.getThemeButtonResource
 import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
-import io.wiffy.gachonNoti.model.PatternLockDialog
+import io.wiffy.gachonNoti.model.customView.PatternLockDialog
 import io.wiffy.gachonNoti.model.adapter.GradeAdapter
 import java.lang.Exception
 import java.util.*
@@ -48,7 +48,10 @@ class GradeFragment : GradeContract.View() {
             loginInformationSetting(it)
         } ?: doneLogin(requireActivity(), context!!)
         myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
-            PatternLockDialog(context!!, CHECK_PATTERN) { patternCheck() }.show()
+            PatternLockDialog(
+                context!!,
+                CHECK_PATTERN
+            ) { patternCheck() }.show()
         }
         setSpinner(ArrayList<String>().apply {
             add("전체")

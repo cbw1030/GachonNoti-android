@@ -1,8 +1,8 @@
-package io.wiffy.gachonNoti.function
+package io.wiffy.gachonNoti.utils
 
 import android.annotation.SuppressLint
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.`object`.Component.colorCount
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.model.`object`.Component.colorCount
 import java.lang.Exception
 import java.text.SimpleDateFormat
 

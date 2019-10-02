@@ -14,8 +14,8 @@ import com.github.eunsiljo.timetablelib.data.TimeTableData
 import com.github.eunsiljo.timetablelib.view.TimeTableView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.skydoves.whatif.whatIfNotNull
-import io.wiffy.gachonNoti.function.*
-import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.utils.*
+import io.wiffy.gachonNoti.model.`object`.Component
 import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")

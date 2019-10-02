@@ -21,9 +21,9 @@ import io.wiffy.extension.getMACAddress
 import io.wiffy.extension.isNetworkConnected
 import io.wiffy.extension.restartApp
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.ContactInformation
-import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.administrator.AdministratorDialog

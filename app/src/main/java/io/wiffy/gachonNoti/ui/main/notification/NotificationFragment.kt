@@ -8,16 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import io.wiffy.gachonNoti.function.getThemeColor
+import io.wiffy.gachonNoti.utils.getThemeColor
 import io.wiffy.gachonNoti.model.ParseList
-import io.wiffy.gachonNoti.`object`.VerticalSpaceItemDecoration
+import io.wiffy.gachonNoti.model.`object`.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.getDarkColor1
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.getDarkColor1
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
 
 @Suppress("DEPRECATION")

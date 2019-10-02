@@ -1,8 +1,8 @@
 @file:Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
 
-package io.wiffy.gachonNoti.function
+package io.wiffy.gachonNoti.utils
 
-import io.wiffy.gachonNoti.`object`.Component.sharedPreferences
+import io.wiffy.gachonNoti.model.`object`.Component.sharedPreferences
 import java.lang.Exception
 import java.util.HashMap
 

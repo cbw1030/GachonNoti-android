@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.getRandomColorId
+import io.wiffy.gachonNoti.utils.getRandomColorId
 import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.fragment_inappmessage.view.*
 

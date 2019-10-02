@@ -3,9 +3,9 @@ package io.wiffy.gachonNoti.ui.main.searcher
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
-import io.wiffy.gachonNoti.function.ACTION_SUCCESS
-import io.wiffy.gachonNoti.function.setSharedItem
-import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.utils.ACTION_SUCCESS
+import io.wiffy.gachonNoti.utils.setSharedItem
+import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.model.SuperContract
 import java.io.BufferedReader
 import java.io.InputStreamReader

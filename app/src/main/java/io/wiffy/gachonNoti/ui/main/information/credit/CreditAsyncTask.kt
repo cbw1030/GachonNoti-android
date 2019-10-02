@@ -2,10 +2,10 @@ package io.wiffy.gachonNoti.ui.main.information.credit
 
 import com.palecosmos.escapableforeach.escapableForEach
 import io.wiffy.extension.isNetworkConnected
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.ACTION_FAILURE
-import io.wiffy.gachonNoti.function.ACTION_SUCCESS
-import io.wiffy.gachonNoti.function.getSharedItem
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.ACTION_FAILURE
+import io.wiffy.gachonNoti.utils.ACTION_SUCCESS
+import io.wiffy.gachonNoti.utils.getSharedItem
 import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.SuperContract
 import org.apache.http.client.methods.HttpPost

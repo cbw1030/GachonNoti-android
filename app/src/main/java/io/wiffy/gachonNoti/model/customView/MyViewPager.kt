@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.model
+package io.wiffy.gachonNoti.model.customView
 
 import android.annotation.SuppressLint
 import android.content.Context

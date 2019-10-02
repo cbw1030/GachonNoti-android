@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.model
+package io.wiffy.gachonNoti.model.customView
 
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
@@ -7,7 +7,8 @@ import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.listener.PatternLockViewListener
 import com.andrognito.patternlockview.utils.PatternLockUtils
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.model.SuperContract
+import io.wiffy.gachonNoti.utils.*
 import kotlinx.android.synthetic.main.dialog_pattern_lock.*
 
 class PatternLockDialog(

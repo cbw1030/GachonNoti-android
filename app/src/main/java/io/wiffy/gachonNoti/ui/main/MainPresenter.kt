@@ -3,8 +3,8 @@ package io.wiffy.gachonNoti.ui.main
 import androidx.fragment.app.Fragment
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.extension.restartApp
-import io.wiffy.gachonNoti.function.*
-import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.utils.*
+import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.ui.main.information.MyInformationFragment
 import io.wiffy.gachonNoti.ui.main.notification.NotificationFragment
 import io.wiffy.gachonNoti.ui.main.searcher.SearcherFragment

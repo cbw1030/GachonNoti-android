@@ -18,10 +18,10 @@ import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.*
+import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.model.PatternLockDialog
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.model.customView.PatternLockDialog
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageActivity
 import kotlinx.android.synthetic.main.activity_main.*

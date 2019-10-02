@@ -1,7 +1,7 @@
-package io.wiffy.gachonNoti.function
+package io.wiffy.gachonNoti.utils
 
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.`object`.Component
+import io.wiffy.gachonNoti.model.`object`.Component
 
 fun getDarkColor1() = R.color.myDark1
 

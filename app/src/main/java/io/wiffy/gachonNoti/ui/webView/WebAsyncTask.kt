@@ -2,7 +2,7 @@ package io.wiffy.gachonNoti.ui.webView
 
 import android.os.Handler
 import android.os.Looper
-import io.wiffy.gachonNoti.function.ACTION_SUCCESS
+import io.wiffy.gachonNoti.utils.ACTION_SUCCESS
 import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL

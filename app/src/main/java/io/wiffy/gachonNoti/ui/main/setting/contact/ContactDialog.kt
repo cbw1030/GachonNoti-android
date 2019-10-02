@@ -8,7 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.getThemeButtonResource
+import io.wiffy.gachonNoti.utils.getThemeButtonResource
 import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.ui.main.setting.SettingContract
 import kotlinx.android.synthetic.main.dialog_contact.*

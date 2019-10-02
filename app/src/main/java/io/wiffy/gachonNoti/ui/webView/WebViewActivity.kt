@@ -12,12 +12,12 @@ import android.view.View
 import android.webkit.WebSettings
 import com.bumptech.glide.Glide
 import io.wiffy.gachonNoti.R
-import io.wiffy.gachonNoti.function.getThemeColor
-import io.wiffy.gachonNoti.function.getThemeDeepColor
+import io.wiffy.gachonNoti.utils.getThemeColor
+import io.wiffy.gachonNoti.utils.getThemeDeepColor
 import io.wiffy.gachonNoti.model.Parse
-import io.wiffy.gachonNoti.`object`.Component
-import io.wiffy.gachonNoti.function.getDarkColor1
-import io.wiffy.gachonNoti.function.getDarkColor2
+import io.wiffy.gachonNoti.model.`object`.Component
+import io.wiffy.gachonNoti.utils.getDarkColor1
+import io.wiffy.gachonNoti.utils.getDarkColor2
 import kotlinx.android.synthetic.main.activity_webview.*
 import java.lang.Exception
 

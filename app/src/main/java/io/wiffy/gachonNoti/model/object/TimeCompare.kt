@@ -1,4 +1,4 @@
-package io.wiffy.gachonNoti.`object`
+package io.wiffy.gachonNoti.model.`object`
 
 import com.github.eunsiljo.timetablelib.data.TimeData
 
