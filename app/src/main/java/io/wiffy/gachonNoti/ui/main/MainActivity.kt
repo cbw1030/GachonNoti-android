@@ -16,6 +16,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.dialog.MaterialDialogs
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.utils.*
@@ -153,12 +154,21 @@ class MainActivity : MainContract.View() {
     }
 
     override fun message() {
-        if (getSharedItem("message", true)) {
-            InAppMessageAsyncTask(this).execute()
-        } else {
-            if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
-                setSharedItem("message", true)
-                InAppMessageAsyncTask(this).execute()
+//        if (getSharedItem("message", true)) {
+//            InAppMessageAsyncTask(this).execute()
+//        } else {
+//            if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
+//                setSharedItem("message", true)
+//                InAppMessageAsyncTask(this).execute()
+//            }
+//        }
+        if (Component.isNew) {
+            Handler(mainLooper).post {
+                MaterialAlertDialogBuilder(this).apply {
+                    setTitle("${Component.version} 버전 업데이트")
+                    setMessage(resources.getString(R.string.update))
+                    setPositiveButton("OK"){_,_-> }
+                }.show()
             }
         }
     }

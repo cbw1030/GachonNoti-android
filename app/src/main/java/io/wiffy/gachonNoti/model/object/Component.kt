@@ -24,6 +24,8 @@ object Component {
 
     var darkTheme = false
 
+    var isNew = false
+
     var isBirthday = false
 
     var adminMode = false

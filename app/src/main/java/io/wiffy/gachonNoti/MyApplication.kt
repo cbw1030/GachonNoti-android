@@ -26,6 +26,7 @@ class MyApplication : Application(), SuperContract.WiffyObject {
         Component.campus = getSharedItem("campus", true)
 
         if (getSharedItem("preVersion", "") != Component.version) {
+            Component.isNew = true
             setSharedItem("preVersion", Component.version)
         }
 
