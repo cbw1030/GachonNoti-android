@@ -32,17 +32,6 @@
                     android:resource="@xml/widget_info_idcard" />
         </receiver>
 
-        <!--        <receiver-->
-        <!--                android:name=".ui.widget.TimeTableWidget"-->
-        <!--                android:label="시간표">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-        <!--            </intent-filter>-->
-        <!--            <meta-data-->
-        <!--                    android:name="android.appwidget.provider"-->
-        <!--                    android:resource="@xml/widget_info_timetable" />-->
-        <!--        </receiver>-->
-
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
                 android:resource="@drawable/notiicon" />
