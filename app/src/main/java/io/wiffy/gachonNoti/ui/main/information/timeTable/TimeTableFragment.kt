@@ -70,7 +70,7 @@ class TimeTableFragment : TimeTableContract.View() {
     override fun initTable(set: HashSet<String>) {
         Handler(Looper.getMainLooper()).post {
             val list = mPresenter.setTableList(set)
-            myView?.findViewById<TimeTableView>(R.id.mTable)?.let {
+            myView?.mTable?.let {
                 it.setOnTimeItemClickListener { _, _, data ->
                     toast(data.time.title)
                 }

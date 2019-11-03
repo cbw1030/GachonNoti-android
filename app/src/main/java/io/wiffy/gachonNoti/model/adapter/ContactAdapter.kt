@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.adapter_contact.view.*
 
 @Suppress("DEPRECATION")
 class ContactAdapter(
-    var items: ArrayList<ContactInformation>,
-    val context: Context
+    private var items: ArrayList<ContactInformation>,
+    private val context: Context
 ) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(), SuperContract.WiffyObject {
 

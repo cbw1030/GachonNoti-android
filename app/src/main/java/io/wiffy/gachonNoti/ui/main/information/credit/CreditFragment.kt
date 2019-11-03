@@ -7,14 +7,13 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.utils.doneLogin
 import io.wiffy.gachonNoti.utils.getSharedItem
 import io.wiffy.gachonNoti.model.CreditInformation
 import io.wiffy.gachonNoti.model.adapter.CreditAdapter
+import kotlinx.android.synthetic.main.fragment_information_credit.view.*
 
 class CreditFragment : CreditContract.View() {
     private var myView: View? = null
@@ -45,12 +44,12 @@ class CreditFragment : CreditContract.View() {
     @SuppressLint("SetTextI18n")
     override fun initList(list: ArrayList<CreditInformation>, cmd: String) {
         Handler(Looper.getMainLooper()).post {
-            myView?.findViewById<TextView>(R.id.credityou)?.text =
+            myView?.credityou?.text =
                 "$cmd/${getSharedItem<String>("department")}/${getSharedItem<String>("name")}/${getSharedItem<String>(
                     "number"
                 )}"
             adapter = CreditAdapter(list)
-            myView?.findViewById<RecyclerView>(R.id.creditRecycler2)?.run {
+            myView?.creditRecycler2?.run {
                 this.adapter = this@CreditFragment.adapter
                 layoutManager = LinearLayoutManager(activity)
             }

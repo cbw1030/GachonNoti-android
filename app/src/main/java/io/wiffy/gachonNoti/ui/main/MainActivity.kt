@@ -137,7 +137,7 @@ class MainActivity : MainContract.View() {
         pager.adapter = adapter
         pager.offscreenPageLimit = mList.size
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(navigation))
-        navigation.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        navigation.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -154,21 +154,12 @@ class MainActivity : MainContract.View() {
     }
 
     override fun message() {
-//        if (getSharedItem("message", true)) {
-//            InAppMessageAsyncTask(this).execute()
-//        } else {
-//            if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
-//                setSharedItem("message", true)
-//                InAppMessageAsyncTask(this).execute()
-//            }
-//        }
-        if (Component.isNew) {
-            Handler(mainLooper).post {
-                MaterialAlertDialogBuilder(this).apply {
-                    setTitle("${Component.version} 버전 업데이트")
-                    setMessage(resources.getString(R.string.update))
-                    setPositiveButton("OK"){_,_-> }
-                }.show()
+        if (getSharedItem("message", true)) {
+            InAppMessageAsyncTask(this).execute()
+        } else {
+            if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
+                setSharedItem("message", true)
+                InAppMessageAsyncTask(this).execute()
             }
         }
     }

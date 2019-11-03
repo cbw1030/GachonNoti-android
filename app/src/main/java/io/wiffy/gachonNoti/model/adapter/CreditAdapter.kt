@@ -10,7 +10,7 @@ import io.wiffy.gachonNoti.model.CreditInformation
 import kotlinx.android.synthetic.main.adapter_credit_information.view.*
 
 class CreditAdapter(
-    var items: ArrayList<CreditInformation>
+    private var items: ArrayList<CreditInformation>
 ) : RecyclerView.Adapter<CreditAdapter.CreditViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int) = CreditViewHolder(parent)
     override fun getItemCount(): Int = items.size

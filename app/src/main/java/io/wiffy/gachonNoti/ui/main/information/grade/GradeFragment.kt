@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.utils.CHECK_PATTERN
 import io.wiffy.gachonNoti.utils.doneLogin
@@ -18,6 +16,7 @@ import io.wiffy.gachonNoti.model.CreditAverage
 import io.wiffy.gachonNoti.model.CreditFormal
 import io.wiffy.gachonNoti.model.customView.PatternLockDialog
 import io.wiffy.gachonNoti.model.adapter.GradeAdapter
+import kotlinx.android.synthetic.main.fragment_information_grade.view.*
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
@@ -47,7 +46,7 @@ class GradeFragment : GradeContract.View() {
         mInfo?.let {
             loginInformationSetting(it)
         } ?: doneLogin(requireActivity(), context!!)
-        myView?.findViewById<Button>(R.id.gradeButton)?.setOnClickListener {
+        myView?.gradeButton?.setOnClickListener {
             PatternLockDialog(
                 context!!,
                 CHECK_PATTERN
@@ -65,20 +64,20 @@ class GradeFragment : GradeContract.View() {
             } catch (e: Exception) {
             }
         })
-        myView?.findViewById<Spinner>(R.id.spinner_semester)?.adapter =
+        myView?.spinner_semester?.adapter =
             ArrayAdapter(
                 context!!,
                 R.layout.my_spinner,
                 arrayListOf("전체", "1학기", "2학기", "여름계절학기", "겨울계절학기")
             )
-        myView?.findViewById<Spinner>(R.id.spinner_grade)?.adapter =
+        myView?.spinner_grade?.adapter =
             ArrayAdapter(
                 context!!,
                 R.layout.my_spinner,
                 arrayListOf("전체", "1학년", "2학년", "3학년", "4학년")
             )
 
-        myView?.findViewById<Button>(R.id.johaebutton)
+        myView?.johaebutton
             ?.setOnClickListener {
                 GradeAsyncTask(
                     this@GradeFragment,
@@ -127,7 +126,7 @@ class GradeFragment : GradeContract.View() {
     }
 
     override fun setSpinner(list: ArrayList<String>) {
-        myView?.findViewById<Spinner>(R.id.spinner_year)?.adapter =
+        myView?.spinner_year?.adapter =
             ArrayAdapter(context!!, R.layout.my_spinner, list)
     }
 
@@ -143,17 +142,17 @@ class GradeFragment : GradeContract.View() {
     override fun sendContext() = context
 
     fun changeTheme() {
-        myView?.findViewById<Button>(R.id.gradeButton)
+        myView?.gradeButton
             ?.setBackgroundResource(getThemeButtonResource())
-        myView?.findViewById<Button>(R.id.johaebutton)
+        myView?.johaebutton
             ?.setBackgroundResource(getThemeButtonResource())
     }
 
     override fun setView(avg: CreditAverage?, list: ArrayList<CreditFormal>) {
-        myView?.findViewById<TextView>(R.id.creditAverage)?.text =
+        myView?.creditAverage?.text =
             Html.fromHtml(avg.toString())
         adapter = GradeAdapter(list)
-        myView?.findViewById<RecyclerView>(R.id.creditRecycler)?.run {
+        myView?.creditRecycler?.run {
             this.adapter = this@GradeFragment.adapter
             layoutManager = LinearLayoutManager(activity)
         }
@@ -161,17 +160,14 @@ class GradeFragment : GradeContract.View() {
     }
 
     fun setViewVisibility(bool: Boolean) {
-        val on = myView?.findViewById<RelativeLayout>(R.id.gradeLayoutOn)
-        val on2 = myView?.findViewById<CardView>(R.id.johaecard)
-        val off = myView?.findViewById<RelativeLayout>(R.id.gradeLayoutOff)
         if (bool) {
-            on?.visibility = View.VISIBLE
-            on2?.visibility = View.VISIBLE
-            off?.visibility = View.GONE
+            myView?.gradeLayoutOn?.visibility = View.VISIBLE
+            myView?.johaecard?.visibility = View.VISIBLE
+            myView?.gradeLayoutOff?.visibility = View.GONE
         } else {
-            off?.visibility = View.VISIBLE
-            on2?.visibility = View.GONE
-            on?.visibility = View.GONE
+            myView?.gradeLayoutOff?.visibility = View.VISIBLE
+            myView?.gradeLayoutOn?.visibility = View.GONE
+            myView?.johaecard?.visibility = View.GONE
         }
     }
 }

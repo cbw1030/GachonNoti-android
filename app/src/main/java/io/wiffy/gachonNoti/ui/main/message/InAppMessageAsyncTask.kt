@@ -27,9 +27,8 @@ class InAppMessageAsyncTask(
         if ((!flag || !getSharedItem(Component.version, false))) {
             mList.add(
                 InAppMessageFragment(
-                    "${Component.version} 버전 업데이트", mView.sendContext().resources.getString(
-                        R.string.update
-                    )
+                    "${Component.version} 버전 업데이트",
+                    mView.sendContext().resources.getString(R.string.update)
                 )
             )
             setSharedItem(Component.version, true)

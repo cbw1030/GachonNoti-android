@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.adapter_notification_dark.view.*
 //        3 -> SCHOLARSHIP
 
 class NotificationAdapter(
-    var items: ParseList,
+    private var items: ParseList,
     private val context: Context,
     private val act: Activity,
     private val type: Int
