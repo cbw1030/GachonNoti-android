@@ -12,7 +12,7 @@ import java.util.*
 
 class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context, R.style.mStyle) {
 
-    lateinit var keyListener: KeyListener
+    private lateinit var keyListener: KeyListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

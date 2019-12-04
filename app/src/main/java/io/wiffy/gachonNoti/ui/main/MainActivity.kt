@@ -16,7 +16,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.dialog.MaterialDialogs
 import com.google.android.material.tabs.TabLayout
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.utils.*
