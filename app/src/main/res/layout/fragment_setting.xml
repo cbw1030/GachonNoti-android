@@ -392,7 +392,6 @@
                 <TableRow>
 
                     <RelativeLayout
-                            android:visibility="gone"
                             android:id="@+id/know"
                             android:layout_width="match_parent"
                             android:background="@drawable/setting_button"

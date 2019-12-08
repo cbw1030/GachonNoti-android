@@ -19,14 +19,13 @@ import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.Exception
 
-
 class LoginAsyncTask(
     private val ids: String,
     private val password: String,
     val mView: LoginDialog
 ) : SuperContract.SuperAsyncTask<Void, Void, Int>() {
 
-    lateinit var studentInformation: StudentInformation
+    private lateinit var studentInformation: StudentInformation
     private val strBuilder = StringBuilder()
 
     override fun onPreExecute() {
@@ -94,7 +93,7 @@ class LoginAsyncTask(
             } catch (e: Exception) {
 
                 strBuilder.appendEnter("Login Error : second error")
-                return ACTION_FAILURE;
+                return ACTION_FAILURE
             }
 
             try {
