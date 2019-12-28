@@ -13,8 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationManagerCompat
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.input.input
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.hdodenhof.circleimageview.CircleImageView
 import io.wiffy.extension.getMACAddress
@@ -26,7 +24,6 @@ import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
-import io.wiffy.gachonNoti.ui.main.setting.administrator.AdministratorDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
@@ -44,7 +41,6 @@ class SettingFragment : SettingContract.View() {
     lateinit var list: ArrayList<CircleImageView>
     private var secretCount = 0
     private var index = 0
-    private var adminCode = StringBuilder()
     private var flag = false
 
     override fun onCreateView(
@@ -88,7 +84,6 @@ class SettingFragment : SettingContract.View() {
                     } else {
                         toast("다크모드 사용중!")
                     }
-                    adminCode(x)
                 }
             }
         }
@@ -448,43 +443,6 @@ class SettingFragment : SettingContract.View() {
 
     override fun builderDismiss() = Handler(Looper.getMainLooper()).post {
         Component.getBuilder()?.dismiss()
-    }
-
-    private fun adminCode(id: Int) {
-        when (id) {
-            0 -> {
-                adminCode.append("0")
-                if (adminCode.toString() == "012120" && Component.adminMode) {
-                    MaterialDialog(activity!!).show {
-                        title(text = "Administrator Option")
-                        message(text = "Input Secret Code")
-                        input(hint = "Code") { _, text ->
-                            when (text.toString().trim()) {
-                                "감사합니다" -> {
-                                    AdministratorDialog(context).show()
-                                }
-                                else -> {
-                                    toast("Error")
-                                    dismiss()
-                                }
-                            }
-                        }
-                        positiveButton(text = "OK")
-                        negativeButton(text = "Cancel")
-                    }
-                    adminCode.clear()
-                } else {
-                    adminCode.clear()
-                    adminCode.append("0")
-                }
-            }
-            1 -> {
-                adminCode.append("1")
-            }
-            2 -> {
-                adminCode.append("2")
-            }
-        }
     }
 
     override fun adminLogout() = mPresenter.setAdminLogout()

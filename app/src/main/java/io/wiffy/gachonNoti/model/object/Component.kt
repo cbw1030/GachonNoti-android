@@ -30,7 +30,7 @@ object Component {
 
     var adminMode = false
 
-    var YEAR = "2019"
+    var YEAR = "2020"
 
     var isLogin = false
 

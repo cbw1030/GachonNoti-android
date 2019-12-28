@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 
+//개발 예정..
 @Suppress("UNUSED_PARAMETER")
 class TimeTableWidget : AppWidgetProvider() {
 
