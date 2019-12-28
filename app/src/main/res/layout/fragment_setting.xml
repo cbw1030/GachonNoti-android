@@ -405,7 +405,7 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_marginStart="15dp"
                                 android:gravity="center"
-                                android:text="그것을 알려드림 (베타)"
+                                android:text="알림이 공지"
                                 android:textColor="@color/BLACK" />
 
                     </RelativeLayout>
@@ -563,12 +563,12 @@
                         <TextView
                                 android:id="@+id/secretText"
                                 android:layout_width="wrap_content"
-                                android:layout_height="50dp"
+                                android:layout_height="30dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
-                                android:gravity="bottom|right"
+                                android:gravity="bottom|end"
                                 android:text="@string/wiffy"
                                 android:textSize="12sp"
                                 android:textColor="@color/gray2" />
