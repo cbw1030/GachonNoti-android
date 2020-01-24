@@ -27,10 +27,42 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                 }
         }
 
+        if(Component.isNew)
+        {
+            manageSubscribe()
+        }
+
         when (Component.firstBoot) {
             true -> channelSet()
             false -> mView.moveToMain()
         }
+    }
+
+    private fun manageSubscribe()
+    {
+        Component.isNew = false
+        val pre = getSharedItem("preVersion", "2.0.6").split(".")
+        setSharedItem("preVersion", Component.version)
+
+        try{
+            val a = pre[0].toInt()
+            val b = pre[1].toInt()
+            val c = pre[2].toInt()
+
+            if((a<2)||(a==2&&b==0&&c<6))
+            {
+                newSubscribe()
+            }
+
+        }catch (e:java.lang.Exception){
+
+        }
+    }
+
+    private fun newSubscribe()
+    {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
+        FirebaseMessaging.getInstance().subscribeToTopic("noti_android")
     }
 
     private fun channelSet() {
@@ -58,7 +90,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
     @SuppressLint("SimpleDateFormat")
     private fun subscribe() {
-        FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnSuccessListener {
+        FirebaseMessaging.getInstance().subscribeToTopic("noti_android").addOnSuccessListener {
             setSharedItem("firstBooting", false)
         }
         setSharedItem(

@@ -9,7 +9,7 @@ import io.wiffy.gachonNoti.utils.setSharedItem
 class SettingPresenter(private val mView: SettingContract.View) : SettingContract.Presenter {
     override fun initPresent() = mView.changeView()
     override fun setOff() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti").addOnCompleteListener {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti_android").addOnCompleteListener {
             if (it.isSuccessful) {
                 Component.notificationSet = false
                 setSharedItem("notiOn", false)
@@ -24,7 +24,7 @@ class SettingPresenter(private val mView: SettingContract.View) : SettingContrac
     }
 
     override fun setOn() {
-        FirebaseMessaging.getInstance().subscribeToTopic("noti").addOnCompleteListener {
+        FirebaseMessaging.getInstance().subscribeToTopic("noti_android").addOnCompleteListener {
             if (it.isSuccessful) {
                 Component.notificationSet = true
                 setSharedItem("notiOn", true)

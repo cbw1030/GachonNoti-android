@@ -29,13 +29,13 @@ class MainPresenter(private val mView: MainContract.View) :
 
     override fun positiveButton() {
         setSharedItem("notiOn", true)
-        FirebaseMessaging.getInstance().subscribeToTopic("noti")
+        FirebaseMessaging.getInstance().subscribeToTopic("noti_android")
     }
 
     override fun negativeButton() {
         Component.notificationSet = false
         setSharedItem("notiOn", false)
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("noti_android")
     }
 
     override fun logout() = (mList[STATE_SETTING] as SettingFragment).adminLogout()
