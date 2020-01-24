@@ -27,6 +27,7 @@ import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
+import io.wiffy.gachonNoti.ui.main.setting.keyWord.KeyWordDialog
 import io.wiffy.gachonNoti.ui.main.setting.login.LoginDialog
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import kotlinx.android.synthetic.main.fragment_setting.view.defaultColor
@@ -137,6 +138,12 @@ class SettingFragment : SettingContract.View() {
             flag = true
             false
         }
+
+        if(Component.notificationSet)
+        {
+            keyWordView(true)
+        }
+
         myView.darkMode.setOnCheckedChangeListener { it, isChecked ->
             if (flag) {
                 MaterialAlertDialogBuilder(context).apply {
@@ -182,6 +189,11 @@ class SettingFragment : SettingContract.View() {
                 ) { _, _ -> }
             }.show()
         }
+
+        myView.setting15.setOnClickListener {
+            KeyWordDialog(context!!).show()
+        }
+
         myView.source.setOnClickListener {
             MaterialAlertDialogBuilder(activity).apply {
                 setTitle(resources.getString(R.string.source))
@@ -315,6 +327,11 @@ class SettingFragment : SettingContract.View() {
         ContactAsyncTask(this, query, query2, query3).execute()
     }
 
+    override fun keyWordView(bool: Boolean) {
+        val visibility = if(bool){View.VISIBLE}else{View.GONE}
+        myView.setting15.visibility= visibility
+        myView.keyBar.visibility= visibility
+    }
 
     // hard coding
     private fun darkTheme() {
@@ -350,6 +367,8 @@ class SettingFragment : SettingContract.View() {
         myView.setting13_.setTextColor(resources.getColor(R.color.white))
         myView.know.setBackgroundResource(R.drawable.setting_button_dark)
         myView.setting14_.setTextColor(resources.getColor(R.color.white))
+        myView.setting15.setBackgroundResource(R.drawable.setting_button_dark)
+        myView.setting15_.setTextColor(resources.getColor(R.color.white))
     }
 
     fun themeChanger() {
@@ -462,6 +481,7 @@ class SettingFragment : SettingContract.View() {
     override fun setSwitch(bool: Boolean) {
         Handler(Looper.getMainLooper()).post {
             myView.notiSwitch.isChecked = bool
+            keyWordView(bool)
         }
     }
 }

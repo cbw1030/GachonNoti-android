@@ -20,6 +20,7 @@ interface SettingContract {
         abstract fun builderDismiss(): Boolean
         abstract fun changeCampus(bool: Boolean)
         abstract fun setSwitch(bool: Boolean)
+        abstract fun keyWordView(bool:Boolean)
         @SuppressLint("ShowToast")
         override fun toastLong(str: String) {
             Toast.makeText(activity, str, Toast.LENGTH_LONG).apply {
