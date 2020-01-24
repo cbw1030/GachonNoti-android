@@ -24,6 +24,7 @@ class WebAsyncTask(
     }
 
     override fun doInBackground(vararg params: Void?): Int {
+
         val address = if (redirect) {
             url
         } else {
@@ -69,7 +70,6 @@ class WebAsyncTask(
             }
         } catch (e: Exception) {
             mPresenter.updateWeb("<p>인터넷 연결을 확인해주세요.</p>")
-            //mPresenter.builderDismiss()
         }
 
         return ACTION_SUCCESS

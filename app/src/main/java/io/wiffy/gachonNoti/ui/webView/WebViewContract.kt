@@ -8,6 +8,7 @@ interface WebViewContract {
         abstract fun changeUI(javaS: String)
         abstract fun builderDismiss()
         abstract fun builderUp()
+        abstract fun mainNotification()
     }
 
     interface Presenter :SuperContract.SuperPresenter{

@@ -153,17 +153,6 @@ class MainActivity : MainContract.View() {
         })
     }
 
-    override fun message() {
-        if (getSharedItem("message", true)) {
-            InAppMessageAsyncTask(this).execute()
-        } else {
-            if (calculateDateDifference(getSharedItem("lastDate")) >= 7) {
-                setSharedItem("message", true)
-                InAppMessageAsyncTask(this).execute()
-            }
-        }
-    }
-
     override fun setMessage(mList: ArrayList<Fragment?>, flag: Boolean) {
         if (mList.size > 0) {
             Component.mFragmentList = mList

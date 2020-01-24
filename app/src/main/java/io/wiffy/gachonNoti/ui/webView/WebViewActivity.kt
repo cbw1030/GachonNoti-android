@@ -48,6 +48,12 @@ class WebViewActivity : WebViewContract.View() {
         themeChange()
     }
 
+    override fun mainNotification() {
+        webview.settings.setSupportZoom(true)
+        webview.settings.builtInZoomControls = false
+        webview.loadUrl(bundle.link)
+    }
+
     private fun initBuild() {
         Glide.with(this).load(R.drawable.defaults).into(logo_splash3)
         builder = Dialog(this@WebViewActivity).apply {
