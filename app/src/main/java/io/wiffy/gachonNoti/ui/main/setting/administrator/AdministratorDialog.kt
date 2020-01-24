@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.dialog_administrator.*
 import java.util.*
 
 /*
-// 테스팅용 관리자 다이얼로그
+// 테스팅용 관리자 다이얼로
 */
 
 class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context, R.style.mStyle) {

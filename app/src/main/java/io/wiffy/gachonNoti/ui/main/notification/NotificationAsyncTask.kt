@@ -1,5 +1,6 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import io.wiffy.extension.isNetworkConnected
@@ -12,6 +13,9 @@ import io.wiffy.gachonNoti.utils.ACTION_SUCCESS2
 import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 
 class NotificationAsyncTask(
@@ -39,6 +43,7 @@ class NotificationAsyncTask(
             else -> "358"
         }}&pageNum=$pageNum&searchword=$keyword&searchopt=title"
 
+    @SuppressLint("SimpleDateFormat")
     override fun onPreExecute() {
         Handler(Looper.getMainLooper()).post {
             Component.getBuilder()?.show()
@@ -48,7 +53,7 @@ class NotificationAsyncTask(
                 Parse(
                     value = "가천알림이 공지사항",
                     text = "가천알림이 공지사항",
-                    data = "",
+                    data = SimpleDateFormat("yyyy-MM-dd").format(Date()),
                     isNotification = true,
                     isNew = true,
                     isSave = false,
