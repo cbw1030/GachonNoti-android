@@ -10,9 +10,13 @@ import io.wiffy.gachonNoti.model.SuperContract
 import kotlinx.android.synthetic.main.dialog_administrator.*
 import java.util.*
 
+/*
+// 테스팅용 관리자 다이얼로그
+*/
+
 class AdministratorDialog(context: Context) : SuperContract.SuperDialog(context, R.style.mStyle) {
 
-    lateinit var keyListener: KeyListener
+    private lateinit var keyListener: KeyListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
