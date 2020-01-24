@@ -25,7 +25,6 @@ class MainPresenter(private val mView: MainContract.View) :
         add(SearcherFragment())
         add(SettingFragment())
         mView.initView(this)
-        mView.message()
     }
 
     override fun positiveButton() {

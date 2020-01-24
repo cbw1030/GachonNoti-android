@@ -38,7 +38,11 @@ class SearchAsyncTask(
             21
         }
         val url =
-            "http://gcis.gachon.ac.kr/haksa/src/jsp/ssu/ssu1000q.jsp?groupType=$type&searchYear=2019&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
+            "http://gcis.gachon.ac.kr/haksa/src/jsp/ssu/ssu1000q.jsp?groupType=$type&searchYear=${if (mySemester != 21) {
+                Component.YEAR
+            } else {
+                (Component.YEAR.toInt() - 1).toString()
+            }}&searchTerm=$mySemester&$data&operationType=MAINSEARCH&comType=DEPT_TOT_CD&comViewValue=N&comResultTarget=cbDeptCD&condition1=CS0000&condition2=20&condition3=TOT"
 
         try {
             (URL(url).openConnection() as HttpURLConnection).apply {

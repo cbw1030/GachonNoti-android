@@ -43,6 +43,19 @@ class NotificationAsyncTask(
         Handler(Looper.getMainLooper()).post {
             Component.getBuilder()?.show()
         }
+        if (list.isEmpty()) {
+            list.add(
+                Parse(
+                    value = "가천알림이 공지사항",
+                    text = "가천알림이 공지사항",
+                    data = "",
+                    isNotification = true,
+                    isNew = true,
+                    isSave = false,
+                    link = "http://wiffy.io/gachon/notification/"
+                )
+            )
+        }
     }
 
     override fun doInBackground(vararg params: Void?): Int {

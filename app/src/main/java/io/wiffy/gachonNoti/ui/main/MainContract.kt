@@ -22,7 +22,6 @@ interface MainContract {
         abstract fun mainLogout()
         abstract fun mainLogin()
         abstract fun darkTheme()
-        abstract fun message()
         abstract fun linkToSite(url:String)
         abstract fun setMessage(mList:ArrayList<Fragment?>, flag:Boolean)
     }
