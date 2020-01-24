@@ -78,7 +78,36 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp" />
                 </TableRow>
+                <TableRow>
 
+                    <RelativeLayout
+                            android:visibility="gone"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:id="@+id/setting15"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/setting_button">
+
+                        <TextView
+                                android:id="@+id/setting15_"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
+                                android:gravity="center"
+                                android:text="키워드 알림"
+                                android:textColor="@color/BLACK" />
+                    </RelativeLayout>
+                </TableRow>
+
+                <TableRow>
+
+                    <View
+                            android:visibility="gone"
+                            android:id="@+id/keyBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
+                </TableRow>
                 <TableRow>
 
                     <RelativeLayout

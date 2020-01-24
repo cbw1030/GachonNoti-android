@@ -14,6 +14,7 @@ class SettingPresenter(private val mView: SettingContract.View) : SettingContrac
                 Component.notificationSet = false
                 setSharedItem("notiOn", false)
                 toast("알림 OFF")
+                mView.keyWordView(false)
             } else {
                 toast("알 수 없는 오류")
                 setSharedItem("notiOn", true)
@@ -28,6 +29,7 @@ class SettingPresenter(private val mView: SettingContract.View) : SettingContrac
                 Component.notificationSet = true
                 setSharedItem("notiOn", true)
                 toast("알림 ON")
+                mView.keyWordView(true)
             } else {
                 setSharedItem("notiOn", false)
                 toast("알 수 없는 오류")
