@@ -12,11 +12,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
+import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.adapter.PagerAdapter
@@ -24,6 +27,7 @@ import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.model.customView.PatternLockDialog
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
 import io.wiffy.gachonNoti.ui.main.message.InAppMessageActivity
+import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Suppress("DEPRECATION")
@@ -150,6 +154,16 @@ class MainActivity : MainContract.View() {
                 )
             }
         })
+        if(Component.isNew)
+        {
+            Component.isNew = false
+            setSharedItem("preVersion", Component.version)
+            MaterialDialog(this).show {
+                title(text="${Component.version} 버전 업데이트")
+                message(text=resources.getString(R.string.update))
+                positiveButton(text = "확인")
+            }
+        }
     }
 
     override fun setMessage(mList: ArrayList<Fragment?>, flag: Boolean) {

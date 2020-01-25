@@ -29,8 +29,7 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
         keySwitch.setOnCheckedChangeListener { _, isChecked ->
             setEnabled(isChecked)
 
-            if(isChecked)
-            {
+            if (isChecked) {
                 toastLong("키워드가 포함되지 않은\n알림은 무시됩니다.")
             }
             use = isChecked
@@ -46,33 +45,33 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
         setEnabled(use)
     }
 
-    private fun onClick()
-    {
+    private fun onClick() {
         val msg = keywordEdit.text.toString()
 
-        if(msg.isNotBlank())
-        {
-            if(list.contains(msg))
-            {
+        if (msg.isNotBlank()) {
+            if (list.contains(msg)) {
                 toast("이미있네")
                 return
             }
             keywordRecycler.adapter?.notifyItemInserted(0)
-            list.add(0,msg)
+            list.add(0, msg)
             keywordEdit.setText("")
 
             setSharedItem("notiKeySet", list.toHashSet())
 
             //toast("${getSharedItem<HashSet<String>>("notiKeySet").toMutableList().size}")
-        }
-        else{
+        } else {
             toast("비어있네")
         }
     }
 
     private fun setTheme() {
 
-        keyword.setBackgroundColor(context.resources.getColor(getThemeColor()))
+        if (Component.darkTheme) {
+            keyword.setBackgroundColor(context.resources.getColor(getDarkColor2()))
+        } else {
+            keyword.setBackgroundColor(context.resources.getColor(getThemeColor()))
+        }
         addKeyword.setBackgroundResource(getThemeButtonResource())
 
         arrayOf(
@@ -114,20 +113,18 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
     private fun setEnabled(bool: Boolean) {
         keywordEdit.isEnabled = bool
         addKeyword.isEnabled = bool
-        if(bool)
-        {
+        if (bool) {
             frames.visibility = View.VISIBLE
             addKeyword.setBackgroundResource(getThemeButtonResource())
 
-            if(list.isEmpty())
-            {
+            if (list.isEmpty()) {
                 keywordRecycler.visibility = View.GONE
                 noKey.visibility = View.VISIBLE
-            }else{
+            } else {
                 keywordRecycler.visibility = View.VISIBLE
                 noKey.visibility = View.GONE
             }
-        }else{
+        } else {
             frames.visibility = View.GONE
             addKeyword.setBackgroundColor(context.resources.getColor(R.color.gray2))
         }

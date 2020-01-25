@@ -40,9 +40,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
     private fun manageSubscribe()
     {
-        Component.isNew = false
         val pre = getSharedItem("preVersion", "2.0.6").split(".")
-        setSharedItem("preVersion", Component.version)
 
         try{
             val a = pre[0].toInt()
