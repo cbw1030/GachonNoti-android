@@ -14,6 +14,8 @@ object Component {
 
     lateinit var sharedPreferences: SharedPreferences
 
+    var keyWordData:String? = null
+
     var mHandler: Handler? = null
 
     var myObject:JSONObject? = null

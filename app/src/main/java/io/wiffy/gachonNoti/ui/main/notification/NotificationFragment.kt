@@ -1,11 +1,13 @@
 package io.wiffy.gachonNoti.ui.main.notification
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.wiffy.gachonNoti.utils.getThemeColor
@@ -15,10 +17,12 @@ import kotlinx.android.synthetic.main.fragment_notification.view.*
 import io.wiffy.gachonNoti.ui.main.MainActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.utils.getDarkColor1
 import io.wiffy.gachonNoti.model.adapter.NotificationAdapter
+import io.wiffy.gachonNoti.ui.webView.WebViewActivity
 
 @Suppress("DEPRECATION")
 class NotificationFragment : NotificationContract.View() {
@@ -136,7 +140,38 @@ class NotificationFragment : NotificationContract.View() {
         }
     }
 
-    override fun updateUI(list: ParseList) = adapter.update(list)
+    override fun updateUI(list: ParseList) {
+        adapter.update(list)
+        if (Component.keyWordData != null) {
+            for (data in list) {
+                if (data.text.contains(Component.keyWordData.let {
+                        it?.substring(
+                            0, if (it.length < 3) {
+                                it.length
+                            } else {
+                                it.length * 2 / 3
+                            }
+                        ) ?: ""
+                    })) {
+                    console(data.text)
+                    if (!Component.surfing) {
+                        Component.surfing = true
+                        if (isNetworkConnected(activity!!)) {
+                            Component.noneVisible = true
+                            val myIntent = Intent(activity, WebViewActivity::class.java)
+                            myIntent.putExtra("bundle", data)
+                            activity?.startActivity(myIntent)
+                        } else {
+                            Component.surfing = false
+                            Toast.makeText(activity, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    break
+                }
+            }
+            Component.keyWordData = null
+        }
+    }
 
     override fun search(str: String) = mPresenter.search(str)
 

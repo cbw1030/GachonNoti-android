@@ -36,6 +36,12 @@ class SplashActivity : SplashContract.View() {
     }
 
     override fun moveToMain() {
+        val dt = intent.getStringExtra("keyData")
+        if(!dt.isNullOrBlank())
+        {
+            console(dt)
+            Component.keyWordData = dt
+        }
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
