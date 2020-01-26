@@ -21,8 +21,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(p0)
         val prefer = getSharedPreferences("GACHONNOTICE", Context.MODE_PRIVATE)
         if (prefer.getBoolean("notiKey", false)) {
-            if (hasKeyword(prefer, p0.data["body"]))
-            {
+            if (hasKeyword(prefer, p0.data["body"])) {
                 //sendNotification(p0)
                 sendData(p0)
             }
@@ -32,42 +31,18 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-//    Notification이 아닌 Data로 보내야만 catch하여 설정가능 -> Intent도 사용 가능하더라.
-//    # fcm 푸시 메세지 요청 주소
-//    url = 'https://fcm.googleapis.com/fcm/send'
-//    token = "AAAAx5GXkQE:APA91bHFo3VHbWdQxGVL6lomgIvYnFBcizA1BrmrsTbfFO7_DR31uFjGBesMBsrlOLkPNH1azvXEoZw4an_GuEtovxBI3YjBA-VKhKmy7P5FRpM4FGPWnlyfZ-5CXX9quTQWJG2Rsvun"
-//
-//    # 인증 정보(서버 키)를 헤더에 담아 전달
-//    headers = {
-//        'Authorization': 'key='+token,
-//        'Content-Type': 'application/json; UTF-8',
-//    }
-//
-//    # 보낼 내용과 대상을 지정
-//    content = {
-//        'to': "/topics/noti_android",
-//        'data': {
-//            'title': '가천알림이',
-//            'body': strf,
-//            'clickAction': 'android.intent.action.MAIN'
-//        }
-//    }
-//
-//    # json 파싱 후 requests 모듈로 FCM 서버에 요청
-//    requests.post(url, data=json.dumps(content), headers=headers)
-
-    private fun sendData(p0:RemoteMessage)
-    {
+    private fun sendData(p0: RemoteMessage) {
         val title = p0.data["title"] ?: getString(R.string.app_name)
         val message = p0.data["body"] ?: ""
-        val clickAction =p0.data["clickAction"]?:""
+        val clickAction = p0.data["clickAction"] ?: ""
 
         val isLatest = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
         val intent = Intent(this, SplashActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra("keyData",message)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT
+        intent.putExtra("keyData", message)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_ONE_SHOT
         )
 
         val notificationBuilder =

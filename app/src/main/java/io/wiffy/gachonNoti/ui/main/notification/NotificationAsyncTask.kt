@@ -3,6 +3,7 @@ package io.wiffy.gachonNoti.ui.main.notification
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.utils.ACTION_FAILURE
 import io.wiffy.gachonNoti.utils.ACTION_SUCCESS
@@ -48,19 +49,6 @@ class NotificationAsyncTask(
         Handler(Looper.getMainLooper()).post {
             Component.getBuilder()?.show()
         }
-        if (list.isEmpty()) {
-            list.add(
-                Parse(
-                    value = "가천알림이 공지사항",
-                    text = "가천알림이 공지사항",
-                    data = SimpleDateFormat("yyyy-MM-dd").format(Date()),
-                    isNotification = true,
-                    isNew = true,
-                    isSave = false,
-                    link = "http://wiffy.io/gachon/notification/"
-                )
-            )
-        }
     }
 
     override fun doInBackground(vararg params: Void?): Int {
@@ -69,6 +57,23 @@ class NotificationAsyncTask(
         }
         return try {
             if (keyword == "" && list.isEmpty()) {
+
+                var serverNotification =
+                    URL("http://wiffy.io/gachon/notification.txt").readText().split(",")
+                if (serverNotification[0] == "on") {
+                    list.add(
+                        Parse(
+                            value = "가천알림이",
+                            text = serverNotification[1],
+                            data = serverNotification[2],
+                            isNotification = true,
+                            isNew = true,
+                            isSave = false,
+                            link = serverNotification[3]
+                        )
+                    )
+                }
+
                 request(true)
             }
             request(false)

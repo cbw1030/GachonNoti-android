@@ -211,7 +211,7 @@ class SearcherPresenter(private val mView: SearchContract.View) : SearchContract
 
     override fun loadTable(str: String) {
         Handler(Looper.getMainLooper()).post {
-            Component.getBuilder()?.show()
+            //Component.getBuilder()?.show()
         }
         Thread(Runnable {
             tableArr = ArrayList(6)
