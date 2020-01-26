@@ -15,7 +15,7 @@
     <string name="helper">후원 목록</string>
     <string name="version">버전</string>
     <string name="ssss">설정을 확인해주세요.</string>
-    <string name="wiffy">이 소프트웨어는 오픈되어 있습니다.\nAppach 2.0 라이센스를 따릅니다.</string>
+    <string name="wiffy">Copyright 2020 WIFFY\nLicensed under the Apache 2.0 License</string>
     <string name="report">버그리포트 (카카오톡 오픈채팅)</string>
     <string name="mCampus">캠퍼스</string>
     <string name="account">계정관리</string>
