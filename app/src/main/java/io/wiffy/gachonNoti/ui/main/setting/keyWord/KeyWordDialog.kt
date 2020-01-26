@@ -36,6 +36,12 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
             setSharedItem("notiKey", isChecked)
         }
 
+        //list가 비어있으면 KeyWordAdapter에 list가 안넘어가는거같음
+        //필요없는 데이터 "%nodata%" 넣고 뒤에서 remove해주면 일다 해결됨
+        if(list.isEmpty()){
+            list.add(0, "%nodata%")
+        }
+
         keywordRecycler.adapter = KeyWordAdapter(list, context)
         keywordRecycler.layoutManager = LinearLayoutManager(context)
         keywordRecycler.addItemDecoration(
@@ -50,18 +56,19 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
 
         if (msg.isNotBlank()) {
             if (list.contains(msg)) {
-                toast("이미있네")
+                toast("이미 존재하는 키워드입니다.")
                 return
             }
-            keywordRecycler.adapter?.notifyItemInserted(0)
+
             list.add(0, msg)
+            keywordRecycler.adapter?.notifyItemInserted(0)
+
             keywordEdit.setText("")
 
             setSharedItem("notiKeySet", list.toHashSet())
-
             //toast("${getSharedItem<HashSet<String>>("notiKeySet").toMutableList().size}")
         } else {
-            toast("비어있네")
+            toast("키워드를 입력해주세요.")
         }
     }
 
@@ -124,9 +131,19 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
                 keywordRecycler.visibility = View.VISIBLE
                 noKey.visibility = View.GONE
             }
+
+            if(list.contains("%nodata%")){
+                list.removeAt(0)
+                keywordRecycler.adapter?.notifyItemInserted(0)
+            }
         } else {
             frames.visibility = View.GONE
             addKeyword.setBackgroundColor(context.resources.getColor(R.color.gray2))
+
+            if(list.isEmpty()){
+                list.add(0, "%nodata%")
+                keywordRecycler.adapter?.notifyItemInserted(0)
+            }
         }
     }
 }

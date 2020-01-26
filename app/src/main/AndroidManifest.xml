@@ -50,6 +50,7 @@
                 android:name=".ui.main.message.InAppMessageActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/mStyle2" />
+
         <activity
                 android:name=".ui.splash.SplashActivity"
                 android:screenOrientation="portrait">
@@ -58,7 +59,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.webView.WebViewActivity" />
+
         <activity
                 android:name=".ui.main.MainActivity"
                 android:screenOrientation="portrait" />
@@ -71,6 +74,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

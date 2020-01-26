@@ -1,7 +1,9 @@
 package io.wiffy.gachonNoti.model.adapter
 
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
@@ -11,6 +13,7 @@ import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.utils.getThemeButtonResource
 import io.wiffy.gachonNoti.utils.setSharedItem
 import kotlinx.android.synthetic.main.adapter_keyword.view.*
+import java.lang.Exception
 
 @Suppress("DEPRECATION")
 class KeyWordAdapter(
@@ -29,18 +32,29 @@ class KeyWordAdapter(
             bt.setBackgroundResource(getThemeButtonResource())
 
             bt.setOnClickListener {
-                notifyItemRemoved(position)
-                items.removeAt(position)
-                setSharedItem("notiKeySet", items.toHashSet())
+                var realPosition = findPosition(items, t1.text.toString())
+                if (realPosition != -1) {
+                    items.removeAt(realPosition)
+                    notifyItemRemoved(realPosition)
+                    setSharedItem("notiKeySet", items.toHashSet())
+                }
             }
         }
 
+    private fun findPosition(items: MutableList<String>, word: String): Int {
+        for ((index, value) in items.withIndex()) {
+            if (value == word) {
+                return index
+            }
+        }
+        return -1
+    }
 
     inner class KeyWordViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter_keyword, parent, false)
     ) {
         val t1: TextView = itemView.word
-        val bt:Button = itemView.deleteKeyword
+        val bt: Button = itemView.deleteKeyword
     }
 
 }

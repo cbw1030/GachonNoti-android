@@ -71,7 +71,7 @@ class NotificationAdapter(
                                     contexts.text = "메디컬"
                                     R.color.green
                                 }
-                                item.value.contains("알림")->{
+                                item.value.contains("알림") -> {
                                     contexts.text = "알림이"
                                     R.color.main2DeepBlue
                                 }

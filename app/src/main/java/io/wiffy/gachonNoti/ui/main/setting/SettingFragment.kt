@@ -139,8 +139,7 @@ class SettingFragment : SettingContract.View() {
             false
         }
 
-        if(Component.notificationSet)
-        {
+        if (Component.notificationSet) {
             keyWordView(true)
         }
 
@@ -289,8 +288,7 @@ class SettingFragment : SettingContract.View() {
         }
 
         myView.know.setOnClickListener {
-            if(Component.newActivity)
-            {
+            if (Component.newActivity) {
                 Component.newActivity = false
                 InAppMessageAsyncTask(MainActivity.mView, false).execute()
             }
@@ -328,9 +326,13 @@ class SettingFragment : SettingContract.View() {
     }
 
     override fun keyWordView(bool: Boolean) {
-        val visibility = if(bool){View.VISIBLE}else{View.GONE}
-        myView.setting15.visibility= visibility
-        myView.keyBar.visibility= visibility
+        val visibility = if (bool) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+        myView.setting15.visibility = visibility
+        myView.keyBar.visibility = visibility
     }
 
     // hard coding

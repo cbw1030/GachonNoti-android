@@ -2,115 +2,116 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:maxHeight="500dp">
 
     <RelativeLayout
             android:id="@+id/keyword"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@color/main2DeepBlue">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="40dp"
-                android:text="키워드"
+                android:layout_marginStart="20dp"
+                android:text="키워드 설정"
+                android:layout_centerInParent="true"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
     </RelativeLayout>
 
-    <FrameLayout
-            android:id="@+id/frames"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/keyword">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/keywordRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone" />
-
-        <TextView
-                android:id="@+id/noKey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="키워드가 존재하지 않습니다." />
-    </FrameLayout>
-
     <LinearLayout
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
             android:id="@+id/keyWordInputs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/frames"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_below="@id/keyword"
+            android:orientation="vertical">
 
         <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <EditText
+                    android:hint="키워드 알림 입력"
                     android:id="@+id/keywordEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
                     android:enabled="false" />
         </RelativeLayout>
 
         <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <Button
                     android:id="@+id/addKeyword"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="5dp"
                     android:background="@color/gray2"
                     android:enabled="false"
-                    android:padding="4dp"
                     android:text="추가"
                     android:textColor="@color/white" />
         </RelativeLayout>
 
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/keySwitch"
+                    android:layout_centerInParent="true"
+                    android:text="키워드 알림 사용" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/keySwitch"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"/>
+        </RelativeLayout>
+
+        <FrameLayout
+                android:id="@+id/frames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/keyword">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/keywordRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone" />
+
+            <TextView
+                    android:id="@+id/noKey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:textAlignment="center"
+                    android:text="키워드가 존재하지 않습니다." />
+        </FrameLayout>
+
     </LinearLayout>
 
-    <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/keyWordInputs"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
 
-        <TextView
-                android:id="@+id/fdfdf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:text="키워드 알림 사용" />
-
-        <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/keySwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/fdfdf" />
-    </RelativeLayout>
 
 </RelativeLayout>
