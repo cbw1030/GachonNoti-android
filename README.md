@@ -2,19 +2,28 @@
 
 <pre><a href="https://play.google.com/store/apps/details?id=io.wiffy.gachonNoti">https://play.google.com/store/apps/details?id=io.wiffy.gachonNoti/</a></pre>
 
-Screenshot
-<br>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/1.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/3.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/4.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/5.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/6.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/7.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/8.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/9.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/10.png' width='250px'/>
-<img src='https://github.com/wiffy-io/GachonNoti-android/blob/master/resource/screen2/11.png' width='250px'/>
+<img alt="icon" src="https://user-images.githubusercontent.com/8678595/66792061-ec652b80-ef31-11e9-9fa9-79f1f7df00f4.png" align="right" width="25%">
 
+## Key Features
+- [x] 공지사항 알림
+- [x] 빈강의실 검색
+- [x] 학생증 기능
+- [x] 성적 확인 기능
+- [x] 이수학점 확인 기능
+
+
+## Introduction
+**가천대학교 공지를 푸시 알림으로 제공합니다.<br>
+강의실 시간표를 제공하여 빈강의실을 찾을 수 있습니다.**</br>
+<br>
+<img src='https://user-images.githubusercontent.com/8678595/73132587-6e500f00-4060-11ea-87b8-852eaf8cb33d.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132600-a22b3480-4060-11ea-8bf6-93d8ce8effb2.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132610-ac4d3300-4060-11ea-9f79-11446b0d38f7.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132602-a2c3cb00-4060-11ea-9dec-5c998b022567.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132605-a35c6180-4060-11ea-874f-e5020efbf53d.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132601-a22b3480-4060-11ea-98af-4bb079fd75c7.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132606-a35c6180-4060-11ea-817e-0617b28fe253.png' width='200px'/>
+<img src='https://user-images.githubusercontent.com/8678595/73132603-a2c3cb00-4060-11ea-8b07-486f190f8b46.png' width='200px'/>
 
 # License
 
