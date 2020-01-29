@@ -7,14 +7,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.wiffy.extension.restartApp
 import io.wiffy.gachonNoti.model.`object`.Component
 
-//fun getScreenSize(activity: Activity) =
-//    Point().apply {
-//        activity.windowManager.defaultDisplay.getSize(this)
-//    }.run {
-//        Component.deviceHeight = y
-//        Component.deviceWidth = x
-//    }
-
 fun Activity.getScreenSize()= Point().also {
     windowManager.defaultDisplay.getSize(it)
 }.run {
