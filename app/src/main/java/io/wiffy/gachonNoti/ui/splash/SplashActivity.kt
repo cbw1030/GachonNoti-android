@@ -37,8 +37,7 @@ class SplashActivity : SplashContract.View() {
 
     override fun moveToMain() {
         val dt = intent.getStringExtra("keyData")
-        if(!dt.isNullOrBlank())
-        {
+        if (!dt.isNullOrBlank()) {
             console(dt)
             Component.keyWordData = dt
         }

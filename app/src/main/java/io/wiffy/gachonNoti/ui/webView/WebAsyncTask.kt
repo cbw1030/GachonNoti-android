@@ -18,9 +18,9 @@ class WebAsyncTask(
     private var goHref = ""
 
     override fun onPreExecute() {
-            Handler(Looper.getMainLooper()).post {
-                mPresenter.builderUp()
-            }
+        Handler(Looper.getMainLooper()).post {
+            mPresenter.builderUp()
+        }
     }
 
     override fun doInBackground(vararg params: Void?): Int {

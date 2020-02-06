@@ -43,7 +43,7 @@ class CreditAsyncTask(val mView: CreditContract.View, val number: String) :
             page.escapableForEach { _, value ->
                 value?.text()!!.split(" ").let {
                     try {
-                        if(it[0] != "이수구분"){
+                        if (it[0] != "이수구분") {
                             list.add(CreditInformation(it[0], it[1], it[2]))
                         }
                     } catch (e: Exception) {

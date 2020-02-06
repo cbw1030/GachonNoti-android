@@ -14,13 +14,13 @@ object Component {
 
     lateinit var sharedPreferences: SharedPreferences
 
-    var keyWordData:String? = null
+    var keyWordData: String? = null
 
     var mHandler: Handler? = null
 
-    var myObject:JSONObject? = null
+    var myObject: JSONObject? = null
 
-    var mFragmentList:ArrayList<Fragment?>?=null
+    var mFragmentList: ArrayList<Fragment?>? = null
 
     var error = true
 

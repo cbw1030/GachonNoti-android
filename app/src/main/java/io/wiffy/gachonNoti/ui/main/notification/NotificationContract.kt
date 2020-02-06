@@ -16,7 +16,7 @@ interface NotificationContract {
         abstract fun recyclerViewClear()
     }
 
-    interface Presenter : SuperContract.SuperPresenter{
+    interface Presenter : SuperContract.SuperPresenter {
         fun internetInterrupted(): Boolean
         fun internetNotInterrupted(): Boolean
         fun resetList()

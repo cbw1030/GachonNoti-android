@@ -38,11 +38,11 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
 
         //list가 비어있으면 KeyWordAdapter에 list가 안넘어가는거같음
         //필요없는 데이터 "%nodata%" 넣고 뒤에서 remove해주면 일다 해결됨
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             list.add(0, "%nodata%")
         }
 
-        keywordRecycler.adapter = KeyWordAdapter(list, context)
+        keywordRecycler.adapter = KeyWordAdapter(list)
         keywordRecycler.layoutManager = LinearLayoutManager(context)
         keywordRecycler.addItemDecoration(
             VerticalSpaceItemDecoration
@@ -132,7 +132,7 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
                 noKey.visibility = View.GONE
             }
 
-            if(list.contains("%nodata%")){
+            if (list.contains("%nodata%")) {
                 list.removeAt(0)
                 keywordRecycler.adapter?.notifyItemInserted(0)
             }
@@ -140,7 +140,7 @@ class KeyWordDialog(context: Context) : SuperContract.SuperDialog(context) {
             frames.visibility = View.GONE
             addKeyword.setBackgroundColor(context.resources.getColor(R.color.gray2))
 
-            if(list.isEmpty()){
+            if (list.isEmpty()) {
                 list.add(0, "%nodata%")
                 keywordRecycler.adapter?.notifyItemInserted(0)
             }

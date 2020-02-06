@@ -1,9 +1,6 @@
 package io.wiffy.gachonNoti.model.adapter
 
-import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
@@ -13,12 +10,10 @@ import io.wiffy.gachonNoti.model.SuperContract
 import io.wiffy.gachonNoti.utils.getThemeButtonResource
 import io.wiffy.gachonNoti.utils.setSharedItem
 import kotlinx.android.synthetic.main.adapter_keyword.view.*
-import java.lang.Exception
 
 @Suppress("DEPRECATION")
 class KeyWordAdapter(
-    private var items: MutableList<String>,
-    private val context: Context
+    private var items: MutableList<String>
 ) :
     RecyclerView.Adapter<KeyWordAdapter.KeyWordViewHolder>(), SuperContract.WiffyObject {
 
@@ -32,7 +27,7 @@ class KeyWordAdapter(
             bt.setBackgroundResource(getThemeButtonResource())
 
             bt.setOnClickListener {
-                var realPosition = findPosition(items, t1.text.toString())
+                val realPosition = findPosition(items, t1.text.toString())
                 if (realPosition != -1) {
                     items.removeAt(realPosition)
                     notifyItemRemoved(realPosition)

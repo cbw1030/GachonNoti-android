@@ -8,7 +8,8 @@ import io.wiffy.gachonNoti.ui.main.information.grade.GradeFragment
 import io.wiffy.gachonNoti.ui.main.information.idCard.IDCardFragment
 import io.wiffy.gachonNoti.ui.main.information.timeTable.TimeTableFragment
 
-class MyInformationPresenter(val mView: MyInformationContract.View) : MyInformationContract.Presenter {
+class MyInformationPresenter(val mView: MyInformationContract.View) :
+    MyInformationContract.Presenter {
     override fun initPresent() {
         mView.initView()
     }

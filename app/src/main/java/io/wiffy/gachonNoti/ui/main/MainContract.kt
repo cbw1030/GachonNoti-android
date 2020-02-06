@@ -6,7 +6,7 @@ import io.wiffy.gachonNoti.model.SuperContract
 
 interface MainContract {
     abstract class View : SuperContract.SuperActivity() {
-        abstract  fun sendContext():Context
+        abstract fun sendContext(): Context
         abstract fun initView(mList: ArrayList<Fragment?>)
         abstract fun builderUp(): Boolean?
         abstract fun builderDismiss(): Boolean?
@@ -22,7 +22,7 @@ interface MainContract {
         abstract fun mainLogout()
         abstract fun mainLogin()
         abstract fun darkTheme()
-        abstract fun linkToSite(url:String)
+        abstract fun linkToSite(url: String)
     }
 
     interface Presenter : SuperContract.SuperPresenter {

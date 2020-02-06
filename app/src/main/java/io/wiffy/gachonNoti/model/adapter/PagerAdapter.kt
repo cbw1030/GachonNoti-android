@@ -8,7 +8,8 @@ import io.wiffy.gachonNoti.model.SuperContract
 class PagerAdapter(
     fm: FragmentManager?,
     private var lists: ArrayList<Fragment?>
-) : FragmentStatePagerAdapter(fm!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT), SuperContract.WiffyObject {
+) : FragmentStatePagerAdapter(fm!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT),
+    SuperContract.WiffyObject {
 
     override fun getItem(position: Int): Fragment = lists[position]!!
     override fun getCount(): Int = lists.size

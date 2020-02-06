@@ -3,7 +3,6 @@ package io.wiffy.gachonNoti.ui.main.notification
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import io.wiffy.extension.isNetworkConnected
 import io.wiffy.gachonNoti.utils.ACTION_FAILURE
 import io.wiffy.gachonNoti.utils.ACTION_SUCCESS
@@ -14,10 +13,6 @@ import io.wiffy.gachonNoti.utils.ACTION_SUCCESS2
 import io.wiffy.gachonNoti.model.SuperContract
 import org.jsoup.Jsoup
 import java.net.URL
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
-
 
 class NotificationAsyncTask(
     private val list: ParseList,

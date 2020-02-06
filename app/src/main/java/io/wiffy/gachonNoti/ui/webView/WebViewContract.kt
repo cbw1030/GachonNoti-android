@@ -11,7 +11,7 @@ interface WebViewContract {
         abstract fun mainNotification()
     }
 
-    interface Presenter :SuperContract.SuperPresenter{
+    interface Presenter : SuperContract.SuperPresenter {
         fun updateWeb(javaS: String)
         fun builderDismiss()
         fun builderUp()
