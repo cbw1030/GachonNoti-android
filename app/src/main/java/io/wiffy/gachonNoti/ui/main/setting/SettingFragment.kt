@@ -23,7 +23,6 @@ import io.wiffy.gachonNoti.utils.*
 import io.wiffy.gachonNoti.model.ContactInformation
 import io.wiffy.gachonNoti.model.`object`.Component
 import io.wiffy.gachonNoti.ui.main.MainActivity
-import io.wiffy.gachonNoti.ui.main.message.InAppMessageAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactAsyncTask
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactDialog
 import io.wiffy.gachonNoti.ui.main.setting.contact.ContactListDialog
@@ -285,13 +284,6 @@ class SettingFragment : SettingContract.View() {
         }
         myView.calling.setOnClickListener {
             ContactDialog(context!!, this).show()
-        }
-
-        myView.know.setOnClickListener {
-            if (Component.newActivity) {
-                Component.newActivity = false
-                InAppMessageAsyncTask(MainActivity.mView, false).execute()
-            }
         }
 
     }

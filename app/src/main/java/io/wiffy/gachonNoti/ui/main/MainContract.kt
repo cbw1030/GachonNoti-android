@@ -23,7 +23,6 @@ interface MainContract {
         abstract fun mainLogin()
         abstract fun darkTheme()
         abstract fun linkToSite(url:String)
-        abstract fun setMessage(mList:ArrayList<Fragment?>, flag:Boolean)
     }
 
     interface Presenter : SuperContract.SuperPresenter {
