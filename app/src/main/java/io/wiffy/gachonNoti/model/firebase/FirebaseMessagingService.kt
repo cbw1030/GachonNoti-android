@@ -15,6 +15,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.skydoves.whatif.whatIfNotNull
 import io.wiffy.gachonNoti.R
 import io.wiffy.gachonNoti.ui.splash.SplashActivity
+import kotlin.random.Random
 
 class FirebaseMessagingService : FirebaseMessagingService() {
 
@@ -37,6 +38,8 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         val message = p0.data["body"] ?: ""
         val clickAction = p0.data["clickAction"] ?: ""
 
+        val seed = Random.nextInt(1111, 9999)
+
         val isLatest = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
         val intent = Intent(this, SplashActivity::class.java)
@@ -45,9 +48,8 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
         val pendingIntent = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(intent)
-            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            getPendingIntent(seed, PendingIntent.FLAG_CANCEL_CURRENT)
         }
-
         val notificationBuilder =
             NotificationCompat.Builder(
                 this, if (isLatest) {
@@ -70,7 +72,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(9999, notificationBuilder.build())
+        notificationManager.notify(seed, notificationBuilder.build())
 
     }
 

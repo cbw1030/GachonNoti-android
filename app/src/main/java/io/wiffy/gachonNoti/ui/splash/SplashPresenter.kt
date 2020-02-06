@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Build
 import com.google.firebase.messaging.FirebaseMessaging
 import io.wiffy.extension.getWordByKorean
@@ -27,8 +28,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
                 }
         }
 
-        if(Component.isNew)
-        {
+        if (Component.isNew) {
             manageSubscribe()
         }
 
@@ -38,27 +38,24 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         }
     }
 
-    private fun manageSubscribe()
-    {
+    private fun manageSubscribe() {
         val pre = getSharedItem("preVersion", "2.0.6").split(".")
 
-        try{
+        try {
             val a = pre[0].toInt()
             val b = pre[1].toInt()
             val c = pre[2].toInt()
 
-            if((a<2)||(a==2&&b==0&&c<6))
-            {
+            if ((a < 2) || (a == 2 && b == 0 && c < 6)) {
                 newSubscribe()
             }
 
-        }catch (e:java.lang.Exception){
+        } catch (e: java.lang.Exception) {
 
         }
     }
 
-    private fun newSubscribe()
-    {
+    private fun newSubscribe() {
         FirebaseMessaging.getInstance().unsubscribeFromTopic("noti")
         FirebaseMessaging.getInstance().subscribeToTopic("noti_android")
     }
@@ -100,6 +97,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
 
     @SuppressLint("SimpleDateFormat")
     private fun checking() {
+        val mp = MediaPlayer.create(context, R.raw.ms)
         try {
             val date = SimpleDateFormat("MMdd").format(Date())
             val birthday: String? = getSharedItem<String>("birthday").substring(2, 6)
@@ -107,18 +105,15 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
             val name: String? = getSharedItem<String>("name")
 
             // birthday == date && name != null
+            if (name != null && birthday == date) {
+                mp.start()
 
-            if (birthday == date && name != null) {
                 Component.isBirthday = true
                 Component.delay = 1500
                 mView.setParams()
                 mView.setImageView(R.drawable.happybirthday)
                 mView.setBirthdayText(
-                    "${randomCake(gender)} ${getWordByKorean(
-                        name.substring(1, name.length),
-                        "아",
-                        "야"
-                    )}, 생일축하해~!"
+                    "${randomCake(gender)} ${getWordByKoreanDo(name, birthday!!)} 생일축하해~!"
                 )
             } else {
                 if (Component.darkTheme) {
@@ -136,12 +131,29 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
         }
     }
 
+    private fun getWordByKoreanDo(name: String, birth: String): String {
+        return if (arrayListOf("0210").contains(birth)) {
+            getWordByKorean(
+                name.substring(1, name.length),
+                "이도",
+                "도"
+            )
+        } else {
+            "${getWordByKorean(
+                name.substring(1, name.length),
+                "아",
+                "야"
+            )},"
+        }
+    }
+
+
     private fun randomCake(bool: Boolean) = if (bool) {
         mView.setTextColor(R.color.main2Blue)
-        arrayOf("잘생긴", "귀여운", "힘이 센", "핵 인싸", "머리가 좋은", "인기 많은")
+        arrayOf("잘생긴", "귀여운", "힘이 센", "핵 인싸", "머리가 좋은", "인기 많은", "꽃미남", "밥 잘먹는", "롤 잘하는")
     } else {
         mView.setTextColor(R.color.red)
-        arrayOf("예쁜", "귀여운", "핵 인싸", "머리가 좋은", "인기 많은", "사랑스러운")
+        arrayOf("예쁜", "귀여운", "핵 인싸", "머리가 좋은", "인기 많은", "사랑스러운", "소중한", "밥 잘먹는", "미래가 밝은")
     }.let {
         it[Random().nextInt(it.size)]
     }
