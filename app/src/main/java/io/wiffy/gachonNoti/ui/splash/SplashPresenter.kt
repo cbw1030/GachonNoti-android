@@ -15,7 +15,6 @@ import io.wiffy.gachonNoti.utils.setSharedItem
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class SplashPresenter(private val mView: SplashContract.View, private val context: Context) :
     SplashContract.Presenter {
 
@@ -132,7 +131,7 @@ class SplashPresenter(private val mView: SplashContract.View, private val contex
     }
 
     private fun getWordByKoreanDo(name: String, birth: String): String {
-        return if (arrayListOf("0210").contains(birth)) {
+        return if (arrayListOf("0210", "0522").contains(birth)) {
             getWordByKorean(
                 name.substring(1, name.length),
                 "이도",
